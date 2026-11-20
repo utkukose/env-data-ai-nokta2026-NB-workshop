@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NOKTA workshop</title>
+<script>
+  // Addresses of the site without docs/ (for example /tr/ or /part1.html) open the same page in docs/.
+  (function () {
+    var parts = location.pathname.split("/");
+    var base = "/" + parts[1] + "/", rest = location.pathname.slice(base.length);
+    if (rest.indexOf("docs/") !== 0) location.replace(base + "docs/" + rest + location.search + location.hash);
+  })();
+</script>
+</head>
+<body style="font-family: system-ui, sans-serif; padding: 24px">
+<p>Page not found · Sayfa bulunamadı</p>
+<p><a href="/env-data-ai-nokta2026-NB-workshop/docs/">Workshop site (English)</a> · <a href="/env-data-ai-nokta2026-NB-workshop/docs/tr/">Atölye sitesi (Türkçe)</a></p>
+</body>
+</html>

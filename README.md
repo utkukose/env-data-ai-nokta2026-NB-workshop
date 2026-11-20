@@ -194,6 +194,7 @@ The build tools need the Python packages of `tools/requirements-build.txt` in ad
 
 ```
 env-data-ai-nokta2026-NB-workshop/
+├── index.html, 404.html          open the site in docs/ from the repository address
 ├── docs/                         the workshop site for GitHub Pages
 │   ├── index.html, part1.html … part5.html, lab.html   English pages
 │   ├── tr/                       Turkish pages
