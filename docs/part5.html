@@ -26,7 +26,7 @@
 <section class="parthead"><div class="wrap">
   <p class="kicker">Part 5 · Share and turn into action · 1:37 to 1:55</p>
   <h1>From numbers to words to action</h1>
-  <p class="lead">Generative AI writes fluent reports in seconds, and fluent is not the same as true. This part keeps one rule: The numbers come from the analysis, the words may come from the AI, and the judgment comes from the team.</p>
+  <p class="lead">Generative AI can write a fluent report in seconds, but a fluent text is not necessarily a true one. This part therefore keeps one rule throughout: The numbers come from the analysis, the words may come from the AI, and the judgment stays with the team. The four stations practice this rule, from catching the errors of a generated text to writing a proposal for the NOKTA workshop.</p>
   <ol class="station-index">
     <li><a href="#s1"><b>1</b>Spot the errors</a></li>
     <li><a href="#s2"><b>2</b>A safe prompt</a></li>
@@ -39,26 +39,26 @@
   <div class="station-head"><span class="no">1</span><h2>Spot the errors</h2></div>
   <div class="grid2 wide-left">
     <div class="card">
-      <p class="note">An AI assistant was asked to summarize the Campus B results. Click every sentence you would not sign, then check.</p>
+      <p class="note">An AI assistant was asked to summarize the results of Campus B, and it wrote the nine sentences below. Some of them are correct, while others contain an invented number, a wrong comparison, a cause that the data cannot show or a source that does not exist. Click every sentence you would not sign with your own name, then press Check the marks to see an explanation for each sentence.</p>
       <div class="spot" id="spot"></div>
       <div class="controls"><button class="btn primary" id="spot-check">Check the marks</button><button class="btn" id="spot-reset">Clear</button><span id="spot-score" class="num"></span></div>
     </div>
     <div>
       <div class="card"><h3 style="margin-top:0">The facts it should have used</h3>
         <table class="tbl" id="facts-b"><thead><tr><th>Point</th><th>PM2.5</th><th>Δref</th><th>°C Δref</th></tr></thead><tbody></tbody></table>
-        <p class="note">Two-round means of Campus B in µg/m³ and differences from the quiet reference point.</p></div>
+        <p class="note">For each point of Campus B, the table gives the two-round mean of PM2.5 in µg/m³ and its difference from the quiet reference point. The last column gives the difference in temperature from the reference in °C. These are the only numbers that the assistant was allowed to use.</p></div>
       <div id="spot-why"></div>
     </div>
   </div>
-  <div class="takeaway"><b>Takeaway.</b> Language models can produce fluent text that is not supported by their input, often called hallucination [1]. Every number in a generated text is checked against the analysis table, and every cause or comparison against the study design.</div>
-  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Section 5.3 of the Colab notebook has a number auditor: It lists every number of a text and marks the ones the fact table does not support.</p></div>
+  <div class="takeaway"><b>Takeaway.</b> Language models can produce fluent text that is not supported by their input, which is often called hallucination [1]. Every number in a generated text is therefore checked against the analysis table, and every cause, comparison or source against the study design and the reference list.</div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Section 5.3 of the Colab notebook contains a number auditor. It reads a text, lists every number in it and marks each number that does not appear in the fact table, allowing only for rounding. Exercise 5.A asks how many numbers of a sample text the auditor flags.</p></div>
 </div></section>
 
 <section class="station" id="s2"><div class="wrap">
   <div class="station-head"><span class="no">2</span><h2>A safe prompt</h2></div>
   <div class="grid2">
     <div>
-      <p>A good prompt hands the assistant the numbers instead of asking it to know them, names the audience and writes the rules down. The builder fills in the fact table of the chosen campus from the analysis.</p>
+      <p>A good prompt does not ask the assistant to know the numbers. It hands the numbers over, names the audience and writes the rules down. The builder below fills in the fact table of the chosen campus directly from the analysis and adds the study design and seven rules. The finished prompt can be copied into any assistant.</p>
       <div class="controls">
         <label>Campus <select id="pb-campus"><option>A</option><option selected>B</option><option>C</option></select></label>
         <label>For <select id="pb-aud"><option value="report">campus environment report</option><option value="poster">congress abstract</option><option value="social">social media post</option></select></label>
@@ -69,17 +69,17 @@
     <div>
       <textarea id="pb-out" rows="22" spellcheck="false" style="font-family:var(--mono);font-size:0.8rem"></textarea>
       <div class="controls"><button class="btn primary" data-copy="pb-out">Copy the prompt</button><span class="note" id="pb-count"></span></div>
-      <p class="note">Use the assistant your institution allows, and do not paste personal data into it. Whatever it writes goes back through the number auditor and the claim check below.</p>
+      <p class="note">Use the assistant that your institution allows, and never paste personal data into it. Whatever the assistant writes goes back through the number auditor of the notebook and through the claim check of the next station before it is used.</p>
     </div>
   </div>
-  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Sections 5.1 and 5.2 of the Colab notebook build the fact table and the same prompt from your own data.</p></div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Sections 5.1 and 5.2 of the Colab notebook build the same fact table and the same prompt from the data loaded in Section 0. A team that loads its own NOKTA files therefore gets a prompt with its own numbers.</p></div>
 </div></section>
 
 <section class="station" id="s3"><div class="wrap">
   <div class="station-head"><span class="no">3</span><h2>How strong is the claim?</h2></div>
   <div class="grid2">
     <div>
-      <p>Field measurements at six points show what was there and what went together. They rarely prove what caused what. Match each sentence to the strongest wording the NOKTA design supports.</p>
+      <p>Field measurements at six points show what was there and what went together. They rarely prove what caused what, because nothing was changed on purpose. Match each of the four sentences below to the strongest wording that the NOKTA design supports, then press Check.</p>
       <div class="card"><b>Observed</b> · measured, in both rounds<br><b>Associated</b> · goes together, cause not shown<br><b>Needs an intervention</b> · a cause that only a change-and-measure study could show<br><b>Not supported</b> · goes beyond the data</div>
     </div>
     <div class="card" id="cl-quiz"></div>
@@ -88,7 +88,7 @@
 
 <section class="station" id="s4"><div class="wrap">
   <div class="station-head"><span class="no">4</span><h2>The solution card</h2></div>
-  <p>On 28 November the NOKTA Environment Workshop works at three thematic tables. Every proposal answers five questions: The problem, the evidence, the solution, its feasibility and the role of young people. Start from a finding of the analysis.</p>
+  <p>On 28 November the NOKTA National Environment Workshop works at three thematic tables. Every proposal brought there has to answer five questions: The problem, the evidence, the solution, its feasibility and the role of young people. The card below starts from a finding of the analysis and fills in an example answer for each question, which the team can then rewrite in its own words.</p>
   <div class="grid2">
     <div class="card">
       <div class="controls"><label>Table <select id="ac-table">
@@ -105,10 +105,10 @@
     <div>
       <div class="actioncard" id="ac-card"></div>
       <div class="controls"><button class="btn primary" id="ac-copy">Copy as text</button><button class="btn" id="ac-dl">Download (.md)</button></div>
-      <p class="note">The card stays in this browser and appears in the debrief of the Lab. The example findings come from the synthetic data. With real NOKTA data the team writes its own.</p>
+      <p class="note">The card is kept only in this browser and appears again in the debrief of the NOKTA Lab, where it can be printed. The example findings come from the synthetic data. With real NOKTA data the team starts from its own finding and writes its own card.</p>
     </div>
   </div>
-  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Section 5.4 of the Colab notebook prints the same card from a finding of your table.</p></div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Section 5.4 of the Colab notebook prints the same card as text, starting from a finding of the team's own fact table.</p></div>
 </div></section>
 
 <section class="station" id="refs"><div class="wrap">
@@ -126,15 +126,15 @@ document.addEventListener("DOMContentLoaded", function () {
   function fact(c, ch, t) { return D.facts[c].filter(function (r) { return r.channel === ch && r.type === t; })[0]; }
   /* ---------- station 1: spot the errors ---------- */
   var SENT = [
-    { ok: true, s: "On Campus B, the point near the campus road had the highest PM2.5, with a two-round mean of 21.7 µg/m³, about 7.8 µg/m³ above the quiet reference point.", why: "Correct: Both numbers are in the table." },
-    { ok: false, s: "The green area was the cleanest point at 6.1 µg/m³.", why: "The green area was the cleanest point, but its mean is 11.0 µg/m³. The number 6.1 appears nowhere in the table." },
-    { ok: false, s: "This proves that trees remove one third of the particles on campus.", why: "A causal claim with an invented share. Six points cannot separate the trees from everything else that differs at that spot." },
-    { ok: false, s: "Near the road PM2.5 exceeded the WHO 24-hour guideline of 15 µg/m³, so the air there was unhealthy that day.", why: "The guideline value is real, but it refers to a 24-hour mean [2]. Two 15-minute visits cannot be compared with it." },
-    { ok: false, s: "Campus B therefore has the worst air quality of the three universities.", why: "NOKTA does not rank universities. The campuses were measured on different days in different weather, and the data are synthetic." },
-    { ok: false, s: "In Round 1 the shaded passage was more polluted than the reference point, which shows that narrow passages trap pollution.", why: "The shaded passage was the first stop of Round 1, at 10:00, when the morning background was highest. Over both rounds it sits only 1.6 µg/m³ above the reference." },
-    { ok: true, s: "At the busy student area, short smoking plumes raised the mean PM2.5 above the median, so the median describes a typical minute better.", why: "Correct: This is what the box plots of Part 2 show." },
-    { ok: false, s: "A 2024 report of the Ministry of Environment confirms that campus roads are the main source of PM2.5 at Turkish universities.", why: "No such report was given to the assistant, and none is cited with a findable reference. An unverifiable source is treated as invented." },
-    { ok: true, s: "The sunny concrete square was about 3.6 °C warmer than the reference, but part of this difference may come from sunshine heating the sensor housing.", why: "Correct, with a fair caution about the sensor." }
+    { ok: true, s: "On Campus B, the point near the campus road had the highest PM2.5, with a two-round mean of 21.7 µg/m³, about 7.8 µg/m³ above the quiet reference point.", why: "Correct: Both numbers appear in the fact table, and the sentence compares the point with the reference, as the design allows." },
+    { ok: false, s: "The green area was the cleanest point at 6.1 µg/m³.", why: "The green area was indeed the cleanest point, but its two-round mean is 11.0 µg/m³. The number 6.1 appears nowhere in the table, so the assistant has invented it." },
+    { ok: false, s: "This proves that trees remove one third of the particles on campus.", why: "This is a causal claim with an invented share. Six points measured on two days cannot separate the effect of the trees from everything else that differs at that spot, such as the distance from the road." },
+    { ok: false, s: "Near the road PM2.5 exceeded the WHO 24-hour guideline of 15 µg/m³, so the air there was unhealthy that day.", why: "The guideline value of 15 µg/m³ is real, but it refers to a mean over 24 hours [2]. The median of two 15-minute visits says nothing about a whole day, so it cannot be compared with this value." },
+    { ok: false, s: "Campus B therefore has the worst air quality of the three universities.", why: "NOKTA does not rank universities. The campuses were measured on different days and in different weather, so their values cannot be set against each other. In this workshop the data are synthetic as well." },
+    { ok: false, s: "In Round 1 the shaded passage was more polluted than the reference point, which shows that narrow passages trap pollution.", why: "The shaded passage was the first stop of Round 1 at 10:00, when the background of the morning was highest. Over both rounds it lies only 1.6 µg/m³ above the reference, so the sentence mistakes the hour for the place." },
+    { ok: true, s: "At the busy student area, short smoking plumes raised the mean PM2.5 above the median, so the median describes a typical minute better.", why: "Correct: This is exactly what the box plots of Part 2 show, and the reasoning about the median is sound." },
+    { ok: false, s: "A 2024 report of the Ministry of Environment confirms that campus roads are the main source of PM2.5 at Turkish universities.", why: "No such report was given to the assistant, and none is cited with a reference that can be found. A source that cannot be verified is treated as invented." },
+    { ok: true, s: "The sunny concrete square was about 3.6 °C warmer than the reference, but part of this difference may come from sunshine heating the sensor housing.", why: "Correct, and the caution about the sensor housing is fair." }
   ];
   var spot = $("spot");
   spot.innerHTML = SENT.map(function (x, i) { return '<span class="s ' + (x.ok ? "ok" : "err") + '" data-i="' + i + '">' + x.s + "</span> "; }).join("");
@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
   $("cl-check").onclick = function () {
     var ok = 0; cq.querySelectorAll("select").forEach(function (s) { var i = +s.getAttribute("data-q"), r = s.value === CLAIMS[i][0]; if (r) ok++; s.style.outline = "2px solid " + (r ? "var(--good)" : "var(--bad)"); });
     $("cl-res").innerHTML = "<b>" + ok + " / 4</b>";
-    $("cl-note").textContent = "1 is measured in both rounds. 2 is a relation in the data. Traffic is a plausible cause, but the minutes were not an experiment. 3 is a likely effect that only a change-and-measure study can confirm. 4 invents a number that no measurement supports.";
+    $("cl-note").textContent = "Sentence 1 is observed: It was measured in both rounds. Sentence 2 is an association: It is a relation in the data, and traffic is a plausible cause, but the minutes were not an experiment. Sentence 3 needs an intervention: Cooling by trees is likely, but only a study that plants the trees and measures again can confirm it. Sentence 4 is not supported: It invents a number that no measurement supports.";
     NK.Store.log("claims", ok);
   };
   /* ---------- station 4: action card ---------- */
@@ -206,27 +206,27 @@ document.addEventListener("DOMContentLoaded", function () {
     { t: "micro", label: "Sunny square about 3.6 °C warmer than the reference (Campus B)",
       p: "The concrete square heats up in the sun and is avoided at midday.",
       e: "Two-round mean +3.6 °C against the reference point. Part of it may come from the sun on the sensor housing.",
-      s: "Shade sails over the benches and two rows of trees on the south side.",
-      f: "Low cost for the sails. Trees need one planting season and watering.",
-      y: "Students measure again after one year with the same NOKTA protocol." },
+      s: "Shade sails are put up over the benches, and two rows of trees are planted on the south side of the square.",
+      f: "The sails are cheap and can be installed quickly. The trees need one planting season and regular watering.",
+      y: "Students measure the square again after one year with the same NOKTA protocol." },
     { t: "micro", label: "PM2.5 at the road about 7.8 µg/m³ above the reference (Campus B)",
-      p: "Students wait at the bus stop inside the exhaust plume.",
+      p: "Students wait at the bus stop inside the exhaust plume of the buses.",
       e: "Two-round mean +7.8 µg/m³ against the reference. Short plumes match the vehicle counts of the field form.",
-      s: "Move the waiting area five meters back behind a hedge and ban idling at the stop.",
-      f: "Needs the campus technical office, and the hedge takes one season.",
-      y: "A student campaign on idling engines and a repeated measurement." },
+      s: "The waiting area is moved five meters back behind a hedge, and engines may not idle at the stop.",
+      f: "The change needs the support of the campus technical office, and the hedge takes one season to grow.",
+      y: "Students run a campaign against idling engines and repeat the measurement afterwards." },
     { t: "waste", label: "Smoking plumes at the faculty entrance (field form and PM2.5 spikes)",
-      p: "Cigarette butts and smoke gather at the main entrance.",
+      p: "Cigarette butts and smoke gather at the main entrance of the faculty.",
       e: "Field notes report a smoking group. PM2.5 at the entrance shows short spikes, and the mean sits above the median.",
-      s: "A marked smoking area away from the door with butt bins sent to recycling.",
-      f: "Low cost, but needs the agreement of the faculty administration.",
-      y: "Student volunteers place the bins and count butts each week." },
+      s: "A marked smoking area is set up away from the door, with bins whose butts are sent to recycling.",
+      f: "The cost is low, but the plan needs the agreement of the faculty administration.",
+      y: "Student volunteers place the bins and count the butts every week." },
     { t: "water", label: "Higher dew point under the irrigated trees (all campuses)",
-      p: "Lawns are irrigated in the morning, also when the air is already humid.",
+      p: "The lawns are watered every morning, even when the air is already humid.",
       e: "The dew point of the green area sits slightly above the other points, and the field form records morning irrigation.",
-      s: "Water by soil moisture instead of by the clock, with a simple sensor and a shared log.",
-      f: "Needs one soil sensor per lawn and a person in charge.",
-      y: "A student team keeps the log and shares the water saved each month." }
+      s: "Lawns are watered by soil moisture instead of by the clock, using a simple sensor and a shared log.",
+      f: "The plan needs one soil moisture sensor per lawn and one person in charge.",
+      y: "A student team keeps the log and reports the water saved every month." }
   ];
   var TBL = { micro: "Microclimate and green campus", waste: "Waste and circular economy", water: "Water, resource efficiency and youth participation" };
   var fsel = $("ac-find");

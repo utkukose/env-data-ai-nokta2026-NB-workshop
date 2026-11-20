@@ -26,7 +26,7 @@
 <section class="parthead"><div class="wrap">
   <p class="kicker">5. Bölüm · Paylaş ve aksiyona dönüştür · 1:37-1:55</p>
   <h1>Sayılardan kelimelere, kelimelerden aksiyona</h1>
-  <p class="lead">Üretken YZ saniyeler içinde akıcı raporlar yazar, ancak akıcı olmak doğru olmak demek değildir. Bu bölüm tek bir kurala uymaktadır: Sayılar analizden, kelimeler YZ'den gelebilir, yargı ise ekipten gelir.</p>
+  <p class="lead">Üretken YZ akıcı bir raporu saniyeler içinde yazabilir, ancak akıcı bir metin her zaman doğru bir metin değildir. Bu nedenle bu bölüm baştan sona tek bir kurala dayanmaktadır: Sayılar analizden gelir, kelimeler YZ'den gelebilir, yargı ise ekipte kalır. Dört durak bu kuralı, üretilmiş bir metnin hatalarını yakalamaktan NOKTA çalıştayı için bir öneri yazmaya kadar adım adım uygular.</p>
   <ol class="station-index">
     <li><a href="#s1"><b>1</b>Hataları bulun</a></li>
     <li><a href="#s2"><b>2</b>Güvenli bir istem</a></li>
@@ -39,26 +39,26 @@
   <div class="station-head"><span class="no">1</span><h2>Hataları bulun</h2></div>
   <div class="grid2 wide-left">
     <div class="card">
-      <p class="note">Bir YZ asistanından Kampüs B sonuçlarını özetlemesi istendi. İmzalamayacağınız her cümleye tıklayın, sonra denetleyin.</p>
+      <p class="note">Bir YZ asistanından Kampüs B'nin sonuçlarını özetlemesi istendi ve asistan aşağıdaki dokuz cümleyi yazdı. Bu cümlelerin bazıları doğrudur, bazıları ise uydurulmuş bir sayı, hatalı bir karşılaştırma, verinin gösteremeyeceği bir neden ya da var olmayan bir kaynak içerir. Kendi adınızla imzalamayacağınız her cümleye tıklayın, ardından her cümlenin açıklamasını görmek için İşaretleri denetle düğmesine basın.</p>
       <div class="spot" id="spot"></div>
       <div class="controls"><button class="btn primary" id="spot-check">İşaretleri denetle</button><button class="btn" id="spot-reset">Temizle</button><span id="spot-score" class="num"></span></div>
     </div>
     <div>
       <div class="card"><h3 style="margin-top:0">Kullanması gereken gerçekler</h3>
         <table class="tbl" id="facts-b"><thead><tr><th>Nokta</th><th>PM2,5</th><th>Δref</th><th>°C Δref</th></tr></thead><tbody></tbody></table>
-        <p class="note">Kampüs B'nin µg/m³ cinsinden iki tur ortalamaları ve sakin referans noktasından farklar.</p></div>
+        <p class="note">Tablo, Kampüs B'nin her noktası için PM2,5'in µg/m³ cinsinden iki tur ortalamasını, bu değerin sakin referans noktasından farkını ve sıcaklığın referanstan °C cinsinden farkını vermektedir. Asistanın kullanmasına izin verilen sayılar yalnızca bunlardır.</p></div>
       <div id="spot-why"></div>
     </div>
   </div>
-  <div class="takeaway"><b>Çıkarım.</b> Dil modelleri girdileriyle desteklenmeyen akıcı metinler üretebilir. Buna çoğunlukla halüsinasyon denir [1]. Üretilen bir metindeki her sayı analiz tablosuyla, her neden ve karşılaştırma ise çalışma tasarımıyla denetlenir.</div>
-  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Colab defterinin 5.3. kısmında bir sayı denetleyicisi vardır: Bir metindeki her sayıyı listeler ve olgu tablosunun desteklemediklerini işaretler.</p></div>
+  <div class="takeaway"><b>Çıkarım.</b> Dil modelleri, kendilerine verilen girdiyle desteklenmeyen akıcı metinler üretebilir. Bu duruma çoğunlukla halüsinasyon denir [1]. Bu nedenle üretilen bir metindeki her sayı analiz tablosuyla, her neden, karşılaştırma ya da kaynak ise çalışma tasarımı ve kaynak listesiyle denetlenir.</div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Colab defterinin 5.3. kısmında bir sayı denetleyicisi bulunmaktadır. Denetleyici bir metni okur, içindeki her sayıyı listeler ve yuvarlama farkı dışında olgu tablosunda yer almayan her sayıyı işaretler. 5.A alıştırması ise örnek bir metinde denetleyicinin kaç sayıyı işaretlediğini sormaktadır.</p></div>
 </div></section>
 
 <section class="station" id="s2"><div class="wrap">
   <div class="station-head"><span class="no">2</span><h2>Güvenli bir istem</h2></div>
   <div class="grid2">
     <div>
-      <p>İyi bir istem, asistandan sayıları bilmesini istemek yerine sayıları ona verir, okur kitlesini belirtir ve kuralları yazıya döker. Oluşturucu, seçilen kampüsün olgu tablosunu analizden doldurur.</p>
+      <p>İyi bir istem, asistandan sayıları bilmesini beklemez. Sayıları ona kendisi verir, okur kitlesini belirtir ve kuralları açıkça yazar. Aşağıdaki oluşturucu, seçilen kampüsün olgu tablosunu doğrudan analizden doldurur ve çalışma tasarımı ile yedi kuralı ekler. Hazırlanan istem herhangi bir asistana kopyalanabilir.</p>
       <div class="controls">
         <label>Kampüs <select id="pb-campus"><option>A</option><option selected>B</option><option>C</option></select></label>
         <label>Hedef <select id="pb-aud"><option value="report">kampüs çevre raporu</option><option value="poster">kongre özeti</option><option value="social">sosyal medya paylaşımı</option></select></label>
@@ -69,17 +69,17 @@
     <div>
       <textarea id="pb-out" rows="22" spellcheck="false" style="font-family:var(--mono);font-size:0.8rem"></textarea>
       <div class="controls"><button class="btn primary" data-copy="pb-out">İstemi kopyala</button><span class="note" id="pb-count"></span></div>
-      <p class="note">Kurumunuzun izin verdiği asistanı kullanın ve içine kişisel veri yapıştırmayın. Ne yazarsa yazsın, metin sayı denetleyicisinden ve aşağıdaki iddia denetiminden geçer.</p>
+      <p class="note">Kurumunuzun izin verdiği asistanı kullanın ve içine hiçbir zaman kişisel veri yapıştırmayın. Asistanın yazdığı her metin, kullanılmadan önce defterdeki sayı denetleyicisinden ve bir sonraki duraktaki iddia denetiminden geçirilir.</p>
     </div>
   </div>
-  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Colab defterinin 5.1. ve 5.2. kısımları olgu tablosunu ve aynı istemi kendi verinizden üretir.</p></div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Colab defterinin 5.1. ve 5.2. kısımları aynı olgu tablosunu ve aynı istemi 0. kısımda yüklenen veriden üretir. Bu yüzden kendi NOKTA dosyalarını yükleyen bir ekip, kendi sayılarını içeren bir istem elde eder.</p></div>
 </div></section>
 
 <section class="station" id="s3"><div class="wrap">
   <div class="station-head"><span class="no">3</span><h2>İddia ne kadar güçlü?</h2></div>
   <div class="grid2">
     <div>
-      <p>Altı noktadaki saha ölçümleri neyin orada olduğunu ve neyin birlikte değiştiğini gösterir. Neyin neye yol açtığını ise nadiren kanıtlar. Her cümleyi NOKTA tasarımının desteklediği en güçlü ifadeyle eşleştirin.</p>
+      <p>Altı noktadaki saha ölçümleri neyin orada olduğunu ve neyin birlikte değiştiğini gösterir. Neyin neye yol açtığını ise nadiren kanıtlar, çünkü hiçbir şey bilerek değiştirilmemiştir. Aşağıdaki dört cümlenin her birini NOKTA tasarımının desteklediği en güçlü ifadeyle eşleştirin, ardından Denetle düğmesine basın.</p>
       <div class="card"><b>Gözlendi</b> · iki turda da ölçüldü<br><b>İlişkili</b> · birlikte değişiyor, neden gösterilmedi<br><b>Müdahale gerektirir</b> · yalnızca değiştir-ve-ölç çalışmasının gösterebileceği bir neden<br><b>Desteklenmiyor</b> · verinin ötesine geçiyor</div>
     </div>
     <div class="card" id="cl-quiz"></div>
@@ -88,7 +88,7 @@
 
 <section class="station" id="s4"><div class="wrap">
   <div class="station-head"><span class="no">4</span><h2>Çözüm kartı</h2></div>
-  <p>28 Kasım'da NOKTA Ulusal Çevre Çalıştayı üç tematik masada çalışacak ve her öneri beş soruyu cevaplayacaktır: Sorun, dayanak, çözüm, uygulanabilirlik ve gençlerin rolü. Analizden bir bulguyla başlayın.</p>
+  <p>28 Kasım'daki NOKTA Ulusal Çevre Çalıştayı üç tematik masada çalışacaktır ve oraya getirilen her öneri beş soruyu cevaplamalıdır: Sorun, dayanak, çözüm, uygulanabilirlik ve gençlerin rolü. Aşağıdaki kart analizden elde edilen bir bulguyla başlar ve her soru için bir örnek cevap doldurur. Ekip bu cevapları daha sonra kendi sözcükleriyle yeniden yazabilir.</p>
   <div class="grid2">
     <div class="card">
       <div class="controls"><label>Masa <select id="ac-table">
@@ -105,10 +105,10 @@
     <div>
       <div class="actioncard" id="ac-card"></div>
       <div class="controls"><button class="btn primary" id="ac-copy">Metin olarak kopyala</button><button class="btn" id="ac-dl">İndir (.md)</button></div>
-      <p class="note">Kart bu tarayıcıda kalır ve Laboratuvarın değerlendirmesinde görünür. Örnek bulgular sentetik veriden gelir. Gerçek NOKTA verisiyle ekip kendi bulgusunu yazar.</p>
+      <p class="note">Kart yalnızca bu tarayıcıda saklanır ve NOKTA Laboratuvarındaki değerlendirmede yeniden görünür, orada yazdırılabilir. Örnek bulgular sentetik veriden gelmektedir. Gerçek NOKTA verisiyle çalışan bir ekip kendi bulgusundan başlar ve kendi kartını yazar.</p>
     </div>
   </div>
-  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Colab defterinin 5.4. kısmı aynı kartı tablonuzdaki bir bulgudan yazdırır.</p></div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Colab defterinin 5.4. kısmı aynı kartı, ekibin kendi olgu tablosundaki bir bulgudan başlayarak metin olarak yazdırır.</p></div>
 </div></section>
 
 <section class="station" id="refs"><div class="wrap">
@@ -126,15 +126,15 @@ document.addEventListener("DOMContentLoaded", function () {
   function fact(c, ch, t) { return D.facts[c].filter(function (r) { return r.channel === ch && r.type === t; })[0]; }
   /* ---------- station 1: spot the errors ---------- */
   var SENT = [
-    { ok: true, s: "Kampüs B'de en yüksek PM2,5, iki tur ortalaması 21,7 µg/m³ ile kampüs yoluna yakın noktadaydı ve sakin referans noktasının yaklaşık 7,8 µg/m³ üstündeydi.", why: "Doğru: İki sayı da tabloda var." },
-    { ok: false, s: "Yeşil alan 6,1 µg/m³ ile en temiz noktaydı.", why: "Yeşil alan en temiz noktaydı ama ortalaması 11,0 µg/m³. 6,1 sayısı tablonun hiçbir yerinde yok." },
-    { ok: false, s: "Bu, ağaçların kampüsteki partiküllerin üçte birini temizlediğini kanıtlamaktadır.", why: "Uydurulmuş bir oranla kurulan nedensel bir iddia. Altı nokta, ağaçları o noktada farklı olan diğer her şeyden ayıramaz." },
-    { ok: false, s: "Yolun yakınında PM2,5, DSÖ'nün 15 µg/m³ olan 24 saatlik kılavuz değerini aştığı için oradaki hava o gün sağlıksızdı.", why: "Kılavuz değeri gerçektir, ancak 24 saatlik ortalamaya karşılık gelir [2]. İki adet 15 dakikalık ziyaret onunla karşılaştırılamaz." },
-    { ok: false, s: "Bu nedenle Kampüs B üç üniversite arasında en kötü hava kalitesine sahiptir.", why: "NOKTA üniversiteleri sıralamaz. Kampüsler farklı günlerde, farklı hava koşullarında ölçüldü ve veriler sentetiktir." },
-    { ok: false, s: "1. turda gölgeli geçit referans noktasından daha kirliydi, bu da dar geçitlerin kirliliği hapsettiğini göstermektedir.", why: "Gölgeli geçit 1. turun saat 10:00'daki ilk durağıydı ve sabah arka planı o sırada en yüksekti. İki turda birlikte referansın yalnızca 1,6 µg/m³ üstündedir." },
-    { ok: true, s: "Öğrenci yoğun alanda kısa süreli sigara dumanı bulutları PM2,5 ortalamasını medyanın üstüne çıkardı, bu yüzden tipik bir dakikayı medyan daha iyi anlatır.", why: "Doğru: 2. Bölümdeki kutu grafikleri bunu gösterir." },
-    { ok: false, s: "Çevre Bakanlığının 2024 tarihli bir raporu, Türk üniversitelerinde PM2,5'in ana kaynağının kampüs yolları olduğunu doğrulamaktadır.", why: "Asistana böyle bir rapor verilmedi ve bulunabilir bir künyeyle de gösterilmedi. Doğrulanamayan bir kaynak uydurulmuş sayılır." },
-    { ok: true, s: "Güneşli beton meydan referanstan yaklaşık 3,6 °C daha sıcaktı, ancak bu farkın bir kısmı güneşin sensör gövdesini ısıtmasından kaynaklanıyor olabilir.", why: "Doğru, sensörle ilgili yerinde bir uyarıyla birlikte." }
+    { ok: true, s: "Kampüs B'de en yüksek PM2,5, iki tur ortalaması 21,7 µg/m³ ile kampüs yoluna yakın noktadaydı ve sakin referans noktasının yaklaşık 7,8 µg/m³ üstündeydi.", why: "Doğru: İki sayı da olgu tablosunda yer alır ve cümle, noktayı tasarımın izin verdiği biçimde referansla karşılaştırır." },
+    { ok: false, s: "Yeşil alan 6,1 µg/m³ ile en temiz noktaydı.", why: "Yeşil alan gerçekten en temiz noktaydı, ancak iki tur ortalaması 11,0 µg/m³'tür. 6,1 sayısı tablonun hiçbir yerinde geçmez, yani asistan bu sayıyı uydurmuştur." },
+    { ok: false, s: "Bu, ağaçların kampüsteki partiküllerin üçte birini temizlediğini kanıtlamaktadır.", why: "Bu, uydurulmuş bir oranla kurulan nedensel bir iddiadır. İki günde ölçülen altı nokta, ağaçların etkisini o noktada farklı olan diğer her şeyden, örneğin yola olan uzaklıktan ayıramaz." },
+    { ok: false, s: "Yolun yakınında PM2,5, DSÖ'nün 15 µg/m³ olan 24 saatlik kılavuz değerini aştığı için oradaki hava o gün sağlıksızdı.", why: "15 µg/m³'lük kılavuz değeri gerçektir, ancak 24 saatlik bir ortalamaya karşılık gelir [2]. İki adet 15 dakikalık ziyaretin medyanı bütün bir gün hakkında bilgi vermez, bu yüzden bu değerle karşılaştırılamaz." },
+    { ok: false, s: "Bu nedenle Kampüs B üç üniversite arasında en kötü hava kalitesine sahiptir.", why: "NOKTA üniversiteleri sıralamaz. Kampüsler farklı günlerde ve farklı hava koşullarında ölçüldüğü için değerleri birbiriyle yarıştırılamaz. Üstelik bu atölyedeki veriler sentetiktir." },
+    { ok: false, s: "1. turda gölgeli geçit referans noktasından daha kirliydi, bu da dar geçitlerin kirliliği hapsettiğini göstermektedir.", why: "Gölgeli geçit 1. turun saat 10:00'daki ilk durağıydı ve sabahın arka plan kirliliği o sırada en yüksek düzeydeydi. İki tur birlikte ele alındığında referansın yalnızca 1,6 µg/m³ üstündedir. Yani cümle saatin etkisini yerin etkisi sanmaktadır." },
+    { ok: true, s: "Öğrenci yoğun alanda kısa süreli sigara dumanı bulutları PM2,5 ortalamasını medyanın üstüne çıkardı, bu yüzden tipik bir dakikayı medyan daha iyi anlatır.", why: "Doğru: 2. Bölümdeki kutu grafikleri tam olarak bunu gösterir ve medyanla ilgili çıkarım yerindedir." },
+    { ok: false, s: "Çevre Bakanlığının 2024 tarihli bir raporu, Türk üniversitelerinde PM2,5'in ana kaynağının kampüs yolları olduğunu doğrulamaktadır.", why: "Asistana böyle bir rapor verilmedi ve bulunabilecek bir künyeyle de gösterilmedi. Doğrulanamayan bir kaynak uydurulmuş sayılır." },
+    { ok: true, s: "Güneşli beton meydan referanstan yaklaşık 3,6 °C daha sıcaktı, ancak bu farkın bir kısmı güneşin sensör gövdesini ısıtmasından kaynaklanıyor olabilir.", why: "Doğru, sensör gövdesiyle ilgili uyarı da yerindedir." }
   ];
   var spot = $("spot");
   spot.innerHTML = SENT.map(function (x, i) { return '<span class="s ' + (x.ok ? "ok" : "err") + '" data-i="' + i + '">' + x.s + "</span> "; }).join("");
@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
   $("cl-check").onclick = function () {
     var ok = 0; cq.querySelectorAll("select").forEach(function (s) { var i = +s.getAttribute("data-q"), r = s.value === CLAIMS[i][0]; if (r) ok++; s.style.outline = "2px solid " + (r ? "var(--good)" : "var(--bad)"); });
     $("cl-res").innerHTML = "<b>" + ok + " / 4</b>";
-    $("cl-note").textContent = "1 iki turda da ölçülmüştür. 2 verideki bir ilişkidir. Trafik akla yatkın bir nedendir ama dakikalar bir deney değildi. 3 olası bir etkidir ve ancak değiştir-ve-ölç çalışmasıyla doğrulanabilir. 4 hiçbir ölçümün desteklemediği bir sayı uydurur.";
+    $("cl-note").textContent = "1. cümle gözlenmiştir: İki turda da ölçülmüştür. 2. cümle bir ilişkidir: Verideki bir bağı anlatır ve trafik akla yatkın bir nedendir, ancak dakikalar bir deney değildi. 3. cümle müdahale gerektirir: Ağaçların serinletmesi olasıdır, ancak bunu yalnızca ağaçları dikip yeniden ölçen bir çalışma doğrulayabilir. 4. cümle desteklenmez: Hiçbir ölçümün desteklemediği bir sayı uydurmaktadır.";
     NK.Store.log("claims", ok);
   };
   /* ---------- station 4: action card ---------- */
@@ -206,27 +206,27 @@ document.addEventListener("DOMContentLoaded", function () {
     { t: "micro", label: "Güneşli meydan referanstan yaklaşık 3,6 °C sıcak (Kampüs B)",
       p: "Beton meydan güneşte ısınıyor ve öğle saatlerinde kullanılmıyor.",
       e: "Referans noktasına göre iki tur ortalaması +3,6 °C. Bunun bir kısmı güneşin sensör gövdesini ısıtmasından gelebilir.",
-      s: "Bankların üzerine gölgelik ve güney kenarına iki sıra ağaç.",
-      f: "Gölgelikler için maliyet düşüktür. Ağaçlar bir dikim mevsimi ve sulama gerektirir.",
-      y: "Öğrenciler bir yıl sonra aynı NOKTA protokolüyle yeniden ölçer." },
+      s: "Bankların üzerine gölgelikler kurulur ve meydanın güney kenarına iki sıra ağaç dikilir.",
+      f: "Gölgelikler ucuzdur ve kısa sürede kurulabilir. Ağaçlar ise bir dikim mevsimi ve düzenli sulama gerektirir.",
+      y: "Öğrenciler bir yıl sonra meydanı aynı NOKTA protokolüyle yeniden ölçer." },
     { t: "micro", label: "Yoldaki PM2,5 referansın yaklaşık 7,8 µg/m³ üstünde (Kampüs B)",
-      p: "Öğrenciler otobüs durağında egzoz bulutunun içinde bekliyor.",
+      p: "Öğrenciler otobüs durağında, otobüslerin egzoz bulutunun içinde bekliyor.",
       e: "Referansa göre iki tur ortalaması +7,8 µg/m³. Kısa bulutlar saha formundaki araç sayılarıyla örtüşmektedir.",
-      s: "Bekleme alanını bir çit arkasına beş metre geri almak ve durakta rölantide beklemeyi yasaklamak.",
-      f: "Kampüs yapı işleri biriminin desteği gerekir, çit de bir mevsimde yetişir.",
-      y: "Rölantide çalışan motorlar üzerine bir öğrenci kampanyası ve tekrar ölçüm." },
+      s: "Bekleme alanı bir çitin arkasına, beş metre geriye alınır ve durakta motorun rölantide çalıştırılması yasaklanır.",
+      f: "Bu değişiklik kampüs yapı işleri biriminin desteğini gerektirir, çitin büyümesi de bir mevsim sürer.",
+      y: "Öğrenciler rölantide çalışan motorlara karşı bir kampanya yürütür ve ardından ölçümü tekrarlar." },
     { t: "waste", label: "Fakülte girişinde sigara dumanı bulutları (saha formu ve PM2,5 sıçramaları)",
-      p: "Ana girişte izmaritler ve duman birikiyor.",
+      p: "Fakültenin ana girişinde izmaritler ve duman birikiyor.",
       e: "Saha notları sigara içen bir grubu bildirmektedir. Girişteki PM2,5 kısa sıçramalar gösterir ve ortalama medyanın üstündedir.",
-      s: "Kapıdan uzakta, izmaritleri geri dönüşüme gönderilen kutularla işaretli bir sigara alanı.",
-      f: "Düşük maliyetlidir, ancak fakülte yönetiminin onayını gerektirir.",
-      y: "Gönüllü öğrenciler kutuları yerleştirir ve her hafta izmarit sayar." },
+      s: "Kapıdan uzakta işaretli bir sigara alanı oluşturulur ve buradaki kutularda toplanan izmaritler geri dönüşüme gönderilir.",
+      f: "Maliyeti düşüktür, ancak planın fakülte yönetimi tarafından onaylanması gerekir.",
+      y: "Gönüllü öğrenciler kutuları yerleştirir ve her hafta izmaritleri sayar." },
     { t: "water", label: "Sulanan ağaçların altında daha yüksek çiy noktası (bütün kampüsler)",
-      p: "Çimler, hava zaten nemliyken de sabahları sulanıyor.",
+      p: "Çimler, hava zaten nemli olduğunda bile her sabah sulanıyor.",
       e: "Yeşil alanın çiy noktası diğer noktaların biraz üstündedir ve saha formu sabah sulamasını kaydetmektedir.",
-      s: "Basit bir sensör ve ortak bir kayıtla, saate göre değil toprak nemine göre sulama.",
-      f: "Her çim alanı için bir toprak nem sensörü ve bir sorumlu gerekir.",
-      y: "Bir öğrenci ekibi kaydı tutar ve her ay tasarruf edilen suyu paylaşır." }
+      s: "Çimler saate göre değil toprak nemine göre sulanır. Bunun için basit bir sensör ve ortak bir kayıt kullanılır.",
+      f: "Plan için her çim alanına bir toprak nem sensörü ve bir sorumlu gerekir.",
+      y: "Bir öğrenci ekibi kaydı tutar ve her ay tasarruf edilen su miktarını duyurur." }
   ];
   var TBL = { micro: "Mikroiklim ve yeşil kampüs", waste: "Atık ve döngüsel ekonomi", water: "Su, kaynak verimliliği ve gençlik katılımı" };
   var fsel = $("ac-find");

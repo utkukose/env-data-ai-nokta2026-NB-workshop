@@ -93,7 +93,7 @@ Süreleri, canlı anket sorularını ve yedek planı içeren akış rehberi [WOR
 |---|---|
 | **1. Bölüm · Ölç** | Güneşin, trafiğin ve PM2,5 değerini izleyen bir toz bulutunun bulunduğu 3B kampüs ikizinde bir saha turunu yeniden oynatırlar. On kanalı okur, 10 saniyelik veri akışlarında dayanıklı z-skoruyla veri doktorluğu yapar, üç istasyonu yan yana testten hizalar ve nemli havanın optik sensördeki partikülleri nasıl şişirdiğini izlerler. |
 | **2. Bölüm · Analiz et** | Sabahın son durağının neden sıcak göründüğünü, ters sıralı ikinci turun saati karşılaştırmadan nasıl çıkardığını, sigara içilen yerde medyanın neden ortalamadan iyi olduğunu, +0,81'lik bir korelasyonun her kampüsün içinde nasıl negatife döndüğünü ve havanın daha nemli mi yoksa yalnızca daha soğuk mu olduğunu görürler. |
-| **3. Bölüm · Keşfet** | 468 temiz dakikayı 3B olarak döndürür, k-ortalamaları tarayıcıda adım adım çalıştırır, temel bileşen analiziyle altı kanalı sıkıştırır ve gruplara ad verirler. |
+| **3. Bölüm · Keşfet** | 468 temiz dakikayı 3B olarak döndürür, k-ortalamaları tarayıcıda adım adım çalıştırır, temel bileşenler analiziyle altı kanalı sıkıştırır ve gruplara ad verirler. |
 | **4. Bölüm · Açıkla** | Bütün noktalar dışarıda tutulduğunda bir rastgele ormanın skorunun yüzde 41 düştüğünü izler, en önemli girdiyi tahmin eder, trafik, insan ve arka planla senaryolar dener ve modelin cevabının üzerinde 3B bir yüzey olarak gezinirler. |
 | **5. Bölüm · Paylaş ve dönüştür** | YZ ile yazılmış bir paragraftaki altı hatayı yakalar, olgu tablosundan güvenli bir istem kurar, iddiaları gözlenenden desteklenmeyene doğru tartar ve NOKTA Ulusal Çevre Çalıştayının üç masası için bir çözüm kartı yazarlar. |
 | **NOKTA Laboratuvarı** | Kampüs ikizi, mikroiklim grupları ve model yüzeyi tek bir tezgâhtadır. Oturumun yazdırılabilir saha raporu da buradadır. |
@@ -122,7 +122,7 @@ Bütün oturumu, iki paralel dil sürümüyle tek bir defter taşır. Ücretsiz 
 | 0 · Kurulum ve veri | Açılış | veri yükleme, kendi NOKTA dosyalarına geçiş, beş fikirlik Python adımı |
 | 1 · Ölç | 1. Bölüm | değiştirilmiş z-skoru, fiziksel akla yatkınlık kuralları, Isolation Forest, eksik değerler, yan yana test sapmaları, κ-Köhler nem düzeltmesi, temiz dakikalar |
 | 2 · Analiz et | 2. Bölüm | ziyaret medyanları, iki tur ortalaması, referans noktasından fark, kutu grafikleri, birleştirilmiş ve grup içi korelasyon, çiy noktası |
-| 3 · Keşfet | 3. Bölüm | standartlaştırma, k-ortalamalar, J ve siluet, temel bileşen analizi, etkileşimli 3B grafikler |
+| 3 · Keşfet | 3. Bölüm | standartlaştırma, k-ortalamalar, J ve siluet, temel bileşenler analizi, etkileşimli 3B grafikler |
 | 4 · Açıkla | 4. Bölüm | rastgele orman, rastgele ve bir noktayı dışarıda bırakan çapraz doğrulama, permütasyon önemi, senaryo kaydırıcıları, kısmi bağımlılık, 3B yüzey |
 | 5 · Paylaş ve dönüştür | 5. Bölüm | olgu tablosu, güvenli istem, sayı denetleyicisi, çözüm kartı |
 

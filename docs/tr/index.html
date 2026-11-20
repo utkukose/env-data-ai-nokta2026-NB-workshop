@@ -27,7 +27,7 @@
   <a class="langpill" href="../index.html" hreflang="en" lang="en"><svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><circle cx='12' cy='12' r='9'/><path d='M3 12h18M12 3c2.6 2.8 3.9 5.8 3.9 9s-1.3 6.2-3.9 9M12 3c-2.6 2.8-3.9 5.8-3.9 9s1.3 6.2 3.9 9'/></svg> English version: Click here for the English pages</a>
   <p class="kicker">NOKTA atölyesi · ÜNİDES 2026 · iki saat</p>
   <h1>Yapay Zekâ ile Çevresel Veri Analizi ve Yorumlama</h1>
-  <p class="sub">Kampüs sensör verisinden kanıta, kanıttan aksiyona.</p>
+  <p class="sub">Kampüste toplanan sensör verisinden kanıta, kanıttan da uygulanabilir bir öneriye.</p>
   <div class="grid2 wide-left" style="margin-top:26px">
     <div>
       <div class="stage3d tall" id="hero3d">
@@ -36,14 +36,14 @@
       </div>
     </div>
     <div>
-      <p class="lead">Bir kampüste altı ölçüm noktası, taşınabilir bir istasyon, iki saha turu ve on sensör kanalı. Bu atölye böyle bir veriyi ilk okumadan çözüm önerisine kadar izlemektedir. Yapay zekânın (YZ) nerede yardımcı olduğunu, nerede yanılttığını ve dikkatli bir analistin onu nasıl dürüst tuttuğunu göstermektedir.</p>
+      <p class="lead">NOKTA projesinde öğrenci ekipleri taşınabilir bir ölçüm istasyonunu kampüslerindeki altı sabit noktaya götürmektedir. İstasyon her noktada 15 dakika boyunca on sensör kanalını kaydeder ve bütün güzergâh iki farklı günde, iki tur hâlinde ölçülür. Bu atölye, böyle bir veri setini ilk ham ölçümden üniversitenin bir biriminin uygulayabileceği bir öneriye kadar adım adım izlemektedir. Bu yol boyunca yapay zekânın (YZ) analize nerede gerçekten katkı sağladığı, nerede yanıltabileceği ve hangi denetimlerin sonuçları güvenilir kıldığı gösterilmektedir.</p>
       <div class="controls" style="margin:18px 0">
         <a class="btn primary" href="part1.html">1. Bölümle başlayın →</a>
         <a class="btn" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb" target="_blank" rel="noopener">Colab defterini açın</a>
         <a class="btn" href="lab.html">NOKTA Laboratuvarı</a>
       </div>
       <div class="controls" id="hero-vars"></div>
-      <p class="note">3B sahne şematik bir kampüstür, gerçek bir kampüsün haritası değildir. Sütunlar her noktanın iki tur ortalamasını gösterir, toz bulutu ise PM2,5 değerini izler.</p>
+      <p class="note">3B sahne gerçek bir kampüsün haritası değil, şematik bir kampüstür. Altı nokta türünü bir kampüste genellikle bulundukları yerlere yerleştirmektedir: İki bina arasındaki gölgeli geçit, kampüs yolunun hemen yanındaki nokta, sakin bir çim alan, güneşe açık beton meydan, kalabalık bir fakülte girişi ve bir ağaç sırası. Her noktanın üzerindeki sütun, yukarıdaki düğmelerle seçilen kanalın iki saha turundaki ortalamasını gösterir. Etiket de aynı değeri birimiyle birlikte verir. Dolayısıyla sütun ne kadar yüksek ve koyuysa ölçülen değer de o kadar büyüktür. Sütunlar hangi kanalı gösterirse göstersin, noktaların çevresindeki toz bulutu her zaman PM2,5 değerini izler. Bu yüzden yol kenarı ve kalabalık giriş, hiçbir sayı okunmadan önce bile göze çarpmaktadır.</p>
     </div>
   </div>
   <div class="cycle">
@@ -56,53 +56,53 @@
 
 <section class="section"><div class="wrap">
   <h2>İki saatlik akış</h2>
-  <p class="muted">Her bölüm, sonuç gösterilmeden önce cevaplanacak bir soruyla açılır. Ardından Colab defteri sayfadaki her sayıyı Python ile yeniden üretir.</p>
+  <p class="muted">Oturum iki saat sürmekte ve beş bölüm ile kapanıştaki laboratuvar çalışmasından oluşmaktadır. Her bölüm, sonuç gösterilmeden önce katılımcıların cevapladığı bir soruyla açılır. Böylece sezgiyle yapılan tahmin, verinin gerçekte gösterdiğiyle karşılaştırılabilir. Sayfalardaki her sonuç daha sonra Colab defterinin ilgili kısmında Python ile yeniden üretilebilir.</p>
   <div class="parts">
-    <a class="pcard" style="--c:var(--p1)" href="part1.html"><span class="t">0:08 - 0:30</span><h3>1 · Ölç: Veri olarak kampüs</h3><p>Bir saha turunu 3B olarak yeniden oynatın, on kanalı okuyun, hatalı ölçümleri bulun, üç istasyonu hizalayın ve nemli havadaki partikül ölçümlerini düzeltin.</p></a>
-    <a class="pcard" style="--c:var(--p2)" href="part2.html"><span class="t">0:30 - 0:52</span><h3>2 · Analiz et: Adil karşılaştırma</h3><p>Sabahın son noktasının neden sıcak göründüğünü, ters sıralı ikinci turun bunu nasıl düzelttiğini ve güçlü bir korelasyonun neden yanlış yönü gösterebileceğini görün.</p></a>
-    <a class="pcard" style="--c:var(--p3)" href="part3.html"><span class="t">0:57 - 1:17</span><h3>3 · Keşfet: YZ örüntü bulur</h3><p>k-ortalamalar yönteminin 468 dakikayı dönen bir 3B uzayda gruplamasını izleyin, temel bileşen analiziyle altı kanalı sıkıştırın ve grupları kendiniz adlandırın.</p></a>
-    <a class="pcard" style="--c:var(--p4)" href="part4.html"><span class="t">1:17 - 1:37</span><h3>4 · Açıkla: Burada neden yüksek?</h3><p>Bir rastgele ormanı dürüstçe test edin, hangi girdilerin önemli olduğunu sorun, trafik ve arka planla senaryolar deneyin ve modelin cevabının üzerinde 3B olarak gezinin.</p></a>
-    <a class="pcard" style="--c:var(--p5)" href="part5.html"><span class="t">1:37 - 1:55</span><h3>5 · Paylaş ve aksiyona dönüştür</h3><p>YZ ile yazılmış bir paragraftaki hataları yakalayın, kendi sayılarınızdan güvenli bir istem kurun ve NOKTA çalıştay masaları için bir çözüm kartı yazın.</p></a>
-    <a class="pcard" style="--c:var(--ink)" href="lab.html"><span class="t">1:55 - 2:00</span><h3>NOKTA Laboratuvarı ve değerlendirme</h3><p>Bütün 3B araçlar tek bir tezgâhta ve bu tarayıcının oturum boyunca yaptıklarından oluşan bir saha raporu.</p></a>
+    <a class="pcard" style="--c:var(--p1)" href="part1.html"><span class="t">0:08 - 0:30</span><h3>1 · Ölç: Veri olarak kampüs</h3><p>Bir saha turu 3B olarak yeniden oynatılır. Böylece istasyonun güzergâhı ve her noktadaki ölçümün nasıl biriktiği nokta nokta izlenebilir. On sensör kanalı birimleri ve tipik değer aralıklarıyla tanıtılır. Ardından sensörün ısınma süresi, ani sıçramalar ve donmuş bir kanal gibi hatalı ölçümler dayanıklı istatistiklerle bulunur. Son olarak üç istasyon yan yana yapılan bir testle birbirine hizalanır ve nemli havada alınan partikül ölçümleri düzeltilir.</p></a>
+    <a class="pcard" style="--c:var(--p2)" href="part2.html"><span class="t">0:30 - 0:52</span><h3>2 · Analiz et: Adil karşılaştırma</h3><p>Hava sabah boyunca ısındığı için en son ziyaret edilen nokta, gerçekte olduğundan daha sıcak görünebilir. Bu bölüm, ikinci turdaki ters sıralamanın saatin bu etkisini nasıl ortadan kaldırdığını ve tipik bir dakikayı ortalamadan çok medyanın neden daha iyi anlattığını göstermektedir. Ayrıca bütün kampüsler birlikte ele alındığında güçlü görünen bir korelasyonun, her kampüsün kendi içinde neden ters yönü gösterebildiği de ele alınmaktadır.</p></a>
+    <a class="pcard" style="--c:var(--p3)" href="part3.html"><span class="t">0:57 - 1:17</span><h3>3 · Keşfet: YZ örüntü bulur</h3><p>k-ortalamalar algoritması, 468 temiz dakikayı nerede ölçüldüklerini bilmeden dönen bir 3B uzayda gruplar. Temel bileşenler analizi (PCA) ise altı kanalı, değişimin büyük bölümünü koruyan birkaç yeni eksene indirger. Sonunda katılımcılar grupları kendileri adlandırır ve algoritmanın gölge, güneş ve trafik gibi gerçek mikroiklimleri bulup bulmadığını denetler.</p></a>
+    <a class="pcard" style="--c:var(--p4)" href="part4.html"><span class="t">1:17 - 1:37</span><h3>4 · Açıkla: Burada neden yüksek?</h3><p>Rastgele orman modeli PM2,5 değerini trafik, insan yoğunluğu, yeşil alan, güneşlenme ve hava koşullarından tahmin etmektedir. Model önce dürüst bir biçimde test edilir: Rastgele dakikalar yerine ölçüm noktalarının tamamı eğitim verisinin dışında tutulur. Ardından modelin hangi girdilere gerçekten ihtiyaç duyduğu sorgulanır. Katılımcılar trafik ve arka plan kirliliğiyle senaryolar dener ve modelin cevabı 3B bir yüzey olarak incelenir.</p></a>
+    <a class="pcard" style="--c:var(--p5)" href="part5.html"><span class="t">1:37 - 1:55</span><h3>5 · Paylaş ve aksiyona dönüştür</h3><p>Bir YZ asistanı Kampüs B için kısa bir rapor yazmıştır ve bu raporun bazı cümleleri hatalıdır. Katılımcılar önce bu hataları bulur ve her birinin neden hata olduğunu görür. Ardından asistana yalnızca doğrulanmış sayıları ve açık kuralları veren bir istem (prompt) hazırlarlar. Son olarak 28 Kasım'daki NOKTA çalıştayının tematik masalarından biri için bir çözüm kartı yazarlar.</p></a>
+    <a class="pcard" style="--c:var(--ink)" href="lab.html"><span class="t">1:55 - 2:00</span><h3>NOKTA Laboratuvarı ve değerlendirme</h3><p>NOKTA Laboratuvarı, oturumdaki üç 3B aracı tek bir sayfada bir araya getirmektedir: Kampüs ikizi, dakikalardan oluşan nokta bulutu ve modelin tahmin yüzeyi. Ayrıca bu tarayıcıda oturum boyunca verilen cevaplardan ve yapılan seçimlerden kısa bir saha raporu hazırlar. Bu rapor yazdırılabilir ya da PDF dosyası olarak kaydedilebilir.</p></a>
   </div>
-  <p class="note">2. ve 3. bölümler arasında beş dakikalık bir ara vardır (<kbd>B</kbd> tuşu). Açılış: 0:00-0:08.</p>
+  <p class="note">Açılış ilk sekiz dakikayı kapsar (0:00-0:08). 2. Bölümden sonra beş dakikalık bir ara verilir ve <kbd>B</kbd> tuşu bu ara için ekranda bir geri sayım gösterir.</p>
 </div></section>
 
 <section class="section"><div class="wrap grid2 even">
   <div>
     <h2>Oturumun verisi</h2>
-    <p>Atölye, NOKTA saha protokolünü izleyen sentetik bir veri setiyle yürütülmektedir. Üç kampüsün (A, B ve C) her birinde altı sabit nokta türü vardır. Her kampüste bir NOKTA Station altı noktayı iki turda ziyaret eder ve ikinci turda sıra tersine çevrilir. Her ziyaret 15 dakika sürer, yerden yaklaşık 1,5 m yükseklikte her 10 saniyede bir ölçüm alınır.</p>
+    <p>Atölyede NOKTA saha protokolünü izleyen sentetik bir veri seti kullanılmaktadır. Veride A, B ve C adlı üç kampüs vardır ve her kampüste aynı altı nokta türü bulunur. Her kampüste tek bir NOKTA Station altı noktayı aralarında bir hafta bulunan iki turda ziyaret eder, ikinci turda noktalar ters sırayla dolaşılır. Her ziyaret 15 dakika sürer. İstasyon her 10 saniyede bir ölçüm alır ve sensörler yerden yaklaşık 1,5 m yükseklikte, yani insanların soluduğu havanın yüksekliğinde durur.</p>
     <div class="stats">
       <div class="stat"><div class="v">3.240</div><div class="k">ölçüm</div></div>
       <div class="stat"><div class="v">36</div><div class="k">saha formlu ziyaret</div></div>
       <div class="stat"><div class="v">10</div><div class="k">sensör kanalı</div></div>
       <div class="stat"><div class="v">468</div><div class="k">kalite kontrolü sonrası temiz dakika</div></div>
     </div>
-    <p class="note">Bütün değerler sabit seed değeriyle çalışan bir betik tarafından üretilmiştir. Güneşli bir kasım sabahı için akla yatkındır ancak gerçek bir kampüsü anlatmaz, bu yüzden bulgu olarak aktarılmamalıdır. NOKTA'nın amacı üniversiteleri ya da şehirleri sıralamak değildir. Atölye de aynı kurala uymaktadır.</p>
+    <p class="note">Bütün değerler sabit bir seed değeriyle çalışan bir betik tarafından üretilmiştir. Güneşli bir kasım sabahı için akla yatkın olsalar da gerçek bir kampüsü anlatmazlar, bu nedenle bulgu olarak aktarılmamalıdırlar. NOKTA'nın amacı üniversiteleri ya da şehirleri sıralamak değildir ve atölye de aynı kuralı izlemektedir: Noktalar her zaman kendi kampüsü içinde karşılaştırılır, kampüsler birbiriyle yarıştırılmaz.</p>
   </div>
   <div>
     <h2>Altı nokta türü</h2>
     <table class="tbl">
-      <thead><tr><th>Nokta</th><th style="text-align:left">Tür</th><th style="text-align:left">Saha formundaki not</th></tr></thead>
+      <thead><tr><th>Nokta</th><th style="text-align:left">Tür</th><th style="text-align:left">Saha formundaki tanım</th></tr></thead>
       <tbody>
-        <tr><td><i class="sw" style="background:var(--t1)"></i>P1</td><td style="text-align:left">Gölgeli, bina arası</td><td style="text-align:left">dar geçit, doğrudan güneş yok</td></tr>
-        <tr><td><i class="sw" style="background:var(--t2)"></i>P2</td><td style="text-align:left">Trafiğe yakın</td><td style="text-align:left">kampüs yoluna iki metre</td></tr>
-        <tr><td><i class="sw" style="background:var(--t3)"></i>P3</td><td style="text-align:left">Sakin referans</td><td style="text-align:left">yollardan uzak çim kenarı</td></tr>
-        <tr><td><i class="sw" style="background:var(--t4)"></i>P4</td><td style="text-align:left">Güneşe açık sert zemin</td><td style="text-align:left">tam güneşte beton meydan</td></tr>
-        <tr><td><i class="sw" style="background:var(--t5)"></i>P5</td><td style="text-align:left">Öğrenci yoğun alan</td><td style="text-align:left">fakülte girişi, yakında sigara içenler</td></tr>
-        <tr><td><i class="sw" style="background:var(--t6)"></i>P6</td><td style="text-align:left">Yeşil alan</td><td style="text-align:left">ağaç sırasının altı</td></tr>
+        <tr><td><i class="sw" style="background:var(--t1)"></i>P1</td><td style="text-align:left">Gölgeli, bina arası</td><td style="text-align:left">İki bina arasında, ziyaret sırasında doğrudan güneş almayan dar bir geçit.</td></tr>
+        <tr><td><i class="sw" style="background:var(--t2)"></i>P2</td><td style="text-align:left">Trafiğe yakın</td><td style="text-align:left">Otobüslerin ve otomobillerin geçip durduğu kampüs yolunun iki metre yanındaki nokta.</td></tr>
+        <tr><td><i class="sw" style="background:var(--t3)"></i>P3</td><td style="text-align:left">Sakin referans</td><td style="text-align:left">Yollardan ve girişlerden uzak bir çim alanın kenarı. Kampüsün sakin karşılaştırma noktası olarak kullanılır.</td></tr>
+        <tr><td><i class="sw" style="background:var(--t4)"></i>P4</td><td style="text-align:left">Güneşe açık sert zemin</td><td style="text-align:left">Sert zeminin ısı depoladığı, tam güneş alan beton bir meydan.</td></tr>
+        <tr><td><i class="sw" style="background:var(--t5)"></i>P5</td><td style="text-align:left">Öğrenci yoğun alan</td><td style="text-align:left">Öğrencilerin yoğun geçtiği ve yakınında sigara içen bir grubun bulunduğu fakülte girişi.</td></tr>
+        <tr><td><i class="sw" style="background:var(--t6)"></i>P6</td><td style="text-align:left">Yeşil alan</td><td style="text-align:left">Bir ağaç sırasının altında, yaprakların gölgelediği ve serinlettiği bir yol.</td></tr>
       </tbody>
     </table>
-    <p class="note" style="margin-top:10px">1. tur saat 10:00'da P1'den P6'ya doğru başlar. 2. tur aynı saatlerde P6'dan P1'e gider.</p>
+    <p class="note" style="margin-top:10px">1. tur saat 10:00'da başlar ve noktaları P1'den P6'ya doğru ziyaret eder. 2. tur bir hafta sonra aynı saatlerde yapılır ve noktaları P6'dan P1'e doğru dolaşır. Böylece her nokta sabahın bir kez erken, bir kez de geç bir saatinde ölçülmüş olur.</p>
   </div>
 </div></section>
 
 <section class="section"><div class="wrap grid2 even">
   <div>
     <h2>Nasıl takip edilir</h2>
-    <p>Hiçbir şey kurmak gerekmez. Sayfalar telefon dâhil her güncel tarayıcıda çalışır. Turuncu kutular Colab defterinin ilgili bölümünü açar. Orada her sonuç çalıştırılabilir, değiştirilebilir ve denetlenebilir.</p>
+    <p>Hiçbir kurulum gerekmez. Sayfalar telefon dâhil her güncel tarayıcıda çalışır ve indirilen bir kopya internet bağlantısı olmadan da açılır. Her sayfadaki turuncu kutular Colab defterinin ilgili kısmını açar. Orada her sonuç Python ile yeniden çalıştırılabilir, değiştirilebilir ve denetlenebilir.</p>
     <p>Tuşlar: <kbd>←</kbd> <kbd>→</kbd> duraklar, <kbd>[</kbd> <kbd>]</kbd> bölümler, <kbd>T</kbd> kâğıt ya da gece görünümü, <kbd>L</kbd> dil, <kbd>F</kbd> tam ekran, <kbd>B</kbd> ara, <kbd>?</kbd> yardım.</p>
-    <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Tek bir defter bütün oturumu taşır: 1. Bölüm için Kısım 1'den 5. Bölüm için Kısım 5'e kadar. Tek bir ayarı değiştirerek gerçek NOKTA dosyalarını da okur.</p></div>
+    <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Oturumun tamamı tek bir Colab defterinde yer almaktadır. Defterin 1-5. kısımları sitenin 1-5. bölümlerini izler, 0. kısım ise veriyi yükler. Tek bir ayar değiştirildiğinde aynı defter bir ekibin gerçek NOKTA dosyalarını da okuyabilir.</p></div>
   </div>
   <div>
     <h2>Eğitmen</h2>
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var box = document.getElementById("hero-vars");
   function legend(v) {
     document.getElementById("hero-var").textContent = NK.chName(v) + " · " + "iki tur ortalaması, Kampüs A";
-    document.getElementById("hero-legend").innerHTML = "Daha yüksek ve koyu sütun: Daha büyük değer. Her etiket altı noktadan birini adlandırır.";
+    document.getElementById("hero-legend").innerHTML = "Sütun ne kadar yüksek ve koyuysa değer o kadar büyüktür. Her etiket altı noktadan birini adlandırır ve değerini verir.";
   }
   vars.forEach(function (v, i) {
     var b = document.createElement("button"); b.className = "btn" + (i === 0 ? " on" : ""); b.textContent = NK.chName(v);

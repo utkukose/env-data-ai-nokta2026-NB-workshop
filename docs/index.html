@@ -36,14 +36,14 @@
       </div>
     </div>
     <div>
-      <p class="lead">Six measurement points on a campus, one portable station, two field rounds and ten sensor channels. This workshop follows such data from the first reading to a solution proposal. It shows where artificial intelligence (AI) helps, where it misleads, and how a careful analyst keeps it honest.</p>
+      <p class="lead">In the NOKTA project, student teams carry one portable measurement station to six fixed points on their campus. At each point the station records ten sensor channels for 15 minutes, and the whole route is measured in two rounds on two different days. This workshop follows such a dataset from the first raw reading to a proposal that a university unit can put into practice. Along the way it shows where artificial intelligence (AI) really helps the analysis, where it can mislead, and which checks keep the conclusions honest.</p>
       <div class="controls" style="margin:18px 0">
         <a class="btn primary" href="part1.html">Start with Part 1 →</a>
         <a class="btn" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb" target="_blank" rel="noopener">Open the Colab notebook</a>
         <a class="btn" href="lab.html">NOKTA Lab</a>
       </div>
       <div class="controls" id="hero-vars"></div>
-      <p class="note">The 3D scene is a schematic campus, not a map of a real one. The columns show the two-round mean of each point, and the dust cloud follows PM2.5.</p>
+      <p class="note">The 3D scene is a schematic campus, not the map of a real one. It places the six point types where they usually occur on a campus: A shaded passage between two buildings, a point next to the campus road, a quiet lawn, a sunny concrete square, a busy faculty entrance and a row of trees. The column above each point shows the mean of the two field rounds for the channel selected with the buttons above. The label gives the same value with its unit. A taller and darker column therefore means a higher value. Whatever channel the columns show, the dust cloud around each point always follows PM2.5, so the road and the busy entrance stand out before any number is read.</p>
     </div>
   </div>
   <div class="cycle">
@@ -56,53 +56,53 @@
 
 <section class="section"><div class="wrap">
   <h2>The two hours</h2>
-  <p class="muted">Every part opens with a question to answer before the reveal. The Colab notebook then reproduces each number of the page in Python.</p>
+  <p class="muted">The session lasts two hours and consists of five parts and a closing lab. Every part opens with a question that the participants answer before the result is shown, so that intuition can be compared with what the data say. Each result on the pages can then be reproduced in Python in the matching section of the Colab notebook.</p>
   <div class="parts">
-    <a class="pcard" style="--c:var(--p1)" href="part1.html"><span class="t">0:08 to 0:30</span><h3>1 · Measure: The campus as data</h3><p>Replay a field round in 3D, read the ten channels, find faulty readings, align three stations and correct humid particle readings.</p></a>
-    <a class="pcard" style="--c:var(--p2)" href="part2.html"><span class="t">0:30 to 0:52</span><h3>2 · Analyze: Fair comparisons</h3><p>See why the last point of a morning looks warm, how the reversed second round fixes it, and why a strong correlation can point the wrong way.</p></a>
-    <a class="pcard" style="--c:var(--p3)" href="part3.html"><span class="t">0:57 to 1:17</span><h3>3 · Discover: AI finds patterns</h3><p>Watch k-means group 468 minutes in a rotating 3D space, compress six channels with principal component analysis and name the groups yourself.</p></a>
-    <a class="pcard" style="--c:var(--p4)" href="part4.html"><span class="t">1:17 to 1:37</span><h3>4 · Explain: Why is it high here?</h3><p>Test a random forest honestly, ask which inputs matter, play what-if with traffic and background, and fly over the model's answer in 3D.</p></a>
-    <a class="pcard" style="--c:var(--p5)" href="part5.html"><span class="t">1:37 to 1:55</span><h3>5 · Share and turn into action</h3><p>Catch the errors in an AI-written paragraph, build a safe prompt from your numbers and write a solution card for the NOKTA workshop tables.</p></a>
-    <a class="pcard" style="--c:var(--ink)" href="lab.html"><span class="t">1:55 to 2:00</span><h3>NOKTA Lab and debrief</h3><p>All 3D tools on one bench and a field report built from what this browser did during the session.</p></a>
+    <a class="pcard" style="--c:var(--p1)" href="part1.html"><span class="t">0:08 to 0:30</span><h3>1 · Measure: The campus as data</h3><p>A field round is replayed in 3D, so the route of the station and the build-up of each reading can be followed point by point. The ten sensor channels are introduced with their units and typical ranges. Faulty readings such as sensor warm-up, sudden spikes and a frozen channel are then found with robust statistics. Finally, the three stations are aligned with a side-by-side test, and particle readings taken in humid air are corrected.</p></a>
+    <a class="pcard" style="--c:var(--p2)" href="part2.html"><span class="t">0:30 to 0:52</span><h3>2 · Analyze: Fair comparisons</h3><p>The air warms during the morning, so the point visited last can look warmer than it really is. This part shows how the reversed order of the second round removes this effect of the clock, and why the median describes a typical minute better than the mean. It also shows how a strong correlation over all campuses together can point the wrong way inside each campus.</p></a>
+    <a class="pcard" style="--c:var(--p3)" href="part3.html"><span class="t">0:57 to 1:17</span><h3>3 · Discover: AI finds patterns</h3><p>The k-means algorithm groups the 468 clean minutes in a rotating 3D space without being told where they were measured. Principal component analysis (PCA) then compresses six channels into a few new axes that keep most of the variation. At the end the participants name the groups themselves and check whether the algorithm has found real microclimates such as shade, sun and traffic.</p></a>
+    <a class="pcard" style="--c:var(--p4)" href="part4.html"><span class="t">1:17 to 1:37</span><h3>4 · Explain: Why is it high here?</h3><p>A random forest model predicts PM2.5 from traffic, people, greenery, sunshine and weather. The model is first tested honestly, by keeping whole measurement points out of the training data instead of random minutes. The part then asks which inputs the model really needs. Finally, the participants try what-if scenarios with traffic and the background level and see the answer of the model as a surface in 3D.</p></a>
+    <a class="pcard" style="--c:var(--p5)" href="part5.html"><span class="t">1:37 to 1:55</span><h3>5 · Share and turn into action</h3><p>An AI assistant has written a short report on Campus B, and some of its sentences are wrong. The participants first find these errors and see why each one is an error. They then build a prompt that gives the assistant only verified numbers and clear rules. Finally, they write a solution card for one of the thematic tables of the NOKTA workshop on 28 November.</p></a>
+    <a class="pcard" style="--c:var(--ink)" href="lab.html"><span class="t">1:55 to 2:00</span><h3>NOKTA Lab and debrief</h3><p>The NOKTA Lab gathers the three 3D tools of the session on one page: The campus twin, the cloud of minutes and the surface of the model. It also writes a short field report from the answers and choices made in this browser during the session. The report can be printed or saved as a PDF file.</p></a>
   </div>
-  <p class="note">A five-minute break sits between Parts 2 and 3 (key <kbd>B</kbd>). Opening: 0:00 to 0:08.</p>
+  <p class="note">The opening takes the first eight minutes (0:00 to 0:08). A five-minute break follows Part 2, and the key <kbd>B</kbd> shows a countdown for it on the screen.</p>
 </div></section>
 
 <section class="section"><div class="wrap grid2 even">
   <div>
     <h2>The data of the session</h2>
-    <p>The workshop runs on a synthetic dataset that follows the NOKTA field protocol. Three campuses (A, B and C) each have six fixed point types. One NOKTA Station per campus visits the six points in two rounds, and the second round reverses the order. Each visit lasts 15 minutes with a reading every 10 seconds, at about 1.5 m above the ground.</p>
+    <p>The workshop uses a synthetic dataset that follows the NOKTA field protocol. It contains three campuses, A, B and C, and each campus has the same six point types. On each campus one NOKTA Station visits the six points in two rounds held one week apart, and the second round visits them in reverse order. Each visit lasts 15 minutes, the station takes a reading every 10 seconds, and the sensors sit about 1.5 m above the ground, at breathing height.</p>
     <div class="stats">
       <div class="stat"><div class="v">3,240</div><div class="k">readings</div></div>
       <div class="stat"><div class="v">36</div><div class="k">visits with a field form</div></div>
       <div class="stat"><div class="v">10</div><div class="k">sensor channels</div></div>
       <div class="stat"><div class="v">468</div><div class="k">clean minutes after quality control</div></div>
     </div>
-    <p class="note">All values are invented by a script with a fixed seed. They are plausible for a sunny November morning but describe no real campus, so they must not be quoted as findings. The aim of NOKTA is not to rank universities or cities, and the workshop follows the same rule.</p>
+    <p class="note">All values were generated by a script with a fixed seed value. They are plausible for a sunny November morning, but they describe no real campus and must not be quoted as findings. The aim of NOKTA is not to rank universities or cities, and the workshop follows the same rule. Points are compared within their own campus, and campuses are never set against each other.</p>
   </div>
   <div>
     <h2>Six point types</h2>
     <table class="tbl">
-      <thead><tr><th>Point</th><th style="text-align:left">Type</th><th style="text-align:left">What the field form says</th></tr></thead>
+      <thead><tr><th>Point</th><th style="text-align:left">Type</th><th style="text-align:left">Description from the field form</th></tr></thead>
       <tbody>
-        <tr><td><i class="sw" style="background:var(--t1)"></i>P1</td><td style="text-align:left">Shaded, between buildings</td><td style="text-align:left">narrow passage, no direct sun</td></tr>
-        <tr><td><i class="sw" style="background:var(--t2)"></i>P2</td><td style="text-align:left">Near traffic</td><td style="text-align:left">two meters from the campus road</td></tr>
-        <tr><td><i class="sw" style="background:var(--t3)"></i>P3</td><td style="text-align:left">Quiet reference</td><td style="text-align:left">lawn edge away from roads</td></tr>
-        <tr><td><i class="sw" style="background:var(--t4)"></i>P4</td><td style="text-align:left">Sunny hard surface</td><td style="text-align:left">concrete square in full sun</td></tr>
-        <tr><td><i class="sw" style="background:var(--t5)"></i>P5</td><td style="text-align:left">Busy student area</td><td style="text-align:left">faculty entrance, smokers nearby</td></tr>
-        <tr><td><i class="sw" style="background:var(--t6)"></i>P6</td><td style="text-align:left">Green area</td><td style="text-align:left">under a row of trees</td></tr>
+        <tr><td><i class="sw" style="background:var(--t1)"></i>P1</td><td style="text-align:left">Shaded, between buildings</td><td style="text-align:left">A narrow passage between two buildings that gets no direct sun during the visit.</td></tr>
+        <tr><td><i class="sw" style="background:var(--t2)"></i>P2</td><td style="text-align:left">Near traffic</td><td style="text-align:left">A point two meters from the campus road, where buses and cars pass and stop.</td></tr>
+        <tr><td><i class="sw" style="background:var(--t3)"></i>P3</td><td style="text-align:left">Quiet reference</td><td style="text-align:left">The edge of a lawn far from roads and entrances, used as the calm baseline of the campus.</td></tr>
+        <tr><td><i class="sw" style="background:var(--t4)"></i>P4</td><td style="text-align:left">Sunny hard surface</td><td style="text-align:left">A concrete square in full sun, where the hard surface stores heat.</td></tr>
+        <tr><td><i class="sw" style="background:var(--t5)"></i>P5</td><td style="text-align:left">Busy student area</td><td style="text-align:left">A faculty entrance with many passing students and a smoking group nearby.</td></tr>
+        <tr><td><i class="sw" style="background:var(--t6)"></i>P6</td><td style="text-align:left">Green area</td><td style="text-align:left">A path under a row of trees, shaded and cooled by the leaves.</td></tr>
       </tbody>
     </table>
-    <p class="note" style="margin-top:10px">Round 1 visits P1 to P6 from 10:00. Round 2 visits P6 to P1 at the same clock times.</p>
+    <p class="note" style="margin-top:10px">Round 1 starts at 10:00 and visits the points from P1 to P6. Round 2 takes place one week later at the same clock times and visits them from P6 back to P1. Every point is therefore measured once early and once late in the morning.</p>
   </div>
 </div></section>
 
 <section class="section"><div class="wrap grid2 even">
   <div>
     <h2>How to follow</h2>
-    <p>Nothing needs to be installed. The pages run in any modern browser, also on a phone. The orange boxes open the matching section of the Colab notebook, where every result can be run, changed and checked.</p>
+    <p>Nothing needs to be installed. The pages run in any modern browser, including a phone, and a downloaded copy also opens without an internet connection. The orange boxes on each page open the matching section of the Colab notebook, where every result can be run again, changed and checked in Python.</p>
     <p>Keys: <kbd>←</kbd> <kbd>→</kbd> stations, <kbd>[</kbd> <kbd>]</kbd> parts, <kbd>T</kbd> paper or night view, <kbd>L</kbd> language, <kbd>F</kbd> full screen, <kbd>B</kbd> break, <kbd>?</kbd> help.</p>
-    <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>One notebook carries the whole session: Section 1 for Part 1 up to Section 5 for Part 5. It also reads real NOKTA files with one change of setting.</p></div>
+    <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>A single Colab notebook carries the whole session. Its Sections 1 to 5 follow Parts 1 to 5 of the site, and Section 0 loads the data. With one change of setting, the same notebook also reads the real NOKTA files of a team.</p></div>
   </div>
   <div>
     <h2>Presenter</h2>
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var box = document.getElementById("hero-vars");
   function legend(v) {
     document.getElementById("hero-var").textContent = NK.chName(v) + " · " + "two-round mean, Campus A";
-    document.getElementById("hero-legend").innerHTML = "Taller and darker column: Higher value. Each label names one of the six points.";
+    document.getElementById("hero-legend").innerHTML = "A taller and darker column means a higher value. Each label names one of the six points and gives its value.";
   }
   vars.forEach(function (v, i) {
     var b = document.createElement("button"); b.className = "btn" + (i === 0 ? " on" : ""); b.textContent = NK.chName(v);

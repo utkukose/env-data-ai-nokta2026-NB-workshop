@@ -26,7 +26,7 @@
 <section class="parthead"><div class="wrap">
   <p class="kicker">NOKTA Lab · 1:55 to 2:00 and after the session</p>
   <h1>The bench</h1>
-  <p class="lead">The 3D tools of the session in one place, for questions at the end and for the analysis days of 21 to 24 November. The debrief turns what this browser did into a short field report.</p>
+  <p class="lead">The NOKTA Lab gathers the three 3D tools of the session on one page. In the last minutes of the workshop it serves for questions from the audience. On the analysis days of 21 to 24 November it lets the teams return to the campus twin, the cloud of minutes and the model surface. The fourth tab, the debrief, turns what was done in this browser during the session into a short field report.</p>
   <div class="controls" id="tabs" style="margin-top:18px">
     <button class="btn on" data-tab="twin">Campus twin</button>
     <button class="btn" data-tab="cloud">Microclimate groups</button>
@@ -46,8 +46,9 @@
         <label>Channel <select id="lt-var"></select></label>
         <label>Speed <select id="lt-speed"><option value="1">×1</option><option value="2" selected>×2</option><option value="4">×4</option></select></label>
       </div>
+      <p class="cap">This is the campus twin of Part 1, now for all three campuses. The menus choose a campus, a single round or the mean of both rounds, and a channel. Play walks the station through the round again, while Results shows the final columns at once. A click on a point fills the point card on the right with its values.</p>
     </div>
-    <div class="card"><h3 style="margin-top:0">Point card</h3><div id="lt-card" class="muted">Click a station in the scene.</div></div>
+    <div class="card"><h3 style="margin-top:0">Point card</h3><div id="lt-card" class="muted">Click one of the six points in the scene to see its values in both rounds.</div></div>
   </div>
 </div></section>
 
@@ -61,14 +62,15 @@
         <div class="seg" id="lc-col"><button class="on" data-v="cluster">Groups</button><button data-v="type">Point types</button></div></div>
       <div class="stats"><div class="stat"><div class="v" id="lc-sil"></div><div class="k">silhouette</div></div><div class="stat"><div class="v" id="lc-j"></div><div class="k">J</div></div></div>
       <div id="lc-tab"></div>
-      <p class="note">Groups as found by scikit-learn in the Colab notebook, ordered by their temperature difference.</p>
+      <p class="note">The cloud shows the clean minutes as in Part 3. The menu k chooses the number of groups, and the silhouette and J values above show how well the groups are separated. The groups are those that scikit-learn found in the Colab notebook, numbered from the coolest to the warmest center. The button Point types colors the same minutes by the place where they were measured, so the two views can be compared.</p>
     </div>
   </div>
 </div></section>
 
 <section class="station" id="model" hidden><div class="wrap">
   <div class="grid2">
-    <div class="stage3d tall" id="lab-surf"><div class="hud"><span>PM2.5 over traffic and background</span><span id="lm-val"></span></div></div>
+    <div><div class="stage3d tall" id="lab-surf"><div class="hud"><span>PM2.5 over traffic and background</span><span id="lm-val"></span></div></div>
+      <p class="cap">The surface shows the PM2.5 that the forest of Part 4 predicts for every combination of traffic and background PM2.5. All other inputs keep the values of the sliders on the right. Higher and darker parts mean higher PM2.5, and the number above the sliders gives the prediction for the current scenario.</p></div>
     <div class="card" id="lm-sliders"><div class="stats"><div class="stat"><div class="v" id="lm-pred"></div><div class="k">predicted PM2.5 (µg/m³)</div></div></div></div>
   </div>
 </div></section>
@@ -78,9 +80,9 @@
     <div class="card" id="report"></div>
     <div>
       <div class="controls"><button class="btn primary" onclick="window.print()">Print or save as PDF</button><button class="btn" id="db-reset">Start a new session</button></div>
-      <p class="note">Everything here comes from this browser and never leaves it. In a live session, the presenter's browser produces the debrief shown at the close.</p>
-      <div class="takeaway"><b>Next steps for the NOKTA teams.</b> 21 to 24 November: Run the Colab notebook on your own files (Section 0, one setting). 28 November: Bring one solution card per table to the workshop and one figure with its averaging time to the congress.</div>
-      <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb#scrollTo=sec-0" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Section 0 of the Colab notebook explains how to load real NOKTA files instead of the synthetic data.</p></div>
+      <p class="note">Everything shown here comes from this browser and is never sent anywhere. In a live session, the debrief shown at the close is the one produced by the presenter's browser, which records the answers that the presenter entered for the room.</p>
+      <div class="takeaway"><b>Next steps for the NOKTA teams.</b> From 21 to 24 November the teams run the Colab notebook on their own NOKTA files. In Section 0, one setting switches the notebook from the synthetic data to the uploaded files. On 28 November each team brings one solution card per thematic table to the workshop. For the congress it brings one figure whose caption states the averaging time of its values.</div>
+      <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb#scrollTo=sec-0" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Section 0 of the Colab notebook explains how real NOKTA files are loaded instead of the synthetic data. It also shows how the column names of another logger are matched to the NOKTA names.</p></div>
     </div>
   </div>
 </div></section>
@@ -189,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "<div class='stats'><div class='stat'><div class='v'>" + visited.filter(function (p) { return /part|lab|index/.test(p); }).length + "/7</div><div class='k'>pages visited</div></div><div class='stat'><div class='v'>" + answered + "</div><div class='k'>predictions made</div></div><div class='stat'><div class='v'>" + right + "</div><div class='k'>right at the first try</div></div><div class='stat'><div class='v'>" + colab + "</div><div class='k'>Colab links opened</div></div></div>" +
       "<p>" + (acts.length ? "In this browser the participant " + acts.join("; ") + "." : "No interactive steps are recorded yet in this browser.") + "</p>" +
       "<table class='tbl'><thead><tr><th>Prediction</th><th>Result</th></tr></thead><tbody>" + rowsP + "</tbody></table>" +
-      "<h3>Solution card</h3>" + (card ? "<div class='actioncard'><h4>" + card.table + "</h4><dl>" + card.fields.map(function (f) { return "<dt>" + f[0] + "</dt><dd>" + String(f[1]).replace(/</g, "&lt;") + "</dd>"; }).join("") + "</dl></div>" : "<p class='muted'>No card yet: Write one in Part 5.</p>") +
+      "<h3>Solution card</h3>" + (card ? "<div class='actioncard'><h4>" + card.table + "</h4><dl>" + card.fields.map(function (f) { return "<dt>" + f[0] + "</dt><dd>" + String(f[1]).replace(/</g, "&lt;") + "</dd>"; }).join("") + "</dl></div>" : "<p class='muted'>No card yet: A solution card can be written in Part 5.</p>") +
       "<p class='note' style='margin-top:12px'>Five rules from the session: Keep the raw file, compare points through both rounds, report the averaging time, treat clusters and importances as hypotheses and check every AI-written number.</p>";
     $("report").innerHTML = html;
   }
