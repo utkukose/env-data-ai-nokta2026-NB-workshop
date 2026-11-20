@@ -53,9 +53,10 @@ IEEE Senior Member · ACM Professional Member
 ---
 
 <p align="center">
-<a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/"><img src="docs/images/site_start.png" width="920" alt="Start page of the workshop site with a 3D campus twin: six NOKTA points with data columns and a dust cloud that follows PM2.5"></a><br>
-<sub>The start page of the workshop site. A schematic 3D campus shows the six NOKTA point types with the two-round mean of the chosen channel.</sub>
+<a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/"><img src="docs/images/site_start.png" width="920" alt="Start page of the workshop site with a 3D campus: Six NOKTA points with data columns and a dust cloud near the road"></a>
 </p>
+
+*The start page of the workshop site.* The 3D scene is a schematic campus, not the map of a real one. It shows the six NOKTA point types where they usually occur on a campus: A shaded passage between two buildings, a point next to the campus road, a quiet lawn used as the reference, a sunny concrete square, a busy faculty entrance and a path under a row of trees. The column above each point gives the two-round mean of the chosen channel, here PM2.5 on Campus A. A taller and darker column means a higher value, and the label gives the number. In this synthetic example the point next to the road has the highest mean, 17.7 µg/m³, and the green area the lowest, 8.6 µg/m³.
 
 ## About
 
@@ -63,7 +64,7 @@ This repository contains the complete material of the two-hour workshop *AI-Base
 
 In NOKTA, teams on three campuses carry a portable NOKTA Station to six fixed point types. The station measures temperature, relative humidity, air pressure, PM1, PM2.5, PM10, carbon dioxide (CO₂), light, UVA and UVB. Each campus runs two field rounds, and the second round reverses the order of the points. The approach of the project is *Measure → Analyze → Share → Turn into action*. The workshop takes place on 20 November 2026, the last day of the second field round. It prepares the teams for the analysis days of 21 to 24 November and for the NOKTA National Youth Environment and Climate Congress and Environment Workshop on 28 November.
 
-The session follows such data from the first reading to a solution proposal. It shows where artificial intelligence (AI) helps, where it misleads and how a careful analyst keeps it honest. The steps are robust quality control, fair comparisons, unsupervised learning in 3D, an explainable model with an honest test, and AI-assisted reporting with a number audit. All material exists in English and Turkish.
+The session follows such a dataset from the first raw reading to a solution proposal. Along the way it shows where artificial intelligence (AI) really helps the analysis, where it can mislead and which checks keep the conclusions reliable. The five parts cover quality control with robust statistics, fair comparisons between points, the discovery of patterns with unsupervised learning, an explainable model that is tested honestly, and AI-assisted reporting in which every number is checked. All material exists in English and Turkish.
 
 ## Use in other courses and workshops
 
@@ -71,7 +72,7 @@ These materials may be used, adapted and run in other courses and workshops at a
 
 ## How the session works
 
-Each part follows the same rhythm. **Predict:** a short page on the [workshop site](https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/) asks a question before anything is shown. **Reveal and explore:** animations and 3D scenes show what the data say, and every formula comes with a worked example in numbers. **Code:** the orange boxes open the matching section of the Colab notebook, which reproduces every number of the page in Python. The NOKTA Lab closes the session with all 3D tools on one bench and a debrief built from what each browser did.
+Each part of the session follows the same rhythm. **Predict:** Most stations of the [workshop site](https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/) open with a short question that the participants answer before anything is shown. Their intuition can then be compared with what the data say. **Reveal and explore:** The page shows the answer with an animation, a chart or a 3D scene. Every formula is followed by the meaning of its symbols, its units and a worked example in numbers. **Code:** The orange boxes open the matching section of the Colab notebook, which reproduces every number of the page in Python. At the end, the NOKTA Lab gathers all 3D tools on one page and writes a short field report from the answers given during the session.
 
 ## Program
 
@@ -90,45 +91,61 @@ The run sheet with the timings, the questions for a live poll and a fallback pla
 
 ## The interactive pages
 
-| Page | What participants do |
-|---|---|
-| **Part 1 · Measure** | Replay a field round in a 3D campus twin with the sun, the traffic and a dust cloud that follows PM2.5, read the ten channels, play data doctor on 10-second streams with a robust z-score, align three stations from their side-by-side test and watch humid air swell particles in an optical sensor. |
-| **Part 2 · Analyze** | See why the last stop of a morning looks warm, how the reversed second round removes the clock from the comparison, why the median beats the mean near smokers, how a correlation of +0.81 turns negative inside each campus, and whether the air is wetter or only colder. |
-| **Part 3 · Discover** | Rotate 468 clean minutes in 3D, run k-means step by step in the browser, compress six channels with principal component analysis and name the groups. |
-| **Part 4 · Explain** | Watch a random forest lose 41 percent of its score when whole points are held out, predict which input matters most, play what-if with traffic, people and background, and fly over the model's answer as a 3D surface. |
-| **Part 5 · Share and act** | Catch six errors in an AI-written paragraph, build a safe prompt from the fact table, weigh claims from observed to unsupported, and write a solution card for the three tables of the NOKTA Environment Workshop. |
-| **NOKTA Lab** | The campus twin, the microclimate groups and the model surface on one bench, and a printable field report of the session. |
+The workshop site has seven pages: The start page, the five parts and the NOKTA Lab. Each part is divided into numbered stations, and each station explains one idea with a short text, a formula where one is needed and an interactive visual. The subsections below describe what each part covers. A screenshot then shows one station of each part, and the paragraph under it explains what the screenshot contains.
 
-<table>
-<tr>
-<td width="50%"><a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/part1.html"><img src="docs/images/site_part1.png" alt="Part 1: the field round replayed in the 3D campus twin"></a></td>
-<td width="50%"><a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/part2.html"><img src="docs/images/site_part2.png" alt="Part 2: the two rounds against the clock"></a></td>
-</tr>
-<tr>
-<td><sub>Part 1. One station walks the six points, and the columns grow with the running median.</sub></td>
-<td><sub>Part 2. Round 1 and the reversed Round 2 against the clock, before the fair result.</sub></td>
-</tr>
-<tr>
-<td width="50%"><a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/part3.html"><img src="docs/images/site_part3.png" alt="Part 3: k-means in a rotating 3D cloud"></a></td>
-<td width="50%"><a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/part4.html"><img src="docs/images/site_part4.png" alt="Part 4: the model surface in 3D"></a></td>
-</tr>
-<tr>
-<td><sub>Part 3. k-means converges in the browser on the same minutes as the notebook.</sub></td>
-<td><sub>Part 4. A forest answers in steps: PM2.5 over traffic and background.</sub></td>
-</tr>
-<tr>
-<td width="50%"><a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/part5.html"><img src="docs/images/site_part5.png" alt="Part 5: spot the errors in an AI-written paragraph"></a></td>
-<td width="50%"><a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/lab.html"><img src="docs/images/site_lab.png" alt="NOKTA Lab"></a></td>
-</tr>
-<tr>
-<td><sub>Part 5. Six of nine sentences would not survive a check against the fact table.</sub></td>
-<td><sub>The NOKTA Lab keeps the 3D tools together for the analysis days.</sub></td>
-</tr>
-</table>
+### Part 1 · Measure: The campus as data
+
+Part 1 turns the field protocol into data and checks the quality of the readings before any analysis. The first station replays a field round in a 3D campus twin, so the route of the station and the build-up of each reading can be followed point by point. The second station introduces the ten sensor channels with their units and typical ranges, and asks why the air pressure differs so much between the campuses. The third station shows the typical faults of low-cost sensors in the 10-second readings: The warm-up after each move, single-channel spikes, a frozen CO₂ sensor and missing values. A robust z-score and a few physical rules mark these faults, and the marks are compared with the problems that were planted in the data on purpose. The fourth station removes the small offsets between the three stations, which were measured in a side-by-side test before the field rounds. The fifth station shows how humid air swells the particles that an optical sensor counts, and how the κ-Köhler formula corrects the reading.
+
+<p align="center"><a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/part1.html"><img src="docs/images/site_part1.png" width="860" alt="Part 1: The field round replayed in the 3D campus twin"></a></p>
+
+*In the screenshot,* the replay of Round 1 on Campus A has reached its fourth stop, the sunny point, which the station visited from 11:15 to 11:30. The clock in the upper left corner of the scene gives the time of the replay. The label in the upper right corner gives the minute of the current visit. The column of each point shows the running median of PM2.5 there, that is, the middle value of all readings taken so far. A column therefore stops growing once its visit is over. The point next to the road has the tallest column, 25.3 µg/m³, and the dust cloud is thickest there. On the right, the field form of the current visit gives the vehicles and people counted in 15 minutes and the readings of that moment.
+
+### Part 2 · Analyze: Fair comparisons
+
+Part 2 shows that clean data can still mislead when two effects are mixed. The air warms during the morning, so the point visited last can look warmer only because it was measured later. The first station shows how the second round removes this effect. Round 2 visits the same points in reverse order one week later, so the average of the two rounds gives every point the same average clock time. The second station uses box plots to show why the median describes a typical minute better than the mean when short smoke plumes pass. The third station finds that warmer minutes come with higher air pressure over all campuses together (r = +0.81), while the relation is negative inside each campus. The campus is the hidden third factor, a case known as Simpson's paradox. The fourth station uses the dew point to tell air that holds more water apart from air that is only colder.
+
+<p align="center"><a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/part2.html"><img src="docs/images/site_part2.png" width="860" alt="Part 2: The temperature of the six points in both rounds against the clock"></a></p>
+
+*In the screenshot,* the first station plots the temperature of the six points of Campus A against the clock. Each dot is the median of one visit, placed at its clock time and colored by its point type. The solid line joins the visits of Round 1, which went from P1 to P6, and the dashed line joins those of Round 2, which went from P6 to P1. The order of the points changes from one round to the other, so a single round cannot separate the effect of the place from the effect of the hour. The button *Fair result* then shows the difference of each point from the reference point, averaged over both rounds.
+
+### Part 3 · Discover: AI finds patterns
+
+Part 3 lets an unsupervised algorithm look for patterns without being told the right answer. The 468 clean minutes of all campuses form a cloud in a rotating 3D space. Each minute is placed by three channels: Its temperature difference from the campus-round median, the logarithm of its light level and its PM2.5 difference. The k-means algorithm groups these minutes without knowing where they were measured. The buttons under the scene run its steps one at a time, and two numbers measure the result: The total squared distance J and the silhouette. Principal component analysis (PCA) then compresses six standardized channels into three new axes that keep about 86 % of the variation. In the last station each group card gives the center of the group in sensor units and the share of each point type among its minutes. The participants choose a name for each group, such as *Hot and bright* or *Smoke and exhaust plumes*, and the page checks the choices.
+
+<p align="center"><a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/part3.html"><img src="docs/images/site_part3.png" width="860" alt="Part 3: Groups found by k-means in a rotating 3D cloud of minutes"></a></p>
+
+*In the screenshot,* k-means has run to the end with k = 4, which took four iterations. Each dot is one clean minute, and its color shows the group of its nearest center. The black rings mark the four centers. Below the scene, J = 363.0 is the total squared distance between the minutes and their centers, which every step of the algorithm lowers. The value 0.499 is the silhouette of the same grouping in the notebook, a measure between −1 and 1 of how well the groups are separated. The menu *Highlight* can pick out a single point type to show which groups its minutes fell into.
+
+### Part 4 · Explain: Why is it high here?
+
+Part 4 builds a model that explains PM2.5 and tests it honestly. A random forest is a set of decision trees whose answers are averaged. Here it predicts the PM2.5 of each minute from eight inputs: The vehicles and people per minute, the green cover, the sunshine, the relative humidity, the temperature, the hour and the background PM2.5 of the day. The first station compares three scores of the same model. On its own training minutes it reaches R² = 0.66 and on random test minutes 0.54. With whole measurement points held out, the score falls to 0.32, which is 41 percent below the random test. Only this last score tells how well the model would do at a new place. The second station asks which input the model relies on most and answers with permutation importance. The third station offers what-if sliders and ready scenarios, such as a quiet lawn or a bus stop. The fourth station draws the answer of the model as a 3D surface over two inputs, next to a partial dependence curve.
+
+<p align="center"><a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/part4.html"><img src="docs/images/site_part4.png" width="860" alt="Part 4: The PM2.5 predicted by the random forest as a 3D surface over traffic and background"></a></p>
+
+*In the screenshot,* the surface shows the PM2.5 that the forest predicts for every combination of vehicles per minute and background PM2.5. All other inputs keep the values of the scenario *Bus stop*, chosen in the what-if panel, and the red marker shows this scenario with a prediction of 18.5 µg/m³. The surface rises in steps, because every tree splits its inputs at threshold values. On the right, the partial dependence curve gives the average prediction over all minutes for each number of vehicles per minute.
+
+### Part 5 · Share and turn into action: From numbers to words to action
+
+Part 5 uses generative AI for reporting and keeps one rule throughout. The numbers come from the analysis, the words may come from the AI, and the judgment stays with the team. The first station gives a summary of Campus B in nine sentences, written by an AI assistant. Six of the sentences contain an error, such as an invented number, a cause that the data cannot show or a source that does not exist. The second station builds a prompt that hands the assistant the fact table of a campus, the study design and seven rules. The third station sorts claims on a ladder from *observed* through *associated* and *needs an intervention* to *not supported*. The fourth station writes a solution card for one of the three thematic tables of the NOKTA National Environment Workshop on 28 November.
+
+<p align="center"><a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/part5.html"><img src="docs/images/site_part5.png" width="860" alt="Part 5: Spot the errors in a paragraph written by an AI assistant"></a></p>
+
+*In the screenshot,* three sentences were marked and then checked. All three break the fact table or the study design: An invented value for the green area, a claim that trees remove one third of the particles, and a ranking of Campus B among the universities. After the check, every sentence with an error gets a red frame and every correct sentence a dashed green frame. The counter shows that three of the six errors were found, and the explanations on the right say what is wrong in each sentence. The fact table above them lists the only numbers that the assistant was allowed to use.
+
+### NOKTA Lab
+
+The NOKTA Lab gathers the three 3D tools of the session on one page: The campus twin, the cloud of minutes with its groups and the surface of the model. It serves for questions in the last minutes of the workshop and for the analysis days of 21 to 24 November. A fourth tab, the debrief, writes a short field report from the answers and steps recorded in the browser during the session. The report can be printed or saved as a PDF file.
+
+<p align="center"><a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/lab.html"><img src="docs/images/site_lab.png" width="860" alt="NOKTA Lab: The campus twin with the two-round means of Campus A"></a></p>
+
+*In the screenshot,* the campus twin of the lab shows the two-round means of PM2.5 on Campus A. The menus under the scene choose the campus, a single round or the mean of both rounds, the channel and the speed of the replay. A click on a point opens its card on the right with the values of both rounds.
+
+### Working with the pages
 
 All pages run in the browser and send nothing anywhere. The 3D scenes use three.js, which is bundled in the repository, so the site also works offline from a local copy. On every page the arrow keys move between stations, and `[` and `]` move between parts. `T` switches between the paper view and the night view, `F` toggles full screen, `L` switches the language, `B` starts a five-minute break and `?` lists the keys. The random forest of Part 4 runs in the browser from the 40 trees exported by `tools/build_site_data.py`, which checks that the JavaScript predictions match scikit-learn.
 
-To publish the site, enable GitHub Pages in the repository settings with the source *Deploy from a branch*, branch `main`, folder `/docs`.
+The site is published with GitHub Pages from the branch `main`. Either folder can serve as the source. With `/docs` the pages are served directly. With the root folder, the files `index.html` and `404.html` forward every address to the same page under `docs/`.
 
 ## The Colab notebook
 
@@ -143,7 +160,7 @@ One notebook carries the whole session, in two parallel language versions. It ru
 | 4 · Explain | Part 4 | random forest, random and leave-one-point-out cross-validation, permutation importance, what-if sliders, partial dependence, 3D surface |
 | 5 · Share and act | Part 5 | fact table, safe prompt, number auditor, solution card |
 
-Six exercises give instant feedback, and the reference solutions sit in folded cells. A table of application challenges invites students of engineering, health sciences, social sciences, communication, economics and education to continue with their own question.
+The notebook contains six exercises, from the robust z-score of Exercise 1.A to the number auditor of Exercise 5.A. Each exercise cell checks the answer as soon as it runs and says whether it is right, and a reference solution sits in a folded cell below it. A table of application challenges at the end suggests a next question for students of engineering, health sciences, social sciences, communication, economics and education. Each team can thus continue the analysis from its own field.
 
 ## The data
 
@@ -226,7 +243,7 @@ env-data-ai-nokta2026-NB-workshop/
 
 ## Design principles
 
-Every number on a page comes from the same code and seeds as the notebook, so a result met in the browser reappears in Colab. Every formula is followed by the meaning of its symbols, its units and a worked example in numbers. Methods are shown with their limits: The detector misses two glitches, the clusters are hypotheses, the importances describe the model rather than the world, and the honest test lowers the score. AI is used as a magnifying glass for the data and as a writing assistant under rules, never as the source of a number.
+Every number on a page comes from the same code and seed values as the notebook, so a result met in the browser reappears in Colab. Every formula is followed by the meaning of its symbols, its units and a worked example in numbers. Methods are shown together with their limits. The detector of Part 1 misses two PM2.5 glitches that occur inside real plumes, and the groups of Part 3 are hypotheses to be checked against the field forms. The importances of Part 4 describe the model rather than the world, and the honest test lowers the score of the model. AI is used to look at the data more closely and as a writing assistant under clear rules, but it is never the source of a number.
 
 ## Related material
 
@@ -276,4 +293,4 @@ Süleyman Demirel University · University of North Dakota · Universidad Paname
 
 ## Acknowledgments
 
-This workshop was prepared for NOKTA, Objective Measurement, Participation, Monitoring and Action Network. NOKTA is carried out by the SDÜ Robotics and Innovation Community under the coordination of Enes Şenol, with the Ankara University Energy and Environment Student Community and the İzmir Institute of Technology Environment Community. The project is supported by ÜNİDES, the University Student Communities Cooperation and Support Program of the Ministry of Youth and Sports of the Republic of Türkiye. Thanks are due to the NOKTA teams, whose field rounds give the workshop its purpose, and to the maintainers of NumPy, pandas, scikit-learn, Matplotlib, Plotly, ipywidgets, three.js and KaTeX.
+This workshop was prepared for NOKTA, Objective Measurement, Participation, Monitoring and Action Network. NOKTA is carried out by the SDÜ Robotics and Innovation Community under the coordination of Enes Şenol. Its partners are the Ankara University Energy and Environment Student Community and the İzmir Institute of Technology Environment Community. The project is supported by ÜNİDES, the University Student Communities Cooperation and Support Program of the Ministry of Youth and Sports of the Republic of Türkiye. Thanks are due to the NOKTA teams, whose field rounds give the workshop its purpose, and to the maintainers of NumPy, pandas, scikit-learn, Matplotlib, Plotly, ipywidgets, three.js and KaTeX.

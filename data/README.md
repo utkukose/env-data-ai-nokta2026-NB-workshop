@@ -1,19 +1,21 @@
 # The synthetic NOKTA dataset
 
-All files of this folder are produced by `tools/make_synthetic_data.py` with the seed 2026. The values are invented. They are plausible for a sunny November morning at mid-latitudes but describe no real campus, and they must not be quoted as findings. A Turkish version of this page is in [README.tr.md](README.tr.md).
+All files of this folder are produced by `tools/make_synthetic_data.py` with the seed value 2026. The values are invented. They are plausible for a sunny November morning at mid-latitudes, but they describe no real campus and must not be quoted as findings. The dataset exists so that the workshop can show every step of the analysis, including the faults that real low-cost sensors produce. A Turkish version of this page is in [README.tr.md](README.tr.md).
 
 ## Design
 
-Three campuses, A (inland highland), B (continental city) and C (coastal), have six fixed point types each. One portable station per campus (S1, S2, S3) visits the points at about 1.5 m in two rounds. Round 1 starts at 10:00 and visits P1 to P6. Round 2 visits P6 to P1 at the same clock times. Each visit lasts 15 minutes with a reading every 10 seconds, followed by 10 minutes of walking to the next point.
+The dataset follows the NOKTA field protocol on three campuses. Campus A is an inland highland campus at about 1000 m above sea level, Campus B a continental city campus and Campus C a coastal campus. Each campus has the same six fixed point types, P1 to P6, which are described in the table below. One portable station per campus (S1, S2 or S3) visits the points and measures at a height of about 1.5 m.
 
-| Point | Type | Field form note |
+Each campus is measured in two rounds held one week apart. Round 1 took place on 10, 11 and 12 November for Campus C, A and B, and Round 2 on 17, 18 and 19 November in the same order. Round 1 starts at 10:00 and visits the points from P1 to P6. Round 2 starts at the same clock time but visits them from P6 back to P1. Each visit lasts 15 minutes with a reading every 10 seconds, and the station then needs 10 minutes to reach the next point. A round therefore lasts about two hours and twenty minutes, and every point is measured once early and once late in the morning.
+
+| Point | Type | Description from the field form |
 |---|---|---|
-| P1 | `shaded` | narrow passage between two buildings, no direct sun |
-| P2 | `traffic` | two meters from the campus road, buses stop nearby |
-| P3 | `reference` | open lawn edge away from roads and entrances |
-| P4 | `sunny_hard` | concrete square in full sun, station housing in direct sun |
-| P5 | `crowded` | faculty entrance, a group smoking near the door |
-| P6 | `green` | under a row of trees, grass irrigated in the morning |
+| P1 | `shaded` | A narrow passage between two buildings that gets no direct sun during the visit. |
+| P2 | `traffic` | A point two meters from the campus road, where buses stop nearby. |
+| P3 | `reference` | The edge of an open lawn far from roads and entrances, used as the calm baseline of the campus. |
+| P4 | `sunny_hard` | A concrete square in full sun, where the housing of the station is also in direct sun. |
+| P5 | `crowded` | A faculty entrance with many passing students and a group smoking near the door. |
+| P6 | `green` | A path under a row of trees, next to grass that is irrigated in the morning. |
 
 ## `nokta_synthetic.csv`, 3,240 rows
 
@@ -37,11 +39,18 @@ Three campuses, A (inland highland), B (continental city) and C (coastal), have 
 
 ## The other files
 
-- `nokta_field_forms_synthetic.csv`: One row per visit with `date`, `start`, `end`, `vehicles_15min`, `people_15min`, `sun_condition` (shade, partial, sun), `sky`, `green_cover_pct`, `station` and `notes`.
-- `nokta_colocation_synthetic.csv`: The three stations side by side on 31 October from 14:00 to 16:00, one reading per minute of temperature, humidity, PM2.5 and CO₂.
-- `nokta_synthetic_qc_truth.csv`: `sample_id` and `qc_truth`, the problem planted in each reading (`ok`, `warmup`, `spike_pm25`, `spike_pm10`, `spike_co2`, `flatline_co2`, `gap`, `saturated`, `high_rh`). Real data have no such file.
-- `nokta_template.csv`: The header of the readings file, to be used for real NOKTA data.
+`nokta_field_forms_synthetic.csv` has one row per visit, 36 rows in total. It gives the date, the start and end times, the vehicles and people counted in 15 minutes, the sun condition (shade, partial or sun), the sky, the green cover in percent, the station and the notes of the team. The random forest of Part 4 takes its traffic, people, green cover and sunshine inputs from this file.
+
+`nokta_colocation_synthetic.csv` holds the side-by-side test. The three stations ran next to each other on 31 October from 14:00 to 16:00 and recorded temperature, relative humidity, PM2.5 and CO₂ once per minute. Since they measured the same air, their differences are offsets of the devices, and Part 1 removes these offsets before the analysis.
+
+`nokta_synthetic_qc_truth.csv` gives, for each `sample_id`, the problem planted in that reading: `ok`, `warmup`, `spike_pm25`, `spike_pm10`, `spike_co2`, `flatline_co2`, `gap`, `saturated` or `high_rh`. It is used only to score the quality control of Part 1. Real data have no such file.
+
+`nokta_template.csv` contains the header of the readings file. Teams that analyze their own NOKTA data bring their files into these columns.
+
+## Using real NOKTA files
+
+Section 0 of the Colab notebook reads the synthetic files by default. A team that wants to analyze its own campus sets `DATA_SOURCE = "own"` and uploads its readings, field forms and side-by-side test in the columns of `nokta_template.csv`. When its logger uses other column names, the team fills `COLUMN_MAP` with the pairs of old and new names. Every later cell then runs on the team's own data.
 
 ## How the values were made
 
-The script draws a background for each campus and round that warms through the morning and slowly dilutes particles and CO₂. Each point type adds its own effect: Shade cools, the sunny square warms and heats the sensor housing, traffic adds short plumes of particles and CO₂, smokers add strong short spikes at the entrance, and trees cool, dim the light and lower particles slightly. The sensor layer then adds what low-cost devices do: A two-minute settling after every move, station offsets, particle readings inflated by humidity (κ-Köhler growth with κ = 0.3), a frozen CO₂ sensor, single-channel glitches, logger dropouts and a light sensor at its limit.
+The script first draws a background for each campus and round. During the morning this background warms and slowly dilutes particles and CO₂, as happens on a real morning when the lowest layer of the atmosphere mixes more deeply. Each point type then adds its own effect. Shade cools the air, while the sunny square warms it and heats the housing of the sensor. Traffic adds short plumes of particles and CO₂, and the smokers at the entrance add strong, short spikes. Trees cool the air, dim the light and lower the particles slightly. Finally, a sensor layer adds what low-cost devices do in the field: A two-minute settling after every move, small offsets between the stations, particle readings inflated by humidity (κ-Köhler growth with κ = 0.3), a frozen CO₂ sensor, single-channel glitches, logger dropouts and a light sensor at its 16-bit limit.

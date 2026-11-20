@@ -6,9 +6,9 @@ The whole session runs from the workshop site, https://utkukose.github.io/env-da
 
 ## Before the session
 
-On the day before, all seven pages should be opened once on the presenting laptop and once on a phone, in both languages. The 3D scenes need WebGL. On an old projector laptop the key `T` (night view) and a smaller browser window keep the scenes smooth. The Colab notebook should be run once from top to bottom. It finishes in about a minute and confirms that the data download from GitHub works.
+On the day before, all seven pages should be opened once on the presenting laptop and once on a phone, in both languages. The 3D scenes need WebGL. On an old projector laptop, the night view (key `T`) and a smaller browser window keep the scenes smooth. The Colab notebook should also be run once from top to bottom. It finishes in about a minute and confirms that the data can be downloaded from GitHub.
 
-About fifteen minutes before the start, the presenter's browser should open the start page, so that the debrief at the end collects the answers given during the session. The following message can be shared in the chat or on the first slide:
+The debrief of the NOKTA Lab is built from the answers and steps recorded in the browser that shows it, so a rehearsal leaves its own answers behind. About fifteen minutes before the start, the presenter opens the Debrief tab of the NOKTA Lab and presses *Start a new session*, which clears the earlier records. During the session the presenter then enters the answer of the room in each prediction question, so that the debrief at the end describes this session. The following message can be shared in the chat or on the first slide:
 
 > Workshop site, no installation needed: https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/
 > Colab notebook (Turkish): Orange buttons on every page
@@ -46,6 +46,24 @@ On every page the right and left arrow keys move to the next or previous station
 | 1:50 | The solution card | station 4 | write one card per team |
 | 1:55 | Debrief and questions | `lab.html#debrief` | open the debrief |
 
+## What to explain in each block
+
+The run sheet gives the order and the timing. The paragraphs below give the message that each block should leave with the participants, together with the numbers of the synthetic data that support it.
+
+**Opening, 0:00 to 0:08.** The opening explains how the data were collected before any analysis starts. On each campus one portable station visits six point types, and each visit lasts 15 minutes. Round 2 repeats the route one week later at the same clock times, but in reverse order from P6 back to P1. The participants should leave the opening knowing what a visit, a round and the reference point are, because every later comparison rests on these three ideas.
+
+**Part 1, 0:08 to 0:30.** A reading becomes data only after its quality has been checked. The replay shows how the values build up during a round. The pressure question shows that the gap of about 115 hPa between Campus A and Campus C comes mostly from altitude, so pressure describes the location of a campus rather than its air quality. At the data doctor station each fault has its own signature: A drift in the first two minutes after a move, an isolated spike in one channel, the flat line of a frozen sensor and the gaps left by the logger. The gap example deserves a moment. Six empty readings written as zero lower the mean temperature from 10.37 °C to 7.54 °C. The detector catches almost all planted faults but misses two PM2.5 glitches inside real plumes, so the flagged readings still need a human look.
+
+**Part 2, 0:30 to 0:52.** A fair comparison has to control the clock, the outliers and the hidden groups. In Round 1 on Campus A the green area reads 13.9 °C and the road 13.3 °C, but the green area was measured last in a warming morning. Over both rounds the green area is 1.1 °C cooler than the reference point, and the road is 0.6 °C warmer. The box plots show that near the busy entrance short smoke plumes lift the mean above the median. Over all minutes, temperature and pressure correlate with r = +0.81, yet inside each campus and round the correlation lies between −0.41 and −0.64. The campus is the hidden third factor. The dew point station closes the part by separating the water content of the air from its temperature.
+
+**Part 3, 0:57 to 1:17.** Unsupervised learning proposes groups, and people name and check them. k-means places centers, assigns each minute to the nearest center and moves the centers until nothing changes. With four groups it stops after four iterations, with J = 363.0 and a silhouette of 0.499. The silhouette hardly changes between three and six groups, so the choice of four is a decision of the analyst that has to be explained. PCA keeps about 86 % of the variation of six channels in three components. The naming station is the place to stress that a group number becomes a microclimate only after its center and its field forms have been read.
+
+**Part 4, 1:17 to 1:37.** A model should be tested the way it will be used. The forest reaches R² = 0.66 on its training minutes and 0.54 on random test minutes, but only 0.32 when whole points are held out. Many minutes from the same point are not independent observations, so only the last score tells how the model would do at a new place. The importance ranking puts traffic first, the background PM2.5 of the day second and the people at the door third. Humidity hardly matters, because Part 1 has already corrected its effect on the sensor. The what-if panel and the surface show what the model has learned from the data, not what would happen after a real change on campus.
+
+**Part 5, 1:37 to 1:55.** The numbers come from the analysis, the words may come from the AI, and the judgment stays with the team. The six errors of the AI paragraph are of six kinds: An invented number, a causal claim with an invented share, a short median set against a 24-hour guideline, a ranking of universities, a difference caused by the clock rather than the place and a source that cannot be found. The safe prompt hands the assistant the fact table, the study design and seven rules instead of asking it to know the numbers. The claim ladder separates what was observed from what is only associated, what would need an intervention and what is not supported. Each team then writes a solution card for one of the three tables of 28 November: *Microclimate and green campus*, *Waste and circular economy* or *Water, resource efficiency and youth participation*. The card answers five questions: The problem, the evidence, the solution, its feasibility and the role of young people.
+
+**NOKTA Lab, 1:55 to 2:00.** The debrief turns the session into a field report with the pages visited, the predictions made, the interactive steps taken and the solution card. Its closing note repeats five rules: Keep the raw file, compare points through both rounds, report the averaging time, treat clusters and importances as hypotheses and check every AI-written number. The remaining minutes are for questions, with the 3D tools of the lab at hand.
+
 ## Questions for a live poll
 
 The pages ask their own questions. The four below can also be put to the room in a poll tool, so that the answers of all participants become visible together.
@@ -60,11 +78,11 @@ The pages ask their own questions. The four below can also be put to the room in
 
 ## Fallback plan
 
-If the 3D scenes do not start, the browser lacks WebGL. Every station still works with its charts, and the night view (`T`) reduces the load. If Colab is slow or a participant cannot sign in, every key number of the notebook is also on the pages. If GitHub Pages does not load, the `docs/` folder of a local copy opens directly from disk. The site has no server side and carries three.js, KaTeX and its font with it. If the data download in Colab fails, the files of the `data/` folder can be uploaded through the Files panel of Colab. If screen sharing fails, the address of the site lets participants follow on their own screens.
+If the 3D scenes do not start, the browser lacks WebGL support. Every station still works with its charts, and the night view (`T`) reduces the load. If Colab is slow or a participant cannot sign in, every key number of the notebook is also on the pages. If GitHub Pages does not load, the `docs/` folder of a local copy opens directly from disk. The site has no server side and carries three.js, KaTeX and its font with it. If the data download in Colab fails, the files of the `data/` folder can be uploaded through the Files panel of Colab. If screen sharing fails, the address of the site lets participants follow on their own screens.
 
 ## Timing notes
 
-Part 1 is the longest block, because it sets up the data that all later parts use. When time is short, station 2 can be shown in one minute and the co-location station summarized from its table. Part 3 works best with the scene on screen while the stations on the right move on. The scene stays in place on wide screens. In Part 4 the leave-one-point-out animation runs on its own, so the presenter can talk over it. The debrief is most useful when the presenter's browser has answered the questions during the session.
+Part 1 is the longest block, because it sets up the data that all later parts use. When time is short, station 2 can be shown in one minute and the co-location station summarized from its table. Part 3 works best with the scene on screen while the stations on the right move on. The scene stays in place on wide screens. In Part 4 the leave-one-point-out animation runs on its own, so the presenter can talk over it. The debrief can only report what was answered in the presenter's browser, so the answers of the room should be entered there as the session goes on.
 
 ## After the session: 21 to 24 November
 
