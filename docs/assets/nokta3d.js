@@ -165,9 +165,9 @@
         mat(0xbdb6aa), mat(tint, { map: windows(w, h) }), mat(tint, { map: windows(w, h) })]);
       m.position.set(x, h / 2, z); m.castShadow = true; m.receiveShadow = true; scene.add(m); return m;
     }
-    building(40, 16, 28, -40, 4, 0xffffff);
+    var frontB = building(40, 16, 28, -40, 4, 0xffffff);
     var backB = [building(22, 26, 28, 11, -34, 0xf6f1ea), building(22, 26, 28, 41, -34, 0xf3efe6)];
-    building(18, 10, 16, -62, 14, 0xfbf7ef);
+    var smallB = building(18, 10, 16, -62, 14, 0xfbf7ef);
     box(6, 4, 0.6, 0x3b6e91, -20, 2.5, 3.5);           // entrance canopy
     // trees
     function tree(x, z, s) {
@@ -295,9 +295,11 @@
     function setPM(t, pm) { var P = points[t]; P.pm = pm; P.cloud.geometry.setDrawRange(0, Math.min(220, Math.round((pm || 0) * 7))); }
     function refresh() {
       Object.keys(deco).forEach(function (k) { deco[k].visible = state.campus === k; });
-      var look = { A: [0xd9cd96, 0.7], B: [0xb9bdc1, 2.1], C: [0xe4e9cf, 1.0] }[state.campus] || [0xcfd8bf, 1];
+      var look = { A: [0xd9cd96, 0.7, 0.75, 0xe0b088, 0xb4532a], B: [0xb9bdc1, 2.1, 1.0, 0xa9b8c8, 0x4b525b], C: [0xe4e9cf, 1.0, 1.0, 0xffffff, 0x2f86d0] }[state.campus] || [0xcfd8bf, 1, 1, 0xffffff, 0xbdb6aa];
       groundM.material.color.setHex(look[0]);
       backB.forEach(function (b) { b.scale.y = look[1]; b.position.y = 13 * look[1]; });
+      frontB.scale.y = look[2]; frontB.position.y = 8 * look[2];
+      [frontB, smallB].concat(backB).forEach(function (b) { b.material.forEach(function (m, i) { m.color.setHex(i === 2 ? look[4] : i === 3 ? 0xbdb6aa : look[3]); }); });
       if (state.mode === "results") {
         mover.visible = false;
         Object.keys(points).forEach(function (t) {
