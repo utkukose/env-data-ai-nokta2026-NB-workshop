@@ -193,6 +193,42 @@
       pm.position.set(-13 + (Math.random() - 0.5) * 18, 1.25, 3 + (Math.random() - 0.5) * 9); pm.castShadow = true;
       scene.add(pm); people.push({ m: pm, a: Math.random() * 6.28, s: 1.5 + Math.random() * 2 });
     }
+    // surroundings that set the campuses apart: A lies high inland, B inside a city, C on the coast
+    var deco = { A: new T.Group(), B: new T.Group(), C: new T.Group() };
+    Object.keys(deco).forEach(function (k) { scene.add(deco[k]); });
+    function dplane(w, d, c, x, z, y, g) {
+      var m = new T.Mesh(new T.PlaneGeometry(w, d), mat(c)); m.rotation.x = -Math.PI / 2; m.position.set(x, y, z); g.add(m); return m;
+    }
+    function dmesh(geo, c, x, y, z, g) { var m = new T.Mesh(geo, mat(c)); m.position.set(x, y, z); g.add(m); return m; }
+    // A: upland with hills and snowy mountains
+    dplane(900, 700, 0xc9c69a, 0, -100, -0.3, deco.A);
+    [[-150, -96, 34, 20], [-75, -92, 30, 16], [5, -98, 36, 22], [85, -94, 30, 18], [160, -96, 34, 20]].forEach(function (h) {
+      var m = dmesh(new T.SphereGeometry(1, 20, 12, 0, Math.PI * 2, 0, Math.PI / 2), 0x9fae7c, h[0], 0, h[1], deco.A);
+      m.scale.set(h[2], h[3], h[2] * 0.7);
+    });
+    [[-190, -112, 26, 34], [-115, -118, 30, 40], [-40, -114, 26, 36], [40, -120, 32, 44], [120, -114, 26, 36], [195, -118, 28, 38],
+     [-160, -200, 60, 110], [-60, -215, 70, 130], [50, -205, 64, 120], [150, -210, 70, 125]].forEach(function (m) {
+      dmesh(new T.ConeGeometry(m[2], m[3], 7), 0x8b8676, m[0], m[3] / 2, m[1], deco.A);
+      dmesh(new T.ConeGeometry(m[2] * 0.37, m[3] * 0.35, 7), 0xf6f6f2, m[0], m[3] * 0.825 + 0.4, m[1], deco.A);
+    });
+    // B: a city of tall blocks around the campus
+    dplane(900, 700, 0xb4b8bc, 0, -100, -0.3, deco.B);
+    function tower(w, h, x, z, tint) {
+      var tx = windows(w, h), tm = mat(tint, { map: tx }), roof = mat(0x8d9399);
+      var m = new T.Mesh(new T.BoxGeometry(w, h, w), [tm, tm, roof, roof, tm, tm]); m.position.set(x, h / 2, z); deco.B.add(m);
+    }
+    [[-170, -92, 22, 70], [-128, -96, 20, 95], [-88, -90, 22, 60], [-48, -98, 18, 110], [-8, -92, 22, 75], [34, -96, 20, 100], [74, -90, 22, 65], [114, -98, 18, 90], [154, -92, 22, 80],
+     [-122, -50, 20, 55], [-124, -10, 18, 80], [-120, 28, 20, 50], [122, -50, 20, 70], [124, -10, 18, 50], [120, 28, 20, 85]].forEach(function (b, i) {
+      tower(b[2], b[3], b[0], b[1], [0xd5d9de, 0xc7ccd2, 0xe0dcd4][i % 3]);
+    });
+    // C: a beach and the sea behind the campus
+    dplane(900, 160, 0xcfd8bf, 0, -2, -0.3, deco.C);
+    dplane(900, 12, 0xe9dcb2, 0, -76, -0.25, deco.C);
+    dplane(900, 600, 0x3f86c4, 0, -382, -0.3, deco.C);
+    [[-70, -125, 0xffffff], [60, -160, 0xf2f2f2], [150, -115, 0xe8e2d6]].forEach(function (b) {
+      dmesh(new T.BoxGeometry(12, 2.4, 4.5), b[2], b[0], 1.0, b[1], deco.C);
+      dmesh(new T.BoxGeometry(4, 3, 3.4), 0xd9dde2, b[0] - 1.5, 3.4, b[1], deco.C);
+    });
     // sensor stations, columns, labels and particle clouds at the six points
     var points = {}, accent = new T.Color(o.accent || "#0E7A5F");
     Object.keys(LAYOUT).forEach(function (t) {
@@ -259,6 +295,7 @@
     }
     function setPM(t, pm) { var P = points[t]; P.pm = pm; P.cloud.geometry.setDrawRange(0, Math.min(220, Math.round((pm || 0) * 7))); }
     function refresh() {
+      Object.keys(deco).forEach(function (k) { deco[k].visible = state.campus === k; });
       if (state.mode === "results") {
         mover.visible = false;
         Object.keys(points).forEach(function (t) {
