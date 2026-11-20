@@ -36,6 +36,58 @@ ROUTE_TITLE = {
 TOKEN = re.compile(r"⟪(.*?)‖(.*?)⟫", re.S)
 
 
+
+# ------------------------------------------------ measurement plan (shared by several pages)
+PLAN_SLOTS = [("10:00", "10:15", 1, 6), ("10:25", "10:40", 2, 5), ("10:50", "11:05", 3, 4),
+              ("11:15", "11:30", 4, 3), ("11:40", "11:55", 5, 2), ("12:05", "12:20", 6, 1)]
+PLAN_NAMES = {1: "⟪Shaded‖Gölgeli⟫", 2: "⟪Traffic‖Trafik⟫", 3: "⟪Reference‖Referans⟫",
+              4: "⟪Sunny‖Güneşli⟫", 5: "⟪Busy‖Yoğun⟫", 6: "⟪Green‖Yeşil⟫"}
+
+
+def _pt(n):
+    return f'<i class="sw" style="background:var(--t{n})"></i>P{n} · {PLAN_NAMES[n]}'
+
+
+def plan_html():
+    """Clock times and order of the visits in both rounds, plus the dates per campus."""
+    rows = "".join(
+        f'<tr><td class="t">⟪{a} to {b}‖{a}-{b}⟫</td><td>{_pt(p1)}</td><td>{_pt(p2)}</td></tr>'
+        for a, b, p1, p2 in PLAN_SLOTS)
+    return (
+        '<div class="plan-box">'
+        '<table class="tbl plan"><thead><tr><th>⟪Clock time‖Saat⟫</th>'
+        "<th>⟪Round 1: from P1 to P6‖1. tur: P1'den P6'ya⟫</th>"
+        "<th>⟪Round 2, one week later: from P6 to P1‖2. tur, bir hafta sonra: P6'dan P1'e⟫</th>"
+        f"</tr></thead><tbody>{rows}</tbody></table>"
+        '<table class="tbl plan plan-dates"><thead><tr><th>⟪Campus‖Kampüs⟫</th>'
+        "<th>⟪Day of Round 1‖1. turun günü⟫</th><th>⟪Day of Round 2‖2. turun günü⟫</th></tr></thead><tbody>"
+        "<tr><td>⟪A · about 1000 m above sea level‖A · deniz seviyesinden yaklaşık 1000 m yukarıda⟫</td>"
+        "<td>⟪11 November‖11 Kasım⟫</td><td>⟪18 November‖18 Kasım⟫</td></tr>"
+        "<tr><td>⟪B · city campus‖B · şehir kampüsü⟫</td><td>⟪12 November‖12 Kasım⟫</td><td>⟪19 November‖19 Kasım⟫</td></tr>"
+        "<tr><td>⟪C · coastal campus‖C · kıyı kampüsü⟫</td><td>⟪10 November‖10 Kasım⟫</td><td>⟪17 November‖17 Kasım⟫</td></tr>"
+        "</tbody></table>"
+        '<p class="note">⟪Each visit lasts 15 minutes, and the station takes one reading every 10 seconds. Walking to the next point takes 10 minutes. '
+        "The first two minutes of every visit are left out of all calculations, because the sensors are still adjusting to the new place. "
+        "Thirteen minutes of every visit are therefore analyzed.‖"
+        "Her ziyaret 15 dakika sürer ve istasyon her 10 saniyede bir ölçüm alır. Bir sonraki noktaya yürümek 10 dakika sürer. "
+        "Her ziyaretin ilk iki dakikası hiçbir hesaba katılmaz, çünkü sensörler bu sırada yeni yere uyum sağlamaya çalışmaktadır. "
+        "Bu yüzden her ziyaretin 13 dakikası analiz edilir.⟫</p></div>")
+
+
+def plan_fair_html():
+    """Clock times of the two visits of each point and their mean."""
+    t1 = {p1: a for a, b, p1, p2 in PLAN_SLOTS}
+    t2 = {p2: a for a, b, p1, p2 in PLAN_SLOTS}
+    rows = "".join(
+        f'<tr><td>{_pt(n)}</td><td class="t">{t1[n]}</td><td class="t">{t2[n]}</td><td class="t"><b>11:02:30</b></td></tr>'
+        for n in range(1, 7))
+    return (
+        '<div class="plan-box"><table class="tbl plan"><thead><tr><th>⟪Point‖Nokta⟫</th>'
+        "<th>⟪Start in Round 1‖1. turda başlangıç⟫</th><th>⟪Start in Round 2‖2. turda başlangıç⟫</th>"
+        f"<th>⟪Mean of the two‖İkisinin ortalaması⟫</th></tr></thead><tbody>{rows}</tbody></table>"
+        '<p class="note">⟪A point measured early in Round 1 is measured late in Round 2. For every point, the mean of its two start times is the same, 11:02:30.‖'
+        "1. turda erken ölçülen bir nokta 2. turda geç ölçülür. Bu yüzden her noktanın iki başlangıç saatinin ortalaması aynıdır: 11:02:30.⟫</p></div>")
+
 def lang_pick(text, lang):
     return TOKEN.sub(lambda m: m.group(1) if lang == "en" else m.group(2), text)
 
@@ -236,6 +288,7 @@ def build():
         mm = re.match(r"<!--META(.*?)-->", src, re.S)
         meta = json.loads(mm.group(1))
         body = src[mm.end():]
+        body = body.replace("{{PLAN}}", plan_html()).replace("{{PLAN_FAIR}}", plan_fair_html())
         for lang in ("en", "tr"):
             text = lang_pick(body, lang)
             text = fill_numbers(text, data, extra, lang)

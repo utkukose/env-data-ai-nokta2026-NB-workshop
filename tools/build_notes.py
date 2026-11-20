@@ -94,9 +94,41 @@ def add_rich(doc, el, size=11, color=INK, prefix=None):
     return p
 
 
+
+def add_table(doc, table_el):
+    """Copies a static HTML table (header row and body rows) into the Word document."""
+    rows = []
+    for tr in table_el.find_all("tr"):
+        cells = [text_of(c) for c in tr.find_all(["th", "td"])]
+        if any(cells):
+            rows.append(cells)
+    if not rows:
+        return
+    ncol = max(len(r) for r in rows)
+    t = doc.add_table(rows=len(rows), cols=ncol)
+    t.style = "Table Grid"
+    for i, r in enumerate(rows):
+        for j in range(ncol):
+            cell = t.cell(i, j)
+            cell.text = r[j] if j < len(r) else ""
+            for par in cell.paragraphs:
+                for run in par.runs:
+                    run.font.size = Pt(9.5)
+                    run.bold = (i == 0)
+    doc.add_paragraph().paragraph_format.space_after = Pt(2)
+
+
+def add_gloss(doc, dl):
+    for dt in dl.find_all("dt"):
+        dd = dt.find_next_sibling("dd")
+        add_par(doc, text_of(dt), bold=True, space=1)
+        if dd:
+            add_par(doc, text_of(dd), color=MUTED, space=6)
+
 def page_soup(page, lang, data, extra, state=None):
     src = (bs.SRC / f"{page}.html").read_text(encoding="utf-8")
     body = src[re.match(r"<!--META(.*?)-->", src, re.S).end():]
+    body = body.replace("{{PLAN}}", bs.plan_html()).replace("{{PLAN_FAIR}}", bs.plan_fair_html())
     text = bs.fill_numbers(bs.lang_pick(body, lang), data, extra, lang)
     text = (text.replace("{{COLAB}}", bs.COLAB[lang]).replace("{{SITE}}", bs.SITE)
             .replace("{{REPO}}", f"https://github.com/{bs.OWNER}/{bs.REPO}"))
@@ -155,6 +187,8 @@ def build(word_dir):
                     if t: doc.add_heading(text_of(t), level=1)
                     for lead in block.find_all(class_=["lead", "sub"]):
                         add_par(doc, text_of(lead), size=12, color=MUTED, space=8)
+                    for tk in block.find_all(class_="takeaway"):
+                        add_rich(doc, tk, size=11)
                     continue
                 if block.get("id") == "refs":
                     doc.add_heading("References" if lang == "en" else "Kaynaklar", level=3)
@@ -163,9 +197,13 @@ def build(word_dir):
                     continue
                 stations = block.find_all(class_="station") if "scrolly" in cls else ([block] if "station" in cls else [])
                 if "section" in cls and page == "index":
-                    for el in block.find_all(["h2", "p", "table"]):
+                    for el in block.find_all(["h2", "p", "table", "dl"]):
                         if el.name == "h2":
                             doc.add_heading(text_of(el), level=2)
+                        elif el.name == "table" and "plan" in (el.get("class") or []):
+                            add_table(doc, el)
+                        elif el.name == "dl":
+                            add_gloss(doc, el)
                         elif el.name == "p" and el.find_parent(class_="pcard") is None and el.find_parent(class_="nbref") is None:
                             add_rich(doc, el, size=11 if "note" not in (el.get("class") or []) else 9.5,
                                      color=INK if "note" not in (el.get("class") or []) else MUTED)
@@ -200,6 +238,10 @@ def build(word_dir):
                             if wk: add_rich(doc, wk, size=10.5)
                         elif "takeaway" in c or "everyday" in c:
                             add_rich(doc, el, size=11)
+                        elif el.name == "table" and "plan" in c:
+                            add_table(doc, el)
+                        elif el.name == "h3" and el.find_parent(class_=["plan-card", "iso-card", "note-card"]) is not None:
+                            doc.add_heading(text_of(el), level=3)
                         elif "pcard" in c:
                             t_ = el.find("h3"); tm = el.find(class_="t"); pp = el.find("p")
                             add_par(doc, text_of(t_), bold=True, space=1)

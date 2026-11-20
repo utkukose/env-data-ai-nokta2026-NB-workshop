@@ -14,7 +14,7 @@ SDÜ Robotik ve İnovasyon Topluluğu · Ankara Üniversitesi · İzmir Yüksek 
 **Türkçe**
 
 <a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/"><img src="https://img.shields.io/badge/At%C3%B6lye%20sitesi-T%C3%BCrk%C3%A7e-0E7A5F?style=for-the-badge&labelColor=18231F" height="40" alt="Atölye sitesini Türkçe açın"></a>&nbsp;&nbsp;
-<a href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb"><img src="https://img.shields.io/badge/Colab'da%20a%C3%A7-T%C3%BCrk%C3%A7e%20defter-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=F9AB00&labelColor=18231F" height="40" alt="Türkçe defteri Colab'da açın"></a>
+<a href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb"><img src="https://img.shields.io/badge/Colab'da%20a%C3%A7-T%C3%BCrk%C3%A7e%20Python%20notebook-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=F9AB00&labelColor=18231F" height="40" alt="Türkçe Python notebook'u Colab'da açın"></a>
 
 **English** · The English version of this page, the site and the Colab notebook
 
@@ -26,7 +26,7 @@ SDÜ Robotik ve İnovasyon Topluluğu · Ankara Üniversitesi · İzmir Yüksek 
 [![NOKTA · ÜNİDES 2026](https://img.shields.io/badge/NOKTA-%C3%9CN%C4%B0DES%202026-1F5F8B)](#teşekkür)
 [![Biçim](https://img.shields.io/badge/Bi%C3%A7im-2%20saatlik%20at%C3%B6lye-1F5F8B)](#program)
 [![Diller](https://img.shields.io/badge/Diller-T%C3%BCrk%C3%A7e%20%C2%B7%20English-0E7A78)](README.md)
-[![Defterler](https://img.shields.io/badge/Defterler-Google%20Colab-F9AB00?logo=googlecolab&logoColor=white)](#colab-defteri)
+[![Python notebook](https://img.shields.io/badge/Python%20notebook-Google%20Colab-F9AB00?logo=googlecolab&logoColor=white)](#python-notebook-colab)
 [![İçerik: CC BY 4.0](https://img.shields.io/badge/%C4%B0%C3%A7erik-CC%20BY%204.0-555555)](LICENSE-CONTENT)
 [![Kod: MIT](https://img.shields.io/badge/Kod-MIT-555555)](LICENSE)
 
@@ -61,21 +61,21 @@ IEEE Senior Member · ACM Professional Member
 
 Bu depo, *Yapay Zekâ ile Çevresel Veri Analizi ve Yorumlama* başlıklı iki saatlik atölyenin bütün malzemesini içermektedir. Atölye, üniversite öğrencilerinin iklim ve kampüs çevresi üzerine yürüttüğü NOKTA, Nesnel Ölçüm, Katılım, Takip ve Aksiyon Ağı projesinin bir parçasıdır. NOKTA, Süleyman Demirel Üniversitesi (SDÜ) Robotik ve İnovasyon Topluluğu yürütücülüğünde, Ankara Üniversitesi ve İzmir Yüksek Teknoloji Enstitüsündeki partner topluluklarla birlikte yürütülmektedir. Proje, Gençlik ve Spor Bakanlığının Üniversite Öğrenci Toplulukları İş Birliği ve Destek Programı (ÜNİDES) tarafından desteklenmektedir.
 
-NOKTA'da üç kampüsteki ekipler taşınabilir bir NOKTA Station ile altı sabit nokta türünde sıcaklık, bağıl nem, atmosfer basıncı, PM1, PM2,5, PM10, karbondioksit (CO₂), ışık şiddeti, UVA ve UVB ölçmektedir. Her kampüste iki saha turu yapılır ve ikinci turda noktaların sırası tersine çevrilir. Projenin yaklaşımı *Ölç → Analiz Et → Paylaş → Aksiyona Dönüştür* şeklindedir. Atölye, ikinci saha turunun son günü olan 20 Kasım 2026'da gerçekleştirilmektedir. Ekipleri 21-24 Kasım analiz günlerine ve 28 Kasım'daki NOKTA Ulusal Gençlik Çevre ve İklim Kongresi ile Ulusal Çevre Çalıştayına hazırlar.
+NOKTA'da üç kampüsteki ekipler taşınabilir bir NOKTA istasyonu ile altı sabit nokta türünde sıcaklık, bağıl nem, atmosfer basıncı, PM1, PM2,5, PM10, karbondioksit (CO₂), ışık şiddeti, UVA ve UVB ölçmektedir. Her kampüste iki saha turu yapılır. 1. tur saat 10:00'da P1'den başlar ve P6'ya kadar sürer, bir hafta sonraki 2. tur ise aynı saatlerde noktaları ters sırayla, P6'dan P1'e doğru dolaşır. Hangi noktanın hangi saatte ölçüldüğü, atölye sitesinin başlangıç sayfasındaki ölçüm planında tablo olarak verilmiştir. Atölyedeki sentetik veride Kampüs A deniz seviyesinden yaklaşık 1000 m yukarıdaki bir kampüs, Kampüs B bir şehir kampüsü, Kampüs C ise bir kıyı kampüsüdür. 3B kampüs ikizi bu farkı görünür kılar: A'nın çevresinde dağlar, B'nin çevresinde yüksek binalar, C'nin arkasında ise deniz yer alır. Projenin yaklaşımı *Ölç → Analiz Et → Paylaş → Aksiyona Dönüştür* şeklindedir. Atölye, ikinci saha turunun son günü olan 20 Kasım 2026'da gerçekleştirilmektedir. Ekipleri 21-24 Kasım analiz günlerine ve 28 Kasım'daki NOKTA Ulusal Gençlik Çevre ve İklim Kongresi ile Ulusal Çevre Çalıştayına hazırlar.
 
 Oturum böyle bir veri setini ilk ham ölçümden bir çözüm önerisine kadar adım adım izlemektedir. Bu yol boyunca yapay zekânın (YZ) analize nerede gerçekten katkı sağladığını, nerede yanıltabileceğini ve sonuçların güvenilir kalması için hangi denetimlerin gerektiğini gösterir. Beş bölüm sırasıyla dayanıklı istatistiklerle kalite kontrolünü, noktalar arasında adil karşılaştırmayı, gözetimsiz öğrenmeyle örüntü keşfini, dürüst biçimde test edilen açıklanabilir bir modeli ve her sayının denetlendiği YZ destekli raporlamayı ele alır. Bütün malzeme Türkçe ve İngilizce olarak hazırlanmıştır.
 
 ## Başka ders ve atölyelerde kullanım
 
-Bu malzemeler atıf yapılarak her düzeyde başka ders ve atölyelerde kullanılabilir, uyarlanabilir ve yürütülebilir. Colab defteri tek bir ayar değişikliğiyle gerçek NOKTA dosyalarını okur. Böylece başka öğrenci ekipleri de analizi kendi kampüslerinde tekrarlayabilir. Düzeltme ve öneriler deponun issues bölümünden iletilebilir. Atölyenin etkin olarak yürütüldüğü dönemde sorular utkukose@sdu.edu.tr ya da utkukose@gmail.com adresine gönderilebilir.
+Bu malzemeler atıf yapılarak her düzeyde başka ders ve atölyelerde kullanılabilir, uyarlanabilir ve yürütülebilir. Colab'daki Python notebook tek bir ayar değişikliğiyle gerçek NOKTA dosyalarını okur. Böylece başka öğrenci ekipleri de analizi kendi kampüslerinde tekrarlayabilir. Düzeltme ve öneriler deponun issues bölümünden iletilebilir. Atölyenin etkin olarak yürütüldüğü dönemde sorular utkukose@sdu.edu.tr ya da utkukose@gmail.com adresine gönderilebilir.
 
 ## Oturum nasıl işler
 
-Oturumun her bölümü aynı ritmi izler. **Tahmin edin:** [Atölye sitesindeki](https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/) durakların çoğu, hiçbir sonuç gösterilmeden önce katılımcıların cevapladığı kısa bir soruyla açılır. Böylece sezgiler daha sonra verinin söyledikleriyle karşılaştırılabilir. **Görün ve keşfedin:** Ardından sayfa cevabı bir animasyon, bir grafik ya da bir 3B sahneyle gösterir. Her formülün ardından sembollerin anlamı, birimleri ve sayılarla çözülmüş bir örnek gelir. **Kodlayın:** Turuncu kutular Colab defterinin ilgili kısmını açar. Defter, sayfadaki her sayıyı Python ile yeniden üretmektedir. Oturumun sonunda NOKTA Laboratuvarı bütün 3B araçları tek bir sayfada toplar ve oturum boyunca verilen cevaplardan kısa bir saha raporu hazırlar.
+Oturumun her bölümü aynı ritmi izler. **Tahmin edin:** [Atölye sitesindeki](https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/) durakların çoğu, hiçbir sonuç gösterilmeden önce katılımcıların cevapladığı kısa bir soruyla açılır. Böylece sezgiler daha sonra verinin söyledikleriyle karşılaştırılabilir. **Görün ve keşfedin:** Ardından sayfa cevabı bir animasyon, bir grafik ya da bir 3B sahneyle gösterir. Her formülün ardından sembollerin anlamı, birimleri ve sayılarla çözülmüş bir örnek gelir. **Kodlayın:** Turuncu kutular Colab'daki Python notebook'un ilgili kısmını açar. Python notebook, sayfadaki her sayıyı Python ile yeniden üretmektedir. Oturumun sonunda NOKTA Laboratuvarı bütün 3B araçları tek bir sayfada toplar ve oturum boyunca verilen cevaplardan kısa bir saha raporu hazırlar.
 
 ## Program
 
-| Süre | Bölüm | Etkileşimli sayfa | Colab defterindeki kısım |
+| Süre | Bölüm | Etkileşimli sayfa | Python notebook'taki kısım |
 |---|---|---|---|
 | 0:00-0:08 | Açılış: Altı nokta, bir istasyon, iki tur | [Başlangıç sayfası](https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/) | 0. kısım |
 | 0:08-0:30 | **1. Bölüm · Ölç.** Veri olarak kampüs | [part1.html](https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/part1.html) | 1. kısım |
@@ -94,7 +94,7 @@ Atölye sitesi yedi sayfadan oluşmaktadır: Başlangıç sayfası, beş bölüm
 
 ### 1. Bölüm · Ölç: Veri olarak kampüs
 
-1. Bölüm saha protokolünü veriye dönüştürür ve analizden önce ölçümlerin kalitesini denetler. İlk durak bir saha turunu 3B kampüs ikizinde yeniden oynatır. Böylece istasyonun izlediği yol ve her ölçümün nasıl biriktiği nokta nokta izlenebilir. İkinci durak on sensör kanalını birimleri ve olağan aralıklarıyla tanıtır, ardından atmosfer basıncının kampüsler arasında neden bu kadar farklı olduğunu sorar. Üçüncü durak, düşük maliyetli sensörlerin tipik hatalarını 10 saniyelik ölçümler üzerinde göstermektedir: Her taşımadan sonraki ısınma süresi, tek kanalda görülen sıçramalar, donmuş bir CO₂ sensörü ve eksik değerler. Dayanıklı z-skoru ve birkaç fiziksel kural bu hataları işaretler. İşaretler daha sonra veriye bilerek yerleştirilmiş sorunlarla karşılaştırılır. Dördüncü durak, saha turlarından önce yapılan yan yana testten yararlanarak üç istasyon arasındaki küçük farkları giderir. Beşinci durak ise nemli havanın optik sensörün saydığı partikülleri nasıl şişirdiğini ve κ-Köhler formülünün ölçümü nasıl düzelttiğini gösterir.
+1. Bölüm saha protokolünü veriye dönüştürür ve analizden önce ölçümlerin kalitesini denetler. İlk durak bir saha turunu 3B kampüs ikizinde yeniden oynatır. Böylece istasyonun izlediği yol ve her ölçümün nasıl biriktiği nokta nokta izlenebilir. İkinci durak on sensör kanalını birimleri ve olağan aralıklarıyla tanıtır, ardından atmosfer basıncının kampüsler arasında neden bu kadar farklı olduğunu sorar. Üçüncü durak, düşük maliyetli sensörlerin tipik hatalarını 10 saniyelik ölçümler üzerinde göstermektedir: Her taşımadan sonraki ısınma süresi, tek kanalda görülen sıçramalar, donmuş bir CO₂ sensörü ve eksik değerler. Dayanıklı z-skoru ve birkaç fiziksel kural bu hataları işaretler. İşaretler daha sonra veriye bilerek yerleştirilmiş sorunlarla karşılaştırılır. Aynı durak, atölyenin ilk YZ yöntemi olan Isolation Forest'ı da tanıtır. Bu makine öğrenmesi yöntemi, kural kullanmadan sıra dışı ölçümleri arar ve ikinci bir görüş verir. Dördüncü durak, saha turlarından önce yapılan yan yana testten yararlanarak üç istasyon arasındaki küçük farkları giderir. Beşinci durak ise nemli havanın optik sensörün saydığı partikülleri nasıl şişirdiğini ve κ-Köhler formülünün ölçümü nasıl düzelttiğini gösterir. Bölümün sonunda 36 ziyaret × 13 dakika = 468 temiz dakikadan oluşan tablo elde edilir ve 2-4. Bölümler bu tablodan çalışır.
 
 <p align="center"><a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/part1.html"><img src="docs/images/site_part1_tr.png" width="860" alt="1. Bölüm: 3B kampüs ikizinde yeniden oynatılan saha turu"></a></p>
 
@@ -106,7 +106,7 @@ Atölye sitesi yedi sayfadan oluşmaktadır: Başlangıç sayfası, beş bölüm
 
 <p align="center"><a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/part2.html"><img src="docs/images/site_part2_tr.png" width="860" alt="2. Bölüm: Altı noktanın iki turdaki sıcaklığı, saate göre"></a></p>
 
-*Ekran görüntüsünde* ilk durak, Kampüs A'daki altı noktanın sıcaklığını saate göre çizmektedir. Her daire bir ziyaretin medyanıdır, ziyaretin saatine yerleştirilmiş ve nokta türünün rengini almıştır. Düz çizgi P1'den P6'ya giden 1. turun ziyaretlerini, kesikli çizgi ise P6'dan P1'e giden 2. turun ziyaretlerini birleştirir. Noktaların sıralaması bir turdan diğerine değiştiği için tek bir tur, yerin etkisini saatin etkisinden ayıramaz. *Adil sonuç* düğmesi ardından her noktanın, iki turun ortalaması üzerinden referans noktasından farkını gösterir.
+*Ekran görüntüsünde* ilk durak, Kampüs A'daki altı noktanın sıcaklığını saate göre çizmektedir. Her daire bir ziyaretin medyanıdır, ziyaretin saatine yerleştirilmiş ve nokta türünün rengini almıştır. Düz çizgi P1'den P6'ya giden 1. turun ziyaretlerini, kesikli çizgi ise P6'dan P1'e giden 2. turun ziyaretlerini birleştirir. Noktaların sıralaması bir turdan diğerine değiştiği için tek bir tur, yerin etkisini saatin etkisinden ayıramaz. *Adil sonuç* düğmesi ardından her noktanın, iki turun ortalaması üzerinden referans noktasından farkını gösterir. Sağdaki tablo her noktanın iki ziyaretinin başlangıç saatlerini ve bunların ortalamasını verir: Altı noktanın hepsinde bu ortalama 11:02:30'dur.
 
 ### 3. Bölüm · Keşfet: YZ örüntü bulur
 
@@ -114,15 +114,15 @@ Atölye sitesi yedi sayfadan oluşmaktadır: Başlangıç sayfası, beş bölüm
 
 <p align="center"><a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/part3.html"><img src="docs/images/site_part3_tr.png" width="860" alt="3. Bölüm: Dönen 3B dakika bulutunda k-ortalamalar grupları"></a></p>
 
-*Ekran görüntüsünde* k-ortalamalar k = 4 için sonuna kadar çalışmış ve dört yinelemede durmuştur. Her nokta bir temiz dakikadır ve rengi en yakın merkezin grubunu gösterir. Siyah halkalar dört merkezi işaretler. Sahnenin altındaki J = 363,0, dakikalarla merkezleri arasındaki toplam kare uzaklıktır ve algoritmanın her adımı bu değeri düşürür. 0,499 ise aynı gruplamanın defterdeki siluet değeridir. Siluet −1 ile 1 arasında değişir ve grupların birbirinden ne kadar iyi ayrıldığını ölçer. *Öne çıkar* menüsü tek bir nokta türünü seçerek o türün dakikalarının hangi gruplara düştüğünü gösterir.
+*Ekran görüntüsünde* k-ortalamalar k = 4 için sonuna kadar çalışmış ve dört yinelemede durmuştur. Her nokta bir temiz dakikadır ve rengi en yakın merkezin grubunu gösterir. Siyah halkalar dört merkezi işaretler. Sahnenin altındaki J = 363,0, dakikalarla merkezleri arasındaki toplam kare uzaklıktır ve algoritmanın her adımı bu değeri düşürür. 0,499 ise aynı gruplamanın Python notebook'taki siluet değeridir. Siluet −1 ile 1 arasında değişir ve grupların birbirinden ne kadar iyi ayrıldığını ölçer. *Öne çıkar* menüsü tek bir nokta türünü seçerek o türün dakikalarının hangi gruplara düştüğünü gösterir.
 
 ### 4. Bölüm · Açıkla: Burada neden yüksek?
 
-4. Bölüm, PM2,5 değerini açıklayan bir model kurar ve bu modeli dürüst biçimde test eder. Rastgele orman, cevaplarının ortalaması alınan karar ağaçlarından oluşan bir modeldir. Burada her dakikanın PM2,5 değerini sekiz girdiden tahmin eder: Dakikadaki araç ve kişi sayısı, yeşil örtü, güneşlenme, bağıl nem, sıcaklık, saat ve günün arka plan PM2,5 değeri. İlk durak aynı modelin üç skorunu karşılaştırır. Model kendi eğitim dakikalarında R² = 0,66, rastgele seçilen test dakikalarında 0,54 değerine ulaşır. Bütün ölçüm noktaları dışarıda tutulduğunda ise skor 0,32'ye düşer ve rastgele testin yüzde 41 altında kalır. Modelin yeni bir yerde ne kadar başarılı olacağını yalnızca bu son skor anlatır. İkinci durak, modelin en çok hangi girdiye dayandığını sorar ve cevabı permütasyon önemiyle verir. Üçüncü durakta senaryo kaydırıcıları ile *Sakin çimen* ya da *Otobüs durağı* gibi hazır senaryolar bulunur. Dördüncü durak modelin cevabını iki girdi üzerinde bir 3B yüzey olarak çizer ve yanında bir kısmi bağımlılık eğrisi verir.
+4. Bölüm, PM2,5 değerini açıklayan bir model kurar ve bu modeli dürüst biçimde test eder. Rastgele orman, 40 karar ağacının cevaplarının ortalamasını alan bir makine öğrenmesi algoritmasıdır. Her karar ağacı, örneğin dakikada sekizden fazla araç geçip geçmediği gibi bir dizi evet-hayır sorusuyla tahmin yapar ve dakikaların rastgele seçilmiş farklı bir örnekleminden öğrenir. Rastgele orman modeli burada her dakikanın PM2,5 değerini sekiz girdiden tahmin eder: Dakikadaki araç ve kişi sayısı, yeşil örtü, güneşlenme, bağıl nem, sıcaklık, saat ve günün arka plan PM2,5 değeri. İlk durak aynı modelin üç skorunu karşılaştırır. Model kendi eğitim dakikalarında R² = 0,66, rastgele seçilen test dakikalarında 0,54 değerine ulaşır. Bütün ölçüm noktaları dışarıda tutulduğunda ise skor 0,32'ye düşer ve rastgele testin yüzde 41 altında kalır. Modelin yeni bir yerde ne kadar başarılı olacağını yalnızca bu son skor anlatır. İkinci durak, modelin en çok hangi girdiye dayandığını sorar ve cevabı permütasyon önemiyle verir. Nemin önemi sıfıra yakındır ve nem düzeltmesi yapılmamış ham veride de değişmez. Üçüncü durakta senaryo kaydırıcıları ile *Sakin çimen* ya da *Otobüs durağı* gibi hazır senaryolar bulunur. Dördüncü durak modelin cevabını iki girdi üzerinde bir 3B yüzey olarak çizer ve yanında bir kısmi bağımlılık eğrisi verir.
 
-<p align="center"><a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/part4.html"><img src="docs/images/site_part4_tr.png" width="860" alt="4. Bölüm: Rastgele ormanın trafik ve arka plana göre tahmin ettiği PM2,5, 3B yüzey olarak"></a></p>
+<p align="center"><a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/part4.html"><img src="docs/images/site_part4_tr.png" width="860" alt="4. Bölüm: Rastgele orman modelinin trafik ve arka plana göre tahmin ettiği PM2,5, 3B yüzey olarak"></a></p>
 
-*Ekran görüntüsünde* yüzey, ormanın dakikadaki araç sayısı ile arka plan PM2,5 değerinin her bileşimi için tahmin ettiği PM2,5 değerini göstermektedir. Diğer bütün girdiler, senaryo panelinde seçilen *Otobüs durağı* senaryosunun değerlerinde kalır. Kırmızı işaret bu senaryoyu ve 18,5 µg/m³ olan tahminini gösterir. Yüzey basamaklar hâlinde yükselir, çünkü her ağaç girdilerini belirli eşik değerlerinden böler. Sağdaki kısmi bağımlılık eğrisi, dakikadaki her araç sayısı için bütün dakikalar üzerinden ortalama tahmini verir.
+*Ekran görüntüsünde* yüzey, rastgele orman modelinin dakikadaki araç sayısı ile arka plan PM2,5 değerinin her bileşimi için tahmin ettiği PM2,5 değerini göstermektedir. Diğer bütün girdiler, senaryo panelinde seçilen *Otobüs durağı* senaryosunun değerlerinde kalır. Kırmızı işaret bu senaryoyu ve 18,5 µg/m³ olan tahminini gösterir. Yüzey basamaklar hâlinde yükselir, çünkü her ağaç girdilerini belirli eşik değerlerinden böler. Sağdaki kısmi bağımlılık eğrisi, dakikadaki her araç sayısı için bütün dakikalar üzerinden ortalama tahmini verir.
 
 ### 5. Bölüm · Paylaş ve aksiyona dönüştür: Sayılardan kelimelere, kelimelerden aksiyona
 
@@ -148,11 +148,11 @@ Bütün sayfalar tarayıcıda çalışır ve hiçbir yere veri göndermez. 3B sa
 
 Site, GitHub Pages ile `main` dalından yayımlanmaktadır. Kaynak olarak iki klasör de kullanılabilir. `/docs` seçildiğinde sayfalar doğrudan sunulur. Kök klasör seçildiğinde ise `index.html` ve `404.html` dosyaları her adresi `docs/` altındaki aynı sayfaya yönlendirir.
 
-## Colab defteri
+## Python notebook (Colab)
 
-Bütün oturumu, iki paralel dil sürümüyle tek bir defter taşır. Ücretsiz Colab CPU'sunda bir dakikadan kısa sürede çalışır, kurulum gerektirmez ve veriyi kendisi indirir.
+Bütün oturumu, iki paralel dil sürümüyle tek bir Python notebook taşır. Ücretsiz Colab CPU'sunda bir dakikadan kısa sürede çalışır, kurulum gerektirmez ve veriyi kendisi indirir.
 
-| Defterin kısmı | Sitedeki bölüm | Yöntemler |
+| Python notebook'un kısmı | Sitedeki bölüm | Yöntemler |
 |---|---|---|
 | 0 · Kurulum ve veri | Açılış | veri yükleme, kendi NOKTA dosyalarına geçiş, beş fikirlik Python adımı |
 | 1 · Ölç | 1. Bölüm | değiştirilmiş z-skoru, fiziksel akla yatkınlık kuralları, Isolation Forest, eksik değerler, yan yana test sapmaları, κ-Köhler nem düzeltmesi, temiz dakikalar |
@@ -161,7 +161,7 @@ Bütün oturumu, iki paralel dil sürümüyle tek bir defter taşır. Ücretsiz 
 | 4 · Açıkla | 4. Bölüm | rastgele orman, rastgele ve bir noktayı dışarıda bırakan çapraz doğrulama, permütasyon önemi, senaryo kaydırıcıları, kısmi bağımlılık, 3B yüzey |
 | 5 · Paylaş ve dönüştür | 5. Bölüm | olgu tablosu, güvenli prompt, sayı denetleyicisi, çözüm kartı |
 
-Defterde, 1.A'daki dayanıklı z-skorundan 5.A'daki sayı denetleyicisine kadar altı alıştırma bulunmaktadır. Her alıştırma hücresi çalıştırıldığı anda cevabı denetler ve doğru olup olmadığını söyler. Örnek çözüm, hemen altındaki katlanmış hücrededir. Defterin sonundaki uygulama görevleri tablosu mühendislik, sağlık bilimleri, sosyal bilimler, iletişim, iktisat ve eğitim öğrencilerine birer yeni soru önerir. Böylece her ekip analizi kendi alanından devam ettirebilir.
+Python notebook'ta, 1.A'daki dayanıklı z-skorundan 5.A'daki sayı denetleyicisine kadar altı alıştırma bulunmaktadır. Her alıştırma hücresi çalıştırıldığı anda cevabı denetler ve doğru olup olmadığını söyler. Örnek çözüm, hemen altındaki katlanmış hücrededir. Python notebook'un sonundaki uygulama görevleri tablosu mühendislik, sağlık bilimleri, sosyal bilimler, iletişim, iktisat ve eğitim öğrencilerine birer yeni soru önerir. Böylece her ekip analizi kendi alanından devam ettirebilir.
 
 ## Veri
 
@@ -179,7 +179,7 @@ Yerleştirilmiş sorunlar düşük maliyetli sensörler için gerçekçidir: Her
 
 ## Malzemeleri çalıştırma
 
-**Çevrim içi.** [Atölye sitesini](https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/) ve turuncu düğmelerden Colab defterini açın. Başka bir şeye gerek yoktur.
+**Çevrim içi.** [Atölye sitesini](https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/) ve turuncu düğmelerden Colab'daki Python notebook'u açın. Başka bir şeye gerek yoktur.
 
 **Yerel kurulum.**
 
@@ -193,15 +193,15 @@ jupyter lab notebooks/
 
 Site herhangi bir derleme adımı gerektirmez: `docs/index.html` doğrudan diskten açılır.
 
-**Her şeyi yeniden üretme.** Veri, sayfalardaki sayılar, sayfalar, defterler ve PDF notları tek bir zincirden üretilmektedir:
+**Her şeyi yeniden üretme.** Veri, sayfalardaki sayılar, sayfalar, Python notebook'lar ve PDF notları tek bir zincirden üretilmektedir:
 
 ```bash
 (cd tools/node && npm install)        # bir kez: derleme araçları için KaTeX, three.js ve yazı tipi
 python tools/make_synthetic_data.py   # data/*.csv
-python tools/build_site_data.py       # docs/assets/site-data.js, aktarılan ormanı denetler
+python tools/build_site_data.py       # docs/assets/site-data.js, aktarılan rastgele orman modelini denetler
 python tools/build_site.py            # docs/*.html ve docs/tr/*.html, formüller KaTeX ile işlenir
 python tools/build_notebooks.py       # notebooks/*.ipynb, fonksiyonlar tools/nokta_core.py dosyasından kopyalanır
-python tools/run_notebooks.py         # iki defteri baştan sona çalıştırır
+python tools/run_notebooks.py         # iki Python notebook'u baştan sona çalıştırır
 python tools/check_site.py            # her sayfayı Chrome'da açar, hataları ve taşmaları bildirir
 python tools/build_notes.py           # notes/*.pdf, Word kopyaları deponun dışında
 ```
@@ -226,15 +226,15 @@ env-data-ai-nokta2026-NB-workshop/
 ├── notes/                        İngilizce ve Türkçe PDF notları
 ├── tools/
 │   ├── make_synthetic_data.py    veri setini üretir
-│   ├── nokta_core.py             defterlerin ve sitenin ortak analiz fonksiyonları
+│   ├── nokta_core.py             Python notebook'ların ve sitenin ortak analiz fonksiyonları
 │   ├── build_site_data.py        sayfalardaki her sayıyı hesaplar
 │   ├── build_site.py             tools/site_src/ klasöründen iki dilli sayfaları üretir
-│   ├── build_notebooks.py        iki dilli defterleri üretir
-│   ├── run_notebooks.py          iki defteri çalıştırır
+│   ├── build_notebooks.py        iki dilli Python notebook'ları üretir
+│   ├── run_notebooks.py          iki Python notebook'u çalıştırır
 │   ├── check_site.py             her sayfayı açar ve hataları bildirir
 │   ├── build_notes.py            sayfalardan PDF notlarını üretir
 │   └── node/                     KaTeX işleme ve vendor paketi (npm)
-├── .github/workflows/notebooks.yml   her gönderimde defterleri çalıştırır
+├── .github/workflows/notebooks.yml   her gönderimde Python notebook'ları çalıştırır
 ├── WORKSHOP_GUIDE.md · WORKSHOP_GUIDE.tr.md   akış planı, anket soruları ve yedek plan
 ├── REFERENCES.md                 bütün kaynaklar
 ├── README.md                     bu sayfanın İngilizce sürümü
@@ -244,7 +244,7 @@ env-data-ai-nokta2026-NB-workshop/
 
 ## Tasarım ilkeleri
 
-Sayfalardaki her sayı, defterle aynı koddan ve aynı seed değerlerinden gelmektedir. Bu yüzden tarayıcıda görülen bir sonuç Colab'da da aynen ortaya çıkar. Her formülün ardından sembollerin anlamı, birimleri ve sayılarla çözülmüş bir örnek gelir. Yöntemler sınırlarıyla birlikte gösterilir. 1. Bölümdeki dedektör, gerçek duman ve egzoz bulutlarının arasına düşen iki PM2,5 hatasını kaçırır. 3. Bölümdeki gruplar, saha formlarıyla doğrulanması gereken hipotezlerdir. 4. Bölümdeki önem değerleri dünyayı değil modeli anlatır ve dürüst test modelin skorunu düşürür. YZ, veriye daha yakından bakmak için ve açık kurallara bağlı bir yazım yardımcısı olarak kullanılmaktadır, ancak hiçbir sayının kaynağı YZ değildir.
+Sayfalardaki her sayı, Python notebook'la aynı koddan ve aynı seed değerlerinden gelmektedir. Bu yüzden tarayıcıda görülen bir sonuç Colab'da da aynen ortaya çıkar. Her formülün ardından sembollerin anlamı, birimleri ve sayılarla çözülmüş bir örnek gelir. Yöntemler sınırlarıyla birlikte gösterilir. 1. Bölümdeki dedektör, gerçek duman ve egzoz bulutlarının arasına düşen iki PM2,5 hatasını kaçırır. 3. Bölümdeki gruplar, saha formlarıyla doğrulanması gereken hipotezlerdir. 4. Bölümdeki önem değerleri dünyayı değil modeli anlatır ve dürüst test modelin skorunu düşürür. YZ, veriye daha yakından bakmak için ve açık kurallara bağlı bir yazım yardımcısı olarak kullanılmaktadır, ancak hiçbir sayının kaynağı YZ değildir.
 
 ## İlgili malzemeler
 
@@ -272,11 +272,11 @@ Makine tarafından okunabilir atıf `CITATION.cff` dosyasındadır.
 
 ## Lisans
 
-Kaynak kod MIT Lisansı ([`LICENSE`](LICENSE)) ile lisanslanmıştır. Bu sayfa, etkileşimli site, defter metinleri, rehberler ve ekran görüntüleri dâhil atölye içeriği Creative Commons Atıf 4.0 Uluslararası ([`LICENSE-CONTENT`](LICENSE-CONTENT)) lisansıyla sunulmaktadır. Depodaki three.js ve KaTeX kendi MIT lisanslarını, Atkinson Hyperlegible yazı tipi de SIL Open Font License 1.1 lisansını korur. Üç lisans da `docs/assets/vendor/` klasöründedir.
+Kaynak kod MIT Lisansı ([`LICENSE`](LICENSE)) ile lisanslanmıştır. Bu sayfa, etkileşimli site, Python notebook metinleri, rehberler ve ekran görüntüleri dâhil atölye içeriği Creative Commons Atıf 4.0 Uluslararası ([`LICENSE-CONTENT`](LICENSE-CONTENT)) lisansıyla sunulmaktadır. Depodaki three.js ve KaTeX kendi MIT lisanslarını, Atkinson Hyperlegible yazı tipi de SIL Open Font License 1.1 lisansını korur. Üç lisans da `docs/assets/vendor/` klasöründedir.
 
 ## Bu sayfada atıf yapılan kaynaklar
 
-Sayfaların ve defterlerin yöntemleri aşağıdaki çalışmalara dayanmaktadır. Bu çalışmaların tam künyeleri [REFERENCES.md](REFERENCES.md) dosyasında ve her sayfanın sonunda verilmiştir: Değiştirilmiş z-skoru [1], Isolation Forest [2], düşük maliyetli partikül sensörlerinin neme tepkisi [3, 4, 5], DSÖ hava kalitesi kılavuzu [6], küresel CO₂ arka planı [7], kentsel enerji dengesi [8], çiy noktası için Magnus formülü [9], k-ortalamalar [10], siluet [11], scikit-learn [12], temel bileşenler analizi [13], yapılandırılmış veride çapraz doğrulama [14], rastgele ormanlar [15], kısmi bağımlılık [16] ve dil üretiminde halüsinasyon [17].
+Sayfaların ve Python notebook'ların yöntemleri aşağıdaki çalışmalara dayanmaktadır. Bu çalışmaların tam künyeleri [REFERENCES.md](REFERENCES.md) dosyasında ve her sayfanın sonunda verilmiştir: Değiştirilmiş z-skoru [1], Isolation Forest [2], düşük maliyetli partikül sensörlerinin neme tepkisi [3, 4, 5], DSÖ hava kalitesi kılavuzu [6], küresel CO₂ arka planı [7], kentsel enerji dengesi [8], çiy noktası için Magnus formülü [9], k-ortalamalar [10], siluet [11], scikit-learn [12], temel bileşenler analizi [13], yapılandırılmış veride çapraz doğrulama [14], rastgele ormanlar [15], kısmi bağımlılık [16] ve dil üretiminde halüsinasyon [17].
 
 ## İnsan-yapay zekâ işbirliği
 

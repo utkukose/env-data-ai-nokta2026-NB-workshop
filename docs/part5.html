@@ -47,7 +47,7 @@
     <div>
       <div class="card"><h3 style="margin-top:0">The facts it should have used</h3>
         <table class="tbl" id="facts-b"><thead><tr><th>Point</th><th>PM2.5</th><th>Δref</th><th>°C Δref</th></tr></thead><tbody></tbody></table>
-        <p class="note">For each point of Campus B, the table gives the two-round mean of PM2.5 in µg/m³ and its difference from the quiet reference point. The last column gives the difference in temperature from the reference in °C. These are the only numbers that the assistant was allowed to use.</p></div>
+        <p class="note">For each point of Campus B, the table gives the two-round mean of PM2.5 in µg/m³ and its difference from the quiet reference point. The last column gives the difference in temperature from the reference in °C. These numbers come from the fair comparison of Part 2, and a table of such numbers is called a fact table. They are the only numbers that the assistant was allowed to use.</p></div>
       <div id="spot-why"></div>
     </div>
   </div>
@@ -59,7 +59,7 @@
   <div class="station-head"><span class="no">2</span><h2>A safe prompt</h2></div>
   <div class="grid2">
     <div>
-      <p>A good prompt does not ask the assistant to know the numbers. It hands the numbers over, names the audience and writes the rules down. The builder below fills in the fact table of the chosen campus directly from the analysis and adds the study design and seven rules. The finished prompt can be copied into any assistant.</p>
+      <p>A good prompt does not ask the assistant to know the numbers. It hands the numbers over, names the audience and writes the rules down. The builder below fills in the fact table of the chosen campus directly from the fair comparison of Part 2 and adds the study design and seven rules. The finished prompt can be copied into any assistant.</p>
       <div class="controls">
         <label>Campus <select id="pb-campus"><option>A</option><option selected>B</option><option>C</option></select></label>
         <label>For <select id="pb-aud"><option value="report">campus environment report</option><option value="poster">congress abstract</option><option value="social">social media post</option></select></label>
@@ -70,7 +70,7 @@
     <div>
       <textarea id="pb-out" rows="22" spellcheck="false" style="font-family:var(--mono);font-size:0.8rem"></textarea>
       <div class="controls"><button class="btn primary" data-copy="pb-out">Copy the prompt</button><span class="note" id="pb-count"></span></div>
-      <p class="note">Use the assistant that your institution allows, and never paste personal data into it. Whatever the assistant writes goes back through the number auditor of the notebook and through the claim check of the next station before it is used.</p>
+      <p class="note">Use the assistant that your institution allows, and never paste personal data into it. Whatever the assistant writes goes back through the number auditor of the Python notebook and through the claim check of the next station before it is used.</p>
     </div>
   </div>
   <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Sections 5.1 and 5.2 of the Colab notebook build the same fact table and the same prompt from the data loaded in Section 0. A team that loads its own NOKTA files therefore gets a prompt with its own numbers.</p></div>

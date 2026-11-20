@@ -281,3 +281,13 @@ kbd { font-family: var(--mono); font-size: 0.82rem; border: 1px solid var(--line
   body { background: #fff; }
   .station { break-inside: avoid; }
 }
+
+/* measurement plan */
+.plan-box { margin: 14px 0 6px; }
+table.tbl.plan th, table.tbl.plan td { text-align: left; }
+table.tbl.plan td.t { white-space: nowrap; color: var(--muted); font-variant-numeric: tabular-nums; }
+table.tbl.plan .sw { margin-right: 6px; }
+table.tbl.plan-dates { margin-top: 12px; }
+.gloss { margin: 8px 0 0; }
+.gloss dt { font-weight: 700; margin-top: 12px; }
+.gloss dd { margin: 3px 0 0; }

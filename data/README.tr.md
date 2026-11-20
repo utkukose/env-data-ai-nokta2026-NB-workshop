@@ -6,7 +6,18 @@ Bu klasördeki bütün dosyalar `tools/make_synthetic_data.py` tarafından 2026 
 
 Veri seti NOKTA saha protokolünü üç kampüste izlemektedir. Kampüs A deniz seviyesinden yaklaşık 1000 m yükseklikte, iç bölgede bir kampüstür. Kampüs B karasal iklimli bir şehir kampüsü, Kampüs C ise bir kıyı kampüsüdür. Her kampüste aşağıdaki tabloda tanımlanan aynı altı sabit nokta türü (P1-P6) bulunur. Her kampüste taşınabilir bir istasyon (S1, S2 ya da S3) noktaları ziyaret eder ve yaklaşık 1,5 m yükseklikte ölçüm yapar.
 
-Her kampüs, aralarında bir hafta bulunan iki turda ölçülmüştür. 1. tur Kampüs C, A ve B için sırasıyla 10, 11 ve 12 Kasım'da, 2. tur ise aynı sırayla 17, 18 ve 19 Kasım'da yapılmıştır. 1. tur saat 10:00'da başlar ve noktaları P1'den P6'ya doğru ziyaret eder. 2. tur aynı saatte başlar, ancak noktaları P6'dan P1'e doğru dolaşır. Her ziyaret 15 dakika sürer ve her 10 saniyede bir ölçüm alınır. İstasyon ardından sonraki noktaya 10 dakikada ulaşır. Böylece bir tur yaklaşık iki saat yirmi dakika sürer ve her nokta sabahın bir kez erken, bir kez de geç bir saatinde ölçülmüş olur.
+Her kampüs, aralarında bir hafta bulunan iki turda ölçülmüştür. 1. tur Kampüs C, A ve B için sırasıyla 10, 11 ve 12 Kasım'da, 2. tur ise aynı sırayla 17, 18 ve 19 Kasım'da yapılmıştır. 1. tur saat 10:00'da başlar ve noktaları P1'den P6'ya doğru ziyaret eder. 2. tur aynı saatte başlar, ancak noktaları P6'dan P1'e doğru dolaşır. Her ziyaret 15 dakika sürer ve her 10 saniyede bir ölçüm alınır. İstasyon ardından sonraki noktaya 10 dakikada ulaşır. Böylece bir tur yaklaşık iki saat yirmi dakika sürer ve her nokta sabahın bir kez erken, bir kez de geç bir saatinde ölçülmüş olur. Aşağıdaki tablo ziyaretlerin saatlerini ve sırasını göstermektedir.
+
+| Saat | 1. tur | 2. tur, bir hafta sonra |
+|---|---|---|
+| 10:00-10:15 | P1 `shaded` | P6 `green` |
+| 10:25-10:40 | P2 `traffic` | P5 `crowded` |
+| 10:50-11:05 | P3 `reference` | P4 `sunny_hard` |
+| 11:15-11:30 | P4 `sunny_hard` | P3 `reference` |
+| 11:40-11:55 | P5 `crowded` | P2 `traffic` |
+| 12:05-12:20 | P6 `green` | P1 `shaded` |
+
+Her ziyaretin ilk iki dakikası sensörlerin ısınma süresidir ve analizde kullanılmaz. Bu yüzden her ziyaretten 13 dakika, toplamda 36 × 13 = 468 temiz dakika kalır.
 
 | Nokta | Tür | Saha formundaki tanım |
 |---|---|---|
@@ -49,7 +60,7 @@ Her kampüs, aralarında bir hafta bulunan iki turda ölçülmüştür. 1. tur K
 
 ## Gerçek NOKTA dosyalarının kullanılması
 
-Colab defterinin 0. kısmı varsayılan olarak sentetik dosyaları okur. Kendi kampüsünü analiz etmek isteyen bir ekip `DATA_SOURCE = "own"` ayarını yapar ve ölçümlerini, saha formlarını ve yan yana testini `nokta_template.csv` sütunlarıyla yükler. Kayıt cihazı başka sütun adları kullanıyorsa ekip `COLUMN_MAP` sözlüğüne eski ve yeni adları eşleştirerek yazar. Böylece sonraki her hücre ekibin kendi verisiyle çalışır.
+Python notebook'un 0. kısmı varsayılan olarak sentetik dosyaları okur. Kendi kampüsünü analiz etmek isteyen bir ekip `DATA_SOURCE = "own"` ayarını yapar ve ölçümlerini, saha formlarını ve yan yana testini `nokta_template.csv` sütunlarıyla yükler. Kayıt cihazı başka sütun adları kullanıyorsa ekip `COLUMN_MAP` sözlüğüne eski ve yeni adları eşleştirerek yazar. Böylece sonraki her hücre ekibin kendi verisiyle çalışır.
 
 ## Değerler nasıl üretildi
 

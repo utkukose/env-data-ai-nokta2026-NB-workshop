@@ -6,7 +6,18 @@ All files of this folder are produced by `tools/make_synthetic_data.py` with the
 
 The dataset follows the NOKTA field protocol on three campuses. Campus A is an inland highland campus at about 1000 m above sea level, Campus B a continental city campus and Campus C a coastal campus. Each campus has the same six fixed point types, P1 to P6, which are described in the table below. One portable station per campus (S1, S2 or S3) visits the points and measures at a height of about 1.5 m.
 
-Each campus is measured in two rounds held one week apart. Round 1 took place on 10, 11 and 12 November for Campus C, A and B, and Round 2 on 17, 18 and 19 November in the same order. Round 1 starts at 10:00 and visits the points from P1 to P6. Round 2 starts at the same clock time but visits them from P6 back to P1. Each visit lasts 15 minutes with a reading every 10 seconds, and the station then needs 10 minutes to reach the next point. A round therefore lasts about two hours and twenty minutes, and every point is measured once early and once late in the morning.
+Each campus is measured in two rounds held one week apart. Round 1 took place on 10, 11 and 12 November for Campus C, A and B, and Round 2 on 17, 18 and 19 November in the same order. Round 1 starts at 10:00 and visits the points from P1 to P6. Round 2 starts at the same clock time but visits them from P6 back to P1. Each visit lasts 15 minutes with a reading every 10 seconds, and the station then needs 10 minutes to reach the next point. A round therefore lasts about two hours and twenty minutes, and every point is measured once early and once late in the morning. The table below shows the clock times and the order of the visits.
+
+| Clock time | Round 1 | Round 2, one week later |
+|---|---|---|
+| 10:00 to 10:15 | P1 `shaded` | P6 `green` |
+| 10:25 to 10:40 | P2 `traffic` | P5 `crowded` |
+| 10:50 to 11:05 | P3 `reference` | P4 `sunny_hard` |
+| 11:15 to 11:30 | P4 `sunny_hard` | P3 `reference` |
+| 11:40 to 11:55 | P5 `crowded` | P2 `traffic` |
+| 12:05 to 12:20 | P6 `green` | P1 `shaded` |
+
+The first two minutes of every visit are the warm-up of the sensors and are not analyzed. Thirteen minutes of every visit therefore remain, 36 × 13 = 468 clean minutes in total.
 
 | Point | Type | Description from the field form |
 |---|---|---|

@@ -47,19 +47,19 @@
     <div>
       <div class="card"><h3 style="margin-top:0">Kullanması gereken gerçekler</h3>
         <table class="tbl" id="facts-b"><thead><tr><th>Nokta</th><th>PM2,5</th><th>Δref</th><th>°C Δref</th></tr></thead><tbody></tbody></table>
-        <p class="note">Tablo, Kampüs B'nin her noktası için PM2,5'in µg/m³ cinsinden iki tur ortalamasını, bu değerin sakin referans noktasından farkını ve sıcaklığın referanstan °C cinsinden farkını vermektedir. Asistanın kullanmasına izin verilen sayılar yalnızca bunlardır.</p></div>
+        <p class="note">Tablo, Kampüs B'nin her noktası için PM2,5'in µg/m³ cinsinden iki tur ortalamasını, bu değerin sakin referans noktasından farkını ve sıcaklığın referanstan °C cinsinden farkını vermektedir. Bu sayılar 2. Bölümdeki adil karşılaştırmadan gelir. Böyle bir tabloya olgu tablosu denir. Asistanın kullanmasına izin verilen sayılar yalnızca bunlardır.</p></div>
       <div id="spot-why"></div>
     </div>
   </div>
   <div class="takeaway"><b>Çıkarım.</b> Dil modelleri, kendilerine verilen girdiyle desteklenmeyen akıcı metinler üretebilir. Bu duruma çoğunlukla halüsinasyon denir [1]. Bu nedenle üretilen bir metindeki her sayı analiz tablosuyla, her neden, karşılaştırma ya da kaynak ise çalışma tasarımı ve kaynak listesiyle denetlenir.</div>
-  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Colab defterinin 5.3. kısmında bir sayı denetleyicisi bulunmaktadır. Denetleyici bir metni okur, içindeki her sayıyı listeler ve yuvarlama farkı dışında olgu tablosunda yer almayan her sayıyı işaretler. 5.A alıştırması ise örnek bir metinde denetleyicinin kaç sayıyı işaretlediğini sormaktadır.</p></div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Python notebook'un 5.3. kısmında bir sayı denetleyicisi bulunmaktadır. Denetleyici bir metni okur, içindeki her sayıyı listeler ve yuvarlama farkı dışında olgu tablosunda yer almayan her sayıyı işaretler. 5.A alıştırması ise örnek bir metinde denetleyicinin kaç sayıyı işaretlediğini sormaktadır.</p></div>
 </div></section>
 
 <section class="station" id="s2"><div class="wrap">
   <div class="station-head"><span class="no">2</span><h2>Güvenli bir prompt</h2></div>
   <div class="grid2">
     <div>
-      <p>İyi bir prompt, asistandan sayıları bilmesini beklemez. Sayıları ona kendisi verir, okur kitlesini belirtir ve kuralları açıkça yazar. Aşağıdaki oluşturucu, seçilen kampüsün olgu tablosunu doğrudan analizden doldurur ve çalışma tasarımı ile yedi kuralı ekler. Hazırlanan prompt herhangi bir asistana kopyalanabilir.</p>
+      <p>İyi bir prompt, asistandan sayıları bilmesini beklemez. Sayıları ona kendisi verir, okur kitlesini belirtir ve kuralları açıkça yazar. Aşağıdaki oluşturucu, seçilen kampüsün olgu tablosunu doğrudan 2. Bölümdeki adil karşılaştırmadan doldurur ve çalışma tasarımı ile yedi kuralı ekler. Hazırlanan prompt herhangi bir asistana kopyalanabilir.</p>
       <div class="controls">
         <label>Kampüs <select id="pb-campus"><option>A</option><option selected>B</option><option>C</option></select></label>
         <label>Hedef <select id="pb-aud"><option value="report">kampüs çevre raporu</option><option value="poster">kongre özeti</option><option value="social">sosyal medya paylaşımı</option></select></label>
@@ -70,10 +70,10 @@
     <div>
       <textarea id="pb-out" rows="22" spellcheck="false" style="font-family:var(--mono);font-size:0.8rem"></textarea>
       <div class="controls"><button class="btn primary" data-copy="pb-out">Promptu kopyala</button><span class="note" id="pb-count"></span></div>
-      <p class="note">Kurumunuzun izin verdiği asistanı kullanın ve içine hiçbir zaman kişisel veri yapıştırmayın. Asistanın yazdığı her metin, kullanılmadan önce defterdeki sayı denetleyicisinden ve bir sonraki duraktaki iddia denetiminden geçirilir.</p>
+      <p class="note">Kurumunuzun izin verdiği asistanı kullanın ve içine hiçbir zaman kişisel veri yapıştırmayın. Asistanın yazdığı her metin, kullanılmadan önce Python notebook'taki sayı denetleyicisinden ve bir sonraki duraktaki iddia denetiminden geçirilir.</p>
     </div>
   </div>
-  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Colab defterinin 5.1. ve 5.2. kısımları aynı olgu tablosunu ve aynı promptu 0. kısımda yüklenen veriden üretir. Bu yüzden kendi NOKTA dosyalarını yükleyen bir ekip, kendi sayılarını içeren bir prompt elde eder.</p></div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Python notebook'un 5.1. ve 5.2. kısımları aynı olgu tablosunu ve aynı promptu 0. kısımda yüklenen veriden üretir. Bu yüzden kendi NOKTA dosyalarını yükleyen bir ekip, kendi sayılarını içeren bir prompt elde eder.</p></div>
 </div></section>
 
 <section class="station" id="s3"><div class="wrap">
@@ -109,14 +109,14 @@
       <p class="note">Kart yalnızca bu tarayıcıda saklanır ve NOKTA Laboratuvarındaki değerlendirmede yeniden görünür, orada yazdırılabilir. Örnek bulgular sentetik veriden gelmektedir. Gerçek NOKTA verisiyle çalışan bir ekip kendi bulgusundan başlar ve kendi kartını yazar. Ekip dışarı çıkabiliyorsa NOKTA Laboratuvarındaki <a href="lab.html#field">Sahada uygulama</a> sekmesi kartın sahada ilk bir denetimini yapmayı sağlar.</p>
     </div>
   </div>
-  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Colab defterinin 5.4. kısmı aynı kartı, ekibin kendi olgu tablosundaki bir bulgudan başlayarak metin olarak yazdırır.</p></div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Python notebook'un 5.4. kısmı aynı kartı, ekibin kendi olgu tablosundaki bir bulgudan başlayarak metin olarak yazdırır.</p></div>
 </div></section>
 
 <section class="station" id="refs"><div class="wrap">
   <h3>Kaynaklar</h3>
   <ol class="note">
     <li>Ji, Z., Lee, N., Frieske, R., Yu, T., Su, D., Xu, Y., Ishii, E., Bang, Y. J., Madotto, A., &amp; Fung, P. (2023). Survey of hallucination in natural language generation. <i>ACM Computing Surveys, 55</i>(12), Article 248, 1–38. <a href="https://doi.org/10.1145/3571730">doi:10.1145/3571730</a></li>
-    <li>World Health Organization. (2021). <i>WHO global air quality guidelines: Particulate matter (PM2,5 and PM10), ozone, nitrogen dioxide, sulfur dioxide and carbon monoxide</i>. World Health Organization. <a href="https://www.who.int/publications/i/item/9789240034228">who.int/publications/i/item/9789240034228</a></li>
+    <li>World Health Organization. (2021). <i>WHO global air quality guidelines: Particulate matter (PM2.5 and PM10), ozone, nitrogen dioxide, sulfur dioxide and carbon monoxide</i>. World Health Organization. <a href="https://www.who.int/publications/i/item/9789240034228">who.int/publications/i/item/9789240034228</a></li>
   </ol>
 </div></section>
 

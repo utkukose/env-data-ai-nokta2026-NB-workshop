@@ -257,7 +257,7 @@
     var mhead = new T.Mesh(new T.BoxGeometry(2.2, 1.6, 2.2), mat(accent, { emissive: accent, emissiveIntensity: 0.25 })); mhead.position.y = 4; mhead.castShadow = true; mover.add(mhead);
     var halo = new T.Mesh(new T.RingGeometry(4.5, 5.5, 48), new T.MeshBasicMaterial({ color: accent, side: T.DoubleSide, transparent: true, opacity: 0.6 }));
     halo.rotation.x = -Math.PI / 2; halo.position.y = 0.1; mover.add(halo);
-    var mtag = label("NOKTA Station", { height: 3, bg: "rgba(14,122,95,0.92)", fg: "#ffffff" }); mtag.position.y = 8.5; mover.add(mtag);
+    var mtag = label(NK.LANG === "tr" ? "NOKTA istasyonu" : "NOKTA station", { height: 3, bg: "rgba(14,122,95,0.92)", fg: "#ffffff" }); mtag.position.y = 8.5; mover.add(mtag);
     mover.visible = false;
 
     var state = { campus: "A", round: "1", variable: "pm25_ugm3", mode: "results", hour: 10, playing: false, speed: 1, onTick: null };
