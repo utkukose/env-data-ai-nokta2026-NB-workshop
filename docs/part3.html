@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Part 3 · Discover: AI finds patterns</title>
+<meta name="description" content="k-means groups 468 minutes in a rotating 3D space, principal component analysis compresses six channels, and the groups get names.">
+<link rel="stylesheet" href="assets/vendor/fonts/atkinson.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E7A5F'/%3E%3Ccircle cx='32' cy='32' r='11' fill='white'/%3E%3Ccircle cx='32' cy='32' r='20' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6 6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site-data.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/charts.js"></script>
+<script src="assets/vendor/three.bundle.min.js"></script><script src="assets/nokta3d.js"></script>
+</head>
+<body data-part="p3">
+<header class="topbar"><div class="wrap">
+<a class="brand" href="index.html"><span class="dot"></span><span class="name">NOKTA · AI workshop<small>Environmental data analysis and interpretation</small></span></a>
+<nav class="route" aria-label="Workshop route"><ol><li data-page="index"><a href="index.html"><span class="pin"></span><span class="lbl">Start</span></a></li><li data-page="part1"><a href="part1.html"><span class="pin"></span><span class="lbl">1 Measure</span></a></li><li data-page="part2"><a href="part2.html"><span class="pin"></span><span class="lbl">2 Analyze</span></a></li><li data-page="part3"><a href="part3.html"><span class="pin"></span><span class="lbl">3 Discover</span></a></li><li data-page="part4"><a href="part4.html"><span class="pin"></span><span class="lbl">4 Explain</span></a></li><li data-page="part5"><a href="part5.html"><span class="pin"></span><span class="lbl">5 Share and act</span></a></li><li data-page="lab"><a href="lab.html"><span class="pin"></span><span class="lbl">Lab</span></a></li></ol></nav>
+<div class="tools"><a class="lang" href="tr/part3.html" title="Türkçe sürüm">TR</a>
+<button data-act="theme" title="T">◐</button><button data-act="full" title="F">⛶</button><button data-act="help" title="?">?</button></div>
+</div></header>
+<main>
+
+<section class="parthead"><div class="wrap">
+  <p class="kicker">Part 3 · Discover · 0:57 to 1:17</p>
+  <h1>AI finds patterns</h1>
+  <p class="lead">Unsupervised learning looks for structure without being told the answer. Here it receives 468 clean minutes and no point names, and the question is whether it can find the microclimates of the campus on its own.</p>
+  <ol class="station-index">
+    <li><a href="#s1"><b>1</b>How many kinds of place?</a></li>
+    <li><a href="#s2"><b>2</b>k-means step by step</a></li>
+    <li><a href="#s3"><b>3</b>Six channels, three axes</a></li>
+    <li><a href="#s4"><b>4</b>Name the groups</a></li>
+  </ol>
+</div></section>
+
+<section class="scrolly"><div class="wrap scrolly-grid">
+  <div class="sticky-col">
+    <div class="stage3d tall" id="cloud3d">
+      <div class="hud"><span id="cl-title">468 minutes, no names</span><span id="cl-info"></span></div>
+      <div class="legend3d" id="cl-legend"></div>
+    </div>
+    <div class="controls">
+      <div class="seg" id="cl-color"><button class="on" data-v="none">No color</button><button data-v="type">Point type</button><button data-v="cluster">k-means group</button></div>
+      <label>Highlight <select id="cl-hl"><option value="">all types</option></select></label>
+      <button class="btn" id="cl-rot">Rotate</button>
+    </div>
+    <div class="controls">
+      <label>k <select id="km-k"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label>
+      <button class="btn" id="km-init">1 · Place centers</button>
+      <button class="btn" id="km-assign">2 · Assign</button>
+      <button class="btn" id="km-move">3 · Move centers</button>
+      <button class="btn primary" id="km-run">Run to the end</button>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="v" id="km-it">0</div><div class="k">iterations</div></div>
+      <div class="stat"><div class="v" id="km-j">–</div><div class="k">J, total squared distance</div></div>
+      <div class="stat"><div class="v" id="km-sil">–</div><div class="k">silhouette in the notebook</div></div>
+    </div>
+    <p class="note" id="km-msg">The scene stays here while the stations on the right move on.</p>
+  </div>
+  <div class="steps-col">
+    <div class="station" id="s1">
+      <div class="station-head"><span class="no">1</span><h2>How many kinds of place?</h2></div>
+      <div class="poll" data-id="p3-s1">
+        <div class="q" data-label="Predict">Rotate the cloud. Each dot is one clean minute, placed by its temperature difference, its brightness and its PM2.5 difference. How many groups do you see?</div>
+        <div class="opts"><button data-v="2">2</button><button data-v="3">3</button><button data-v="4">4</button><button data-v="5">5 or more</button></div>
+        <div class="verdict"></div>
+        <div class="msg-right" hidden>Now color the dots by point type. Shaded minutes sit low and dark, sunny minutes warm and bright, and the plumes of the road and the entrance shoot upwards. The number of groups is a choice that the analyst defends, not a fact the data hand over.</div>
+      </div>
+      <p>The three axes are the difference of the temperature from its campus-round median (°C), the base-10 logarithm of light (lx) and the difference of PM2.5 from its campus-round median (µg/m³). The logarithm keeps a shady 5000 lx and a sunny 60 000 lx on one readable axis.</p>
+      <p class="note">Values beyond three standard deviations are drawn on the edge of the box. Hover over a dot to see its minute.</p>
+    </div>
+    <div class="station" id="s2">
+      <div class="station-head"><span class="no">2</span><h2>k-means step by step</h2></div>
+      <p>k-means places k centers, gives each minute to its nearest center, moves every center to the mean of its minutes and repeats until nothing changes [1]. Before that, every channel is standardized, so that one degree and one microgram count on the same scale. Use the buttons under the scene: 1, 2, 3, then 2 and 3 again.</p>
+      <div class="formula">
+        <span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:6.3743em;vertical-align:-2.9372em;"></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.4372em;"><span style="top:-5.4372em;"><span class="pstrut" style="height:4.0289em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">ij</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.2603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">ij</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal">μ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9721em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">d</span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">c</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.0289em;"><span class="svg-align" style="top:-5.4026em;"><span class="pstrut" style="height:5.4026em;"></span><span class="mord" style="padding-left:1.056em;"><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8011em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.4138em;"><span></span></span></span></span></span><span class="mopen"><span class="delimsizing size1">(</span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.044em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">ij</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">c</span><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose"><span class="delimsizing size1">)</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.054em;"><span style="top:-3.3029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.9889em;"><span class="pstrut" style="height:5.4026em;"></span><span class="hide-tail" style="min-width:0.742em;height:3.4826em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="3.4826em" viewBox="0 0 400000 3482" preserveAspectRatio="xMinYMin slice"><path d="M702 80H40000040
+H742v3348l-4 4-4 4c-.667.7 -2 1.5-4 2.5s-4.167 1.833-6.5 2.5-5.5 1-9.5 1
+h-12l-28-84c-16.667-52-96.667 -294.333-240-727l-212 -643 -85 170
+c-4-3.333-8.333-7.667-13 -13l-13-13l77-155 77-156c66 199.333 139 419.667
+219 661 l218 661zM702 80H400000v40H742z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.4138em;"><span></span></span></span></span></span></span></span><span style="top:-2.6694em;"><span class="pstrut" style="height:4.0289em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.09618em;">J</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.05em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">d</span><span class="mopen"><span class="delimsizing size1">(</span></span><span class="mord mathnormal">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">c</span><span class="mopen">(</span><span class="mord mathnormal">i</span><span class="mclose">)</span><span class="mclose"><span class="mclose"><span class="delimsizing size1">)</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.054em;"><span style="top:-3.3029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.9372em;"><span></span></span></span></span></span></span></span></span></span></span></span>
+        <p class="sym"><b>x<sub>ij</sub></b> value of channel j in minute i · <b>μ<sub>j</sub></b>, <b>σ<sub>j</sub></b> mean and standard deviation of channel j · <b>m<sub>c</sub></b> center of group c · <b>c(i)</b> the group of minute i · <b>J</b> total squared distance, which every step lowers.</p>
+        <div class="worked"><b>Worked example.</b> A sunny minute: ΔT = 3.2 °C, log₁₀ lux = 4.8, ΔPM2.5 = 0.5. For temperature, μ = 0.15 and σ = 1.90, so z = (3.2 − 0.15) / 1.90 = 1.60. The full z vector is (1.60, 1.02, −0.27). Its distances to the four centers of the notebook are 3.71, 1.69, 3.29 and 0.22, so the minute joins group 4, the warm and bright one.</div>
+      </div>
+      <div class="viz"><div id="km-elbow"></div>
+      <p class="cap">J falls with every extra group, so it cannot choose k alone. The silhouette score compares how close a minute is to its own group and to the next one, from −1 to +1 [2]. Here it hardly changes between 3 and 6.</p></div>
+      <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb#scrollTo=sec-3" target="_blank" rel="noopener">Colab ↗</a><p>Sections 3.1 to 3.3 of the Colab notebook standardize the channels and run k-means with scikit-learn [3]. They draw the same cloud in an interactive 3D plot and compute J and the silhouette for every k.</p></div>
+    </div>
+    <div class="station" id="s3">
+      <div class="station-head"><span class="no">3</span><h2>Six channels, three axes</h2></div>
+      <div class="poll" data-id="p3-s3" data-answer="85">
+        <div class="q" data-label="Predict">Principal component analysis (PCA) turns six standardized channels into three new axes. How much of the variation can three axes keep?</div>
+        <div class="opts"><button data-v="30">about 30 %</button><button data-v="60">about 60 %</button><button data-v="85">about 85 %</button><button data-v="100">100 %</button></div>
+        <div class="verdict"></div>
+        <div class="msg-right" hidden>The channels move together: Sun raises light, ultraviolet and temperature at once, and humidity falls. Three axes keep most of the story.</div>
+        <div class="msg-wrong" hidden>About 85 %. The channels move together: Sun raises light, ultraviolet and temperature at once, and humidity falls, so three axes keep most of the story.</div>
+      </div>
+      <div class="controls"><div class="seg" id="pc-mode"><button class="on" data-v="raw">Three sensor axes</button><button data-v="pca">Three principal components</button></div></div>
+      <div class="viz"><div id="pc-bars"></div>
+      <p class="cap">Share of the variation of the six standardized channels kept by each component. The arrows in the 3D scene show how each channel loads on the components.</p></div>
+      <div class="formula">
+        <span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5944em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathbf">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0935em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathbf" style="margin-right:0.01597em;">W</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">⊤</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathbf">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord text"><span class="mord">share of component </span></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.6513em;vertical-align:-1.2798em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.156em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.954em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">6</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4358em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">λ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">λ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2798em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+        <p class="sym"><b>z<sub>i</sub></b> the six standardized channels of minute i · <b>W</b> the loadings, one column per component · <b>s<sub>i</sub></b> the new coordinates · <b>λ<sub>k</sub></b> variance along component k [4]. The first component explains <b>0.495</b> of the variation, the second 0.254 and the third 0.107.</p>
+      </div>
+      <p>The first component is a sunshine axis: Light, ultraviolet and the temperature difference load positively and humidity negatively. It separates the shaded passage from the sunny square without being told that such places exist.</p>
+      <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb#scrollTo=sec-3" target="_blank" rel="noopener">Colab ↗</a><p>Section 3.4 of the Colab notebook fits the PCA, prints the loadings and draws the three components in 3D.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="station" id="s4"><div class="wrap">
+  <div class="station-head"><span class="no">4</span><h2>Name the groups</h2></div>
+  <p>k-means returns numbers, not names. The names come from reading each center and the field forms. Choose a name for each of the four groups of the notebook, then check.</p>
+  <div class="grid2 wide-left">
+    <div class="viz"><div id="nm-cards"></div></div>
+    <div class="card">
+      <div class="controls"><button class="btn primary" id="nm-check">Check the names</button></div>
+      <p id="nm-result" class="muted">Each card shows the center in sensor units and which point types fill the group.</p>
+      <div class="takeaway"><b>Takeaway.</b> A cluster is a hypothesis about the campus. It becomes a finding only when the field notes, a second round or another campus show the same group.</div>
+    </div>
+  </div>
+</div></section>
+
+<section class="station" id="refs"><div class="wrap">
+  <h3>References</h3>
+  <ol class="note">
+    <li>Lloyd, S. P. (1982). Least squares quantization in PCM. <i>IEEE Transactions on Information Theory, 28</i>(2), 129–137. <a href="https://doi.org/10.1109/TIT.1982.1056489">doi:10.1109/TIT.1982.1056489</a></li>
+    <li>Rousseeuw, P. J. (1987). Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. <i>Journal of Computational and Applied Mathematics, 20</i>, 53–65. <a href="https://doi.org/10.1016/0377-0427(87)90125-7">doi:10.1016/0377-0427(87)90125-7</a></li>
+    <li>Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel, O., Blondel, M., Prettenhofer, P., Weiss, R., Dubourg, V., Vanderplas, J., Passos, A., Cournapeau, D., Brucher, M., Perrot, M., &amp; Duchesnay, É. (2011). Scikit-learn: Machine learning in Python. <i>Journal of Machine Learning Research, 12</i>, 2825–2830. <a href="https://jmlr.org/papers/v12/pedregosa11a.html">jmlr.org/papers/v12/pedregosa11a.html</a></li>
+    <li>Jolliffe, I. T., &amp; Cadima, J. (2016). Principal component analysis: A review and recent developments. <i>Philosophical Transactions of the Royal Society A, 374</i>(2065), 20150202. <a href="https://doi.org/10.1098/rsta.2015.0202">doi:10.1098/rsta.2015.0202</a></li>
+  </ol>
+</div></section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var D = window.NOKTA, C = D.cluster, $ = function (id) { return document.getElementById(id); };
+  var ORDER = ["shaded", "traffic", "reference", "sunny_hard", "crowded", "green"];
+  var N = C.z.length, SLOT = ["--t1", "--t2", "--t3", "--t4", "--t5", "--t6"];
+  function clip(v) { return Math.max(-1, Math.min(1, v / 3)); }
+  var rawPos = C.z.map(function (z) { return [clip(z[0]), clip(z[1]), clip(z[2])]; });
+  var pcaPos = [], pidx = 0, maxS = 0;
+  C.pca.scores.forEach(function (s) { s.forEach(function (v) { maxS = Math.max(maxS, Math.abs(v)); }); });
+  // PCA scores exist for the minutes without missing values; map them in order
+  var pcaFull = []; C.pca.scores.forEach(function (s) { pcaFull.push([s[0] / 4, s[1] / 4, s[2] / 4].map(function (v) { return Math.max(-1, Math.min(1, v)); })); });
+  var AX = ["ΔT (°C)", "log₁₀ light", "ΔPM2.5"];
+  var hl = $("cl-hl");
+  ORDER.forEach(function (t) { var o = document.createElement("option"); o.value = t; o.textContent = NK.typeName(t); hl.appendChild(o); });
+  var cloud = NOKTA3D.cloud($("cloud3d"), { n: N, autoRotate: true, fallback: "3D view needs WebGL.",
+    tip: function (i) { var r = C.raw[i]; return "<b>" + NK.typeName(C.type[i]) + "</b><br>" + NK.L.campus[C.campus[i]] + " · " + NK.L.round + " " + C.round[i] + "<br>ΔT " + NK.signed(r[0], 1) + " °C · log₁₀ lx " + NK.fmt(r[1], 2) + " · ΔPM2.5 " + NK.signed(r[2], 1); } });
+  var colorMode = "none", labels = null, cents = null, k = 4, iter = 0, mode = "raw";
+  function gray() { return NK.cssVar("--muted"); }
+  function paint() {
+    if (!cloud) return;
+    var h = hl.value, cols = [];
+    for (var i = 0; i < N; i++) {
+      var c = gray();
+      if (colorMode === "type") c = (!h || C.type[i] === h) ? NK.typeColor(C.type[i]) : (document.documentElement.getAttribute("data-theme") === "dark" ? "#2b3a35" : "#dfe5e0");
+      else if (colorMode === "cluster" && labels) c = NK.cssVar(SLOT[labels[i] % 6]);
+      cols.push(c);
+    }
+    cloud.setColors(cols);
+    var lg = $("cl-legend");
+    if (colorMode === "type") lg.innerHTML = ORDER.map(function (t) { return '<span style="margin-right:8px"><i class="sw" style="background:' + NK.typeColor(t) + '"></i>' + NK.shortName(t) + "</span>"; }).join("");
+    else if (colorMode === "cluster" && labels) { var ks = {}; labels.forEach(function (l) { ks[l] = 1; }); lg.innerHTML = Object.keys(ks).map(function (l) { return '<span style="margin-right:8px"><i class="sw" style="background:' + NK.cssVar(SLOT[l % 6]) + '"></i>group ' + (+l + 1) + "</span>"; }).join(""); }
+    else lg.textContent = "Gray: Every minute looks alike";
+  }
+  if (cloud) { cloud.setAxes(AX); cloud.setPositions(rawPos, false); paint(); }
+  document.querySelectorAll("#cl-color button").forEach(function (b) { b.onclick = function () {
+    document.querySelectorAll("#cl-color button").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); colorMode = b.getAttribute("data-v");
+    if (colorMode === "cluster" && !labels) { labels = C.labels[k].slice(); if (cloud) cloud.setCentroids(C.centers[k].map(function (c) { return [clip(c[0]), clip(c[1]), clip(c[2])]; }), C.centers[k].map(function (_, j) { return NK.cssVar(SLOT[j % 6]); })); }
+    paint(); }; });
+  hl.onchange = function () { if (colorMode !== "type") { colorMode = "type"; document.querySelectorAll("#cl-color button").forEach(function (x) { x.classList.toggle("on", x.getAttribute("data-v") === "type"); }); } paint(); };
+  var rot = true; $("cl-rot").onclick = function () { rot = !rot; this.classList.toggle("on", rot); if (cloud) cloud.autoRotate(rot); };
+  $("cl-rot").classList.add("on");
+  /* ---------- k-means in the browser ---------- */
+  function rng(seed) { return function () { seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function d2(a, b) { return (a[0] - b[0]) * (a[0] - b[0]) + (a[1] - b[1]) * (a[1] - b[1]) + (a[2] - b[2]) * (a[2] - b[2]); }
+  function initCentres() {
+    var r = rng(2026 + k), Z = C.z; cents = [Z[Math.floor(r() * N)].slice()];
+    while (cents.length < k) {
+      var ds = Z.map(function (z) { return Math.min.apply(null, cents.map(function (c) { return d2(z, c); })); });
+      var tot = ds.reduce(function (a, b) { return a + b; }, 0), u = r() * tot, acc = 0, pick = 0;
+      for (var i = 0; i < N; i++) { acc += ds[i]; if (acc >= u) { pick = i; break; } }
+      cents.push(Z[pick].slice());
+    }
+    labels = null; iter = 0; showCentres(true); colorMode = "cluster"; syncColorButtons();
+    labels = new Array(N).fill(0).map(function () { return -1; }); paint(); report();
+  }
+  function assign() {
+    if (!cents) initCentres();
+    var changed = 0;
+    labels = labels || [];
+    C.z.forEach(function (z, i) { var best = 0, bd = Infinity; cents.forEach(function (c, j) { var dd = d2(z, c); if (dd < bd) { bd = dd; best = j; } }); if (labels[i] !== best) changed++; labels[i] = best; });
+    paint(); report(); return changed;
+  }
+  function move() {
+    if (!labels || labels[0] === -1) assign();
+    cents = cents.map(function (c, j) { var s = [0, 0, 0], n = 0; C.z.forEach(function (z, i) { if (labels[i] === j) { s[0] += z[0]; s[1] += z[1]; s[2] += z[2]; n++; } }); return n ? [s[0] / n, s[1] / n, s[2] / n] : c; });
+    iter++; showCentres(false); report();
+  }
+  function J() { if (!labels || labels[0] === -1) return null; var s = 0; C.z.forEach(function (z, i) { s += d2(z, cents[labels[i]]); }); return s; }
+  function report() { $("km-it").textContent = iter; var j = J(); $("km-j").textContent = j === null ? "–" : NK.fmt(j, 1); $("km-sil").textContent = NK.fmt(C.silhouette[k], 3); }
+  function showCentres(fresh) {
+    if (!cloud) return;
+    var P = cents.map(function (c) { return [clip(c[0]), clip(c[1]), clip(c[2])]; });
+    if (fresh) cloud.setCentroids(P, cents.map(function (_, j) { return NK.cssVar(SLOT[j % 6]); })); else cloud.moveCentroids(P);
+  }
+  function syncColorButtons() { document.querySelectorAll("#cl-color button").forEach(function (x) { x.classList.toggle("on", x.getAttribute("data-v") === colorMode); }); }
+  $("km-k").onchange = function () { k = +this.value; cents = null; labels = null; iter = 0; if (cloud) cloud.setCentroids([], []); report(); drawElbow(); };
+  $("km-init").onclick = function () { initCentres(); NK.Store.log("kmeans:k", k); };
+  $("km-assign").onclick = function () { assign(); };
+  $("km-move").onclick = function () { move(); };
+  $("km-run").onclick = function () {
+    if (!cents) initCentres();
+    var guard = 0;
+    (function stepLoop() { var ch = assign(); if (ch === 0 || guard++ > 40) { $("km-msg").textContent = "Converged after " + iter + " iterations."; NK.Store.log("kmeans:run", { k: k, it: iter }); return; } setTimeout(function () { move(); setTimeout(stepLoop, 450); }, 450); })();
+  };
+  function drawElbow() {
+    var ks = [2, 3, 4, 5, 6];
+    Charts.line($("km-elbow"), { height: 220, series: [{ name: "J", color: NK.cssVar("--p3"), dots: true, pts: ks.map(function (q) { return [q, C.inertia[q]]; }) }],
+      marks: [{ x: k, y: C.inertia[k], color: "var(--ink)", r: 9 }], x: { label: "k", min: 1.8, max: 6.2, fmt: function (v) { return Math.round(v) === v ? String(v) : ""; } },
+      y: { label: "J in the notebook (scikit-learn)" },
+      tooltip: function (xv) { var q = Math.max(2, Math.min(6, Math.round(xv))); return { x: q, html: "k = " + q + "<br>J = " + NK.fmt(C.inertia[q], 1) + "<br>silhouette = " + NK.fmt(C.silhouette[q], 3) }; } });
+  }
+  drawElbow(); report();
+  /* ---------- PCA ---------- */
+  var FEAT = { temp_anomaly: "ΔT", rel_humidity_pct: "humidity", pm25_anomaly: "ΔPM2.5", co2_anomaly: "ΔCO₂", log10_lux: "light", uva_wm2: "UVA" };
+  Charts.bars($("pc-bars"), { items: C.pca.var.map(function (v, i) { return { label: "Component " + (i + 1), value: v * 100, color: NK.cssVar("--p3") }; }), unit: "%", nd: 1, labelW: 120, max: 60 });
+  document.querySelectorAll("#pc-mode button").forEach(function (b) { b.onclick = function () {
+    document.querySelectorAll("#pc-mode button").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); mode = b.getAttribute("data-v");
+    if (!cloud) return;
+    if (mode === "pca" && pcaFull.length === N) {
+      cloud.setPositions(pcaFull, true); cloud.setAxes(["PC1", "PC2", "PC3"]);
+      cloud.setArrows(C.pca.features.map(function (f, j) { return { name: FEAT[f], v: [C.pca.loadings[0][j] * 1.6, C.pca.loadings[1][j] * 1.6, C.pca.loadings[2][j] * 1.6] }; }));
+      cloud.setCentroids([], []);
+      $("cl-title").textContent = "Principal components of six channels";
+    } else {
+      cloud.setPositions(rawPos, true); cloud.setAxes(AX); cloud.setArrows([]);
+      $("cl-title").textContent = "468 minutes, three sensor axes";
+    }
+    NK.Store.log("pca:" + mode, true);
+  }; });
+  /* ---------- naming ---------- */
+  var NAMES = [["cool", "Cool and dim"], ["open", "Ordinary open air"], ["smoke", "Smoke and exhaust plumes"], ["hot", "Hot and bright"]];
+  var TRUE = ["cool", "open", "smoke", "hot"];
+  var L4 = C.labels[4], cardBox = $("nm-cards"), html = "";
+  C.centers[4].forEach(function (c, j) {
+    var raw = [c[0] * C.sd[0] + C.mu[0], c[1] * C.sd[1] + C.mu[1], c[2] * C.sd[2] + C.mu[2]];
+    var counts = {}; ORDER.forEach(function (t) { counts[t] = 0; }); var n = 0;
+    L4.forEach(function (l, i) { if (l === j) { counts[C.type[i]]++; n++; } });
+    var bar = ORDER.map(function (t) { return counts[t] ? '<span title="' + NK.typeName(t) + ": " + counts[t] + '" style="display:inline-block;height:14px;width:' + (100 * counts[t] / n) + '%;background:' + NK.typeColor(t) + '"></span>' : ""; }).join("");
+    html += '<div class="card" style="border-left:6px solid ' + NK.cssVar(SLOT[j]) + '"><b>Group ' + (j + 1) + "</b> · " + n + " minutes<br><span class='note'>ΔT " + NK.signed(raw[0], 1) + " °C · " + NK.fmt(Math.pow(10, raw[1]), 0) + " lx · ΔPM2.5 " + NK.signed(raw[2], 1) + " µg/m³</span>" +
+      '<div style="display:flex;margin:8px 0;border-radius:4px;overflow:hidden">' + bar + "</div>" +
+      '<label class="note">Name <select data-g="' + j + '"><option value="">…</option>' + NAMES.map(function (nm) { return '<option value="' + nm[0] + '">' + nm[1] + "</option>"; }).join("") + "</select></label></div>";
+  });
+  cardBox.innerHTML = html + '<div class="legend">' + ORDER.map(function (t) { return '<span><i class="sw" style="background:' + NK.typeColor(t) + '"></i>' + NK.shortName(t) + "</span>"; }).join("") + "</div>";
+  $("nm-check").onclick = function () {
+    var ok = 0, picks = [];
+    cardBox.querySelectorAll("select").forEach(function (s) { var g = +s.getAttribute("data-g"); picks.push(s.value); var right = s.value === TRUE[g]; if (right) ok++; s.style.outline = "2px solid " + (right ? "var(--good)" : "var(--bad)"); });
+    $("nm-result").innerHTML = "<b>" + ok + " / 4</b> · " + "Group 1 is the shaded passage and the tree shade, group 4 the sunny square, group 3 the minutes with plumes from the road and the entrance, and group 2 everything in between.";
+    NK.Store.log("names", { ok: ok, picks: picks });
+  };
+  document.addEventListener("nokta:theme", function () { paint(); drawElbow(); });
+});
+</script>
+
+</main>
+<footer class="sig"><div class="wrap"><a class="btn primary next" href="part4.html">Part 4 · Explain →</a><br><b>Prof. Dr. Utku Köse</b><br>Süleyman Demirel University, AI Application and Research Center (YAZEM) · University of North Dakota · Universidad Panamericana · Vel Tech University<br><a href="https://www.utkukose.com">utkukose.com</a> · <a href="https://orcid.org/0000-0002-9652-6415">ORCID 0000-0002-9652-6415</a> · <a href="https://github.com/utkukose">github.com/utkukose</a><br>NOKTA, Objective Measurement, Participation, Monitoring and Action Network · ÜNİDES 2026<br>This workshop is updated in line with current developments in the field. First version: November 2026.<br>Content: CC BY 4.0 · Code: MIT · The data are synthetic and describe no real campus.</div></footer>
+<div class="overlay" id="help-overlay" hidden><div class="box"><button class="btn close" data-act="close">✕</button><h3>Keys</h3><p><kbd>←</kbd> <kbd>→</kbd> previous or next station · <kbd>[</kbd> <kbd>]</kbd> previous or next part · <kbd>T</kbd> paper or night view · <kbd>F</kbd> full screen · <kbd>L</kbd> English or Turkish · <kbd>B</kbd> five-minute break · <kbd>?</kbd> this help</p></div></div>
+<div class="overlay" id="break-overlay" hidden><div class="box"><button class="btn close" data-act="close">✕</button>
+<p class="kicker">Break</p><div class="breakclock">5:00</div>
+<p class="lead" style="text-align:center;margin:14px auto 0">Question for after the break: Which of the six points do you expect to look warmest in Round 1, and why might that be misleading?</p></div></div>
+</body>
+</html>

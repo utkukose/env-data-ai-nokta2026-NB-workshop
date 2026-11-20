@@ -1,0 +1,110 @@
+<!--META{"title": "⟪AI-Based Environmental Data Analysis and Interpretation · NOKTA workshop‖Yapay Zekâ ile Çevresel Veri Analizi ve Yorumlama · NOKTA atölyesi⟫", "desc": "⟪Start page of the NOKTA workshop: Five interactive parts with 3D scenes, one Colab notebook and the NOKTA Lab.‖NOKTA atölyesinin başlangıç sayfası: 3B sahneli beş etkileşimli bölüm, bir Colab defteri ve NOKTA Laboratuvarı.⟫", "part": "start", "three": true, "next": ["part1", "⟪Part 1 · Measure‖1. Bölüm · Ölç⟫"]}-->
+<section class="hero"><div class="wrap">
+  <p class="kicker">⟪NOKTA workshop · ÜNİDES 2026 · two hours‖NOKTA atölyesi · ÜNİDES 2026 · iki saat⟫</p>
+  <h1>⟪AI-Based Environmental Data Analysis and Interpretation‖Yapay Zekâ ile Çevresel Veri Analizi ve Yorumlama⟫</h1>
+  <p class="sub">⟪From campus sensor readings to evidence, and from evidence to action.‖Kampüs sensör verisinden kanıta, kanıttan aksiyona.⟫</p>
+  <div class="grid2 wide-left" style="margin-top:26px">
+    <div>
+      <div class="stage3d tall" id="hero3d">
+        <div class="hud"><span class="clock" id="hero-var">⟪PM2.5‖PM2,5⟫</span><span id="hero-hint">⟪Drag to rotate · scroll to zoom‖Döndürmek için sürükleyin · yakınlaştırmak için kaydırın⟫</span></div>
+        <div class="legend3d" id="hero-legend"></div>
+      </div>
+    </div>
+    <div>
+      <p class="lead">⟪Six measurement points on a campus, one portable station, two field rounds and ten sensor channels. This workshop follows such data from the first reading to a solution proposal. It shows where artificial intelligence (AI) helps, where it misleads, and how a careful analyst keeps it honest.‖Bir kampüste altı ölçüm noktası, taşınabilir bir istasyon, iki saha turu ve on sensör kanalı. Bu atölye böyle bir veriyi ilk okumadan çözüm önerisine kadar izlemektedir. Yapay zekânın (YZ) nerede yardımcı olduğunu, nerede yanılttığını ve dikkatli bir analistin onu nasıl dürüst tuttuğunu göstermektedir.⟫</p>
+      <div class="controls" style="margin:18px 0">
+        <a class="btn primary" href="part1.html">⟪Start with Part 1‖1. Bölümle başlayın⟫ →</a>
+        <a class="btn" href="{{COLAB}}" target="_blank" rel="noopener">⟪Open the Colab notebook‖Colab defterini açın⟫</a>
+        <a class="btn" href="lab.html">⟪NOKTA Lab‖NOKTA Laboratuvarı⟫</a>
+      </div>
+      <div class="controls" id="hero-vars"></div>
+      <p class="note">⟪The 3D scene is a schematic campus, not a map of a real one. The columns show the two-round mean of each point, and the dust cloud follows PM2.5.‖3B sahne şematik bir kampüstür, gerçek bir kampüsün haritası değildir. Sütunlar her noktanın iki tur ortalamasını gösterir, toz bulutu ise PM2,5 değerini izler.⟫</p>
+    </div>
+  </div>
+  <div class="cycle">
+    <div><b>⟪Measure‖Ölç⟫</b><span>⟪Part 1 · readings, quality control, devices‖1. Bölüm · ölçümler, kalite kontrolü, cihazlar⟫</span></div>
+    <div><b>⟪Analyze‖Analiz et⟫</b><span>⟪Parts 2 to 4 · fair comparisons, patterns, explanations‖2-4. Bölümler · adil karşılaştırma, örüntüler, açıklamalar⟫</span></div>
+    <div><b>⟪Share‖Paylaş⟫</b><span>⟪Part 5 · AI-assisted reporting with checks‖5. Bölüm · denetimli, YZ destekli raporlama⟫</span></div>
+    <div><b>⟪Turn into action‖Aksiyona dönüştür⟫</b><span>⟪Part 5 and the Lab · solution cards for the workshop tables‖5. Bölüm ve Laboratuvar · çalıştay masaları için çözüm kartları⟫</span></div>
+  </div>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <h2>⟪The two hours‖İki saatlik akış⟫</h2>
+  <p class="muted">⟪Every part opens with a question to answer before the reveal. The Colab notebook then reproduces each number of the page in Python.‖Her bölüm, sonuç gösterilmeden önce cevaplanacak bir soruyla açılır. Ardından Colab defteri sayfadaki her sayıyı Python ile yeniden üretir.⟫</p>
+  <div class="parts">
+    <a class="pcard" style="--c:var(--p1)" href="part1.html"><span class="t">0:08 ⟪to‖-⟫ 0:30</span><h3>⟪1 · Measure: The campus as data‖1 · Ölç: Veri olarak kampüs⟫</h3><p>⟪Replay a field round in 3D, read the ten channels, find faulty readings, align three stations and correct humid particle readings.‖Bir saha turunu 3B olarak yeniden oynatın, on kanalı okuyun, hatalı ölçümleri bulun, üç istasyonu hizalayın ve nemli havadaki partikül ölçümlerini düzeltin.⟫</p></a>
+    <a class="pcard" style="--c:var(--p2)" href="part2.html"><span class="t">0:30 ⟪to‖-⟫ 0:52</span><h3>⟪2 · Analyze: Fair comparisons‖2 · Analiz et: Adil karşılaştırma⟫</h3><p>⟪See why the last point of a morning looks warm, how the reversed second round fixes it, and why a strong correlation can point the wrong way.‖Sabahın son noktasının neden sıcak göründüğünü, ters sıralı ikinci turun bunu nasıl düzelttiğini ve güçlü bir korelasyonun neden yanlış yönü gösterebileceğini görün.⟫</p></a>
+    <a class="pcard" style="--c:var(--p3)" href="part3.html"><span class="t">0:57 ⟪to‖-⟫ 1:17</span><h3>⟪3 · Discover: AI finds patterns‖3 · Keşfet: YZ örüntü bulur⟫</h3><p>⟪Watch k-means group 468 minutes in a rotating 3D space, compress six channels with principal component analysis and name the groups yourself.‖k-ortalamalar yönteminin 468 dakikayı dönen bir 3B uzayda gruplamasını izleyin, temel bileşen analiziyle altı kanalı sıkıştırın ve grupları kendiniz adlandırın.⟫</p></a>
+    <a class="pcard" style="--c:var(--p4)" href="part4.html"><span class="t">1:17 ⟪to‖-⟫ 1:37</span><h3>⟪4 · Explain: Why is it high here?‖4 · Açıkla: Burada neden yüksek?⟫</h3><p>⟪Test a random forest honestly, ask which inputs matter, play what-if with traffic and background, and fly over the model's answer in 3D.‖Bir rastgele ormanı dürüstçe test edin, hangi girdilerin önemli olduğunu sorun, trafik ve arka planla senaryolar deneyin ve modelin cevabının üzerinde 3B olarak gezinin.⟫</p></a>
+    <a class="pcard" style="--c:var(--p5)" href="part5.html"><span class="t">1:37 ⟪to‖-⟫ 1:55</span><h3>⟪5 · Share and turn into action‖5 · Paylaş ve aksiyona dönüştür⟫</h3><p>⟪Catch the errors in an AI-written paragraph, build a safe prompt from your numbers and write a solution card for the NOKTA workshop tables.‖YZ ile yazılmış bir paragraftaki hataları yakalayın, kendi sayılarınızdan güvenli bir istem kurun ve NOKTA çalıştay masaları için bir çözüm kartı yazın.⟫</p></a>
+    <a class="pcard" style="--c:var(--ink)" href="lab.html"><span class="t">1:55 ⟪to‖-⟫ 2:00</span><h3>⟪NOKTA Lab and debrief‖NOKTA Laboratuvarı ve değerlendirme⟫</h3><p>⟪All 3D tools on one bench and a field report built from what this browser did during the session.‖Bütün 3B araçlar tek bir tezgâhta ve bu tarayıcının oturum boyunca yaptıklarından oluşan bir saha raporu.⟫</p></a>
+  </div>
+  <p class="note">⟪A five-minute break sits between Parts 2 and 3 (key <kbd>B</kbd>). Opening: 0:00 to 0:08.‖2. ve 3. bölümler arasında beş dakikalık bir ara vardır (<kbd>B</kbd> tuşu). Açılış: 0:00-0:08.⟫</p>
+</div></section>
+
+<section class="section"><div class="wrap grid2 even">
+  <div>
+    <h2>⟪The data of the session‖Oturumun verisi⟫</h2>
+    <p>⟪The workshop runs on a synthetic dataset that follows the NOKTA field protocol. Three campuses (A, B and C) each have six fixed point types. One NOKTA Station per campus visits the six points in two rounds, and the second round reverses the order. Each visit lasts 15 minutes with a reading every 10 seconds, at about 1.5 m above the ground.‖Atölye, NOKTA saha protokolünü izleyen sentetik bir veri setiyle yürütülmektedir. Üç kampüsün (A, B ve C) her birinde altı sabit nokta türü vardır. Her kampüste bir NOKTA Station altı noktayı iki turda ziyaret eder ve ikinci turda sıra tersine çevrilir. Her ziyaret 15 dakika sürer, yerden yaklaşık 1,5 m yükseklikte her 10 saniyede bir ölçüm alınır.⟫</p>
+    <div class="stats">
+      <div class="stat"><div class="v">{{n:counts.readings:0}}</div><div class="k">⟪readings‖ölçüm⟫</div></div>
+      <div class="stat"><div class="v">{{n:counts.visits:0}}</div><div class="k">⟪visits with a field form‖saha formlu ziyaret⟫</div></div>
+      <div class="stat"><div class="v">10</div><div class="k">⟪sensor channels‖sensör kanalı⟫</div></div>
+      <div class="stat"><div class="v">{{n:counts.minutes:0}}</div><div class="k">⟪clean minutes after quality control‖kalite kontrolü sonrası temiz dakika⟫</div></div>
+    </div>
+    <p class="note">⟪All values are invented by a script with a fixed seed. They are plausible for a sunny November morning but describe no real campus, so they must not be quoted as findings. The aim of NOKTA is not to rank universities or cities, and the workshop follows the same rule.‖Bütün değerler sabit seed değeriyle çalışan bir betik tarafından üretilmiştir. Güneşli bir kasım sabahı için akla yatkındır ancak gerçek bir kampüsü anlatmaz, bu yüzden bulgu olarak aktarılmamalıdır. NOKTA'nın amacı üniversiteleri ya da şehirleri sıralamak değildir. Atölye de aynı kurala uymaktadır.⟫</p>
+  </div>
+  <div>
+    <h2>⟪Six point types‖Altı nokta türü⟫</h2>
+    <table class="tbl">
+      <thead><tr><th>⟪Point‖Nokta⟫</th><th style="text-align:left">⟪Type‖Tür⟫</th><th style="text-align:left">⟪What the field form says‖Saha formundaki not⟫</th></tr></thead>
+      <tbody>
+        <tr><td><i class="sw" style="background:var(--t1)"></i>P1</td><td style="text-align:left">⟪Shaded, between buildings‖Gölgeli, bina arası⟫</td><td style="text-align:left">⟪narrow passage, no direct sun‖dar geçit, doğrudan güneş yok⟫</td></tr>
+        <tr><td><i class="sw" style="background:var(--t2)"></i>P2</td><td style="text-align:left">⟪Near traffic‖Trafiğe yakın⟫</td><td style="text-align:left">⟪two meters from the campus road‖kampüs yoluna iki metre⟫</td></tr>
+        <tr><td><i class="sw" style="background:var(--t3)"></i>P3</td><td style="text-align:left">⟪Quiet reference‖Sakin referans⟫</td><td style="text-align:left">⟪lawn edge away from roads‖yollardan uzak çim kenarı⟫</td></tr>
+        <tr><td><i class="sw" style="background:var(--t4)"></i>P4</td><td style="text-align:left">⟪Sunny hard surface‖Güneşe açık sert zemin⟫</td><td style="text-align:left">⟪concrete square in full sun‖tam güneşte beton meydan⟫</td></tr>
+        <tr><td><i class="sw" style="background:var(--t5)"></i>P5</td><td style="text-align:left">⟪Busy student area‖Öğrenci yoğun alan⟫</td><td style="text-align:left">⟪faculty entrance, smokers nearby‖fakülte girişi, yakında sigara içenler⟫</td></tr>
+        <tr><td><i class="sw" style="background:var(--t6)"></i>P6</td><td style="text-align:left">⟪Green area‖Yeşil alan⟫</td><td style="text-align:left">⟪under a row of trees‖ağaç sırasının altı⟫</td></tr>
+      </tbody>
+    </table>
+    <p class="note" style="margin-top:10px">⟪Round 1 visits P1 to P6 from 10:00. Round 2 visits P6 to P1 at the same clock times.‖1. tur saat 10:00'da P1'den P6'ya doğru başlar. 2. tur aynı saatlerde P6'dan P1'e gider.⟫</p>
+  </div>
+</div></section>
+
+<section class="section"><div class="wrap grid2 even">
+  <div>
+    <h2>⟪How to follow‖Nasıl takip edilir⟫</h2>
+    <p>⟪Nothing needs to be installed. The pages run in any modern browser, also on a phone. The orange boxes open the matching section of the Colab notebook, where every result can be run, changed and checked.‖Hiçbir şey kurmak gerekmez. Sayfalar telefon dâhil her güncel tarayıcıda çalışır. Turuncu kutular Colab defterinin ilgili bölümünü açar. Orada her sonuç çalıştırılabilir, değiştirilebilir ve denetlenebilir.⟫</p>
+    <p>⟪Keys: <kbd>←</kbd> <kbd>→</kbd> stations, <kbd>[</kbd> <kbd>]</kbd> parts, <kbd>T</kbd> paper or night view, <kbd>L</kbd> language, <kbd>F</kbd> full screen, <kbd>B</kbd> break, <kbd>?</kbd> help.‖Tuşlar: <kbd>←</kbd> <kbd>→</kbd> duraklar, <kbd>[</kbd> <kbd>]</kbd> bölümler, <kbd>T</kbd> kâğıt ya da gece görünümü, <kbd>L</kbd> dil, <kbd>F</kbd> tam ekran, <kbd>B</kbd> ara, <kbd>?</kbd> yardım.⟫</p>
+    <div class="nbref"><a class="badge" href="{{COLAB}}" target="_blank" rel="noopener">Colab ↗</a><p>⟪One notebook carries the whole session: Section 1 for Part 1 up to Section 5 for Part 5. It also reads real NOKTA files with one change of setting.‖Tek bir defter bütün oturumu taşır: 1. Bölüm için Kısım 1'den 5. Bölüm için Kısım 5'e kadar. Tek bir ayarı değiştirerek gerçek NOKTA dosyalarını da okur.⟫</p></div>
+  </div>
+  <div>
+    <h2>⟪Presenter‖Eğitmen⟫</h2>
+    <p><b>Prof. Dr. Utku Köse</b><br>⟪Full Professor, Department of Computer Engineering, Süleyman Demirel University, Isparta, Türkiye<br>Founding Director, AI Application and Research Center (YAZEM), Süleyman Demirel University<br>Additional affiliations: University of North Dakota (USA), Universidad Panamericana (Mexico), Vel Tech University (India)‖Profesör, Bilgisayar Mühendisliği Bölümü, Süleyman Demirel Üniversitesi, Isparta<br>Kurucu Müdür, Yapay Zekâ Uygulama ve Araştırma Merkezi (YAZEM), Süleyman Demirel Üniversitesi<br>Diğer afiliasyonlar: University of North Dakota (ABD), Universidad Panamericana (Meksika), Vel Tech University (Hindistan)⟫</p>
+    <p class="note">⟪Prepared for NOKTA, Objective Measurement, Participation, Monitoring and Action Network. The project is carried out by the SDÜ Robotics and Innovation Community with partner communities at Ankara University and the İzmir Institute of Technology. It is supported by ÜNİDES of the Ministry of Youth and Sports of the Republic of Türkiye.‖NOKTA, Nesnel Ölçüm, Katılım, Takip ve Aksiyon Ağı için hazırlanmıştır. Proje SDÜ Robotik ve İnovasyon Topluluğu yürütücülüğünde, Ankara Üniversitesi ve İzmir Yüksek Teknoloji Enstitüsündeki partner topluluklarla birlikte yürütülmekte ve Gençlik ve Spor Bakanlığı ÜNİDES programı tarafından desteklenmektedir.⟫</p>
+    <p><a href="{{REPO}}">⟪Repository on GitHub‖GitHub deposu⟫</a> · <a href="{{REPO}}/blob/main/WORKSHOP_GUIDE.md">⟪Workshop guide‖Atölye rehberi⟫</a></p>
+  </div>
+</div></section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var el = document.getElementById("hero3d");
+  var tw = NOKTA3D.twin(el, { accent: NK.cssVar("--p1"), fallback: "⟪3D view needs WebGL. The rest of the site works without it.‖3B görünüm WebGL gerektirir. Sitenin geri kalanı onsuz da çalışır.⟫" });
+  if (!tw) return;
+  tw.set("round", "mean"); tw.set("variable", "pm25_ugm3");
+  tw.stage.controls.autoRotate = true; tw.stage.controls.autoRotateSpeed = 0.5;
+  var vars = ["pm25_ugm3", "temperature_c", "co2_ppm", "light_lux", "rel_humidity_pct"];
+  var box = document.getElementById("hero-vars");
+  function legend(v) {
+    document.getElementById("hero-var").textContent = NK.chName(v) + " · " + "⟪two-round mean, Campus A‖iki tur ortalaması, Kampüs A⟫";
+    document.getElementById("hero-legend").innerHTML = "⟪Taller and darker column: Higher value. Each label names one of the six points.‖Daha yüksek ve koyu sütun: Daha büyük değer. Her etiket altı noktadan birini adlandırır.⟫";
+  }
+  vars.forEach(function (v, i) {
+    var b = document.createElement("button"); b.className = "btn" + (i === 0 ? " on" : ""); b.textContent = NK.chName(v);
+    b.onclick = function () { box.querySelectorAll(".btn").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); tw.set("variable", v); legend(v); };
+    box.appendChild(b);
+  });
+  legend("pm25_ugm3");
+});
+</script>

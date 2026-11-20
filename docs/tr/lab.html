@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NOKTA Laboratuvarı ve değerlendirme</title>
+<meta name="description" content="Atölyenin bütün 3B araçları tek bir tezgâhta ve oturumun saha raporu.">
+<link rel="stylesheet" href="../assets/vendor/fonts/atkinson.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E7A5F'/%3E%3Ccircle cx='32' cy='32' r='11' fill='white'/%3E%3Ccircle cx='32' cy='32' r='20' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6 6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site-data.js"></script>
+<script src="../assets/site.js"></script>
+<script src="../assets/charts.js"></script>
+<script src="../assets/vendor/three.bundle.min.js"></script><script src="../assets/nokta3d.js"></script>
+</head>
+<body data-part="lab">
+<header class="topbar"><div class="wrap">
+<a class="brand" href="index.html"><span class="dot"></span><span class="name">NOKTA · YZ atölyesi<small>Çevresel veri analizi ve yorumlama</small></span></a>
+<nav class="route" aria-label="Atölye rotası"><ol><li data-page="index"><a href="index.html"><span class="pin"></span><span class="lbl">Başlangıç</span></a></li><li data-page="part1"><a href="part1.html"><span class="pin"></span><span class="lbl">1 Ölç</span></a></li><li data-page="part2"><a href="part2.html"><span class="pin"></span><span class="lbl">2 Analiz et</span></a></li><li data-page="part3"><a href="part3.html"><span class="pin"></span><span class="lbl">3 Keşfet</span></a></li><li data-page="part4"><a href="part4.html"><span class="pin"></span><span class="lbl">4 Açıkla</span></a></li><li data-page="part5"><a href="part5.html"><span class="pin"></span><span class="lbl">5 Paylaş ve dönüştür</span></a></li><li data-page="lab"><a href="lab.html"><span class="pin"></span><span class="lbl">Laboratuvar</span></a></li></ol></nav>
+<div class="tools"><a class="lang" href="../lab.html" title="English version">EN</a>
+<button data-act="theme" title="T">◐</button><button data-act="full" title="F">⛶</button><button data-act="help" title="?">?</button></div>
+</div></header>
+<main>
+
+<section class="parthead"><div class="wrap">
+  <p class="kicker">NOKTA Laboratuvarı · 1:55-2:00 ve oturumdan sonra</p>
+  <h1>Tezgâh</h1>
+  <p class="lead">Oturumun 3B araçları, kapanıştaki sorular ve 21-24 Kasım analiz günleri için tek bir yerde toplanmıştır. Değerlendirme, bu tarayıcının yaptıklarını kısa bir saha raporuna dönüştürür.</p>
+  <div class="controls" id="tabs" style="margin-top:18px">
+    <button class="btn on" data-tab="twin">Kampüs ikizi</button>
+    <button class="btn" data-tab="cloud">Mikroiklim grupları</button>
+    <button class="btn" data-tab="model">Model yüzeyi</button>
+    <button class="btn" data-tab="debrief">Değerlendirme</button>
+  </div>
+</div></section>
+
+<section class="station" id="twin"><div class="wrap">
+  <div class="grid2 wide-left">
+    <div>
+      <div class="stage3d tall" id="lab-twin"><div class="hud"><span class="clock" id="lt-clock">sonuçlar</span><span id="lt-status">İki tur ortalamaları</span></div></div>
+      <div class="controls">
+        <button class="btn primary" id="lt-play">▶ Oynat</button><button class="btn" id="lt-res">Sonuçlar</button>
+        <label>Kampüs <select id="lt-campus"><option>A</option><option>B</option><option>C</option></select></label>
+        <label>Tur <select id="lt-round"><option value="mean">iki tur ortalaması</option><option value="1">1</option><option value="2">2</option></select></label>
+        <label>Kanal <select id="lt-var"></select></label>
+        <label>Hız <select id="lt-speed"><option value="1">×1</option><option value="2" selected>×2</option><option value="4">×4</option></select></label>
+      </div>
+    </div>
+    <div class="card"><h3 style="margin-top:0">Nokta kartı</h3><div id="lt-card" class="muted">Sahnede bir istasyona tıklayın.</div></div>
+  </div>
+</div></section>
+
+<section class="station" id="cloud" hidden><div class="wrap">
+  <div class="grid2 wide-left">
+    <div>
+      <div class="stage3d tall" id="lab-cloud"><div class="hud"><span id="lc-title">k = 4</span></div><div class="legend3d" id="lc-legend"></div></div>
+    </div>
+    <div class="card">
+      <div class="controls"><label>k <select id="lc-k"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label>
+        <div class="seg" id="lc-col"><button class="on" data-v="cluster">Gruplar</button><button data-v="type">Nokta türleri</button></div></div>
+      <div class="stats"><div class="stat"><div class="v" id="lc-sil"></div><div class="k">siluet</div></div><div class="stat"><div class="v" id="lc-j"></div><div class="k">J</div></div></div>
+      <div id="lc-tab"></div>
+      <p class="note">Colab defterinde scikit-learn'ün bulduğu gruplar, sıcaklık farklarına göre sıralanmıştır.</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="station" id="model" hidden><div class="wrap">
+  <div class="grid2">
+    <div class="stage3d tall" id="lab-surf"><div class="hud"><span>Trafik ve arka plana göre PM2,5</span><span id="lm-val"></span></div></div>
+    <div class="card" id="lm-sliders"><div class="stats"><div class="stat"><div class="v" id="lm-pred"></div><div class="k">tahmin edilen PM2,5 (µg/m³)</div></div></div></div>
+  </div>
+</div></section>
+
+<section class="station" id="debrief" hidden><div class="wrap">
+  <div class="grid2 wide-left">
+    <div class="card" id="report"></div>
+    <div>
+      <div class="controls"><button class="btn primary" onclick="window.print()">Yazdır ya da PDF olarak kaydet</button><button class="btn" id="db-reset">Yeni oturum başlat</button></div>
+      <p class="note">Buradaki her şey bu tarayıcıdan gelir ve dışarı çıkmaz. Canlı oturumda kapanışta gösterilen değerlendirmeyi eğitmenin tarayıcısı üretir.</p>
+      <div class="takeaway"><b>NOKTA ekipleri için sonraki adımlar.</b> 21-24 Kasım: Colab defterini kendi dosyalarınızla çalıştırın (0. Bölüm, tek ayar). 28 Kasım: Çalıştaya her masa için bir çözüm kartı, kongreye de ortalama alma süresi yazılı bir şekil getirin.</div>
+      <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-0" target="_blank" rel="noopener">Colab ↗</a><p>Colab defterinin 0. Bölümü sentetik veri yerine gerçek NOKTA dosyalarının nasıl yükleneceğini anlatır.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var D = window.NOKTA, $ = function (id) { return document.getElementById(id); };
+  var ORDER = ["shaded", "traffic", "reference", "sunny_hard", "crowded", "green"], SLOT = ["--t1", "--t2", "--t3", "--t4", "--t5", "--t6"];
+  var CH = ["temperature_c", "rel_humidity_pct", "pressure_hpa", "pm1_ugm3", "pm25_ugm3", "pm10_ugm3", "co2_ppm", "light_lux", "uva_wm2", "uvb_wm2"];
+  var made = {};
+  function show(tab) {
+    ["twin", "cloud", "model", "debrief"].forEach(function (t) { $(t).hidden = t !== tab; });
+    document.querySelectorAll("#tabs .btn").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-tab") === tab); });
+    if (!made[tab]) { made[tab] = true; ({ twin: makeTwin, cloud: makeCloud, model: makeModel, debrief: makeReport })[tab](); }
+    if (tab === "debrief") makeReport();
+    if (location.hash !== "#" + tab) history.replaceState(null, "", "#" + tab);
+  }
+  document.querySelectorAll("#tabs .btn").forEach(function (b) { b.onclick = function () { show(b.getAttribute("data-tab")); }; });
+  /* ---------- twin ---------- */
+  function makeTwin() {
+    var sel = $("lt-var");
+    CH.forEach(function (c) { var o = document.createElement("option"); o.value = c; o.textContent = NK.chName(c); if (c === "pm25_ugm3") o.selected = true; sel.appendChild(o); });
+    var tw = NOKTA3D.twin($("lab-twin"), { accent: NK.cssVar("--p1"), onPick: function (t, st) {
+      var rows = CH.map(function (c) {
+        var a = D.twin[st.campus]["1"].filter(function (v) { return v.type === t; })[0].median[c], b = D.twin[st.campus]["2"].filter(function (v) { return v.type === t; })[0].median[c];
+        var nd = c === "light_lux" ? 0 : c === "uvb_wm2" ? 3 : 1;
+        return "<tr><td>" + NK.chName(c) + "</td><td>" + NK.fmt(a, nd) + "</td><td>" + NK.fmt(b, nd) + "</td><td><b>" + NK.fmt((a + b) / 2, nd) + "</b></td><td>" + NK.chUnit(c) + "</td></tr>"; }).join("");
+      $("lt-card").innerHTML = "<b>" + NK.typeName(t) + "</b> · " + NK.L.campus[st.campus] + '<table class="tbl" style="margin-top:8px"><thead><tr><th></th><th>' + NK.L.round + " 1</th><th>" + NK.L.round + " 2</th><th>ort.</th><th></th></tr></thead><tbody>" + rows + "</tbody></table>";
+    } });
+    if (!tw) return;
+    tw.set("round", "mean"); tw.set("speed", 2);
+    $("lt-campus").onchange = function () { tw.set("campus", this.value); };
+    $("lt-round").onchange = function () { if (this.value === "mean") tw.results(); tw.set("round", this.value); };
+    sel.onchange = function () { tw.set("variable", this.value); };
+    $("lt-speed").onchange = function () { tw.set("speed", +this.value); };
+    $("lt-res").onclick = function () { tw.results(); $("lt-clock").textContent = "sonuçlar"; };
+    $("lt-play").onclick = function () {
+      if ($("lt-round").value === "mean") { $("lt-round").value = "1"; tw.set("round", "1"); }
+      tw.play(function (info) { $("lt-clock").textContent = info.clock; $("lt-status").textContent = info.at ? NK.shortName(info.at) : info.moving ? "→ " + NK.shortName(info.next) : ""; }, function () {});
+      NK.Store.log("twin:played", true);
+    };
+  }
+  /* ---------- clusters ---------- */
+  function makeCloud() {
+    var C = D.cluster, N = C.z.length, mode = "cluster", k = 4;
+    function clip(v) { return Math.max(-1, Math.min(1, v / 3)); }
+    var cl = NOKTA3D.cloud($("lab-cloud"), { n: N, autoRotate: true, tip: function (i) { return NK.typeName(C.type[i]) + " · " + NK.L.campus[C.campus[i]]; } });
+    if (!cl) return;
+    cl.setAxes(["ΔT (°C)", "log₁₀ ışık", "ΔPM2,5"]);
+    cl.setPositions(C.z.map(function (z) { return [clip(z[0]), clip(z[1]), clip(z[2])]; }), false);
+    function paint() {
+      var L = C.labels[k];
+      cl.setColors(L.map(function (l, i) { return mode === "cluster" ? NK.cssVar(SLOT[l % 6]) : NK.typeColor(C.type[i]); }));
+      cl.setCentroids(mode === "cluster" ? C.centers[k].map(function (c) { return [clip(c[0]), clip(c[1]), clip(c[2])]; }) : [], C.centers[k].map(function (_, j) { return NK.cssVar(SLOT[j % 6]); }));
+      $("lc-sil").textContent = NK.fmt(C.silhouette[k], 3); $("lc-j").textContent = NK.fmt(C.inertia[k], 1); $("lc-title").textContent = "k = " + k;
+      var rows = C.centers[k].map(function (c, j) {
+        var n = L.filter(function (l) { return l === j; }).length;
+        return "<tr><td><i class='sw' style='background:" + NK.cssVar(SLOT[j % 6]) + "'></i>" + (j + 1) + "</td><td>" + n + "</td><td>" + NK.signed(c[0] * C.sd[0] + C.mu[0], 1) + "</td><td>" + NK.fmt(Math.pow(10, c[1] * C.sd[1] + C.mu[1]), 0) + "</td><td>" + NK.signed(c[2] * C.sd[2] + C.mu[2], 1) + "</td></tr>"; }).join("");
+      $("lc-tab").innerHTML = '<table class="tbl"><thead><tr><th>Grup</th><th>n</th><th>ΔT °C</th><th>lx</th><th>ΔPM2.5</th></tr></thead><tbody>' + rows + "</tbody></table>";
+      $("lc-legend").innerHTML = mode === "type" ? ORDER.map(function (t) { return '<span style="margin-right:8px"><i class="sw" style="background:' + NK.typeColor(t) + '"></i>' + NK.shortName(t) + "</span>"; }).join("") : "";
+    }
+    $("lc-k").onchange = function () { k = +this.value; paint(); };
+    document.querySelectorAll("#lc-col button").forEach(function (b) { b.onclick = function () { document.querySelectorAll("#lc-col button").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); mode = b.getAttribute("data-v"); paint(); }; });
+    document.addEventListener("nokta:theme", paint);
+    paint();
+  }
+  /* ---------- model surface ---------- */
+  function makeModel() {
+    var RF = D.rf, F = RF.features, X = RF.median.slice();
+    var FN = { vehicles_per_min: "Dakikadaki araç sayısı", people_per_min: "Dakikadaki kişi sayısı", green_cover_pct: "Yeşil örtü (%)", sun_index: "Güneş (0-1)", rel_humidity_pct: "Bağıl nem (%)", temperature_c: "Sıcaklık (°C)", hour: "Saat", background_pm25: "Arka plan PM2,5" };
+    function predict(x) { var s = 0; RF.trees.forEach(function (t) { var n = 0; while (t.l[n] !== -1) n = x[t.f[n]] <= t.t[n] ? t.l[n] : t.r[n]; s += t.v[n]; }); return s / RF.trees.length; }
+    var box = $("lm-sliders");
+    F.forEach(function (f, i) { box.insertAdjacentHTML("beforeend", '<div class="slider"><span>' + FN[f] + '</span><input type="range" data-i="' + i + '" min="' + RF.min[i] + '" max="' + RF.max[i] + '" step="' + ((RF.max[i] - RF.min[i]) / 60).toFixed(3) + '" value="' + X[i] + '"><output id="lmo-' + i + '"></output></div>'); });
+    var sf = NOKTA3D.surface($("lab-surf"), { nx: 30, ny: 30, onTheme: draw });
+    function draw() {
+      F.forEach(function (f, i) { $("lmo-" + i).textContent = NK.fmt(X[i], f === "hour" || f === "sun_index" ? 2 : 1); });
+      var p = predict(X); $("lm-pred").textContent = NK.fmt(p, 1); $("lm-val").textContent = NK.fmt(p, 1) + " µg/m³";
+      if (!sf) return;
+      var ix = 0, iy = 7, Z = [], lo = Infinity, hi = -Infinity;
+      for (var j = 0; j < 30; j++) { var row = []; for (var i = 0; i < 30; i++) { var x = X.slice(); x[ix] = RF.min[ix] + (RF.max[ix] - RF.min[ix]) * i / 29; x[iy] = RF.max[iy] - (RF.max[iy] - RF.min[iy]) * j / 29; var v = predict(x); row.push(v); lo = Math.min(lo, v); hi = Math.max(hi, v); } Z.push(row); }
+      sf.setGrid(Z, lo, hi); sf.setLabels(FN.vehicles_per_min, FN.background_pm25, "PM2,5");
+      sf.setMarker((X[ix] - RF.min[ix]) / (RF.max[ix] - RF.min[ix]), (X[iy] - RF.min[iy]) / (RF.max[iy] - RF.min[iy]), p);
+    }
+    box.addEventListener("input", function (e) { if (e.target.dataset.i !== undefined) { X[+e.target.dataset.i] = +e.target.value; draw(); } });
+    draw();
+  }
+  /* ---------- debrief ---------- */
+  var POLLS = { "p1-s1": "En yüksek PM2,5 noktası", "p1-s2": "Basınç farkı", "p1-s3": "Hatalı ölçümler", "p1-s4": "Hangi istasyon doğru", "p1-s5": "Nemli partiküller",
+    "p2-s1": "Son durak", "p2-s2": "Ortalama ve medyan", "p2-s3": "Korelasyon ve neden", "p3-s1": "Grup sayısı", "p3-s3": "TBA'nın koruduğu varyans",
+    "p4-s1": "Dürüst test", "p4-s2": "En önemli girdi" };
+  function makeReport() {
+    var log = NK.Store.get("log", {}), card = NK.Store.get("card", null), visited = NK.Store.get("visited", []);
+    var answered = 0, right = 0, rowsP = "";
+    Object.keys(POLLS).forEach(function (id) { var e = log["poll:" + id]; if (e) { answered++; if (e.v.ok) right++; }
+      rowsP += "<tr><td>" + POLLS[id] + "</td><td>" + (e ? (e.v.ok === null ? "✓" : e.v.ok ? "doğru" : "gözden geçirildi") : "–") + "</td></tr>"; });
+    var acts = [];
+    if (log["twin:played"]) acts.push("bir saha turunu 3B olarak yeniden oynattı");
+    if (log["coloc:aligned"]) acts.push("üç istasyonu hizaladı");
+    if (log["kmeans:run"]) acts.push("k-ortalamaları yakınsamaya kadar çalıştırdı (k = " + log["kmeans:run"].v.k + ")");
+    if (log["pca:pca"]) acts.push("dakikaları temel bileşenlere izdüşürdü");
+    if (log["names"]) acts.push("grupları adlandırdı: " + log["names"].v.ok + "/4");
+    if (log["spot"]) acts.push("YZ paragrafındaki hataları buldu: " + log["spot"].v.found + "/" + log["spot"].v.of);
+    if (log["claims"]) acts.push("iddiaları tarttı: " + log["claims"].v + "/4");
+    var colab = Object.keys(log).filter(function (k) { return k.indexOf("colab:") === 0; }).length;
+    var html = "<h3 style='margin-top:0'>Bu oturumun saha raporu</h3>" +
+      "<div class='stats'><div class='stat'><div class='v'>" + visited.filter(function (p) { return /part|lab|index/.test(p); }).length + "/7</div><div class='k'>ziyaret edilen sayfa</div></div><div class='stat'><div class='v'>" + answered + "</div><div class='k'>yapılan tahmin</div></div><div class='stat'><div class='v'>" + right + "</div><div class='k'>ilk denemede doğru</div></div><div class='stat'><div class='v'>" + colab + "</div><div class='k'>açılan Colab bağlantısı</div></div></div>" +
+      "<p>" + (acts.length ? "Bu tarayıcıda katılımcı " + acts.join("; ") + "." : "Bu tarayıcıda henüz etkileşimli bir adım kaydedilmedi.") + "</p>" +
+      "<table class='tbl'><thead><tr><th>Tahmin</th><th>Sonuç</th></tr></thead><tbody>" + rowsP + "</tbody></table>" +
+      "<h3>Çözüm kartı</h3>" + (card ? "<div class='actioncard'><h4>" + card.table + "</h4><dl>" + card.fields.map(function (f) { return "<dt>" + f[0] + "</dt><dd>" + String(f[1]).replace(/</g, "&lt;") + "</dd>"; }).join("") + "</dl></div>" : "<p class='muted'>Henüz kart yok: 5. Bölümde bir tane yazın.</p>") +
+      "<p class='note' style='margin-top:12px'>Oturumdan beş kural: Ham dosyayı koru, noktaları iki tur üzerinden karşılaştır, ortalama alma süresini bildir, kümeleri ve önem değerlerini hipotez olarak gör ve YZ'nin yazdığı her sayıyı denetle.</p>";
+    $("report").innerHTML = html;
+  }
+  $("db-reset").onclick = function () { ["log", "card", "visited"].forEach(function (k) { NK.Store.set(k, k === "log" ? {} : k === "visited" ? [] : null); }); makeReport(); };
+  var start = (location.hash || "#twin").slice(1);
+  show(["twin", "cloud", "model", "debrief"].indexOf(start) >= 0 ? start : "twin");
+});
+</script>
+
+</main>
+<footer class="sig"><div class="wrap"><b>Prof. Dr. Utku Köse</b><br>Süleyman Demirel Üniversitesi, Yapay Zekâ Uygulama ve Araştırma Merkezi (YAZEM) · University of North Dakota · Universidad Panamericana · Vel Tech University<br><a href="https://www.utkukose.com">utkukose.com</a> · <a href="https://orcid.org/0000-0002-9652-6415">ORCID 0000-0002-9652-6415</a> · <a href="https://github.com/utkukose">github.com/utkukose</a><br>NOKTA, Nesnel Ölçüm, Katılım, Takip ve Aksiyon Ağı · ÜNİDES 2026<br>Bu atölye alandaki güncel gelişmelere göre güncellenmektedir. İlk sürüm: Kasım 2026.<br>İçerik: CC BY 4.0 · Kod: MIT · Veriler sentetiktir ve gerçek bir kampüsü anlatmaz.</div></footer>
+<div class="overlay" id="help-overlay" hidden><div class="box"><button class="btn close" data-act="close">✕</button><h3>Tuşlar</h3><p><kbd>←</kbd> <kbd>→</kbd> önceki ya da sonraki durak · <kbd>[</kbd> <kbd>]</kbd> önceki ya da sonraki bölüm · <kbd>T</kbd> kâğıt ya da gece görünümü · <kbd>F</kbd> tam ekran · <kbd>L</kbd> İngilizce ya da Türkçe · <kbd>B</kbd> beş dakikalık ara · <kbd>?</kbd> bu yardım</p></div></div>
+<div class="overlay" id="break-overlay" hidden><div class="box"><button class="btn close" data-act="close">✕</button>
+<p class="kicker">Ara</p><div class="breakclock">5:00</div>
+<p class="lead" style="text-align:center;margin:14px auto 0">Aradan sonraki soru: 1. turda altı noktadan hangisinin en sıcak görüneceğini düşünüyorsunuz ve bu neden yanıltıcı olabilir?</p></div></div>
+</body>
+</html>

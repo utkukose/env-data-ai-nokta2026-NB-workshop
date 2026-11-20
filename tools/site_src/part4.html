@@ -1,0 +1,212 @@
+<!--META{"title": "⟪Part 4 · Explain: Why is it high here?‖4. Bölüm · Açıkla: Burada neden yüksek?⟫", "desc": "⟪Test a random forest honestly, ask which inputs matter, play what-if and fly over the model's answer in 3D.‖Bir rastgele ormanı dürüstçe test edin, hangi girdilerin önemli olduğunu sorun, senaryolar deneyin ve modelin cevabının üzerinde 3B olarak gezinin.⟫", "part": "p4", "three": true, "next": ["part5", "⟪Part 5 · Share and act‖5. Bölüm · Paylaş ve dönüştür⟫"]}-->
+<section class="parthead"><div class="wrap">
+  <p class="kicker">⟪Part 4 · Explain · 1:17 to 1:37‖4. Bölüm · Açıkla · 1:17-1:37⟫</p>
+  <h1>⟪Why is it high here?‖Burada neden yüksek?⟫</h1>
+  <p class="lead">⟪A random forest learns PM2.5 from the field form and the weather of each minute. The interesting part is not the prediction but the questions around it: How good is it really, what does it rely on, and what would change the answer?‖Bir rastgele orman, PM2,5 değerini saha formundan ve her dakikanın hava koşullarından öğrenir. Asıl ilginç olan tahminin kendisi değil, çevresindeki sorulardır: Gerçekte ne kadar iyidir, neye dayanır ve cevabı ne değiştirir?⟫</p>
+  <ol class="station-index">
+    <li><a href="#s1"><b>1</b>⟪An honest test‖Dürüst bir test⟫</a></li>
+    <li><a href="#s2"><b>2</b>⟪What does it rely on?‖Neye dayanıyor?⟫</a></li>
+    <li><a href="#s3"><b>3</b>⟪What if?‖Ya şöyle olsaydı?⟫</a></li>
+    <li><a href="#s4"><b>4</b>⟪Fly over the model‖Modelin üzerinde gezinin⟫</a></li>
+  </ol>
+</div></section>
+
+<section class="station" id="s1"><div class="wrap">
+  <div class="station-head"><span class="no">1</span><h2>⟪An honest test‖Dürüst bir test⟫</h2></div>
+  <div class="poll" data-id="p4-s1" data-answer="drops">
+    <div class="q" data-label="⟪Predict‖Tahmin edin⟫">⟪The forest scores well when the test minutes are drawn at random. What happens when it must predict a point it has never seen?‖Test dakikaları rastgele seçildiğinde orman iyi bir skor alıyor. Hiç görmediği bir noktayı tahmin etmesi gerektiğinde ne olur?⟫</div>
+    <div class="opts"><button data-v="rises">⟪The score rises‖Skor yükselir⟫</button><button data-v="same">⟪It stays the same‖Aynı kalır⟫</button><button data-v="drops">⟪It drops clearly‖Belirgin biçimde düşer⟫</button></div>
+    <div class="verdict"></div>
+    <div class="msg-right" hidden>⟪Minutes of one visit are near copies of each other. In a random split the test minute has its neighbors in the training set, so the model partly remembers instead of predicting [1].‖Bir ziyaretin dakikaları birbirinin neredeyse kopyasıdır. Rastgele bölmede test dakikasının komşuları eğitim kümesindedir. Bu yüzden model kısmen tahmin etmek yerine hatırlar [1].⟫</div>
+    <div class="msg-wrong" hidden>⟪It drops. Minutes of one visit are near copies of each other. In a random split the test minute has its neighbors in the training set, so the model partly remembers instead of predicting [1].‖Düşer. Bir ziyaretin dakikaları birbirinin neredeyse kopyasıdır. Rastgele bölmede test dakikasının komşuları eğitim kümesindedir. Bu yüzden model kısmen tahmin etmek yerine hatırlar [1].⟫</div>
+  </div>
+  <div class="grid2">
+    <div class="viz">
+      <div class="controls"><div class="seg" id="cv-mode"><button class="on" data-v="random">⟪Random minutes‖Rastgele dakikalar⟫</button><button data-v="group">⟪Leave one point out‖Bir noktayı dışarıda bırak⟫</button></div></div>
+      <div id="cv-tiles"></div>
+      <div class="legend"><span><i class="sw" style="background:var(--muted)"></i>⟪training minute‖eğitim dakikası⟫</span><span><i class="sw" style="background:var(--p4)"></i>⟪test minute‖test dakikası⟫</span></div>
+      <p class="cap" id="cv-cap"></p>
+    </div>
+    <div>
+      <div class="reveal-lock locked" data-for="p4-s1"><div class="reveal-body"><div class="viz" id="cv-bars"></div></div></div>
+      <div class="formula">
+        <texd>R^2 = 1 - \frac{\sum_i (y_i - \hat{y}_i)^2}{\sum_i (y_i - \bar{y})^2}</texd>
+        <p class="sym">⟪<b>y<sub>i</sub></b> measured PM2.5 of minute i (µg/m³) · <b>ŷ<sub>i</sub></b> prediction for that minute, made by a model that did not see it · <b>ȳ</b> mean of all minutes. R² = 1 is perfect, R² = 0 is no better than always guessing the mean. The same forest drops by about {{n:rf.drop:0}} % when whole points are held out.‖<b>y<sub>i</sub></b> i. dakikanın ölçülen PM2,5 değeri (µg/m³) · <b>ŷ<sub>i</sub></b> o dakikayı görmemiş bir modelin tahmini · <b>ȳ</b> bütün dakikaların ortalaması. R² = 1 kusursuzdur, R² = 0 her zaman ortalamayı tahmin etmekten iyi değildir. Aynı orman, bütün noktalar dışarıda tutulduğunda yaklaşık %{{n:rf.drop:0}} düşer.⟫</p>
+      </div>
+    </div>
+  </div>
+  <div class="takeaway"><b>⟪Takeaway.‖Çıkarım.⟫</b> ⟪Ask what the model will face in use. For a new spot on a campus, the honest test leaves whole points out. Many rows are not many independent observations: This dataset has {{n:rf.cv.n:0}} minutes but only {{n:rf.cv.groups:0}} measurement points.‖Modelin kullanımda neyle karşılaşacağını sorun. Kampüste yeni bir nokta için dürüst test bütün noktaları dışarıda bırakır. Çok sayıda satır, çok sayıda bağımsız gözlem demek değildir: Bu veri setinde {{n:rf.cv.n:0}} dakika ama yalnızca {{n:rf.cv.groups:0}} ölçüm noktası vardır.⟫</div>
+  <div class="nbref"><a class="badge" href="{{COLAB}}#scrollTo=sec-4" target="_blank" rel="noopener">Colab ↗</a><p>⟪Sections 4.1 and 4.2 of the Colab notebook build the model table, train the forest [2] and compute the three scores.‖Colab defterinin 4.1. ve 4.2. kısımları model tablosunu kurar, ormanı eğitir [2] ve üç skoru hesaplar.⟫</p></div>
+</div></section>
+
+<section class="station" id="s2"><div class="wrap">
+  <div class="station-head"><span class="no">2</span><h2>⟪What does it rely on?‖Neye dayanıyor?⟫</h2></div>
+  <div class="poll" data-id="p4-s2" data-answer="vehicles_per_min">
+    <div class="q" data-label="⟪Predict‖Tahmin edin⟫">⟪Which input will matter most for the forest's PM2.5 predictions on a campus it has not seen?‖Görmediği bir kampüste ormanın PM2,5 tahminleri için en önemli girdi hangisi olacak?⟫</div>
+    <div class="opts"><button data-v="vehicles_per_min">⟪Vehicles per minute‖Dakikadaki araç sayısı⟫</button><button data-v="background_pm25">⟪Background PM2.5 of the day‖Günün arka plan PM2,5 değeri⟫</button><button data-v="people_per_min">⟪People per minute‖Dakikadaki kişi sayısı⟫</button><button data-v="rel_humidity_pct">⟪Humidity‖Nem⟫</button><button data-v="hour">⟪Clock time‖Saat⟫</button></div>
+    <div class="verdict"></div>
+    <div class="msg-right" hidden>⟪Traffic first, the background of the day a close second, people at the door third. Humidity hardly matters, because Part 1 already removed its effect on the sensor.‖Önce trafik, hemen arkasından günün arka planı, üçüncü sırada kapıdaki insanlar. Nemin etkisi neredeyse yoktur, çünkü 1. Bölüm sensör üzerindeki etkisini zaten gidermişti.⟫</div>
+    <div class="msg-wrong" hidden>⟪Traffic comes first, the background of the day a close second, people at the door third. Humidity hardly matters, because Part 1 already removed its effect on the sensor.‖Önce trafik gelir, hemen arkasından günün arka planı, üçüncü sırada kapıdaki insanlar. Nemin etkisi neredeyse yoktur, çünkü 1. Bölüm sensör üzerindeki etkisini zaten gidermişti.⟫</div>
+  </div>
+  <div class="grid2">
+    <div class="reveal-lock locked" data-for="p4-s2"><div class="reveal-body"><div class="viz"><div id="imp-bars"></div>
+      <p class="cap">⟪Permutation importance: The drop of R² when one input is shuffled. The forest is trained on two campuses and tested on the third, and the three results are averaged.‖Permütasyon önemi: Tek bir girdi karıştırıldığında R² değerindeki düşüş. Orman iki kampüste eğitilip üçüncüsünde test edilir ve üç sonuç ortalanır.⟫</p></div></div></div>
+    <div>
+      <div class="formula">
+        <texd>I_j = R^2\bigl(\mathbf{X}\bigr) - R^2\bigl(\mathbf{X}\ \text{⟪with column‖sütunu⟫ } j \text{ ⟪shuffled‖karıştırılmış⟫}\bigr)</texd>
+        <p class="sym">⟪<b>I<sub>j</sub></b> importance of input j · shuffling breaks the link between that input and PM2.5 while keeping its values. A large drop means the model needs the input; a value near zero means it does not [2].‖<b>I<sub>j</sub></b> j girdisinin önemi · karıştırma, girdinin değerlerini koruyarak PM2,5 ile bağını koparır. Büyük bir düşüş modelin o girdiye ihtiyaç duyduğunu, sıfıra yakın bir değer ise duymadığını gösterir [2].⟫</p>
+      </div>
+      <div class="everyday"><b>⟪In everyday life:‖Gündelik hayatta:⟫</b> ⟪To test whether a team needs its goalkeeper, swap the goalkeeper for a random player and watch the score. The bigger the drop, the more the team relied on that player.‖Bir takımın kalecisine ne kadar ihtiyaç duyduğunu anlamak için kaleciyi rastgele bir oyuncuyla değiştirip skoru izleyin. Düşüş ne kadar büyükse takım o oyuncuya o kadar dayanıyordur.⟫</div>
+      <p class="note">⟪Importance describes the model, not the world. In this synthetic dataset the forest recovers the rules that generated the data. With real NOKTA data an importance is a hypothesis to check against the field forms.‖Önem modeli anlatır, dünyayı değil. Bu sentetik veri setinde orman veriyi üreten kuralları yeniden bulur. Gerçek NOKTA verisinde ise önem, saha formlarıyla sınanacak bir hipotezdir.⟫</p>
+    </div>
+  </div>
+  <div class="nbref"><a class="badge" href="{{COLAB}}#scrollTo=sec-4" target="_blank" rel="noopener">Colab ↗</a><p>⟪Section 4.3 of the Colab notebook computes these importances. The exercise there repeats them for the raw, uncorrected PM2.5.‖Colab defterinin 4.3. kısmı bu önem değerlerini hesaplar. Oradaki alıştırma, aynı hesabı düzeltilmemiş ham PM2,5 için tekrarlatır.⟫</p></div>
+</div></section>
+
+<section class="station" id="s3"><div class="wrap">
+  <div class="station-head"><span class="no">3</span><h2>⟪What if?‖Ya şöyle olsaydı?⟫</h2></div>
+  <div class="grid2">
+    <div class="card" id="wi-sliders">
+      <div class="controls" id="wi-presets"></div>
+    </div>
+    <div>
+      <div class="stats"><div class="stat"><div class="v" id="wi-pred">–</div><div class="k">⟪predicted PM2.5 (µg/m³)‖tahmin edilen PM2,5 (µg/m³)⟫</div></div><div class="stat"><div class="v" id="wi-base">–</div><div class="k">⟪with every input at its median‖bütün girdiler medyandayken⟫</div></div></div>
+      <div class="viz"><div id="wi-bars"></div>
+      <p class="cap">⟪Each bar shows how much the prediction falls when that one input is set back to its median. The forest runs here in the browser with the 40 trees exported from the notebook.‖Her çubuk, yalnızca o girdi medyanına döndürüldüğünde tahminin ne kadar düştüğünü gösterir. Orman, defterden aktarılan 40 ağaçla burada tarayıcıda çalışır.⟫</p></div>
+    </div>
+  </div>
+  <div class="nbref"><a class="badge" href="{{COLAB}}#scrollTo=sec-4" target="_blank" rel="noopener">Colab ↗</a><p>⟪Section 4.4 of the Colab notebook has the same what-if panel with sliders.‖Colab defterinin 4.4. kısmında kaydırıcılarla aynı senaryo paneli bulunur.⟫</p></div>
+</div></section>
+
+<section class="station" id="s4"><div class="wrap">
+  <div class="station-head"><span class="no">4</span><h2>⟪Fly over the model‖Modelin üzerinde gezinin⟫</h2></div>
+  <div class="grid2 wide-left">
+    <div>
+      <div class="stage3d tall" id="surf3d">
+        <div class="hud"><span>⟪PM2.5 predicted over traffic and background‖Trafik ve arka plana göre tahmin edilen PM2,5⟫</span><span id="sf-val"></span></div>
+      </div>
+      <p class="cap">⟪Other inputs: The values of the what-if panel. The red marker is the current scenario, and a lighter color means lower PM2.5.‖Diğer girdiler: Senaryo panelindeki değerler. Kırmızı işaret şu anki senaryodur, açık renk ise daha düşük PM2,5 demektir.⟫</p>
+      <div class="controls"><label>⟪Second axis‖İkinci eksen⟫ <select id="sf-y"><option value="background_pm25">⟪Background PM2.5‖Arka plan PM2,5⟫</option><option value="people_per_min">⟪People per minute‖Dakikadaki kişi⟫</option><option value="green_cover_pct">⟪Green cover‖Yeşil örtü⟫</option><option value="rel_humidity_pct">⟪Humidity‖Nem⟫</option></select></label><button class="btn on" id="sf-rot">⟪Rotate‖Döndür⟫</button></div>
+    </div>
+    <div>
+      <p>⟪A forest answers with steps, because every tree splits its inputs at thresholds. The surface shows those steps for two inputs while the other six stay fixed. Change the what-if sliders above and the landscape changes with them.‖Bir orman basamaklarla cevap verir, çünkü her ağaç girdilerini eşik değerlerde böler. Yüzey, diğer altı girdi sabitken iki girdi için bu basamakları gösterir. Yukarıdaki senaryo kaydırıcılarını değiştirin, manzara da onlarla birlikte değişsin.⟫</p>
+      <div class="formula">
+        <texd>\hat{f}_S(x_S) = \frac{1}{n}\sum_{i=1}^{n} \hat{f}\bigl(x_S,\, \mathbf{x}_{C}^{(i)}\bigr)</texd>
+        <p class="sym">⟪<b>x<sub>S</sub></b> the input being studied · <b>x<sub>C</sub><sup>(i)</sup></b> the other inputs of minute i · averaging over all minutes gives the partial dependence curve, the average answer of the model as one input changes [3].‖<b>x<sub>S</sub></b> incelenen girdi · <b>x<sub>C</sub><sup>(i)</sup></b> i. dakikanın diğer girdileri · bütün dakikalar üzerinden ortalama alındığında, bir girdi değişirken modelin ortalama cevabı olan kısmi bağımlılık eğrisi elde edilir [3].⟫</p>
+      </div>
+      <div class="viz"><div id="pdp"></div><p class="cap">⟪Partial dependence of PM2.5 on vehicles per minute, computed in the notebook.‖PM2,5'in dakikadaki araç sayısına kısmi bağımlılığı, defterde hesaplanmıştır.⟫</p></div>
+    </div>
+  </div>
+  <div class="nbref"><a class="badge" href="{{COLAB}}#scrollTo=sec-4" target="_blank" rel="noopener">Colab ↗</a><p>⟪Sections 4.5 and 4.6 of the Colab notebook draw the partial dependence curves and the same surface as an interactive 3D plot.‖Colab defterinin 4.5. ve 4.6. kısımları kısmi bağımlılık eğrilerini ve aynı yüzeyi etkileşimli bir 3B grafik olarak çizer.⟫</p></div>
+</div></section>
+
+<section class="station" id="refs"><div class="wrap">
+  <h3>⟪References‖Kaynaklar⟫</h3>
+  <ol class="note">
+    <li>Roberts, D. R., Bahn, V., Ciuti, S., Boyce, M. S., Elith, J., Guillera-Arroita, G., Hauenstein, S., Lahoz-Monfort, J. J., Schröder, B., Thuiller, W., Warton, D. I., Wintle, B. A., Hartig, F., &amp; Dormann, C. F. (2017). Cross-validation strategies for data with temporal, spatial, hierarchical, or phylogenetic structure. <i>Ecography, 40</i>(8), 913–929. <a href="https://doi.org/10.1111/ecog.02881">doi:10.1111/ecog.02881</a></li>
+    <li>Breiman, L. (2001). Random forests. <i>Machine Learning, 45</i>(1), 5–32. <a href="https://doi.org/10.1023/A:1010933404324">doi:10.1023/A:1010933404324</a></li>
+    <li>Friedman, J. H. (2001). Greedy function approximation: A gradient boosting machine. <i>The Annals of Statistics, 29</i>(5), 1189–1232. <a href="https://doi.org/10.1214/aos/1013203451">doi:10.1214/aos/1013203451</a></li>
+  </ol>
+</div></section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var D = window.NOKTA, RF = D.rf, $ = function (id) { return document.getElementById(id); };
+  var F = RF.features;
+  var FN = { vehicles_per_min: "⟪Vehicles per minute‖Dakikadaki araç sayısı⟫", people_per_min: "⟪People per minute‖Dakikadaki kişi sayısı⟫", green_cover_pct: "⟪Green cover (%)‖Yeşil örtü (%)⟫", sun_index: "⟪Sun (0 shade, 1 full)‖Güneş (0 gölge, 1 tam)⟫", rel_humidity_pct: "⟪Relative humidity (%)‖Bağıl nem (%)⟫", temperature_c: "⟪Temperature (°C)‖Sıcaklık (°C)⟫", hour: "⟪Clock time (h)‖Saat⟫", background_pm25: "⟪Background PM2.5 (µg/m³)‖Arka plan PM2,5 (µg/m³)⟫" };
+  function predict(x) {
+    var s = 0;
+    RF.trees.forEach(function (t) { var n = 0; while (t.l[n] !== -1) n = x[t.f[n]] <= t.t[n] ? t.l[n] : t.r[n]; s += t.v[n]; });
+    return s / RF.trees.length;
+  }
+  /* ---------- station 1: honest test ---------- */
+  var TYPES = ["shaded", "traffic", "reference", "sunny_hard", "crowded", "green"], cvMode = "random", gi = 0, timer = null;
+  function rng(seed) { return function () { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }; }
+  function drawTiles() {
+    var W = 640, H = 300, s = "", r = rng(7), tw = W / 6, th = 92;
+    ["A", "B", "C"].forEach(function (c, ci) {
+      TYPES.forEach(function (t, ti) {
+        var x0 = ti * tw + 6, y0 = ci * (th + 8) + 4, gidx = ci * 6 + ti, test = cvMode === "group" && gidx === gi;
+        s += '<rect x="' + x0 + '" y="' + y0 + '" width="' + (tw - 12) + '" height="' + th + '" rx="8" fill="none" stroke="' + (test ? "var(--p4)" : "var(--line)") + '" stroke-width="' + (test ? 3 : 1.2) + '"/>';
+        s += '<text class="ch-lbl" style="font-size:15px" x="' + (x0 + 6) + '" y="' + (y0 + 17) + '">' + c + " · " + NK.shortName(t) + "</text>";
+        for (var k = 0; k < 26; k++) {
+          var cx = x0 + 12 + (k % 9) * ((tw - 36) / 8), cy = y0 + 36 + Math.floor(k / 9) * 19;
+          var isTest = cvMode === "random" ? r() < 0.2 : test;
+          s += '<circle cx="' + cx + '" cy="' + cy + '" r="5.2" fill="' + (isTest ? "var(--p4)" : "var(--muted)") + '" opacity="' + (isTest ? 1 : 0.45) + '"/>';
+        }
+      });
+    });
+    $("cv-tiles").innerHTML = '<svg viewBox="0 0 ' + W + " " + H + '">' + s + "</svg>";
+    $("cv-cap").textContent = cvMode === "random" ? "⟪Random split: Test minutes (orange) are scattered over all 18 points, so their neighbors one minute earlier and later sit in the training set.‖Rastgele bölme: Test dakikaları (turuncu) 18 noktanın hepsine dağılmıştır, bu yüzden bir dakika önceki ve sonraki komşuları eğitim kümesindedir.⟫" : "⟪Leave one point out: The whole point (orange frame) is hidden from training, both rounds. The forest has to predict it from the other 17 points.‖Bir noktayı dışarıda bırak: Bütün nokta (turuncu çerçeve) iki turuyla birlikte eğitimden saklanır. Orman onu diğer 17 noktadan tahmin etmek zorundadır.⟫";
+  }
+  document.querySelectorAll("#cv-mode button").forEach(function (b) { b.onclick = function () {
+    document.querySelectorAll("#cv-mode button").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); cvMode = b.getAttribute("data-v");
+    clearInterval(timer); if (cvMode === "group") timer = setInterval(function () { gi = (gi + 1) % 18; drawTiles(); }, 700);
+    drawTiles(); }; });
+  drawTiles();
+  function drawCV() {
+    Charts.bars($("cv-bars"), { items: [
+      { label: "⟪Its own training minutes‖Kendi eğitim dakikaları⟫", value: RF.cv.train, color: NK.cssVar("--muted") },
+      { label: "⟪Random minutes (5-fold)‖Rastgele dakikalar (5 katlı)⟫", value: RF.cv.random, color: NK.cssVar("--p2") },
+      { label: "⟪Leave one point out‖Bir noktayı dışarıda bırak⟫", value: RF.cv.group, color: NK.cssVar("--p4"), bold: true }],
+      min: 0, max: 1, nd: 2, labelW: 220, title: "R²" });
+  }
+  drawCV();
+  document.addEventListener("nokta:poll", function (e) { if (e.detail.id === "p4-s1") { $("cv-bars")._prev = null; drawCV(); } if (e.detail.id === "p4-s2") { $("imp-bars")._prev = null; drawImp(); } });
+  /* ---------- station 2: importance ---------- */
+  function drawImp() {
+    var items = F.map(function (f, i) { return { label: FN[f], value: RF.importance[i], color: NK.cssVar(i === 0 || i === 7 ? "--p4" : "--muted"), bold: i === 0 || i === 7 }; })
+      .sort(function (a, b) { return b.value - a.value; });
+    Charts.bars($("imp-bars"), { items: items, nd: 3, labelW: 230, title: "⟪Drop of R² when shuffled‖Karıştırıldığında R² düşüşü⟫" });
+  }
+  drawImp();
+  /* ---------- station 3: what-if ---------- */
+  var X = RF.median.slice(), box = $("wi-sliders");
+  var STEP = { vehicles_per_min: 0.1, people_per_min: 0.5, green_cover_pct: 5, sun_index: 0.5, rel_humidity_pct: 1, temperature_c: 0.5, hour: 0.05, background_pm25: 0.5 };
+  F.forEach(function (f, i) {
+    var lo = RF.min[i], hi = RF.max[i];
+    box.insertAdjacentHTML("beforeend", '<div class="slider"><span>' + FN[f] + '</span><input type="range" data-i="' + i + '" min="' + lo + '" max="' + hi + '" step="' + STEP[f] + '" value="' + X[i] + '"><output id="wo-' + i + '"></output></div>');
+  });
+  var PRE = [
+    ["⟪Quiet lawn‖Sakin çimen⟫", { vehicles_per_min: 0, people_per_min: 0.5, green_cover_pct: 30, sun_index: 1 }],
+    ["⟪Bus stop‖Otobüs durağı⟫", { vehicles_per_min: 7, people_per_min: 1.5, green_cover_pct: 5, sun_index: 0.5 }],
+    ["⟪Faculty door‖Fakülte kapısı⟫", { vehicles_per_min: 0.3, people_per_min: 18, green_cover_pct: 10, sun_index: 0.5 }],
+    ["⟪Under trees‖Ağaç altı⟫", { vehicles_per_min: 0, people_per_min: 1.2, green_cover_pct: 85, sun_index: 0.5 }],
+    ["⟪Smoggy day‖Kirli hava günü⟫", { background_pm25: RF.max[7] }]
+  ];
+  PRE.forEach(function (p) { var b = document.createElement("button"); b.className = "btn"; b.textContent = p[0]; b.onclick = function () { Object.keys(p[1]).forEach(function (k) { X[F.indexOf(k)] = p[1][k]; }); syncSliders(); update(); NK.Store.log("whatif:" + p[0], true); }; $("wi-presets").appendChild(b); });
+  function syncSliders() { box.querySelectorAll("input").forEach(function (inp) { inp.value = X[+inp.getAttribute("data-i")]; }); }
+  box.addEventListener("input", function (e) { if (e.target.dataset.i !== undefined) { X[+e.target.dataset.i] = +e.target.value; update(); } });
+  var base = predict(RF.median);
+  $("wi-base").textContent = NK.fmt(base, 1);
+  function update() {
+    F.forEach(function (f, i) { var nd = f === "hour" ? 2 : (f === "vehicles_per_min" || f === "sun_index") ? 1 : f === "background_pm25" ? 1 : 0; $("wo-" + i).textContent = NK.fmt(X[i], nd); });
+    var p = predict(X); $("wi-pred").textContent = NK.fmt(p, 1);
+    var items = F.map(function (f, i) { var x2 = X.slice(); x2[i] = RF.median[i]; var d = p - predict(x2); return { label: FN[f], value: d, color: NK.cssVar(d >= 0 ? "--p4" : "--p2") }; });
+    Charts.bars($("wi-bars"), { items: items, signed: true, nd: 1, unit: "µg/m³", labelW: 230, instant: true });
+    drawSurface();
+  }
+  /* ---------- station 4: surface ---------- */
+  var NX = 30, NY = 30, yKey = "background_pm25";
+  var surf = NOKTA3D.surface($("surf3d"), { nx: NX, ny: NY, fallback: "⟪3D view needs WebGL.‖3B görünüm WebGL gerektirir.⟫", onTheme: function () { drawSurface(); } });
+  function drawSurface() {
+    if (!surf) return;
+    var ix = F.indexOf("vehicles_per_min"), iy = F.indexOf(yKey);
+    var x0 = RF.min[ix], x1 = RF.max[ix], y0 = RF.min[iy], y1 = RF.max[iy], Z = [], lo = Infinity, hi = -Infinity;
+    for (var j = 0; j < NY; j++) { var row = []; for (var i = 0; i < NX; i++) { var x = X.slice(); x[ix] = x0 + (x1 - x0) * i / (NX - 1); x[iy] = y1 - (y1 - y0) * j / (NY - 1); var v = predict(x); row.push(v); lo = Math.min(lo, v); hi = Math.max(hi, v); } Z.push(row); }
+    surf.setGrid(Z, lo, hi);
+    surf.setLabels(FN.vehicles_per_min, FN[yKey], "⟪PM2.5‖PM2,5⟫");
+    var p = predict(X);
+    surf.setMarker((X[ix] - x0) / (x1 - x0), (X[iy] - y0) / (y1 - y0), p);
+    $("sf-val").textContent = NK.fmt(p, 1) + " µg/m³";
+  }
+  $("sf-y").onchange = function () { yKey = this.value; drawSurface(); };
+  var srot = true; $("sf-rot").onclick = function () { srot = !srot; this.classList.toggle("on", srot); if (surf) surf.autoRotate(srot); };
+  document.addEventListener("nokta:theme", function () { drawCV(); drawImp(); update(); });
+  update();
+  var P = RF.pdp.vehicles_per_min;
+  Charts.line($("pdp"), { height: 230, series: [{ name: "pdp", color: NK.cssVar("--p4"), width: 2.5, pts: P.x.map(function (v, i) { return [v, P.y[i]]; }) }],
+    x: { label: FN.vehicles_per_min }, y: { label: "⟪average predicted PM2.5 (µg/m³)‖ortalama tahmin PM2,5 (µg/m³)⟫" },
+    tooltip: function (xv) { var i = 0; P.x.forEach(function (v, k) { if (Math.abs(v - xv) < Math.abs(P.x[i] - xv)) i = k; }); return { x: P.x[i], html: NK.fmt(P.x[i], 2) + " → <b>" + NK.fmt(P.y[i], 2) + "</b> µg/m³" }; } });
+});
+</script>

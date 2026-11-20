@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>5. Bölüm · Paylaş ve aksiyona dönüştür</title>
+<meta name="description" content="YZ ile yazılmış bir paragraftaki hataları yakalayın, kendi sayılarınızdan güvenli bir istem kurun, iddiaları tartın ve NOKTA çalıştay masaları için bir çözüm kartı yazın.">
+<link rel="stylesheet" href="../assets/vendor/fonts/atkinson.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E7A5F'/%3E%3Ccircle cx='32' cy='32' r='11' fill='white'/%3E%3Ccircle cx='32' cy='32' r='20' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6 6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site-data.js"></script>
+<script src="../assets/site.js"></script>
+<script src="../assets/charts.js"></script>
+
+</head>
+<body data-part="p5">
+<header class="topbar"><div class="wrap">
+<a class="brand" href="index.html"><span class="dot"></span><span class="name">NOKTA · YZ atölyesi<small>Çevresel veri analizi ve yorumlama</small></span></a>
+<nav class="route" aria-label="Atölye rotası"><ol><li data-page="index"><a href="index.html"><span class="pin"></span><span class="lbl">Başlangıç</span></a></li><li data-page="part1"><a href="part1.html"><span class="pin"></span><span class="lbl">1 Ölç</span></a></li><li data-page="part2"><a href="part2.html"><span class="pin"></span><span class="lbl">2 Analiz et</span></a></li><li data-page="part3"><a href="part3.html"><span class="pin"></span><span class="lbl">3 Keşfet</span></a></li><li data-page="part4"><a href="part4.html"><span class="pin"></span><span class="lbl">4 Açıkla</span></a></li><li data-page="part5"><a href="part5.html"><span class="pin"></span><span class="lbl">5 Paylaş ve dönüştür</span></a></li><li data-page="lab"><a href="lab.html"><span class="pin"></span><span class="lbl">Laboratuvar</span></a></li></ol></nav>
+<div class="tools"><a class="lang" href="../part5.html" title="English version">EN</a>
+<button data-act="theme" title="T">◐</button><button data-act="full" title="F">⛶</button><button data-act="help" title="?">?</button></div>
+</div></header>
+<main>
+
+<section class="parthead"><div class="wrap">
+  <p class="kicker">5. Bölüm · Paylaş ve aksiyona dönüştür · 1:37-1:55</p>
+  <h1>Sayılardan kelimelere, kelimelerden aksiyona</h1>
+  <p class="lead">Üretken YZ saniyeler içinde akıcı raporlar yazar, ancak akıcı olmak doğru olmak demek değildir. Bu bölüm tek bir kurala uymaktadır: Sayılar analizden, kelimeler YZ'den gelebilir, yargı ise ekipten gelir.</p>
+  <ol class="station-index">
+    <li><a href="#s1"><b>1</b>Hataları bulun</a></li>
+    <li><a href="#s2"><b>2</b>Güvenli bir istem</a></li>
+    <li><a href="#s3"><b>3</b>İddia ne kadar güçlü?</a></li>
+    <li><a href="#s4"><b>4</b>Çözüm kartı</a></li>
+  </ol>
+</div></section>
+
+<section class="station" id="s1"><div class="wrap">
+  <div class="station-head"><span class="no">1</span><h2>Hataları bulun</h2></div>
+  <div class="grid2 wide-left">
+    <div class="card">
+      <p class="note">Bir YZ asistanından Kampüs B sonuçlarını özetlemesi istendi. İmzalamayacağınız her cümleye tıklayın, sonra denetleyin.</p>
+      <div class="spot" id="spot"></div>
+      <div class="controls"><button class="btn primary" id="spot-check">İşaretleri denetle</button><button class="btn" id="spot-reset">Temizle</button><span id="spot-score" class="num"></span></div>
+    </div>
+    <div>
+      <div class="card"><h3 style="margin-top:0">Kullanması gereken gerçekler</h3>
+        <table class="tbl" id="facts-b"><thead><tr><th>Nokta</th><th>PM2,5</th><th>Δref</th><th>°C Δref</th></tr></thead><tbody></tbody></table>
+        <p class="note">Kampüs B'nin µg/m³ cinsinden iki tur ortalamaları ve sakin referans noktasından farklar.</p></div>
+      <div id="spot-why"></div>
+    </div>
+  </div>
+  <div class="takeaway"><b>Çıkarım.</b> Dil modelleri girdileriyle desteklenmeyen akıcı metinler üretebilir. Buna çoğunlukla halüsinasyon denir [1]. Üretilen bir metindeki her sayı analiz tablosuyla, her neden ve karşılaştırma ise çalışma tasarımıyla denetlenir.</div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab ↗</a><p>Colab defterinin 5.3. kısmında bir sayı denetleyicisi vardır: Bir metindeki her sayıyı listeler ve olgu tablosunun desteklemediklerini işaretler.</p></div>
+</div></section>
+
+<section class="station" id="s2"><div class="wrap">
+  <div class="station-head"><span class="no">2</span><h2>Güvenli bir istem</h2></div>
+  <div class="grid2">
+    <div>
+      <p>İyi bir istem, asistandan sayıları bilmesini istemek yerine sayıları ona verir, okur kitlesini belirtir ve kuralları yazıya döker. Oluşturucu, seçilen kampüsün olgu tablosunu analizden doldurur.</p>
+      <div class="controls">
+        <label>Kampüs <select id="pb-campus"><option>A</option><option selected>B</option><option>C</option></select></label>
+        <label>Hedef <select id="pb-aud"><option value="report">kampüs çevre raporu</option><option value="poster">kongre özeti</option><option value="social">sosyal medya paylaşımı</option></select></label>
+        <label>Çıktı dili <select id="pb-lang"><option value="tr">Türkçe</option><option value="en">İngilizce</option></select></label>
+      </div>
+      <div class="card" id="pb-rules"></div>
+    </div>
+    <div>
+      <textarea id="pb-out" rows="22" spellcheck="false" style="font-family:var(--mono);font-size:0.8rem"></textarea>
+      <div class="controls"><button class="btn primary" data-copy="pb-out">İstemi kopyala</button><span class="note" id="pb-count"></span></div>
+      <p class="note">Kurumunuzun izin verdiği asistanı kullanın ve içine kişisel veri yapıştırmayın. Ne yazarsa yazsın, metin sayı denetleyicisinden ve aşağıdaki iddia denetiminden geçer.</p>
+    </div>
+  </div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab ↗</a><p>Colab defterinin 5.1. ve 5.2. kısımları olgu tablosunu ve aynı istemi kendi verinizden üretir.</p></div>
+</div></section>
+
+<section class="station" id="s3"><div class="wrap">
+  <div class="station-head"><span class="no">3</span><h2>İddia ne kadar güçlü?</h2></div>
+  <div class="grid2">
+    <div>
+      <p>Altı noktadaki saha ölçümleri neyin orada olduğunu ve neyin birlikte değiştiğini gösterir. Neyin neye yol açtığını ise nadiren kanıtlar. Her cümleyi NOKTA tasarımının desteklediği en güçlü ifadeyle eşleştirin.</p>
+      <div class="card"><b>Gözlendi</b> · iki turda da ölçüldü<br><b>İlişkili</b> · birlikte değişiyor, neden gösterilmedi<br><b>Müdahale gerektirir</b> · yalnızca değiştir-ve-ölç çalışmasının gösterebileceği bir neden<br><b>Desteklenmiyor</b> · verinin ötesine geçiyor</div>
+    </div>
+    <div class="card" id="cl-quiz"></div>
+  </div>
+</div></section>
+
+<section class="station" id="s4"><div class="wrap">
+  <div class="station-head"><span class="no">4</span><h2>Çözüm kartı</h2></div>
+  <p>28 Kasım'da NOKTA Ulusal Çevre Çalıştayı üç tematik masada çalışacak ve her öneri beş soruyu cevaplayacaktır: Sorun, dayanak, çözüm, uygulanabilirlik ve gençlerin rolü. Analizden bir bulguyla başlayın.</p>
+  <div class="grid2">
+    <div class="card">
+      <div class="controls"><label>Masa <select id="ac-table">
+        <option value="micro">Mikroiklim ve yeşil kampüs</option>
+        <option value="waste">Atık ve döngüsel ekonomi</option>
+        <option value="water">Su, kaynak verimliliği ve gençlik katılımı</option></select></label></div>
+      <div class="controls"><label>Bir bulgudan başlayın <select id="ac-find"></select></label></div>
+      <label class="note">Sorun</label><textarea id="ac-problem" rows="2"></textarea>
+      <label class="note">Dayanak</label><textarea id="ac-evidence" rows="2"></textarea>
+      <label class="note">Çözüm</label><textarea id="ac-solution" rows="2"></textarea>
+      <label class="note">Uygulanabilirlik</label><textarea id="ac-feas" rows="2"></textarea>
+      <label class="note">Gençlerin rolü</label><textarea id="ac-youth" rows="2"></textarea>
+    </div>
+    <div>
+      <div class="actioncard" id="ac-card"></div>
+      <div class="controls"><button class="btn primary" id="ac-copy">Metin olarak kopyala</button><button class="btn" id="ac-dl">İndir (.md)</button></div>
+      <p class="note">Kart bu tarayıcıda kalır ve Laboratuvarın değerlendirmesinde görünür. Örnek bulgular sentetik veriden gelir. Gerçek NOKTA verisiyle ekip kendi bulgusunu yazar.</p>
+    </div>
+  </div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab ↗</a><p>Colab defterinin 5.4. kısmı aynı kartı tablonuzdaki bir bulgudan yazdırır.</p></div>
+</div></section>
+
+<section class="station" id="refs"><div class="wrap">
+  <h3>Kaynaklar</h3>
+  <ol class="note">
+    <li>Ji, Z., Lee, N., Frieske, R., Yu, T., Su, D., Xu, Y., Ishii, E., Bang, Y. J., Madotto, A., &amp; Fung, P. (2023). Survey of hallucination in natural language generation. <i>ACM Computing Surveys, 55</i>(12), Article 248, 1–38. <a href="https://doi.org/10.1145/3571730">doi:10.1145/3571730</a></li>
+    <li>World Health Organization. (2021). <i>WHO global air quality guidelines: Particulate matter (PM2,5 and PM10), ozone, nitrogen dioxide, sulfur dioxide and carbon monoxide</i>. World Health Organization. <a href="https://www.who.int/publications/i/item/9789240034228">who.int/publications/i/item/9789240034228</a></li>
+  </ol>
+</div></section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var D = window.NOKTA, $ = function (id) { return document.getElementById(id); };
+  var ORDER = ["shaded", "traffic", "reference", "sunny_hard", "crowded", "green"];
+  function fact(c, ch, t) { return D.facts[c].filter(function (r) { return r.channel === ch && r.type === t; })[0]; }
+  /* ---------- station 1: spot the errors ---------- */
+  var SENT = [
+    { ok: true, s: "Kampüs B'de en yüksek PM2,5, iki tur ortalaması 21,7 µg/m³ ile kampüs yoluna yakın noktadaydı ve sakin referans noktasının yaklaşık 7,8 µg/m³ üstündeydi.", why: "Doğru: İki sayı da tabloda var." },
+    { ok: false, s: "Yeşil alan 6,1 µg/m³ ile en temiz noktaydı.", why: "Yeşil alan en temiz noktaydı ama ortalaması 11,0 µg/m³. 6,1 sayısı tablonun hiçbir yerinde yok." },
+    { ok: false, s: "Bu, ağaçların kampüsteki partiküllerin üçte birini temizlediğini kanıtlamaktadır.", why: "Uydurulmuş bir oranla kurulan nedensel bir iddia. Altı nokta, ağaçları o noktada farklı olan diğer her şeyden ayıramaz." },
+    { ok: false, s: "Yolun yakınında PM2,5, DSÖ'nün 15 µg/m³ olan 24 saatlik kılavuz değerini aştığı için oradaki hava o gün sağlıksızdı.", why: "Kılavuz değeri gerçektir, ancak 24 saatlik ortalamaya karşılık gelir [2]. İki adet 15 dakikalık ziyaret onunla karşılaştırılamaz." },
+    { ok: false, s: "Bu nedenle Kampüs B üç üniversite arasında en kötü hava kalitesine sahiptir.", why: "NOKTA üniversiteleri sıralamaz. Kampüsler farklı günlerde, farklı hava koşullarında ölçüldü ve veriler sentetiktir." },
+    { ok: false, s: "1. turda gölgeli geçit referans noktasından daha kirliydi, bu da dar geçitlerin kirliliği hapsettiğini göstermektedir.", why: "Gölgeli geçit 1. turun saat 10:00'daki ilk durağıydı ve sabah arka planı o sırada en yüksekti. İki turda birlikte referansın yalnızca 1,6 µg/m³ üstündedir." },
+    { ok: true, s: "Öğrenci yoğun alanda kısa süreli sigara dumanı bulutları PM2,5 ortalamasını medyanın üstüne çıkardı, bu yüzden tipik bir dakikayı medyan daha iyi anlatır.", why: "Doğru: 2. Bölümdeki kutu grafikleri bunu gösterir." },
+    { ok: false, s: "Çevre Bakanlığının 2024 tarihli bir raporu, Türk üniversitelerinde PM2,5'in ana kaynağının kampüs yolları olduğunu doğrulamaktadır.", why: "Asistana böyle bir rapor verilmedi ve bulunabilir bir künyeyle de gösterilmedi. Doğrulanamayan bir kaynak uydurulmuş sayılır." },
+    { ok: true, s: "Güneşli beton meydan referanstan yaklaşık 3,6 °C daha sıcaktı, ancak bu farkın bir kısmı güneşin sensör gövdesini ısıtmasından kaynaklanıyor olabilir.", why: "Doğru, sensörle ilgili yerinde bir uyarıyla birlikte." }
+  ];
+  var spot = $("spot");
+  spot.innerHTML = SENT.map(function (x, i) { return '<span class="s ' + (x.ok ? "ok" : "err") + '" data-i="' + i + '">' + x.s + "</span> "; }).join("");
+  spot.querySelectorAll(".s").forEach(function (el) { el.onclick = function () { if (!spot.classList.contains("revealed")) el.classList.toggle("marked"); }; });
+  $("spot-check").onclick = function () {
+    var hit = 0, fp = 0, nerr = 0, why = "";
+    SENT.forEach(function (x, i) {
+      var m = spot.querySelector('[data-i="' + i + '"]').classList.contains("marked");
+      if (!x.ok) { nerr++; if (m) hit++; } else if (m) fp++;
+      why += '<div class="why"><b>' + (i + 1) + (x.ok ? " ✓" : " ✗") + "</b> " + x.why + "</div>";
+    });
+    spot.classList.add("revealed");
+    $("spot-score").innerHTML = "<b>" + hit + " / " + nerr + "</b> hata bulundu" + (fp ? " · " + fp + " doğru cümle işaretlendi" : "");
+    $("spot-why").innerHTML = why;
+    NK.Store.log("spot", { found: hit, of: nerr, fp: fp });
+  };
+  $("spot-reset").onclick = function () { spot.classList.remove("revealed"); spot.querySelectorAll(".s").forEach(function (e) { e.classList.remove("marked"); }); $("spot-why").innerHTML = ""; $("spot-score").textContent = ""; };
+  var tb = document.querySelector("#facts-b tbody");
+  ORDER.forEach(function (t) { var p = fact("B", "pm25_ugm3", t), q = fact("B", "temperature_c", t);
+    tb.insertAdjacentHTML("beforeend", "<tr><td>" + NK.shortName(t) + "</td><td>" + NK.fmt(p.mean, 1) + "</td><td>" + NK.signed(p.ref, 1) + "</td><td>" + NK.signed(q.ref, 1) + "</td></tr>"); });
+  /* ---------- station 2: prompt builder ---------- */
+  var RULES = [
+    ["nums", "Yalnızca tablodaki sayıları kullan. Eksik bir şey olduğunda \"ölçülmedi\" yaz.", true],
+    ["rank", "Kampüsleri, üniversiteleri ya da şehirleri sıralama.", true],
+    ["avg", "Her değerin iki adet 15 dakikalık ziyaretin medyanı olduğunu belirt. Bunu 24 saatlik ya da yıllık kılavuz değerleriyle karşılaştırma.", true],
+    ["obs", "Gözlemi, yorumu ve öneriyi ayrı paragraflarda tut.", true],
+    ["sens", "Sınırlılıkları belirt: Düşük maliyetli sensörler, nem düzeltmesi ve istasyon sapmaları.", true],
+    ["cause", "Nedenler için \"olabilir\" ve \"ile ilişkilidir\" gibi temkinli ifadeler kullan.", true],
+    ["list", "Kullanılan her sayıyı ve geldiği tablo satırını sona bir liste olarak ekle.", false]
+  ];
+  $("pb-rules").innerHTML = RULES.map(function (r) { return '<label style="display:flex;gap:8px;align-items:flex-start;margin:4px 0"><input type="checkbox" data-r="' + r[0] + '"' + (r[2] ? " checked" : "") + "><span>" + r[1] + "</span></label>"; }).join("");
+  var AUD = { report: "üniversite birimleri için bir kampüs çevre raporu", poster: "NOKTA Ulusal Gençlik Çevre ve İklim Kongresi için 200 kelimelik bir özet", social: "öğrenciler için 80 kelimeyi aşmayan kısa bir sosyal medya paylaşımı" };
+  function buildPrompt() {
+    var c = $("pb-campus").value, outLang = $("pb-lang").value, rows = [];
+    var hdr = "| " + ["Nokta", "Kanal", "1. tur", "2. tur", "İki tur ortalaması", "Referanstan fark"].join(" | ") + " |\n|---|---|---|---|---|---|\n";
+    D.facts[c].forEach(function (r) { if (r.channel === "light_lux" || r.channel === "rel_humidity_pct") return;
+      var nd = r.channel === "co2_ppm" ? 0 : 1;
+      rows.push("| " + NK.typeName(r.type) + " | " + NK.chName(r.channel) + " (" + NK.chUnit(r.channel) + ") | " + NK.fmt(r.r1, nd) + " | " + NK.fmt(r.r2, nd) + " | " + NK.fmt(r.mean, nd) + " | " + (r.type === "reference" ? "0" : NK.signed(r.ref, nd)) + " |"); });
+    var rules = []; $("pb-rules").querySelectorAll("input").forEach(function (b, i) { if (b.checked) rules.push("- " + RULES[i][1]); });
+    var txt = "Rol: Kendi kampüsündeki çevresel ölçümleri raporlaştıran bir öğrenci ekibine yardım ediyorsun.\n\n" +
+      "Görev: " + NK.L.campus[c] + " verisiyle " + AUD[$("pb-aud").value] + " yaz. " + (outLang === "tr" ? "Türkçe yaz." : "İngilizce yaz.") + "\n\n" +
+      "Çalışma tasarımı: Taşınabilir tek bir istasyon altı sabit noktayı iki turda ziyaret etti ve ikinci turda sıra tersine çevrildi. Aşağıdaki her değer, kalite kontrolü, cihaz sapmaları ve nem düzeltmesinden sonra 15 dakikalık bir ziyaretin medyanıdır.\n\n" +
+      "Veri:\n" + hdr + rows.join("\n") + "\n\nKurallar:\n" + rules.join("\n") + "\n";
+    $("pb-out").value = txt;
+    $("pb-count").textContent = rows.length + " tablo satırı · " + rules.length + " kural";
+  }
+  ["pb-campus", "pb-aud", "pb-lang"].forEach(function (id) { $(id).onchange = buildPrompt; });
+  $("pb-rules").addEventListener("change", buildPrompt);
+  buildPrompt();
+  /* ---------- station 3: claim ladder ---------- */
+  var LEVELS = [["obs", "Gözlendi"], ["assoc", "İlişkili"], ["interv", "Müdahale gerektirir"], ["no", "Desteklenmiyor"]];
+  var CLAIMS = [
+    ["obs", "Kampüs B'de yoldaki PM2,5 iki turda da referans noktasının üstündeydi."],
+    ["assoc", "Daha fazla aracın geçtiği dakikalarda PM2,5 daha yüksekti."],
+    ["interv", "Beton meydana ağaç dikmek orayı serinletir."],
+    ["no", "Yolu kapatmak fakülte girişindeki PM2,5'i %40 azaltır."]
+  ];
+  var cq = $("cl-quiz");
+  cq.innerHTML = CLAIMS.map(function (c, i) { return '<p style="margin:0 0 6px">' + (i + 1) + ". " + c[1] + '</p><select data-q="' + i + '" style="margin-bottom:12px"><option value="">…</option>' + LEVELS.map(function (l) { return '<option value="' + l[0] + '">' + l[1] + "</option>"; }).join("") + "</select>"; }).join("") +
+    '<div class="controls"><button class="btn primary" id="cl-check">Denetle</button><span id="cl-res"></span></div><p class="note" id="cl-note"></p>';
+  $("cl-check").onclick = function () {
+    var ok = 0; cq.querySelectorAll("select").forEach(function (s) { var i = +s.getAttribute("data-q"), r = s.value === CLAIMS[i][0]; if (r) ok++; s.style.outline = "2px solid " + (r ? "var(--good)" : "var(--bad)"); });
+    $("cl-res").innerHTML = "<b>" + ok + " / 4</b>";
+    $("cl-note").textContent = "1 iki turda da ölçülmüştür. 2 verideki bir ilişkidir. Trafik akla yatkın bir nedendir ama dakikalar bir deney değildi. 3 olası bir etkidir ve ancak değiştir-ve-ölç çalışmasıyla doğrulanabilir. 4 hiçbir ölçümün desteklemediği bir sayı uydurur.";
+    NK.Store.log("claims", ok);
+  };
+  /* ---------- station 4: action card ---------- */
+  var FIND = [
+    { t: "micro", label: "Güneşli meydan referanstan yaklaşık 3,6 °C sıcak (Kampüs B)",
+      p: "Beton meydan güneşte ısınıyor ve öğle saatlerinde kullanılmıyor.",
+      e: "Referans noktasına göre iki tur ortalaması +3,6 °C. Bunun bir kısmı güneşin sensör gövdesini ısıtmasından gelebilir.",
+      s: "Bankların üzerine gölgelik ve güney kenarına iki sıra ağaç.",
+      f: "Gölgelikler için maliyet düşüktür. Ağaçlar bir dikim mevsimi ve sulama gerektirir.",
+      y: "Öğrenciler bir yıl sonra aynı NOKTA protokolüyle yeniden ölçer." },
+    { t: "micro", label: "Yoldaki PM2,5 referansın yaklaşık 7,8 µg/m³ üstünde (Kampüs B)",
+      p: "Öğrenciler otobüs durağında egzoz bulutunun içinde bekliyor.",
+      e: "Referansa göre iki tur ortalaması +7,8 µg/m³. Kısa bulutlar saha formundaki araç sayılarıyla örtüşmektedir.",
+      s: "Bekleme alanını bir çit arkasına beş metre geri almak ve durakta rölantide beklemeyi yasaklamak.",
+      f: "Kampüs yapı işleri biriminin desteği gerekir, çit de bir mevsimde yetişir.",
+      y: "Rölantide çalışan motorlar üzerine bir öğrenci kampanyası ve tekrar ölçüm." },
+    { t: "waste", label: "Fakülte girişinde sigara dumanı bulutları (saha formu ve PM2,5 sıçramaları)",
+      p: "Ana girişte izmaritler ve duman birikiyor.",
+      e: "Saha notları sigara içen bir grubu bildirmektedir. Girişteki PM2,5 kısa sıçramalar gösterir ve ortalama medyanın üstündedir.",
+      s: "Kapıdan uzakta, izmaritleri geri dönüşüme gönderilen kutularla işaretli bir sigara alanı.",
+      f: "Düşük maliyetlidir, ancak fakülte yönetiminin onayını gerektirir.",
+      y: "Gönüllü öğrenciler kutuları yerleştirir ve her hafta izmarit sayar." },
+    { t: "water", label: "Sulanan ağaçların altında daha yüksek çiy noktası (bütün kampüsler)",
+      p: "Çimler, hava zaten nemliyken de sabahları sulanıyor.",
+      e: "Yeşil alanın çiy noktası diğer noktaların biraz üstündedir ve saha formu sabah sulamasını kaydetmektedir.",
+      s: "Basit bir sensör ve ortak bir kayıtla, saate göre değil toprak nemine göre sulama.",
+      f: "Her çim alanı için bir toprak nem sensörü ve bir sorumlu gerekir.",
+      y: "Bir öğrenci ekibi kaydı tutar ve her ay tasarruf edilen suyu paylaşır." }
+  ];
+  var TBL = { micro: "Mikroiklim ve yeşil kampüs", waste: "Atık ve döngüsel ekonomi", water: "Su, kaynak verimliliği ve gençlik katılımı" };
+  var fsel = $("ac-find");
+  FIND.forEach(function (f, i) { var o = document.createElement("option"); o.value = i; o.textContent = f.label; fsel.appendChild(o); });
+  var custom = document.createElement("option"); custom.value = "own"; custom.textContent = "Ekibin kendi bulgusu"; fsel.appendChild(custom);
+  var FIELDS = [["ac-problem", "p", "Sorun"], ["ac-evidence", "e", "Dayanak"], ["ac-solution", "s", "Çözüm"], ["ac-feas", "f", "Uygulanabilirlik"], ["ac-youth", "y", "Gençlerin rolü"]];
+  function fill() { var v = fsel.value; if (v === "own") { FIELDS.forEach(function (f) { $(f[0]).value = ""; }); } else { var F = FIND[+v]; $("ac-table").value = F.t; FIELDS.forEach(function (f) { $(f[0]).value = F[f[1]]; }); } render(); }
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+  function cardText() { return "# " + TBL[$("ac-table").value] + "\n\n" + FIELDS.map(function (f) { return "**" + f[2] + ".** " + $(f[0]).value; }).join("\n\n") + "\n"; }
+  function render() {
+    $("ac-card").innerHTML = "<h4>" + TBL[$("ac-table").value] + "</h4><dl>" + FIELDS.map(function (f) { return "<dt>" + f[2] + "</dt><dd>" + esc($(f[0]).value) + "</dd>"; }).join("") + "</dl>";
+    NK.Store.set("card", { table: TBL[$("ac-table").value], fields: FIELDS.map(function (f) { return [f[2], $(f[0]).value]; }) });
+  }
+  fsel.onchange = fill; $("ac-table").onchange = render;
+  FIELDS.forEach(function (f) { $(f[0]).addEventListener("input", render); });
+  $("ac-copy").onclick = function () { NK.copy(cardText(), this); };
+  $("ac-dl").onclick = function () { NK.download("nokta-solution-card.md", cardText()); };
+  fill();
+});
+</script>
+
+</main>
+<footer class="sig"><div class="wrap"><a class="btn primary next" href="lab.html">NOKTA Laboratuvarı ve değerlendirme →</a><br><b>Prof. Dr. Utku Köse</b><br>Süleyman Demirel Üniversitesi, Yapay Zekâ Uygulama ve Araştırma Merkezi (YAZEM) · University of North Dakota · Universidad Panamericana · Vel Tech University<br><a href="https://www.utkukose.com">utkukose.com</a> · <a href="https://orcid.org/0000-0002-9652-6415">ORCID 0000-0002-9652-6415</a> · <a href="https://github.com/utkukose">github.com/utkukose</a><br>NOKTA, Nesnel Ölçüm, Katılım, Takip ve Aksiyon Ağı · ÜNİDES 2026<br>Bu atölye alandaki güncel gelişmelere göre güncellenmektedir. İlk sürüm: Kasım 2026.<br>İçerik: CC BY 4.0 · Kod: MIT · Veriler sentetiktir ve gerçek bir kampüsü anlatmaz.</div></footer>
+<div class="overlay" id="help-overlay" hidden><div class="box"><button class="btn close" data-act="close">✕</button><h3>Tuşlar</h3><p><kbd>←</kbd> <kbd>→</kbd> önceki ya da sonraki durak · <kbd>[</kbd> <kbd>]</kbd> önceki ya da sonraki bölüm · <kbd>T</kbd> kâğıt ya da gece görünümü · <kbd>F</kbd> tam ekran · <kbd>L</kbd> İngilizce ya da Türkçe · <kbd>B</kbd> beş dakikalık ara · <kbd>?</kbd> bu yardım</p></div></div>
+<div class="overlay" id="break-overlay" hidden><div class="box"><button class="btn close" data-act="close">✕</button>
+<p class="kicker">Ara</p><div class="breakclock">5:00</div>
+<p class="lead" style="text-align:center;margin:14px auto 0">Aradan sonraki soru: 1. turda altı noktadan hangisinin en sıcak görüneceğini düşünüyorsunuz ve bu neden yanıltıcı olabilir?</p></div></div>
+</body>
+</html>

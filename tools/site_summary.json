@@ -1,0 +1,185 @@
+{
+ "cv": {
+  "train": 0.662,
+  "random": 0.536,
+  "group": 0.315,
+  "n": 468,
+  "groups": 18
+ },
+ "importance": {
+  "vehicles_per_min": 0.2941,
+  "people_per_min": 0.0827,
+  "green_cover_pct": 0.0324,
+  "sun_index": 0.0011,
+  "rel_humidity_pct": -0.0146,
+  "temperature_c": 0.0013,
+  "hour": 0.0045,
+  "background_pm25": 0.242
+ },
+ "qc": [
+  {
+   "problem": "warmup",
+   "planted": 432,
+   "flagged": 432,
+   "caught": 432
+  },
+  {
+   "problem": "spike_pm25",
+   "planted": 20,
+   "flagged": 19,
+   "caught": 18
+  },
+  {
+   "problem": "spike_pm10",
+   "planted": 16,
+   "flagged": 16,
+   "caught": 16
+  },
+  {
+   "problem": "spike_co2",
+   "planted": 10,
+   "flagged": 10,
+   "caught": 10
+  },
+  {
+   "problem": "flatline_co2",
+   "planted": 24,
+   "flagged": 24,
+   "caught": 24
+  },
+  {
+   "problem": "gap",
+   "planted": 9,
+   "flagged": 9,
+   "caught": 9
+  },
+  {
+   "problem": "saturated",
+   "planted": 150,
+   "flagged": 173,
+   "caught": 150
+  },
+  {
+   "problem": "high_rh",
+   "planted": 76,
+   "flagged": 76,
+   "caught": 73
+  }
+ ],
+ "offsets": {
+  "S1": {
+   "t": -0.13,
+   "rh": 0.67,
+   "co2": -0.9,
+   "pm": 0.951
+  },
+  "S2": {
+   "t": 0.46,
+   "rh": -1.3,
+   "co2": 10.3,
+   "pm": 0.951
+  },
+  "S3": {
+   "t": -0.33,
+   "rh": 0.63,
+   "co2": -9.4,
+   "pm": 1.098
+  }
+ },
+ "silhouette": {
+  "2": 0.468,
+  "3": 0.512,
+  "4": 0.499,
+  "5": 0.529,
+  "6": 0.518
+ },
+ "inertia": {
+  "2": 827.5,
+  "3": 523.7,
+  "4": 363.0,
+  "5": 286.2,
+  "6": 222.9
+ },
+ "pca_var": [
+  0.495,
+  0.254,
+  0.107
+ ],
+ "corr": {
+  "pooled": 0.815,
+  "within": {
+   "A1": -0.617,
+   "A2": -0.443,
+   "B1": -0.583,
+   "B2": -0.412,
+   "C1": -0.635,
+   "C2": -0.513
+  }
+ },
+ "humidity": [
+  {
+   "type": "crowded",
+   "raw": 13.84,
+   "corrected": 9.34,
+   "rh": 71.6
+  },
+  {
+   "type": "green",
+   "raw": 15.07,
+   "corrected": 6.61,
+   "rh": 87.3
+  },
+  {
+   "type": "reference",
+   "raw": 9.56,
+   "corrected": 6.98,
+   "rh": 67.1
+  },
+  {
+   "type": "shaded",
+   "raw": 9.38,
+   "corrected": 6.91,
+   "rh": 66.6
+  },
+  {
+   "type": "sunny_hard",
+   "raw": 9.74,
+   "corrected": 7.95,
+   "rh": 56.4
+  },
+  {
+   "type": "traffic",
+   "raw": 11.52,
+   "corrected": 8.86,
+   "rh": 61.8
+  }
+ ],
+ "gap": {
+  "values": [
+   10.38,
+   10.31,
+   10.37,
+   10.34,
+   10.33,
+   10.33,
+   10.43,
+   10.29,
+   10.42,
+   10.41,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   10.36,
+   10.42,
+   10.42,
+   10.39,
+   10.39,
+   10.4
+  ],
+  "mean_skip": 10.37,
+  "mean_zero": 7.54
+ }
+}

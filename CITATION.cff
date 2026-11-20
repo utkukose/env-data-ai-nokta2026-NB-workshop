@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use these materials, please cite them as below."
+title: "AI-Based Environmental Data Analysis and Interpretation: From Campus Sensor Readings to Evidence and Action (NOKTA Workshop, ÜNİDES 2026)"
+abstract: >-
+  Bilingual (English and Turkish) materials of a two-hour workshop for the NOKTA
+  project: an interactive site with 3D scenes, a Colab notebook and a synthetic
+  dataset that follows the NOKTA field protocol. Participants clean low-cost
+  sensor data, compare measurement points fairly, discover microclimates with
+  unsupervised learning, explain a random forest under an honest test and write
+  AI-assisted reports with a number audit.
+type: software
+authors:
+  - family-names: "Köse"
+    given-names: "Utku"
+    orcid: "https://orcid.org/0000-0002-9652-6415"
+    affiliation: "Süleyman Demirel University, Isparta, Türkiye"
+version: "1.0.0"
+date-released: "2026-11-20"
+license: MIT
+url: "https://github.com/utkukose/env-data-ai-nokta2026-NB-workshop"
+repository-code: "https://github.com/utkukose/env-data-ai-nokta2026-NB-workshop"
+keywords:
+  - environmental data
+  - low-cost sensors
+  - air quality
+  - microclimate
+  - data quality control
+  - unsupervised learning
+  - explainable artificial intelligence
+  - generative AI
+  - climate education
+  - NOKTA

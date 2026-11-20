@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yapay Zekâ ile Çevresel Veri Analizi ve Yorumlama · NOKTA atölyesi</title>
+<meta name="description" content="NOKTA atölyesinin başlangıç sayfası: 3B sahneli beş etkileşimli bölüm, bir Colab defteri ve NOKTA Laboratuvarı.">
+<link rel="stylesheet" href="../assets/vendor/fonts/atkinson.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E7A5F'/%3E%3Ccircle cx='32' cy='32' r='11' fill='white'/%3E%3Ccircle cx='32' cy='32' r='20' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6 6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site-data.js"></script>
+<script src="../assets/site.js"></script>
+<script src="../assets/charts.js"></script>
+<script src="../assets/vendor/three.bundle.min.js"></script><script src="../assets/nokta3d.js"></script>
+</head>
+<body data-part="start">
+<header class="topbar"><div class="wrap">
+<a class="brand" href="index.html"><span class="dot"></span><span class="name">NOKTA · YZ atölyesi<small>Çevresel veri analizi ve yorumlama</small></span></a>
+<nav class="route" aria-label="Atölye rotası"><ol><li data-page="index"><a href="index.html"><span class="pin"></span><span class="lbl">Başlangıç</span></a></li><li data-page="part1"><a href="part1.html"><span class="pin"></span><span class="lbl">1 Ölç</span></a></li><li data-page="part2"><a href="part2.html"><span class="pin"></span><span class="lbl">2 Analiz et</span></a></li><li data-page="part3"><a href="part3.html"><span class="pin"></span><span class="lbl">3 Keşfet</span></a></li><li data-page="part4"><a href="part4.html"><span class="pin"></span><span class="lbl">4 Açıkla</span></a></li><li data-page="part5"><a href="part5.html"><span class="pin"></span><span class="lbl">5 Paylaş ve dönüştür</span></a></li><li data-page="lab"><a href="lab.html"><span class="pin"></span><span class="lbl">Laboratuvar</span></a></li></ol></nav>
+<div class="tools"><a class="lang" href="../index.html" title="English version">EN</a>
+<button data-act="theme" title="T">◐</button><button data-act="full" title="F">⛶</button><button data-act="help" title="?">?</button></div>
+</div></header>
+<main>
+
+<section class="hero"><div class="wrap">
+  <p class="kicker">NOKTA atölyesi · ÜNİDES 2026 · iki saat</p>
+  <h1>Yapay Zekâ ile Çevresel Veri Analizi ve Yorumlama</h1>
+  <p class="sub">Kampüs sensör verisinden kanıta, kanıttan aksiyona.</p>
+  <div class="grid2 wide-left" style="margin-top:26px">
+    <div>
+      <div class="stage3d tall" id="hero3d">
+        <div class="hud"><span class="clock" id="hero-var">PM2,5</span><span id="hero-hint">Döndürmek için sürükleyin · yakınlaştırmak için kaydırın</span></div>
+        <div class="legend3d" id="hero-legend"></div>
+      </div>
+    </div>
+    <div>
+      <p class="lead">Bir kampüste altı ölçüm noktası, taşınabilir bir istasyon, iki saha turu ve on sensör kanalı. Bu atölye böyle bir veriyi ilk okumadan çözüm önerisine kadar izlemektedir. Yapay zekânın (YZ) nerede yardımcı olduğunu, nerede yanılttığını ve dikkatli bir analistin onu nasıl dürüst tuttuğunu göstermektedir.</p>
+      <div class="controls" style="margin:18px 0">
+        <a class="btn primary" href="part1.html">1. Bölümle başlayın →</a>
+        <a class="btn" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb" target="_blank" rel="noopener">Colab defterini açın</a>
+        <a class="btn" href="lab.html">NOKTA Laboratuvarı</a>
+      </div>
+      <div class="controls" id="hero-vars"></div>
+      <p class="note">3B sahne şematik bir kampüstür, gerçek bir kampüsün haritası değildir. Sütunlar her noktanın iki tur ortalamasını gösterir, toz bulutu ise PM2,5 değerini izler.</p>
+    </div>
+  </div>
+  <div class="cycle">
+    <div><b>Ölç</b><span>1. Bölüm · ölçümler, kalite kontrolü, cihazlar</span></div>
+    <div><b>Analiz et</b><span>2-4. Bölümler · adil karşılaştırma, örüntüler, açıklamalar</span></div>
+    <div><b>Paylaş</b><span>5. Bölüm · denetimli, YZ destekli raporlama</span></div>
+    <div><b>Aksiyona dönüştür</b><span>5. Bölüm ve Laboratuvar · çalıştay masaları için çözüm kartları</span></div>
+  </div>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <h2>İki saatlik akış</h2>
+  <p class="muted">Her bölüm, sonuç gösterilmeden önce cevaplanacak bir soruyla açılır. Ardından Colab defteri sayfadaki her sayıyı Python ile yeniden üretir.</p>
+  <div class="parts">
+    <a class="pcard" style="--c:var(--p1)" href="part1.html"><span class="t">0:08 - 0:30</span><h3>1 · Ölç: Veri olarak kampüs</h3><p>Bir saha turunu 3B olarak yeniden oynatın, on kanalı okuyun, hatalı ölçümleri bulun, üç istasyonu hizalayın ve nemli havadaki partikül ölçümlerini düzeltin.</p></a>
+    <a class="pcard" style="--c:var(--p2)" href="part2.html"><span class="t">0:30 - 0:52</span><h3>2 · Analiz et: Adil karşılaştırma</h3><p>Sabahın son noktasının neden sıcak göründüğünü, ters sıralı ikinci turun bunu nasıl düzelttiğini ve güçlü bir korelasyonun neden yanlış yönü gösterebileceğini görün.</p></a>
+    <a class="pcard" style="--c:var(--p3)" href="part3.html"><span class="t">0:57 - 1:17</span><h3>3 · Keşfet: YZ örüntü bulur</h3><p>k-ortalamalar yönteminin 468 dakikayı dönen bir 3B uzayda gruplamasını izleyin, temel bileşen analiziyle altı kanalı sıkıştırın ve grupları kendiniz adlandırın.</p></a>
+    <a class="pcard" style="--c:var(--p4)" href="part4.html"><span class="t">1:17 - 1:37</span><h3>4 · Açıkla: Burada neden yüksek?</h3><p>Bir rastgele ormanı dürüstçe test edin, hangi girdilerin önemli olduğunu sorun, trafik ve arka planla senaryolar deneyin ve modelin cevabının üzerinde 3B olarak gezinin.</p></a>
+    <a class="pcard" style="--c:var(--p5)" href="part5.html"><span class="t">1:37 - 1:55</span><h3>5 · Paylaş ve aksiyona dönüştür</h3><p>YZ ile yazılmış bir paragraftaki hataları yakalayın, kendi sayılarınızdan güvenli bir istem kurun ve NOKTA çalıştay masaları için bir çözüm kartı yazın.</p></a>
+    <a class="pcard" style="--c:var(--ink)" href="lab.html"><span class="t">1:55 - 2:00</span><h3>NOKTA Laboratuvarı ve değerlendirme</h3><p>Bütün 3B araçlar tek bir tezgâhta ve bu tarayıcının oturum boyunca yaptıklarından oluşan bir saha raporu.</p></a>
+  </div>
+  <p class="note">2. ve 3. bölümler arasında beş dakikalık bir ara vardır (<kbd>B</kbd> tuşu). Açılış: 0:00-0:08.</p>
+</div></section>
+
+<section class="section"><div class="wrap grid2 even">
+  <div>
+    <h2>Oturumun verisi</h2>
+    <p>Atölye, NOKTA saha protokolünü izleyen sentetik bir veri setiyle yürütülmektedir. Üç kampüsün (A, B ve C) her birinde altı sabit nokta türü vardır. Her kampüste bir NOKTA Station altı noktayı iki turda ziyaret eder ve ikinci turda sıra tersine çevrilir. Her ziyaret 15 dakika sürer, yerden yaklaşık 1,5 m yükseklikte her 10 saniyede bir ölçüm alınır.</p>
+    <div class="stats">
+      <div class="stat"><div class="v">3.240</div><div class="k">ölçüm</div></div>
+      <div class="stat"><div class="v">36</div><div class="k">saha formlu ziyaret</div></div>
+      <div class="stat"><div class="v">10</div><div class="k">sensör kanalı</div></div>
+      <div class="stat"><div class="v">468</div><div class="k">kalite kontrolü sonrası temiz dakika</div></div>
+    </div>
+    <p class="note">Bütün değerler sabit seed değeriyle çalışan bir betik tarafından üretilmiştir. Güneşli bir kasım sabahı için akla yatkındır ancak gerçek bir kampüsü anlatmaz, bu yüzden bulgu olarak aktarılmamalıdır. NOKTA'nın amacı üniversiteleri ya da şehirleri sıralamak değildir. Atölye de aynı kurala uymaktadır.</p>
+  </div>
+  <div>
+    <h2>Altı nokta türü</h2>
+    <table class="tbl">
+      <thead><tr><th>Nokta</th><th style="text-align:left">Tür</th><th style="text-align:left">Saha formundaki not</th></tr></thead>
+      <tbody>
+        <tr><td><i class="sw" style="background:var(--t1)"></i>P1</td><td style="text-align:left">Gölgeli, bina arası</td><td style="text-align:left">dar geçit, doğrudan güneş yok</td></tr>
+        <tr><td><i class="sw" style="background:var(--t2)"></i>P2</td><td style="text-align:left">Trafiğe yakın</td><td style="text-align:left">kampüs yoluna iki metre</td></tr>
+        <tr><td><i class="sw" style="background:var(--t3)"></i>P3</td><td style="text-align:left">Sakin referans</td><td style="text-align:left">yollardan uzak çim kenarı</td></tr>
+        <tr><td><i class="sw" style="background:var(--t4)"></i>P4</td><td style="text-align:left">Güneşe açık sert zemin</td><td style="text-align:left">tam güneşte beton meydan</td></tr>
+        <tr><td><i class="sw" style="background:var(--t5)"></i>P5</td><td style="text-align:left">Öğrenci yoğun alan</td><td style="text-align:left">fakülte girişi, yakında sigara içenler</td></tr>
+        <tr><td><i class="sw" style="background:var(--t6)"></i>P6</td><td style="text-align:left">Yeşil alan</td><td style="text-align:left">ağaç sırasının altı</td></tr>
+      </tbody>
+    </table>
+    <p class="note" style="margin-top:10px">1. tur saat 10:00'da P1'den P6'ya doğru başlar. 2. tur aynı saatlerde P6'dan P1'e gider.</p>
+  </div>
+</div></section>
+
+<section class="section"><div class="wrap grid2 even">
+  <div>
+    <h2>Nasıl takip edilir</h2>
+    <p>Hiçbir şey kurmak gerekmez. Sayfalar telefon dâhil her güncel tarayıcıda çalışır. Turuncu kutular Colab defterinin ilgili bölümünü açar. Orada her sonuç çalıştırılabilir, değiştirilebilir ve denetlenebilir.</p>
+    <p>Tuşlar: <kbd>←</kbd> <kbd>→</kbd> duraklar, <kbd>[</kbd> <kbd>]</kbd> bölümler, <kbd>T</kbd> kâğıt ya da gece görünümü, <kbd>L</kbd> dil, <kbd>F</kbd> tam ekran, <kbd>B</kbd> ara, <kbd>?</kbd> yardım.</p>
+    <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb" target="_blank" rel="noopener">Colab ↗</a><p>Tek bir defter bütün oturumu taşır: 1. Bölüm için Kısım 1'den 5. Bölüm için Kısım 5'e kadar. Tek bir ayarı değiştirerek gerçek NOKTA dosyalarını da okur.</p></div>
+  </div>
+  <div>
+    <h2>Eğitmen</h2>
+    <p><b>Prof. Dr. Utku Köse</b><br>Profesör, Bilgisayar Mühendisliği Bölümü, Süleyman Demirel Üniversitesi, Isparta<br>Kurucu Müdür, Yapay Zekâ Uygulama ve Araştırma Merkezi (YAZEM), Süleyman Demirel Üniversitesi<br>Diğer afiliasyonlar: University of North Dakota (ABD), Universidad Panamericana (Meksika), Vel Tech University (Hindistan)</p>
+    <p class="note">NOKTA, Nesnel Ölçüm, Katılım, Takip ve Aksiyon Ağı için hazırlanmıştır. Proje SDÜ Robotik ve İnovasyon Topluluğu yürütücülüğünde, Ankara Üniversitesi ve İzmir Yüksek Teknoloji Enstitüsündeki partner topluluklarla birlikte yürütülmekte ve Gençlik ve Spor Bakanlığı ÜNİDES programı tarafından desteklenmektedir.</p>
+    <p><a href="https://github.com/utkukose/env-data-ai-nokta2026-NB-workshop">GitHub deposu</a> · <a href="https://github.com/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/WORKSHOP_GUIDE.md">Atölye rehberi</a></p>
+  </div>
+</div></section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var el = document.getElementById("hero3d");
+  var tw = NOKTA3D.twin(el, { accent: NK.cssVar("--p1"), fallback: "3B görünüm WebGL gerektirir. Sitenin geri kalanı onsuz da çalışır." });
+  if (!tw) return;
+  tw.set("round", "mean"); tw.set("variable", "pm25_ugm3");
+  tw.stage.controls.autoRotate = true; tw.stage.controls.autoRotateSpeed = 0.5;
+  var vars = ["pm25_ugm3", "temperature_c", "co2_ppm", "light_lux", "rel_humidity_pct"];
+  var box = document.getElementById("hero-vars");
+  function legend(v) {
+    document.getElementById("hero-var").textContent = NK.chName(v) + " · " + "iki tur ortalaması, Kampüs A";
+    document.getElementById("hero-legend").innerHTML = "Daha yüksek ve koyu sütun: Daha büyük değer. Her etiket altı noktadan birini adlandırır.";
+  }
+  vars.forEach(function (v, i) {
+    var b = document.createElement("button"); b.className = "btn" + (i === 0 ? " on" : ""); b.textContent = NK.chName(v);
+    b.onclick = function () { box.querySelectorAll(".btn").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); tw.set("variable", v); legend(v); };
+    box.appendChild(b);
+  });
+  legend("pm25_ugm3");
+});
+</script>
+
+</main>
+<footer class="sig"><div class="wrap"><a class="btn primary next" href="part1.html">1. Bölüm · Ölç →</a><br><b>Prof. Dr. Utku Köse</b><br>Süleyman Demirel Üniversitesi, Yapay Zekâ Uygulama ve Araştırma Merkezi (YAZEM) · University of North Dakota · Universidad Panamericana · Vel Tech University<br><a href="https://www.utkukose.com">utkukose.com</a> · <a href="https://orcid.org/0000-0002-9652-6415">ORCID 0000-0002-9652-6415</a> · <a href="https://github.com/utkukose">github.com/utkukose</a><br>NOKTA, Nesnel Ölçüm, Katılım, Takip ve Aksiyon Ağı · ÜNİDES 2026<br>Bu atölye alandaki güncel gelişmelere göre güncellenmektedir. İlk sürüm: Kasım 2026.<br>İçerik: CC BY 4.0 · Kod: MIT · Veriler sentetiktir ve gerçek bir kampüsü anlatmaz.</div></footer>
+<div class="overlay" id="help-overlay" hidden><div class="box"><button class="btn close" data-act="close">✕</button><h3>Tuşlar</h3><p><kbd>←</kbd> <kbd>→</kbd> önceki ya da sonraki durak · <kbd>[</kbd> <kbd>]</kbd> önceki ya da sonraki bölüm · <kbd>T</kbd> kâğıt ya da gece görünümü · <kbd>F</kbd> tam ekran · <kbd>L</kbd> İngilizce ya da Türkçe · <kbd>B</kbd> beş dakikalık ara · <kbd>?</kbd> bu yardım</p></div></div>
+<div class="overlay" id="break-overlay" hidden><div class="box"><button class="btn close" data-act="close">✕</button>
+<p class="kicker">Ara</p><div class="breakclock">5:00</div>
+<p class="lead" style="text-align:center;margin:14px auto 0">Aradan sonraki soru: 1. turda altı noktadan hangisinin en sıcak görüneceğini düşünüyorsunuz ve bu neden yanıltıcı olabilir?</p></div></div>
+</body>
+</html>

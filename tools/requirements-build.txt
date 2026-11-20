@@ -1,0 +1,6 @@
+# Packages for the build tools in tools/, in addition to ../requirements.txt.
+# check_site.py also needs a browser: "python -m playwright install chromium" or Chrome with --chrome.
+beautifulsoup4>=4.12
+python-docx>=1.1
+Pillow>=10.0
+playwright>=1.45

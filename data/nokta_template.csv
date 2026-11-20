@@ -1,0 +1,1 @@
+sample_id,timestamp,campus,round,point_id,point_type,visit_order,station,seconds_since_arrival,temperature_c,rel_humidity_pct,pressure_hpa,pm1_ugm3,pm25_ugm3,pm10_ugm3,co2_ppm,light_lux,uva_wm2,uvb_wm2

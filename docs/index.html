@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI-Based Environmental Data Analysis and Interpretation · NOKTA workshop</title>
+<meta name="description" content="Start page of the NOKTA workshop: Five interactive parts with 3D scenes, one Colab notebook and the NOKTA Lab.">
+<link rel="stylesheet" href="assets/vendor/fonts/atkinson.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E7A5F'/%3E%3Ccircle cx='32' cy='32' r='11' fill='white'/%3E%3Ccircle cx='32' cy='32' r='20' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6 6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site-data.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/charts.js"></script>
+<script src="assets/vendor/three.bundle.min.js"></script><script src="assets/nokta3d.js"></script>
+</head>
+<body data-part="start">
+<header class="topbar"><div class="wrap">
+<a class="brand" href="index.html"><span class="dot"></span><span class="name">NOKTA · AI workshop<small>Environmental data analysis and interpretation</small></span></a>
+<nav class="route" aria-label="Workshop route"><ol><li data-page="index"><a href="index.html"><span class="pin"></span><span class="lbl">Start</span></a></li><li data-page="part1"><a href="part1.html"><span class="pin"></span><span class="lbl">1 Measure</span></a></li><li data-page="part2"><a href="part2.html"><span class="pin"></span><span class="lbl">2 Analyze</span></a></li><li data-page="part3"><a href="part3.html"><span class="pin"></span><span class="lbl">3 Discover</span></a></li><li data-page="part4"><a href="part4.html"><span class="pin"></span><span class="lbl">4 Explain</span></a></li><li data-page="part5"><a href="part5.html"><span class="pin"></span><span class="lbl">5 Share and act</span></a></li><li data-page="lab"><a href="lab.html"><span class="pin"></span><span class="lbl">Lab</span></a></li></ol></nav>
+<div class="tools"><a class="lang" href="tr/index.html" title="Türkçe sürüm">TR</a>
+<button data-act="theme" title="T">◐</button><button data-act="full" title="F">⛶</button><button data-act="help" title="?">?</button></div>
+</div></header>
+<main>
+
+<section class="hero"><div class="wrap">
+  <p class="kicker">NOKTA workshop · ÜNİDES 2026 · two hours</p>
+  <h1>AI-Based Environmental Data Analysis and Interpretation</h1>
+  <p class="sub">From campus sensor readings to evidence, and from evidence to action.</p>
+  <div class="grid2 wide-left" style="margin-top:26px">
+    <div>
+      <div class="stage3d tall" id="hero3d">
+        <div class="hud"><span class="clock" id="hero-var">PM2.5</span><span id="hero-hint">Drag to rotate · scroll to zoom</span></div>
+        <div class="legend3d" id="hero-legend"></div>
+      </div>
+    </div>
+    <div>
+      <p class="lead">Six measurement points on a campus, one portable station, two field rounds and ten sensor channels. This workshop follows such data from the first reading to a solution proposal. It shows where artificial intelligence (AI) helps, where it misleads, and how a careful analyst keeps it honest.</p>
+      <div class="controls" style="margin:18px 0">
+        <a class="btn primary" href="part1.html">Start with Part 1 →</a>
+        <a class="btn" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb" target="_blank" rel="noopener">Open the Colab notebook</a>
+        <a class="btn" href="lab.html">NOKTA Lab</a>
+      </div>
+      <div class="controls" id="hero-vars"></div>
+      <p class="note">The 3D scene is a schematic campus, not a map of a real one. The columns show the two-round mean of each point, and the dust cloud follows PM2.5.</p>
+    </div>
+  </div>
+  <div class="cycle">
+    <div><b>Measure</b><span>Part 1 · readings, quality control, devices</span></div>
+    <div><b>Analyze</b><span>Parts 2 to 4 · fair comparisons, patterns, explanations</span></div>
+    <div><b>Share</b><span>Part 5 · AI-assisted reporting with checks</span></div>
+    <div><b>Turn into action</b><span>Part 5 and the Lab · solution cards for the workshop tables</span></div>
+  </div>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <h2>The two hours</h2>
+  <p class="muted">Every part opens with a question to answer before the reveal. The Colab notebook then reproduces each number of the page in Python.</p>
+  <div class="parts">
+    <a class="pcard" style="--c:var(--p1)" href="part1.html"><span class="t">0:08 to 0:30</span><h3>1 · Measure: The campus as data</h3><p>Replay a field round in 3D, read the ten channels, find faulty readings, align three stations and correct humid particle readings.</p></a>
+    <a class="pcard" style="--c:var(--p2)" href="part2.html"><span class="t">0:30 to 0:52</span><h3>2 · Analyze: Fair comparisons</h3><p>See why the last point of a morning looks warm, how the reversed second round fixes it, and why a strong correlation can point the wrong way.</p></a>
+    <a class="pcard" style="--c:var(--p3)" href="part3.html"><span class="t">0:57 to 1:17</span><h3>3 · Discover: AI finds patterns</h3><p>Watch k-means group 468 minutes in a rotating 3D space, compress six channels with principal component analysis and name the groups yourself.</p></a>
+    <a class="pcard" style="--c:var(--p4)" href="part4.html"><span class="t">1:17 to 1:37</span><h3>4 · Explain: Why is it high here?</h3><p>Test a random forest honestly, ask which inputs matter, play what-if with traffic and background, and fly over the model's answer in 3D.</p></a>
+    <a class="pcard" style="--c:var(--p5)" href="part5.html"><span class="t">1:37 to 1:55</span><h3>5 · Share and turn into action</h3><p>Catch the errors in an AI-written paragraph, build a safe prompt from your numbers and write a solution card for the NOKTA workshop tables.</p></a>
+    <a class="pcard" style="--c:var(--ink)" href="lab.html"><span class="t">1:55 to 2:00</span><h3>NOKTA Lab and debrief</h3><p>All 3D tools on one bench and a field report built from what this browser did during the session.</p></a>
+  </div>
+  <p class="note">A five-minute break sits between Parts 2 and 3 (key <kbd>B</kbd>). Opening: 0:00 to 0:08.</p>
+</div></section>
+
+<section class="section"><div class="wrap grid2 even">
+  <div>
+    <h2>The data of the session</h2>
+    <p>The workshop runs on a synthetic dataset that follows the NOKTA field protocol. Three campuses (A, B and C) each have six fixed point types. One NOKTA Station per campus visits the six points in two rounds, and the second round reverses the order. Each visit lasts 15 minutes with a reading every 10 seconds, at about 1.5 m above the ground.</p>
+    <div class="stats">
+      <div class="stat"><div class="v">3,240</div><div class="k">readings</div></div>
+      <div class="stat"><div class="v">36</div><div class="k">visits with a field form</div></div>
+      <div class="stat"><div class="v">10</div><div class="k">sensor channels</div></div>
+      <div class="stat"><div class="v">468</div><div class="k">clean minutes after quality control</div></div>
+    </div>
+    <p class="note">All values are invented by a script with a fixed seed. They are plausible for a sunny November morning but describe no real campus, so they must not be quoted as findings. The aim of NOKTA is not to rank universities or cities, and the workshop follows the same rule.</p>
+  </div>
+  <div>
+    <h2>Six point types</h2>
+    <table class="tbl">
+      <thead><tr><th>Point</th><th style="text-align:left">Type</th><th style="text-align:left">What the field form says</th></tr></thead>
+      <tbody>
+        <tr><td><i class="sw" style="background:var(--t1)"></i>P1</td><td style="text-align:left">Shaded, between buildings</td><td style="text-align:left">narrow passage, no direct sun</td></tr>
+        <tr><td><i class="sw" style="background:var(--t2)"></i>P2</td><td style="text-align:left">Near traffic</td><td style="text-align:left">two meters from the campus road</td></tr>
+        <tr><td><i class="sw" style="background:var(--t3)"></i>P3</td><td style="text-align:left">Quiet reference</td><td style="text-align:left">lawn edge away from roads</td></tr>
+        <tr><td><i class="sw" style="background:var(--t4)"></i>P4</td><td style="text-align:left">Sunny hard surface</td><td style="text-align:left">concrete square in full sun</td></tr>
+        <tr><td><i class="sw" style="background:var(--t5)"></i>P5</td><td style="text-align:left">Busy student area</td><td style="text-align:left">faculty entrance, smokers nearby</td></tr>
+        <tr><td><i class="sw" style="background:var(--t6)"></i>P6</td><td style="text-align:left">Green area</td><td style="text-align:left">under a row of trees</td></tr>
+      </tbody>
+    </table>
+    <p class="note" style="margin-top:10px">Round 1 visits P1 to P6 from 10:00. Round 2 visits P6 to P1 at the same clock times.</p>
+  </div>
+</div></section>
+
+<section class="section"><div class="wrap grid2 even">
+  <div>
+    <h2>How to follow</h2>
+    <p>Nothing needs to be installed. The pages run in any modern browser, also on a phone. The orange boxes open the matching section of the Colab notebook, where every result can be run, changed and checked.</p>
+    <p>Keys: <kbd>←</kbd> <kbd>→</kbd> stations, <kbd>[</kbd> <kbd>]</kbd> parts, <kbd>T</kbd> paper or night view, <kbd>L</kbd> language, <kbd>F</kbd> full screen, <kbd>B</kbd> break, <kbd>?</kbd> help.</p>
+    <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb" target="_blank" rel="noopener">Colab ↗</a><p>One notebook carries the whole session: Section 1 for Part 1 up to Section 5 for Part 5. It also reads real NOKTA files with one change of setting.</p></div>
+  </div>
+  <div>
+    <h2>Presenter</h2>
+    <p><b>Prof. Dr. Utku Köse</b><br>Full Professor, Department of Computer Engineering, Süleyman Demirel University, Isparta, Türkiye<br>Founding Director, AI Application and Research Center (YAZEM), Süleyman Demirel University<br>Additional affiliations: University of North Dakota (USA), Universidad Panamericana (Mexico), Vel Tech University (India)</p>
+    <p class="note">Prepared for NOKTA, Objective Measurement, Participation, Monitoring and Action Network. The project is carried out by the SDÜ Robotics and Innovation Community with partner communities at Ankara University and the İzmir Institute of Technology. It is supported by ÜNİDES of the Ministry of Youth and Sports of the Republic of Türkiye.</p>
+    <p><a href="https://github.com/utkukose/env-data-ai-nokta2026-NB-workshop">Repository on GitHub</a> · <a href="https://github.com/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/WORKSHOP_GUIDE.md">Workshop guide</a></p>
+  </div>
+</div></section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var el = document.getElementById("hero3d");
+  var tw = NOKTA3D.twin(el, { accent: NK.cssVar("--p1"), fallback: "3D view needs WebGL. The rest of the site works without it." });
+  if (!tw) return;
+  tw.set("round", "mean"); tw.set("variable", "pm25_ugm3");
+  tw.stage.controls.autoRotate = true; tw.stage.controls.autoRotateSpeed = 0.5;
+  var vars = ["pm25_ugm3", "temperature_c", "co2_ppm", "light_lux", "rel_humidity_pct"];
+  var box = document.getElementById("hero-vars");
+  function legend(v) {
+    document.getElementById("hero-var").textContent = NK.chName(v) + " · " + "two-round mean, Campus A";
+    document.getElementById("hero-legend").innerHTML = "Taller and darker column: Higher value. Each label names one of the six points.";
+  }
+  vars.forEach(function (v, i) {
+    var b = document.createElement("button"); b.className = "btn" + (i === 0 ? " on" : ""); b.textContent = NK.chName(v);
+    b.onclick = function () { box.querySelectorAll(".btn").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); tw.set("variable", v); legend(v); };
+    box.appendChild(b);
+  });
+  legend("pm25_ugm3");
+});
+</script>
+
+</main>
+<footer class="sig"><div class="wrap"><a class="btn primary next" href="part1.html">Part 1 · Measure →</a><br><b>Prof. Dr. Utku Köse</b><br>Süleyman Demirel University, AI Application and Research Center (YAZEM) · University of North Dakota · Universidad Panamericana · Vel Tech University<br><a href="https://www.utkukose.com">utkukose.com</a> · <a href="https://orcid.org/0000-0002-9652-6415">ORCID 0000-0002-9652-6415</a> · <a href="https://github.com/utkukose">github.com/utkukose</a><br>NOKTA, Objective Measurement, Participation, Monitoring and Action Network · ÜNİDES 2026<br>This workshop is updated in line with current developments in the field. First version: November 2026.<br>Content: CC BY 4.0 · Code: MIT · The data are synthetic and describe no real campus.</div></footer>
+<div class="overlay" id="help-overlay" hidden><div class="box"><button class="btn close" data-act="close">✕</button><h3>Keys</h3><p><kbd>←</kbd> <kbd>→</kbd> previous or next station · <kbd>[</kbd> <kbd>]</kbd> previous or next part · <kbd>T</kbd> paper or night view · <kbd>F</kbd> full screen · <kbd>L</kbd> English or Turkish · <kbd>B</kbd> five-minute break · <kbd>?</kbd> this help</p></div></div>
+<div class="overlay" id="break-overlay" hidden><div class="box"><button class="btn close" data-act="close">✕</button>
+<p class="kicker">Break</p><div class="breakclock">5:00</div>
+<p class="lead" style="text-align:center;margin:14px auto 0">Question for after the break: Which of the six points do you expect to look warmest in Round 1, and why might that be misleading?</p></div></div>
+</body>
+</html>

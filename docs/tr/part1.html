@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>1. Bölüm · Ölç: Veri olarak kampüs</title>
+<meta name="description" content="Bir NOKTA saha turunu 3B olarak yeniden oynatın, on kanalı okuyun, hatalı ölçümleri bulun, üç istasyonu hizalayın ve nemli havadaki partikül ölçümlerini düzeltin.">
+<link rel="stylesheet" href="../assets/vendor/fonts/atkinson.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E7A5F'/%3E%3Ccircle cx='32' cy='32' r='11' fill='white'/%3E%3Ccircle cx='32' cy='32' r='20' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6 6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site-data.js"></script>
+<script src="../assets/site.js"></script>
+<script src="../assets/charts.js"></script>
+<script src="../assets/vendor/three.bundle.min.js"></script><script src="../assets/nokta3d.js"></script>
+</head>
+<body data-part="p1">
+<header class="topbar"><div class="wrap">
+<a class="brand" href="index.html"><span class="dot"></span><span class="name">NOKTA · YZ atölyesi<small>Çevresel veri analizi ve yorumlama</small></span></a>
+<nav class="route" aria-label="Atölye rotası"><ol><li data-page="index"><a href="index.html"><span class="pin"></span><span class="lbl">Başlangıç</span></a></li><li data-page="part1"><a href="part1.html"><span class="pin"></span><span class="lbl">1 Ölç</span></a></li><li data-page="part2"><a href="part2.html"><span class="pin"></span><span class="lbl">2 Analiz et</span></a></li><li data-page="part3"><a href="part3.html"><span class="pin"></span><span class="lbl">3 Keşfet</span></a></li><li data-page="part4"><a href="part4.html"><span class="pin"></span><span class="lbl">4 Açıkla</span></a></li><li data-page="part5"><a href="part5.html"><span class="pin"></span><span class="lbl">5 Paylaş ve dönüştür</span></a></li><li data-page="lab"><a href="lab.html"><span class="pin"></span><span class="lbl">Laboratuvar</span></a></li></ol></nav>
+<div class="tools"><a class="lang" href="../part1.html" title="English version">EN</a>
+<button data-act="theme" title="T">◐</button><button data-act="full" title="F">⛶</button><button data-act="help" title="?">?</button></div>
+</div></header>
+<main>
+
+<section class="parthead"><div class="wrap">
+  <p class="kicker">1. Bölüm · Ölç · 0:08-0:30</p>
+  <h1>Veri olarak kampüs</h1>
+  <p class="lead">Herhangi bir YZ yönteminden önce verinin anlaşılması ve denetlenmesi gerekir. Bu bölüm bir saha turunu yeniden oynatmakta, on kanalı okumakta ve hiçbir şeyi gizlemeden ölçümleri temizlemektedir.</p>
+  <ol class="station-index">
+    <li><a href="#s1"><b>1</b>Bir sabah, altı nokta</a></li>
+    <li><a href="#s2"><b>2</b>On kanal</a></li>
+    <li><a href="#s3"><b>3</b>Veri doktoru</a></li>
+    <li><a href="#s4"><b>4</b>Üç istasyon, tek hikâye</a></li>
+    <li><a href="#s5"><b>5</b>Nemli hava</a></li>
+  </ol>
+</div></section>
+
+<!-- ============================ station 1 ============================ -->
+<section class="station" id="s1"><div class="wrap">
+  <div class="station-head"><span class="no">1</span><h2>Bir sabah, altı nokta</h2></div>
+  <div class="poll" data-id="p1-s1" data-answer="traffic">
+    <div class="q" data-label="Tahmin edin">Kampüs A'nın 1. turunda en yüksek PM2,5 hangi noktada görülecek?</div>
+    <div class="opts">
+      <button data-v="shaded">Gölgeli</button><button data-v="traffic">Trafiğe yakın</button>
+      <button data-v="reference">Referans</button><button data-v="sunny_hard">Güneşli sert zemin</button>
+      <button data-v="crowded">Öğrenci yoğun alan</button><button data-v="green">Yeşil alan</button>
+    </div>
+    <div class="verdict"></div>
+    <div class="msg-right" hidden>Otobüs ve otomobiller kısa süreli partikül bulutları ekler. Oynat'a basın ve P2 sütununun en hızlı büyüdüğünü izleyin.</div>
+    <div class="msg-wrong" hidden>Yol kazanır: Otobüs ve otomobiller kısa süreli partikül bulutları ekler. Oynat'a basın ve P2'yi izleyin. Saat 10:00'daki ilk durak P1'e de bakın: O da yüksektir ve nedenini 2. Bölüm açıklar.</div>
+  </div>
+  <div class="grid2 wide-left">
+    <div>
+      <div class="stage3d tall" id="twin1">
+        <div class="hud"><span class="clock" id="tw-clock">10:00</span><span id="tw-status">Saha turunu başlatmak için oynat'a basın</span></div>
+        <div class="legend3d" id="tw-legend"></div>
+      </div>
+      <div class="controls">
+        <button class="btn primary" id="tw-play">▶ Turu oynat</button>
+        <button class="btn" id="tw-reset">⟲ 10:00</button>
+        <button class="btn" id="tw-results">Sonuçları göster</button>
+        <label>Hız <select id="tw-speed"><option value="0.5">×0.5</option><option value="1" selected>×1</option><option value="2">×2</option><option value="4">×4</option></select></label>
+      </div>
+      <div class="controls">
+        <label>Kampüs <select id="tw-campus"><option value="A">A</option><option value="B">B</option><option value="C">C</option></select></label>
+        <label>Tur <select id="tw-round"><option value="1">1 (P1 → P6)</option><option value="2">2 (P6 → P1)</option><option value="mean">iki tur ortalaması</option></select></label>
+        <label>Kanal <select id="tw-var"></select></label>
+        <label>Görünüm <select id="tw-view"><option value="overview">genel</option><option value="top">yukarıdan</option><option value="street">sokak seviyesi</option></select></label>
+      </div>
+    </div>
+    <div>
+      <div class="card" id="tw-form">
+        <h3 style="margin-top:0">Şu anki ziyaretin saha formu</h3>
+        <p class="muted" id="tw-form-body">Oynat'a basın ya da altı istasyondan birine tıklayın.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Sahne neyi gösteriyor</h3>
+        <p>Taşınabilir tek bir istasyon altı noktayı ziyaret eder. Her noktada 15 dakika ölçüm yapar ve sonraki noktaya 10 dakika yürür. Noktanın yanındaki sütun, seçilen kanalın o ana kadarki medyanıyla büyür. Toz bulutu PM2,5 ile yoğunlaşır, gölgeler de o sabahın güneşini izler.</p>
+        <p class="note">Her taşımadan sonraki ilk iki dakika dışarıda bırakılır: Sensörler hâlâ dengelenmektedir (3. durak).</p>
+      </div>
+    </div>
+  </div>
+  <div class="takeaway"><b>Çıkarım.</b> Tek bir istasyon her seferinde tek bir yeri ölçer. Bu yüzden noktalar arasındaki her karşılaştırma aynı zamanda saatler arasındaki bir karşılaştırmadır ve bu durum 2. Bölümdeki her şeyi belirler.</div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-1" target="_blank" rel="noopener">Colab ↗</a><p>Colab defterinin 1.1. kısmı aynı ölçümleri yükler, ziyaretleri sayar ve bir saha turunu çizer.</p></div>
+</div></section>
+
+<!-- ============================ station 2 ============================ -->
+<section class="station" id="s2"><div class="wrap">
+  <div class="station-head"><span class="no">2</span><h2>On kanal, tek ölçüm</h2></div>
+  <div class="grid2">
+    <div>
+      <p>Bir NOKTA dosyasının her satırı, bir noktadaki tek bir anı gösterir: Bir zaman damgası, kampüs, tur, nokta ve on sayı. Birimler göründüğünden daha önemlidir. Birimi ve ortalama alma süresi belirtilmemiş bir değer yorumlanamaz.</p>
+      <div class="poll" data-id="p1-s2" data-answer="altitude">
+        <div class="q" data-label="Tahmin edin">Atmosfer basıncı Kampüs A'da yaklaşık 900 hPa, Kampüs C'de yaklaşık 1015 hPa. Bu farkın büyük kısmını ne açıklar?</div>
+        <div class="opts"><button data-v="pollution">Hava kirliliği</button><button data-v="altitude">Deniz seviyesinden yükseklik</button><button data-v="fault">Sensör arızası</button><button data-v="temp">Sıcaklık</button></div>
+        <div class="verdict"></div>
+        <div class="msg-right" hidden>Basınç yükseklikle düşer: Kampüs A deniz seviyesinden yaklaşık 1000 m yukarıdadır, Kampüs C ise kıyıdadır. Kampüsler arasındaki basınç farkı hava kalitesini değil konumu anlatır.</div>
+      </div>
+    </div>
+    <div class="viz">
+      <table class="tbl" id="chan-table">
+        <thead><tr><th>Kanal</th><th>Birim</th><th>Ziyaret medyanı aralığı</th><th style="text-align:left">Nasıl okunur</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <p class="cap">Aralıklar kalite kontrolünden sonraki 36 ziyaretten alınmıştır. Bir satıra tıklayınca o kanal yukarıdaki 3B sahnede gösterilir.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============================ station 3 ============================ -->
+<section class="station" id="s3"><div class="wrap">
+  <div class="station-head"><span class="no">3</span><h2>Veri doktoru</h2></div>
+  <div class="poll" data-id="p1-s3" data-answer="all">
+    <div class="q" data-label="Tahmin edin">Kampüs B'nin 1. turundaki ilk ziyarette üç tür sorun var. Hangi ölçümler ziyaret medyanının dışında kalmalı?</div>
+    <div class="opts"><button data-v="warm">İlk iki dakika</button><button data-v="flat">Donmuş CO₂ bölümü</button><button data-v="spike">Tekil sıçramalar</button><button data-v="all">Üçü de</button></div>
+    <div class="verdict"></div>
+    <div class="msg-right" hidden>Üçü de işaretlenir. Ham dosyada bir gerekçeyle kalırlar, yalnızca analiz onları dışarıda bırakır.</div>
+    <div class="msg-wrong" hidden>Üçü de işaretlenmelidir. Ham dosyada bir gerekçeyle kalırlar, yalnızca analiz onları dışarıda bırakır.</div>
+  </div>
+  <div class="reveal-lock locked" data-for="p1-s3"><div class="reveal-body">
+  <div class="grid2 wide-left">
+    <div class="viz">
+      <div class="controls">
+        <label>Ziyaret <select id="qc-visit">
+          <option value="B-R1-P1">B · 1. tur · P1 gölgeli (ilk durak)</option>
+          <option value="A-R1-P2">A · 1. tur · P2 trafiğe yakın</option>
+          <option value="B-R1-P5">B · 1. tur · P5 öğrenci yoğun alan</option>
+          <option value="C-R2-P6">C · 2. tur · P6 yeşil alan (nemli)</option>
+        </select></label>
+        <label>Kanal <select id="qc-ch">
+          <option value="co2_ppm">CO₂</option><option value="pm25_ugm3">PM2,5</option><option value="pm10_ugm3">PM10</option>
+          <option value="temperature_c">Sıcaklık</option><option value="rel_humidity_pct">Bağıl nem</option>
+        </select></label>
+      </div>
+      <div class="controls">
+        <button class="btn on" data-qc="warmup">Isınma</button>
+        <button class="btn on" data-qc="flags">Dedektör işaretleri</button>
+        <button class="btn" data-qc="truth">Yerleştirilmiş sorunlar</button>
+      </div>
+      <div id="qc-chart"></div>
+      <div class="legend" id="qc-legend"></div>
+    </div>
+    <div>
+      <h3>Sıçramalar için dayanıklı bir test</h3>
+      <p>Alışılmış z-skoru ortalamayı ve standart sapmayı kullanır, ancak büyük bir sıçrama ikisini de kendine doğru çekerek gizlenir. Değiştirilmiş z-skoru ise tek bir sıçramanın etkileyemediği medyanı ve medyan mutlak sapmayı (MAD) kullanır [1].</p>
+      <div class="formula">
+        <span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.987em;vertical-align:-1.7435em;"></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.2435em;"><span style="top:-4.2435em;"><span class="pstrut" style="height:3.427em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathrm">MAD</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">6745</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6679em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3.35em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">~</span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-2.3435em;"><span class="pstrut" style="height:3.427em;"></span><span class="mord"><span class="mord"><span class="mord mathrm">MAD</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mop"><span class="mop"><span class="mord mathrm">median</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mopen">∣</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6679em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3.35em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">~</span></span></span></span></span></span></span><span class="mclose">∣</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.7435em;"><span></span></span></span></span></span></span></span></span></span></span></span>
+        <p class="sym"><b>x<sub>i</sub></b> tek bir ölçüm (µg/m³) · <b>x̃</b> ölçümlerin medyanı · <b>MAD</b> x̃'e olan uzaklıkların medyanı · 0,6745 çarpanı M'yi alışılmış z-skoruyla karşılaştırılabilir kılar. |M| değeri yaklaşık 3'ün üzerindeki ölçüm incelenmelidir.</p>
+        <div class="worked"><b>Çözümlü örnek.</b> Yedi PM2,5 ölçümü: 14,2; 15,0; 13,8; 14,6; 97,3; 15,1; 14,4. Medyan 14,6, medyana uzaklıklar 0,4; 0,4; 0,8; 0,0; 82,7; 0,5; 0,2 olduğundan MAD = 0,4. 97,3 için: M = 0,6745 × 82,7 / 0,4 = <b>139,45</b>, açık bir işaret. Alışılmış z-skorunda ortalama 26,34, standart sapma 28,97 ve z = (82,7 + 14,6 − 26,34) / 28,97 = <b>2,45</b> olur, 3'ün altında kalır: Sıçrama kendini gizler.</div>
+      </div>
+      <p class="note">Defterdeki dedektör iki fiziksel kural ekler. Gerçek bir partikül bulutu PM1, PM2,5 ve PM10'u birlikte yükseltir, hatalı ölçüm ise tek bir kanalı yükseltir. CO₂ için 0 ya da 2000 ppm ölçümleri aralık dışıdır ve iki dakika boyunca hiç değişmeyen bir CO₂ değeri donmuş bir sensörü gösterir.</p>
+    </div>
+  </div>
+  <div class="grid2 even" style="margin-top:18px">
+    <div class="card">
+      <h3 style="margin-top:0">Dedektör ne kadar başarılı?</h3>
+      <table class="tbl" id="qc-score"><thead><tr><th>Sorun</th><th>Yerleştirilen</th><th>İşaretlenen</th><th>Yakalanan</th></tr></thead><tbody></tbody></table>
+      <p class="note">İki PM2,5 hatası gerçek duman ve trafik bulutlarının arasına gizlendi. Hiçbir kural kusursuz değildir. Bu yüzden işaretler saha notlarıyla birlikte gözden geçirilmektedir.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Eksik değer sıfır değildir</h3>
+      <p>Kampüs A'nın 2. turunda kayıt cihazı P5'te yeniden başladı ve bir dakika kayboldu. Boşluğun çevresindeki 22 ölçümde, boş ölçümler atlandığında ortalama sıcaklık <b>10,37 °C</b>, sıfır yazıldığında ise <b>7,54 °C</b> olur. Altı boş ölçüm noktayı hiç var olmamış yaklaşık üç derece kadar soğutur.</p>
+      <div class="chips"><span class="chip good">ham dosyayı koru</span><span class="chip good">işaretle, silme</span><span class="chip good">gerekçeyi yaz</span><span class="chip bad">asla sıfırla doldurma</span></div>
+    </div>
+  </div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-1" target="_blank" rel="noopener">Colab ↗</a><p>Colab defterinin 1.2. ve 1.3. kısımları aynı işaretleri üretir, bunları yerleştirilen sorunlarla karşılaştırır ve ikinci bir görüş için Isolation Forest kullanır [2].</p></div>
+  </div></div>
+</div></section>
+
+<!-- ============================ station 4 ============================ -->
+<section class="station" id="s4"><div class="wrap">
+  <div class="station-head"><span class="no">4</span><h2>Üç istasyon, tek hikâye</h2></div>
+  <div class="grid2">
+    <div>
+      <p>Saha turlarından önce üç NOKTA Station iki saat boyunca yan yana çalıştırıldı. Aralarındaki sürekli bir fark kampüslerin değil cihazların özelliğidir.</p>
+      <div class="poll" data-id="p1-s4" data-answer="unknown">
+        <div class="q" data-label="Tahmin edin">S2 istasyonu diğerlerinden yaklaşık yarım derece sıcak ölçüyor. Hangi istasyon doğru?</div>
+        <div class="opts"><button data-v="s1">S1</button><button data-v="s2">S2</button><button data-v="unknown">Referans olmadan bilinemez</button></div>
+        <div class="verdict"></div>
+        <div class="msg-right" hidden>Kalibre edilmiş bir referans cihaz olmadan hiçbir istasyon doğru ilan edilemez. İstasyonlar ortak ortalamalarına hizalanır. Bu, cihazlar arasındaki farkları giderir, hepsinin paylaştığı bir hatayı gidermez.</div>
+        <div class="msg-wrong" hidden>Kalibre edilmiş bir referans cihaz olmadan hiçbir istasyon doğru ilan edilemez. İstasyonlar ortak ortalamalarına hizalanır. Bu işlem cihazlar arasındaki farkları giderir ama hepsinin paylaştığı bir hatayı gidermez.</div>
+      </div>
+      <div class="formula">
+        <span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:6.7637em;vertical-align:-3.1318em;"></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:3.6318em;"><span style="top:-5.6318em;"><span class="pstrut" style="height:3.8283em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">o</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283em;"><span style="top:-1.8829em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2671em;"><span></span></span></span></span></span><span class="mopen"><span class="delimsizing size2">(</span></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mclose"><span class="delimsizing size2">)</span></span></span></span><span style="top:-2.2636em;"><span class="pstrut" style="height:3.8283em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">3</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8011em;"><span style="top:-1.8829em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2671em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:3.1318em;"><span></span></span></span></span></span></span></span></span></span></span></span>
+        <p class="sym"><b>o<sub>s</sub></b> s istasyonunun sapması (°C) · <b>x<sub>s</sub>(t)</b> t dakikasındaki ölçümü · <b>x̄(t)</b> t dakikasında üç istasyonun ortalaması · <b>T</b> dakika sayısı (120). Düzeltilmiş ölçüm x<sub>s</sub> − o<sub>s</sub> olur. Partiküllerde fark yerine oran kullanılmaktadır.</p>
+        <div class="worked"><b>Çözümlü örnek, ilk dakika.</b> S1 = 15,99, S2 = 16,48, S3 = 15,78 °C. Ortalama = 16,08 °C. Farklar: S1 −0,09, S2 +0,40, S3 −0,30 °C. 120 dakikanın ortalaması: S1 −0,13, S2 +0,46, S3 −0,33 °C.</div>
+      </div>
+    </div>
+    <div class="viz">
+      <div class="controls">
+        <div class="seg" id="co-ch"><button class="on" data-v="temperature_c">Sıcaklık</button><button data-v="pm25_ugm3">PM2,5</button><button data-v="co2_ppm">CO₂</button></div>
+        <button class="btn" id="co-fix">Sapmaları uygula</button>
+      </div>
+      <div id="co-chart"></div>
+      <div class="legend" id="co-legend"></div>
+      <table class="tbl" style="margin-top:10px"><thead><tr><th>İstasyon</th><th>Sıcaklık</th><th>Nem</th><th>CO₂</th><th>PM oranı</th></tr></thead>
+        <tbody>
+          <tr><td>S1 (A)</td><td>−0,13 °C</td><td>+0,67 %</td><td>−0,9 ppm</td><td>× 0,951</td></tr>
+          <tr><td>S2 (B)</td><td>+0,46 °C</td><td>−1,30 %</td><td>+10,3 ppm</td><td>× 0,951</td></tr>
+          <tr><td>S3 (C)</td><td>−0,33 °C</td><td>+0,63 %</td><td>−9,4 ppm</td><td>× 1,098</td></tr>
+        </tbody></table>
+    </div>
+  </div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-1" target="_blank" rel="noopener">Colab ↗</a><p>Colab defterinin 1.4. kısmı bu sapmaları yan yana test dosyasından hesaplar ve her kampüs ölçümüne uygular.</p></div>
+</div></section>
+
+<!-- ============================ station 5 ============================ -->
+<section class="station" id="s5"><div class="wrap">
+  <div class="station-head"><span class="no">5</span><h2>Nemli hava partikül sayacını yanıltır</h2></div>
+  <div class="poll" data-id="p1-s5" data-answer="humid">
+    <div class="q" data-label="Tahmin edin">Kampüs C'nin 2. turundaki nemli sabahta yeşil alanın ham PM2,5 değeri yoldakinden yüksek. Neden?</div>
+    <div class="opts"><button data-v="trees">Ağaçlar partikül salar</button><button data-v="irrig">Sulama tozu</button><button data-v="humid">Nemli hava partikülleri şişirir</button><button data-v="traffic">Trafik oraya kaydı</button></div>
+    <div class="verdict"></div>
+    <div class="msg-right" hidden>Yeşil alan ilk duraktı ve bağıl nem %87'ydi. Partiküller su alır, büyür ve kurutucusu olmayan ışık saçılımlı bir sensör bunları daha fazla kütle olarak sayar [3, 4].</div>
+    <div class="msg-wrong" hidden>Sebep yer değil hava. Yeşil alan ilk duraktı ve bağıl nem %87'ydi. Partiküller su alıp büyür ve kurutucusu olmayan ışık saçılımlı bir sensör bunları daha fazla kütle olarak sayar [3, 4].</div>
+  </div>
+  <div class="reveal-lock locked" data-for="p1-s5"><div class="reveal-body">
+  <div class="grid2">
+    <div>
+      <div class="viz"><canvas id="hum-canvas" width="560" height="250" style="width:100%;height:auto;display:block;border-radius:8px"></canvas>
+        <div class="slider"><span>Bağıl nem</span><input type="range" id="hum-rh" min="30" max="95" value="50"><output id="hum-out"></output></div>
+        <p class="cap" id="hum-cap"></p></div>
+      <div class="formula">
+        <span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:5.0093em;vertical-align:-2.2547em;"></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.7547em;"><span style="top:-4.7547em;"><span class="pstrut" style="height:3.427em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">−</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1/</span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">κ</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">ρ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">/</span><span class="mord"><span class="mord mathnormal">ρ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">100</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathrm">RH</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-2.1583em;"><span class="pstrut" style="height:3.427em;"></span><span class="mord"><span class="mord"><span class="mord"><span class="mord mathrm">PM</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">d</span><span class="mord accent mtight"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6679em;"><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span class="mord mtight">u</span></span><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span class="accent-body" style="left:-0.25em;"><span class="mord mtight">¨</span></span></span></span></span></span></span><span class="mord mtight">zeltilmi</span><span class="mord accent mtight"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.4306em;"><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span class="mord mtight">s</span></span><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord mtight">¸</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1701em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2691em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord"><span class="mord mathrm">PM</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">ham</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.2547em;"><span></span></span></span></span></span></span></span></span></span></span></span>
+        <p class="sym"><b>C</b> partikül kütlesinin büyüme çarpanı (birimsiz) · <b>κ</b> partiküllerin higroskopikliği, ortalama karasal değer olarak 0,3 · <b>ρ<sub>w</sub>/ρ<sub>p</sub></b> suyun yoğunluğunun kuru partikül yoğunluğuna oranı, 1/1,65 · <b>RH</b> bağıl nem (%) [4].</p>
+        <div class="worked"><b>Çözümlü örnek.</b> Yeşil alan, RH = %87,3, dolayısıyla a<sub>w</sub> = 0,873. Buradan −1 + 1/0,873 = 0,145 ve 0,3/1,65 = 0,182 bulunur. C = 1 + 0,182/0,145 = <b>2,255</b>. Ham medyan 15,07 µg/m³, 15,07/2,255 = <b>6,7 µg/m³</b> olur.</div>
+      </div>
+    </div>
+    <div class="viz">
+      <div id="hum-bars"></div>
+      <div class="legend"><span><i class="sw" style="background:var(--muted)"></i>ham</span><span><i class="sw" style="background:var(--accent)"></i>düzeltilmiş</span></div>
+      <p class="cap">Kampüs C, 2. tur, µg/m³ cinsinden PM2,5 ziyaret medyanları. Düzeltmeden sonra yeşil alan yeniden en temiz noktadır. κ değeri yerel havaya aittir. Bu yüzden gerçek bir çalışma onu bir referans cihazla karşılaştırarak kestirir.</p>
+    </div>
+  </div>
+  <div class="takeaway"><b>Çıkarım.</b> Düşük maliyetli bir sensör her zaman orada olanı değil, gördüğünü bildirir [5]. Kalite kontrolü, cihaz hizalaması ve fiziksel düzeltmeler her YZ yönteminden önce gelir ve her adım kayda geçirilir.</div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-1" target="_blank" rel="noopener">Colab ↗</a><p>Colab defterinin 1.5. ve 1.6. kısımları düzeltmeyi her ölçüme uygular ve 2-4. bölümlerde kullanılan temiz dakika tablosunu oluşturur.</p></div>
+  </div></div>
+</div></section>
+
+<section class="station" id="refs"><div class="wrap">
+  <h3>Kaynaklar</h3>
+  <ol class="note">
+    <li>Leys, C., Ley, C., Klein, O., Bernard, P., &amp; Licata, L. (2013). Detecting outliers: Do not use standard deviation around the mean, use absolute deviation around the median. <i>Journal of Experimental Social Psychology, 49</i>(4), 764–766. <a href="https://doi.org/10.1016/j.jesp.2013.03.013">doi:10.1016/j.jesp.2013.03.013</a></li>
+    <li>Liu, F. T., Ting, K. M., &amp; Zhou, Z.-H. (2008). Isolation forest. In <i>Proceedings of the 8th IEEE International Conference on Data Mining (ICDM 2008)</i> (pp. 413–422). <a href="https://doi.org/10.1109/ICDM.2008.17">doi:10.1109/ICDM.2008.17</a></li>
+    <li>Jayaratne, R., Liu, X., Thai, P., Dunbabin, M., &amp; Morawska, L. (2018). The influence of humidity on the performance of a low-cost air particle mass sensor and the effect of atmospheric fog. <i>Atmospheric Measurement Techniques, 11</i>(8), 4883–4890. <a href="https://doi.org/10.5194/amt-11-4883-2018">doi:10.5194/amt-11-4883-2018</a></li>
+    <li>Crilley, L. R., Shaw, M., Pound, R., Kramer, L. J., Price, R., Young, S., Lewis, A. C., &amp; Pope, F. D. (2018). Evaluation of a low-cost optical particle counter (Alphasense OPC-N2) for ambient air monitoring. <i>Atmospheric Measurement Techniques, 11</i>(2), 709–720. <a href="https://doi.org/10.5194/amt-11-709-2018">doi:10.5194/amt-11-709-2018</a></li>
+    <li>Morawska, L., Thai, P. K., Liu, X., Asumadu-Sakyi, A., Ayoko, G., Bartonova, A., Bedini, A., Chai, F., Christensen, B., Dunbabin, M., Gao, J., Hagler, G. S. W., Jayaratne, R., Kumar, P., Lau, A. K. H., Louie, P. K. K., Mazaheri, M., Ning, Z., Motta, N., Mullins, B., Rahman, M. M., Ristovski, Z., Shafiei, M., Tjondronegoro, D., Westerdahl, D., &amp; Williams, R. (2018). Applications of low-cost sensing technologies for air quality monitoring and exposure assessment: How far have they gone? <i>Environment International, 116</i>, 286–299. <a href="https://doi.org/10.1016/j.envint.2018.04.018">doi:10.1016/j.envint.2018.04.018</a></li>
+    <li>World Health Organization. (2021). <i>WHO global air quality guidelines: Particulate matter (PM2,5 and PM10), ozone, nitrogen dioxide, sulfur dioxide and carbon monoxide</i>. World Health Organization. <a href="https://www.who.int/publications/i/item/9789240034228">who.int/publications/i/item/9789240034228</a></li>
+    <li>NOAA Global Monitoring Laboratory. (2026). <i>The NOAA Annual Greenhouse Gas Index (AGGI)</i>. National Oceanic and Atmospheric Administration. <a href="https://gml.noaa.gov/aggi/aggi.html">gml.noaa.gov/aggi/aggi.html</a></li>
+  </ol>
+</div></section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var D = window.NOKTA, $ = function (id) { return document.getElementById(id); };
+  var CH = ["temperature_c", "rel_humidity_pct", "pressure_hpa", "pm1_ugm3", "pm25_ugm3", "pm10_ugm3", "co2_ppm", "light_lux", "uva_wm2", "uvb_wm2"];
+  /* ---------- station 1: the twin ---------- */
+  var vsel = $("tw-var");
+  CH.forEach(function (c) { var o = document.createElement("option"); o.value = c; o.textContent = NK.chName(c) + " (" + NK.chUnit(c) + ")"; if (c === "pm25_ugm3") o.selected = true; vsel.appendChild(o); });
+  function formHTML(v, c, r) {
+    if (!v) return "";
+    return "<b>" + v.pid + " · " + NK.typeName(v.type) + "</b><br>" + NK.L.campus[c] + " · " + NK.L.round + " " + r + " · " + v.start + " - " + v.end +
+      "<br>15 dakikadaki araç: <b>" + v.vehicles + "</b> · kişi: <b>" + v.people + "</b> · güneş: <b>" +
+      ({ sun: "tam", partial: "kısmi", shade: "gölge" })[v.sun] + "</b><br><span class='note'>" +
+      ["temperature_c", "rel_humidity_pct", "pm25_ugm3", "co2_ppm", "light_lux"].map(function (k) {
+        return NK.chName(k) + " " + NK.fmt(v.median[k], k === "light_lux" ? 0 : 1) + " " + NK.chUnit(k); }).join(" · ") + "</span>";
+  }
+  var tw = NOKTA3D.twin($("twin1"), {
+    accent: NK.cssVar("--p1"), fallback: "3B görünüm WebGL gerektirir.",
+    onPick: function (t, st) {
+      var r = st.round === "mean" ? "1" : st.round;
+      var v = D.twin[st.campus][r].filter(function (x) { return x.type === t; })[0];
+      $("tw-form-body").innerHTML = formHTML(v, st.campus, r);
+    }
+  });
+  function legend() {
+    if (!tw) return;
+    var v = tw.get("variable");
+    $("tw-legend").innerHTML = NK.chName(v) + " (" + NK.chUnit(v) + ") · Daha yüksek ve koyu: Daha büyük değer";
+  }
+  if (tw) {
+    tw.reset(); legend();
+    function tick(info) {
+      $("tw-clock").textContent = info.clock;
+      var st = info.at ? "Ölçüm noktası " + NK.shortName(info.at) + " · dakika " + (info.minute + 1) +
+        (info.minute < 2 ? " · sensörler dengeleniyor" : "") :
+        info.moving ? "Yürüyor: " + NK.shortName(info.next) : "Tur bitti";
+      $("tw-status").textContent = st;
+      if (info.at) {
+        var r = tw.get("round") === "mean" ? "1" : tw.get("round");
+        var v = D.twin[tw.get("campus")][r].filter(function (x) { return x.type === info.at; })[0];
+        $("tw-form-body").innerHTML = formHTML(v, tw.get("campus"), r);
+      }
+    }
+    $("tw-play").onclick = function () {
+      if (tw.get("round") === "mean") { $("tw-round").value = "1"; tw.set("round", "1"); }
+      if (tw.get("playing")) { tw.pause(); this.textContent = "▶ Turu oynat"; }
+      else { var b = this; tw.play(tick, function () { b.textContent = "▶ Turu oynat"; }); this.textContent = "❚❚ Duraklat"; NK.Store.log("twin:played", true); }
+    };
+    $("tw-reset").onclick = function () { tw.reset(); $("tw-play").textContent = "▶ Turu oynat"; tick({ clock: "10:00", at: null, moving: false }); $("tw-status").textContent = "Hazır"; };
+    $("tw-results").onclick = function () { tw.results(); $("tw-clock").textContent = "sonuçlar"; $("tw-status").textContent = "Seçilen turun ziyaret medyanları"; };
+    $("tw-speed").onchange = function () { tw.set("speed", +this.value); };
+    $("tw-campus").onchange = function () { tw.set("campus", this.value); };
+    $("tw-round").onchange = function () { if (this.value === "mean") tw.results(); tw.set("round", this.value); };
+    vsel.onchange = function () { tw.set("variable", this.value); legend(); };
+    $("tw-view").onchange = function () { tw.view(this.value); };
+  }
+  /* ---------- station 2: channel table ---------- */
+  var READ = {
+    temperature_c: "gövdenin gölgesindeki hava sıcaklığı, güneş gövdeyi ısıtınca yükselir",
+    rel_humidity_pct: "havanın doymaya ne kadar yakın olduğu, hava ısındıkça düşer",
+    pressure_hpa: "üstteki havanın ağırlığı, çoğunlukla yüksekliğe bağlıdır",
+    pm1_ugm3: "en ince partiküller, çoğunlukla yanmadan",
+    pm25_ugm3: "akciğerlerin derinlerine ulaşan ince partiküller [6]",
+    pm10_ugm3: "kaba tozu da içerir, örneğin yol ve çıplak zeminden",
+    co2_ppm: "nefes ve egzozdan gelir, küresel arka plan yaklaşık 425 ppm'dir [7]",
+    light_lux: "göz için parlaklık, 16 bitlik sensör 65 535 lx'te durur",
+    uva_wm2: "uzun dalga morötesi ışın, gölgede ışıktan daha az düşer",
+    uvb_wm2: "kısa dalga morötesi ışın, güneş yanığının nedeni"
+  };
+  var tb = document.querySelector("#chan-table tbody");
+  CH.forEach(function (c) {
+    var lo = Infinity, hi = -Infinity;
+    ["A", "B", "C"].forEach(function (k) { ["1", "2"].forEach(function (r) { D.twin[k][r].forEach(function (v) { var x = v.median[c]; if (x < lo) lo = x; if (x > hi) hi = x; }); }); });
+    var nd = c === "light_lux" ? 0 : c === "uvb_wm2" ? 2 : 1;
+    var tr = document.createElement("tr"); tr.style.cursor = "pointer";
+    tr.innerHTML = "<td><b>" + NK.chName(c) + "</b></td><td>" + NK.chUnit(c) + "</td><td>" + NK.fmt(lo, nd) + " - " + NK.fmt(hi, nd) + "</td><td style='text-align:left'>" + READ[c] + "</td>";
+    tr.onclick = function () { if (tw) { vsel.value = c; tw.set("variable", c); legend(); document.getElementById("s1").scrollIntoView({ behavior: "smooth" }); } };
+    tb.appendChild(tr);
+  });
+  /* ---------- station 3: data doctor ---------- */
+  var show = { warmup: true, flags: true, truth: false };
+  document.querySelectorAll("[data-qc]").forEach(function (b) {
+    b.onclick = function () { var k = b.getAttribute("data-qc"); show[k] = !show[k]; b.classList.toggle("on", show[k]); drawQC(); };
+  });
+  var FLAGMAP = { co2_ppm: ["spike_co2_ppm", "flatline_co2"], pm25_ugm3: ["spike_pm25_ugm3"], pm10_ugm3: ["spike_pm10_ugm3"], temperature_c: [], rel_humidity_pct: ["high_rh"] };
+  var TRUTHMAP = { co2_ppm: ["spike_co2", "flatline_co2"], pm25_ugm3: ["spike_pm25", "high_rh"], pm10_ugm3: ["spike_pm10"], temperature_c: [], rel_humidity_pct: ["high_rh"] };
+  function drawQC() {
+    var V = D.qc.visits[$("qc-visit").value], ch = $("qc-ch").value;
+    var pts = V.sec.map(function (s, i) { return [s / 60, V.raw[ch][i]]; });
+    var marks = [];
+    if (show.flags) FLAGMAP[ch].forEach(function (f) { V.flags[f].forEach(function (on, i) { if (on && V.raw[ch][i] !== null) marks.push({ x: V.sec[i] / 60, y: V.raw[ch][i], color: "var(--bad)", r: 6 }); }); });
+    if (show.truth) V.truth.forEach(function (t, i) { if (TRUTHMAP[ch].indexOf(t) >= 0 && V.raw[ch][i] !== null) marks.push({ x: V.sec[i] / 60, y: V.raw[ch][i], color: "var(--ink)", shape: "x" }); });
+    var bands = show.warmup ? [{ x0: 0, x1: 2, fill: "var(--warn)", label: "ısınma", opacity: 0.16 }] : [];
+    Charts.line($("qc-chart"), {
+      height: 300, series: [{ name: ch, color: NK.cssVar("--p1"), pts: pts, width: 1.8 }], marks: marks, bands: bands,
+      x: { label: "varıştan sonraki dakika", min: 0, max: 15 }, y: { label: NK.chName(ch) + " (" + NK.chUnit(ch) + ")" },
+      tooltip: function (xv) {
+        var i = Math.max(0, Math.min(V.sec.length - 1, Math.round(xv * 6)));
+        return { x: V.sec[i] / 60, html: NK.fmt(V.sec[i], 0) + " s · <b>" + NK.fmt(V.raw[ch][i], ch === "co2_ppm" ? 0 : 1) + "</b> " + NK.chUnit(ch) + (V.truth[i] !== "ok" ? "<br>yerleştirilen: " + V.truth[i] : "") };
+      }
+    });
+    Charts.legend($("qc-legend"), [{ color: NK.cssVar("--p1"), label: "ham ölçümler, 10 saniyede bir" }].concat(show.flags ? [{ color: NK.cssVar("--bad"), label: "dedektörün işaretlediği (halka)" }] : []).concat(show.truth ? [{ color: NK.cssVar("--ink"), label: "yerleştirilen sorun (çarpı)" }] : []));
+  }
+  $("qc-visit").onchange = drawQC; $("qc-ch").onchange = drawQC; drawQC();
+  var NAMES = { warmup: "taşıma sonrası ısınma", spike_pm25: "PM2,5 hatası", spike_pm10: "PM10 hatası", spike_co2: "aralık dışı CO₂", flatline_co2: "donmuş CO₂ sensörü", gap: "kayıt kesintisi", saturated: "sınırındaki ışık sensörü", high_rh: "%85 üzeri nem" };
+  var sb = document.querySelector("#qc-score tbody");
+  D.qc.score.forEach(function (r) { sb.insertAdjacentHTML("beforeend", "<tr><td>" + NAMES[r.problem] + "</td><td>" + r.planted + "</td><td>" + r.flagged + "</td><td>" + r.caught + "</td></tr>"); });
+  /* ---------- station 4: co-location ---------- */
+  var coCh = "temperature_c", coFix = false, SC = { S1: "--t1", S2: "--t2", S3: "--t3" };
+  function drawCo() {
+    var S = D.coloc.series[coCh], off = D.coloc.offsets;
+    var series = ["S1", "S2", "S3"].map(function (s) {
+      return { name: s, color: NK.cssVar(SC[s]), width: 1.8, pts: S[s].map(function (v, i) {
+        var y = v; if (coFix) { y = coCh === "temperature_c" ? v - off[s].t : coCh === "co2_ppm" ? v - off[s].co2 : v / off[s].pm; }
+        return [i, y]; }) };
+    });
+    Charts.line($("co-chart"), { height: 260, series: series, x: { label: "yan yana testin dakikası" }, y: { label: NK.chName(coCh) + " (" + NK.chUnit(coCh) + ")" },
+      tooltip: function (xv) { var i = Math.max(0, Math.min(119, Math.round(xv))); return { x: i, html: series.map(function (s) { return s.name + ": <b>" + NK.fmt(s.pts[i][1], 2) + "</b>"; }).join("<br>") }; } });
+    Charts.legend($("co-legend"), series.map(function (s) { return { color: s.color, label: s.name + (coFix ? " (hizalanmış)" : "") }; }));
+  }
+  document.querySelectorAll("#co-ch button").forEach(function (b) { b.onclick = function () { document.querySelectorAll("#co-ch button").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); coCh = b.getAttribute("data-v"); drawCo(); }; });
+  $("co-fix").onclick = function () { coFix = !coFix; this.classList.toggle("on", coFix); drawCo(); NK.Store.log("coloc:aligned", coFix); };
+  drawCo();
+  /* ---------- station 5: humidity ---------- */
+  var cv = $("hum-canvas"), g = cv.getContext("2d"), parts = [];
+  for (var i = 0; i < 70; i++) parts.push({ x: Math.random() * 560, y: Math.random() * 250, r: 2 + Math.random() * 4, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4 });
+  function C(rh) { var aw = Math.min(0.99, rh / 100); return 1 + (0.3 / 1.65) / (-1 + 1 / aw); }
+  function humTick() {
+    var rh = +$("hum-rh").value, c = C(rh), grow = Math.cbrt(c);
+    g.clearRect(0, 0, 560, 250);
+    g.fillStyle = NK.cssVar("--panel"); g.fillRect(0, 0, 560, 250);
+    g.fillStyle = "rgba(255,240,170,0.25)"; g.beginPath(); g.moveTo(470, 0); g.lineTo(560, 0); g.lineTo(300, 250); g.lineTo(200, 250); g.fill();
+    parts.forEach(function (p) {
+      p.x += p.vx; p.y += p.vy; if (p.x < 0) p.x += 560; if (p.x > 560) p.x -= 560; if (p.y < 0) p.y += 250; if (p.y > 250) p.y -= 250;
+      var rr = p.r * grow;
+      g.fillStyle = "rgba(107,90,70,0.85)"; g.beginPath(); g.arc(p.x, p.y, p.r, 0, 6.283); g.fill();
+      if (grow > 1.02) { g.strokeStyle = "rgba(42,120,214,0.75)"; g.lineWidth = 1.5; g.fillStyle = "rgba(42,120,214,0.18)"; g.beginPath(); g.arc(p.x, p.y, rr, 0, 6.283); g.fill(); g.stroke(); }
+    });
+    g.fillStyle = NK.cssVar("--ink"); g.font = "700 15px Atkinson Hyperlegible, sans-serif";
+    g.fillText("Sensörün gördüğü kütle × " + NK.fmt(c, 2), 14, 24);
+    requestAnimationFrame(humTick);
+  }
+  function humText() { var rh = +$("hum-rh").value; $("hum-out").textContent = rh + " %"; $("hum-cap").textContent = "Kahverengi çekirdekler kuru partiküllerdir, mavi kabuklar ise şu nemde alınan sudur: " + rh + " %."; }
+  $("hum-rh").oninput = humText; humText(); humTick();
+  var H = D.humidity.campusC_round2, order = ["green", "crowded", "sunny_hard", "reference", "traffic", "shaded"];
+  var items = [];
+  order.forEach(function (t) {
+    var h = H.filter(function (x) { return x.type === t; })[0];
+    items.push({ label: NK.shortName(t) + " · ham (" + NK.fmt(h.rh, 0) + " %)", value: h.raw, color: NK.cssVar("--muted") });
+    items.push({ label: NK.shortName(t) + " · düzeltilmiş", value: h.corrected, color: NK.cssVar("--p1"), bold: true });
+  });
+  Charts.bars($("hum-bars"), { items: items, unit: "µg/m³", nd: 1, labelW: 210, rowH: 26 });
+  document.addEventListener("nokta:theme", function () {
+    drawQC(); drawCo();
+    items.forEach(function (it) { it.color = NK.cssVar(it.bold ? "--p1" : "--muted"); });
+    Charts.bars($("hum-bars"), { items: items, unit: "µg/m³", nd: 1, labelW: 210, rowH: 26, instant: true });
+  });
+});
+</script>
+
+</main>
+<footer class="sig"><div class="wrap"><a class="btn primary next" href="part2.html">2. Bölüm · Analiz et →</a><br><b>Prof. Dr. Utku Köse</b><br>Süleyman Demirel Üniversitesi, Yapay Zekâ Uygulama ve Araştırma Merkezi (YAZEM) · University of North Dakota · Universidad Panamericana · Vel Tech University<br><a href="https://www.utkukose.com">utkukose.com</a> · <a href="https://orcid.org/0000-0002-9652-6415">ORCID 0000-0002-9652-6415</a> · <a href="https://github.com/utkukose">github.com/utkukose</a><br>NOKTA, Nesnel Ölçüm, Katılım, Takip ve Aksiyon Ağı · ÜNİDES 2026<br>Bu atölye alandaki güncel gelişmelere göre güncellenmektedir. İlk sürüm: Kasım 2026.<br>İçerik: CC BY 4.0 · Kod: MIT · Veriler sentetiktir ve gerçek bir kampüsü anlatmaz.</div></footer>
+<div class="overlay" id="help-overlay" hidden><div class="box"><button class="btn close" data-act="close">✕</button><h3>Tuşlar</h3><p><kbd>←</kbd> <kbd>→</kbd> önceki ya da sonraki durak · <kbd>[</kbd> <kbd>]</kbd> önceki ya da sonraki bölüm · <kbd>T</kbd> kâğıt ya da gece görünümü · <kbd>F</kbd> tam ekran · <kbd>L</kbd> İngilizce ya da Türkçe · <kbd>B</kbd> beş dakikalık ara · <kbd>?</kbd> bu yardım</p></div></div>
+<div class="overlay" id="break-overlay" hidden><div class="box"><button class="btn close" data-act="close">✕</button>
+<p class="kicker">Ara</p><div class="breakclock">5:00</div>
+<p class="lead" style="text-align:center;margin:14px auto 0">Aradan sonraki soru: 1. turda altı noktadan hangisinin en sıcak görüneceğini düşünüyorsunuz ve bu neden yanıltıcı olabilir?</p></div></div>
+</body>
+</html>

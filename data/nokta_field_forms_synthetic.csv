@@ -1,0 +1,37 @@
+campus,round,point_id,point_type,visit_order,date,start,end,vehicles_15min,people_15min,sun_condition,sky,green_cover_pct,station,notes
+A,1,P1,shaded,1,2026-11-11,10:00,10:15,2,27,shade,clear,5,S1,"Narrow passage between two buildings, no direct sun. First stop: the station was brought from indoors."
+A,1,P2,traffic,2,2026-11-11,10:25,10:40,101,29,partial,clear,5,S1,Two meters from the campus road; buses stop nearby.
+A,1,P3,reference,3,2026-11-11,10:50,11:05,0,6,sun,clear,30,S1,Open lawn edge away from roads and entrances.
+A,1,P4,sunny_hard,4,2026-11-11,11:15,11:30,16,36,sun,clear,0,S1,Concrete square in full sun; station housing in direct sun.
+A,1,P5,crowded,5,2026-11-11,11:40,11:55,7,290,partial,clear,10,S1,Faculty entrance; a group was smoking near the door.
+A,1,P6,green,6,2026-11-11,12:05,12:20,0,25,partial,clear,85,S1,Under a row of trees; grass irrigated in the morning.
+A,2,P6,green,1,2026-11-18,10:00,10:15,0,13,partial,partly cloudy,85,S1,Under a row of trees; grass irrigated in the morning. First stop: the station was brought from indoors.
+A,2,P5,crowded,2,2026-11-18,10:25,10:40,3,248,partial,partly cloudy,10,S1,Faculty entrance; a group was smoking near the door. Logger restarted once.
+A,2,P4,sunny_hard,3,2026-11-18,10:50,11:05,8,31,sun,partly cloudy,0,S1,Concrete square in full sun; station housing in direct sun.
+A,2,P3,reference,4,2026-11-18,11:15,11:30,0,8,sun,partly cloudy,30,S1,Open lawn edge away from roads and entrances.
+A,2,P2,traffic,5,2026-11-18,11:40,11:55,90,27,partial,partly cloudy,5,S1,Two meters from the campus road; buses stop nearby.
+A,2,P1,shaded,6,2026-11-18,12:05,12:20,0,33,shade,partly cloudy,5,S1,"Narrow passage between two buildings, no direct sun."
+B,1,P1,shaded,1,2026-11-12,10:00,10:15,2,34,shade,clear,5,S2,"Narrow passage between two buildings, no direct sun. First stop: the station was brought from indoors. CO2 reading looked frozen for a few minutes."
+B,1,P2,traffic,2,2026-11-12,10:25,10:40,116,21,partial,clear,5,S2,Two meters from the campus road; buses stop nearby.
+B,1,P3,reference,3,2026-11-12,10:50,11:05,0,12,sun,clear,30,S2,Open lawn edge away from roads and entrances.
+B,1,P4,sunny_hard,4,2026-11-12,11:15,11:30,10,35,sun,clear,0,S2,Concrete square in full sun; station housing in direct sun.
+B,1,P5,crowded,5,2026-11-12,11:40,11:55,6,258,partial,clear,10,S2,Faculty entrance; a group was smoking near the door.
+B,1,P6,green,6,2026-11-12,12:05,12:20,0,24,partial,clear,85,S2,Under a row of trees; grass irrigated in the morning.
+B,2,P6,green,1,2026-11-19,10:00,10:15,0,17,partial,partly cloudy,85,S2,Under a row of trees; grass irrigated in the morning. First stop: the station was brought from indoors.
+B,2,P5,crowded,2,2026-11-19,10:25,10:40,1,258,partial,partly cloudy,10,S2,Faculty entrance; a group was smoking near the door.
+B,2,P4,sunny_hard,3,2026-11-19,10:50,11:05,7,43,sun,partly cloudy,0,S2,Concrete square in full sun; station housing in direct sun.
+B,2,P3,reference,4,2026-11-19,11:15,11:30,0,8,sun,partly cloudy,30,S2,Open lawn edge away from roads and entrances.
+B,2,P2,traffic,5,2026-11-19,11:40,11:55,95,31,partial,partly cloudy,5,S2,Two meters from the campus road; buses stop nearby.
+B,2,P1,shaded,6,2026-11-19,12:05,12:20,3,52,shade,partly cloudy,5,S2,"Narrow passage between two buildings, no direct sun."
+C,1,P1,shaded,1,2026-11-10,10:00,10:15,1,44,shade,clear,5,S3,"Narrow passage between two buildings, no direct sun. First stop: the station was brought from indoors."
+C,1,P2,traffic,2,2026-11-10,10:25,10:40,115,26,partial,clear,5,S3,Two meters from the campus road; buses stop nearby.
+C,1,P3,reference,3,2026-11-10,10:50,11:05,0,9,sun,clear,30,S3,Open lawn edge away from roads and entrances.
+C,1,P4,sunny_hard,4,2026-11-10,11:15,11:30,6,27,sun,clear,0,S3,Concrete square in full sun; station housing in direct sun.
+C,1,P5,crowded,5,2026-11-10,11:40,11:55,3,244,partial,clear,10,S3,Faculty entrance; a group was smoking near the door.
+C,1,P6,green,6,2026-11-10,12:05,12:20,0,24,partial,clear,85,S3,Under a row of trees; grass irrigated in the morning.
+C,2,P6,green,1,2026-11-17,10:00,10:15,0,20,partial,"humid, hazy",85,S3,Under a row of trees; grass irrigated in the morning. First stop: the station was brought from indoors.
+C,2,P5,crowded,2,2026-11-17,10:25,10:40,6,252,partial,"humid, hazy",10,S3,Faculty entrance; a group was smoking near the door.
+C,2,P4,sunny_hard,3,2026-11-17,10:50,11:05,10,26,sun,"humid, hazy",0,S3,Concrete square in full sun; station housing in direct sun.
+C,2,P3,reference,4,2026-11-17,11:15,11:30,0,10,sun,"humid, hazy",30,S3,Open lawn edge away from roads and entrances.
+C,2,P2,traffic,5,2026-11-17,11:40,11:55,82,18,partial,"humid, hazy",5,S3,Two meters from the campus road; buses stop nearby.
+C,2,P1,shaded,6,2026-11-17,12:05,12:20,2,28,shade,"humid, hazy",5,S3,"Narrow passage between two buildings, no direct sun."

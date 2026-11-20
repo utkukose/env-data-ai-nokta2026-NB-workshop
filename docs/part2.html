@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Part 2 · Analyze: Fair comparisons</title>
+<meta name="description" content="Why the last point of a morning looks warm, how the reversed second round fixes it, typical values, a correlation that points the wrong way and the dew point.">
+<link rel="stylesheet" href="assets/vendor/fonts/atkinson.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E7A5F'/%3E%3Ccircle cx='32' cy='32' r='11' fill='white'/%3E%3Ccircle cx='32' cy='32' r='20' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6 6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site-data.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/charts.js"></script>
+
+</head>
+<body data-part="p2">
+<header class="topbar"><div class="wrap">
+<a class="brand" href="index.html"><span class="dot"></span><span class="name">NOKTA · AI workshop<small>Environmental data analysis and interpretation</small></span></a>
+<nav class="route" aria-label="Workshop route"><ol><li data-page="index"><a href="index.html"><span class="pin"></span><span class="lbl">Start</span></a></li><li data-page="part1"><a href="part1.html"><span class="pin"></span><span class="lbl">1 Measure</span></a></li><li data-page="part2"><a href="part2.html"><span class="pin"></span><span class="lbl">2 Analyze</span></a></li><li data-page="part3"><a href="part3.html"><span class="pin"></span><span class="lbl">3 Discover</span></a></li><li data-page="part4"><a href="part4.html"><span class="pin"></span><span class="lbl">4 Explain</span></a></li><li data-page="part5"><a href="part5.html"><span class="pin"></span><span class="lbl">5 Share and act</span></a></li><li data-page="lab"><a href="lab.html"><span class="pin"></span><span class="lbl">Lab</span></a></li></ol></nav>
+<div class="tools"><a class="lang" href="tr/part2.html" title="Türkçe sürüm">TR</a>
+<button data-act="theme" title="T">◐</button><button data-act="full" title="F">⛶</button><button data-act="help" title="?">?</button></div>
+</div></header>
+<main>
+
+<section class="parthead"><div class="wrap">
+  <p class="kicker">Part 2 · Analyze · 0:30 to 0:52</p>
+  <h1>Fair comparisons</h1>
+  <p class="lead">Clean data can still mislead. This part separates the effect of a place from the effect of the clock. It also chooses statistics that resist spikes and tests whether a strong correlation means what it seems to mean.</p>
+  <ol class="station-index">
+    <li><a href="#s1"><b>1</b>The last stop looks warm</a></li>
+    <li><a href="#s2"><b>2</b>Typical values</a></li>
+    <li><a href="#s3"><b>3</b>Related or caused?</a></li>
+    <li><a href="#s4"><b>4</b>Wetter or colder?</a></li>
+  </ol>
+</div></section>
+
+<section class="station" id="s1"><div class="wrap">
+  <div class="station-head"><span class="no">1</span><h2>The last stop looks warm</h2></div>
+  <div class="poll" data-id="p2-s1" data-answer="later">
+    <div class="q" data-label="Predict">In Round 1 on Campus A, the green area reads 13.9 °C and the road reads 13.3 °C. Is the green area really warmer than the road?</div>
+    <div class="opts"><button data-v="yes">Yes, trees keep heat</button><button data-v="later">No, it was measured later in a warming morning</button><button data-v="same">They are equal</button></div>
+    <div class="verdict"></div>
+    <div class="msg-right" hidden>The green area was the last stop at 12:05, the road the second at 10:25. The morning warmed by more than three degrees in between, so the clock, not the place, made the green area look warm.</div>
+    <div class="msg-wrong" hidden>The green area was the last stop at 12:05, the road the second at 10:25. The morning warmed by more than three degrees in between, so the clock, not the place, made the green area look warm.</div>
+  </div>
+  <div class="grid2 wide-left">
+    <div class="viz">
+      <div class="controls">
+        <div class="seg" id="dr-step"><button class="on" data-v="1">Round 1</button><button data-v="2">+ Round 2 (reversed)</button><button data-v="3">Fair result</button></div>
+        <label>Campus <select id="dr-campus"><option>A</option><option>B</option><option>C</option></select></label>
+        <label>Channel <select id="dr-ch"><option value="temperature_c">Temperature</option><option value="pm25_ugm3">PM2.5</option><option value="co2_ppm">CO₂</option></select></label>
+      </div>
+      <div id="dr-chart"></div>
+      <div class="legend" id="dr-legend"></div>
+      <p class="cap" id="dr-cap"></p>
+    </div>
+    <div>
+      <p>Round 1 visits P1 to P6 and Round 2 visits P6 to P1 at the same clock times. A point visited early in one round is visited late in the other. Averaging the two rounds gives every point the same average clock time.</p>
+      <div class="formula">
+        <span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8539em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.9463em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.2603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mpunct mtight">,</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mpunct mtight">,</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord">Δ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7178em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">ref</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>
+        <p class="sym"><b>x<sub>p,1</sub></b>, <b>x<sub>p,2</sub></b> visit medians of point p in Rounds 1 and 2 · <b>x̄<sub>p</sub></b> two-round mean · <b>Δ<sub>p</sub></b> difference from the quiet reference point (°C). If the morning warms by b °C per hour, slot k of Round 1 and slot 5 − k of Round 2 add the same drift to every point. The drift cancels in Δ<sub>p</sub>.</p>
+        <div class="worked"><b>Worked example, Campus A.</b> Green: (13.91 + 8.34) / 2 = 11.12 °C. Road: (13.30 + 12.39) / 2 = 12.85 °C. Reference: (13.10 + 11.37) / 2 = 12.23 °C. So Δ<sub>green</sub> = −1.11 °C and Δ<sub>road</sub> = +0.62 °C: The green area is cooler after all.</div>
+      </div>
+      <p class="note">The reversal removes a straight-line trend. A curved trend, such as sunshine that peaks around noon, can leave a small remainder, and the field notes help to judge it. Hard sunlit surfaces store heat while trees shade and cool by evaporation [1]. Part of the heat at the sunny square is also the sun warming the sensor housing.</p>
+    </div>
+  </div>
+  <div class="takeaway"><b>Takeaway.</b> Compare points through the two-round mean and through the difference from the reference point. A ranking from one round mixes the place with the hour.</div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb#scrollTo=sec-2" target="_blank" rel="noopener">Colab ↗</a><p>Sections 2.1 and 2.2 of the Colab notebook build the visit table and the fair table for every campus and channel.</p></div>
+</div></section>
+
+<section class="station" id="s2"><div class="wrap">
+  <div class="station-head"><span class="no">2</span><h2>Typical values, not only averages</h2></div>
+  <div class="poll" data-id="p2-s2" data-answer="above">
+    <div class="q" data-label="Predict">At the busy student area, people smoke near the door. Where will the mean of PM2.5 sit compared with the median?</div>
+    <div class="opts"><button data-v="above">Above the median</button><button data-v="equal">About equal</button><button data-v="below">Below the median</button></div>
+    <div class="verdict"></div>
+    <div class="msg-right" hidden>Short, strong plumes pull the mean up while the median stays with the typical minute. Turn on the means (white dots) to see the gap.</div>
+    <div class="msg-wrong" hidden>Short, strong plumes pull the mean up while the median stays with the typical minute. Turn on the means (white dots) to see the gap.</div>
+  </div>
+  <div class="grid2 wide-left">
+    <div class="viz">
+      <div class="controls">
+        <div class="seg" id="bx-ch"><button data-v="temp_anomaly" class="on">Temperature</button><button data-v="pm25_anomaly">PM2.5</button><button data-v="co2_anomaly">CO₂</button><button data-v="log10_lux">Light (log)</button></div>
+        <button class="btn" id="bx-mean">Show means</button>
+      </div>
+      <div id="bx-chart"></div>
+    </div>
+    <div>
+      <p>Each box collects the clean minutes of one point type from the three campuses and both rounds. The values are differences from the median of their own campus and round, so a cold coastal morning and a cold highland morning can sit in one box.</p>
+      <div class="formula">
+        <span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathrm">IQR</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord text"><span class="mord">whiskers: </span></span><span class="mopen">[</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord">1.5</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathrm">IQR</span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1.5</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathrm">IQR</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mclose">]</span></span></span></span></span>
+        <p class="sym"><b>Q<sub>1</sub></b>, <b>Q<sub>3</sub></b> first and third quartiles: A quarter of the minutes lie below Q<sub>1</sub> and a quarter above Q<sub>3</sub> · the line in the box is the median · circles beyond the whiskers are unusual minutes, not errors.</p>
+      </div>
+      <div class="everyday"><b>In everyday life:</b> One person with a very high salary moves the average income of a street, but not its median. A smoking group does the same to the PM2.5 mean of a minute.</div>
+    </div>
+  </div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb#scrollTo=sec-2" target="_blank" rel="noopener">Colab ↗</a><p>Section 2.3 of the Colab notebook draws the same box plots and prints the mean and the median of every point type.</p></div>
+</div></section>
+
+<section class="station" id="s3"><div class="wrap">
+  <div class="station-head"><span class="no">3</span><h2>Related or caused?</h2></div>
+  <div class="poll" data-id="p2-s3" data-answer="campus">
+    <div class="q" data-label="Predict">Over all 468 minutes, warmer minutes come with higher air pressure: r = 0.81. Does warm air raise the pressure?</div>
+    <div class="opts"><button data-v="yes">Yes</button><button data-v="campus">No, the campus drives both</button><button data-v="noise">It is noise</button></div>
+    <div class="verdict"></div>
+    <div class="msg-right" hidden>The coastal campus is both warmer and lower, so it has higher pressure. Inside each campus and round the relation turns negative, because the pressure falls slowly while the morning warms.</div>
+    <div class="msg-wrong" hidden>The coastal campus is both warmer and lower, so it has higher pressure. Inside each campus and round the relation turns negative, because the pressure falls slowly while the morning warms.</div>
+  </div>
+  <div class="grid2 wide-left">
+    <div class="viz">
+      <div class="controls"><div class="seg" id="sc-mode"><button class="on" data-v="pooled">All minutes together</button><button data-v="within">Within each campus and round</button></div></div>
+      <div id="sc-chart"></div>
+      <div class="legend" id="sc-legend"></div>
+    </div>
+    <div>
+      <div class="formula">
+        <span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.5697em;vertical-align:-1.13em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4397em;"><span style="top:-2.1999em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9101em;"><span class="svg-align" style="top:-3.2em;"><span class="pstrut" style="height:3.2em;"></span><span class="mord" style="padding-left:1em;"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.162em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-2.8701em;"><span class="pstrut" style="height:3.2em;"></span><span class="hide-tail" style="min-width:1.02em;height:1.28em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.28em" viewBox="0 0 400000 1296" preserveAspectRatio="xMinYMin slice"><path d="M263,681c0.7,0,18,39.7,52,119
+c34,79.3,68.167,158.7,102.5,238c34.3,79.3,51.8,119.3,52.5,120
+c340,-704.7,510.7,-1060.3,512,-1067
+l0 -0
+c4.7,-7.3,11,-11,19,-11
+H40000v40H1012.3
+s-271.3,567,-271.3,567c-38.7,80.7,-84,175,-136,283c-52,108,-89.167,185.3,-111.5,232
+c-22.3,46.7,-33.8,70.3,-34.5,71c-4.7,4.7,-12.3,7,-23,7s-12,-1,-12,-1
+s-109,-253,-109,-253c-72.7,-168,-109.3,-252,-110,-252c-10.7,8,-22,16.7,-34,26
+c-22,17.3,-33.3,26,-34,26s-26,-26,-26,-26s76,-59,76,-59s76,-60,76,-60z
+M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3299em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9101em;"><span class="svg-align" style="top:-3.2em;"><span class="pstrut" style="height:3.2em;"></span><span class="mord" style="padding-left:1em;"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.162em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1944em;"><span class="mord">ˉ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1944em;"><span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-2.8701em;"><span class="pstrut" style="height:3.2em;"></span><span class="hide-tail" style="min-width:1.02em;height:1.28em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.28em" viewBox="0 0 400000 1296" preserveAspectRatio="xMinYMin slice"><path d="M263,681c0.7,0,18,39.7,52,119
+c34,79.3,68.167,158.7,102.5,238c34.3,79.3,51.8,119.3,52.5,120
+c340,-704.7,510.7,-1060.3,512,-1067
+l0 -0
+c4.7,-7.3,11,-11,19,-11
+H40000v40H1012.3
+s-271.3,567,-271.3,567c-38.7,80.7,-84,175,-136,283c-52,108,-89.167,185.3,-111.5,232
+c-22.3,46.7,-33.8,70.3,-34.5,71c-4.7,4.7,-12.3,7,-23,7s-12,-1,-12,-1
+s-109,-253,-109,-253c-72.7,-168,-109.3,-252,-110,-252c-10.7,8,-22,16.7,-34,26
+c-22,17.3,-33.3,26,-34,26s-26,-26,-26,-26s76,-59,76,-59s76,-60,76,-60z
+M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3299em;"><span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.6897em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.162em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="mclose">)</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1944em;"><span class="mord">ˉ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1944em;"><span></span></span></span></span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.13em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+        <p class="sym"><b>r</b> Pearson correlation, between −1 and +1 · <b>x<sub>i</sub></b> temperature (°C) and <b>y<sub>i</sub></b> pressure (hPa) of minute i · <b>x̄</b>, <b>ȳ</b> their means. r measures how well a straight line fits. It says nothing about which variable moves the other.</p>
+      </div>
+      <table class="tbl"><thead><tr><th>Group</th><th>r</th></tr></thead><tbody>
+        <tr><td><b>All minutes</b></td><td><b>+0.81</b></td></tr>
+        <tr><td>A · Round 1 / 2</td><td>−0.62 / −0.44</td></tr>
+        <tr><td>B · Round 1 / 2</td><td>−0.58 / −0.41</td></tr>
+        <tr><td>C · Round 1 / 2</td><td>−0.64 / −0.51</td></tr>
+      </tbody></table>
+      <p class="note">When a hidden third factor drives two variables, the pooled correlation can even reverse its sign. This is known as Simpson's paradox.</p>
+    </div>
+  </div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb#scrollTo=sec-2" target="_blank" rel="noopener">Colab ↗</a><p>Section 2.4 of the Colab notebook computes the pooled and the within-group correlations and draws a correlation map of all channels.</p></div>
+</div></section>
+
+<section class="station" id="s4"><div class="wrap">
+  <div class="station-head"><span class="no">4</span><h2>Wetter or only colder?</h2></div>
+  <div class="grid2">
+    <div>
+      <p>Relative humidity depends on temperature: The same air shows a higher relative humidity where it is cooler. The dew point removes this effect. It is the temperature at which the air would become saturated, so it changes only when water is added or removed.</p>
+      <div class="formula">
+        <span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">γ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0463em;vertical-align:-0.686em;"></span><span class="mop">ln</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">100</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathrm">RH</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:2.1297em;vertical-align:-0.7693em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2519em;vertical-align:-0.8804em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">γ</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">γ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">17.625</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7241em;"></span><span class="mord">243.04</span><span class="mord"><span class="mspace"> </span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7241em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∘</span></span></span></span></span></span></span></span><span class="mord mathrm">C</span></span></span></span></span>
+        <p class="sym"><b>T</b> temperature (°C) · <b>RH</b> relative humidity (%) · <b>T<sub>d</sub></b> dew point (°C) · <b>a</b>, <b>b</b> constants of the Magnus form [2].</p>
+        <div class="worked"><b>Worked example.</b> T = 13.3 °C and RH = 43 %. ln(0.43) = −0.844 and 17.625 × 13.3 / (243.04 + 13.3) = 0.914, so γ = 0.070. T<sub>d</sub> = 243.04 × 0.070 / (17.625 − 0.070) ≈ <b>1.0 °C</b>.</div>
+      </div>
+    </div>
+    <div class="viz">
+      <div class="slider"><span>Temperature</span><input type="range" id="dp-t" min="0" max="30" step="0.1" value="13.3"><output id="dp-to"></output></div>
+      <div class="slider"><span>Relative humidity</span><input type="range" id="dp-rh" min="10" max="100" step="1" value="43"><output id="dp-rho"></output></div>
+      <div class="stats"><div class="stat"><div class="v" id="dp-out"></div><div class="k">dew point (°C)</div></div><div class="stat"><div class="v" id="dp-gap"></div><div class="k">margin to saturation (°C)</div></div></div>
+      <div class="controls"><label>Campus and round <select id="dp-grp"><option value="A1">A · 1</option><option value="A2">A · 2</option><option value="B1">B · 1</option><option value="B2">B · 2</option><option value="C1">C · 1</option><option value="C2">C · 2</option></select></label></div>
+      <div id="dp-bars"></div>
+      <p class="cap">Median dew point of each point type. Relative humidity differs by up to 20 points between the six places, while the dew point barely moves: Most of the difference comes from temperature. The green area sits slightly higher, as watered grass and leaves add moisture.</p>
+    </div>
+  </div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb#scrollTo=sec-2" target="_blank" rel="noopener">Colab ↗</a><p>Section 2.5 of the Colab notebook adds the dew point to every minute. The exercise there asks for the dew point of your own point.</p></div>
+</div></section>
+
+<section class="station" id="refs"><div class="wrap">
+  <h3>References</h3>
+  <ol class="note">
+    <li>Oke, T. R. (1982). The energetic basis of the urban heat island. <i>Quarterly Journal of the Royal Meteorological Society, 108</i>(455), 1–24. <a href="https://doi.org/10.1002/qj.49710845502">doi:10.1002/qj.49710845502</a></li>
+    <li>Alduchov, O. A., &amp; Eskridge, R. E. (1996). Improved Magnus form approximation of saturation vapor pressure. <i>Journal of Applied Meteorology, 35</i>(4), 601–609. <a href="https://doi.org/10.1175/1520-0450(1996)035%3C0601:IMFAOS%3E2.0.CO;2">doi:10.1175/1520-0450(1996)035&lt;0601:IMFAOS&gt;2.0.CO;2</a></li>
+  </ol>
+</div></section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var D = window.NOKTA, $ = function (id) { return document.getElementById(id); };
+  var ORDER = ["shaded", "traffic", "reference", "sunny_hard", "crowded", "green"];
+  /* ---------- station 1: drift ---------- */
+  var step = 1;
+  function drawDrift() {
+    var c = $("dr-campus").value, ch = $("dr-ch").value, nd = ch === "co2_ppm" ? 0 : 1;
+    var rows = D.fair[ch].filter(function (r) { return r.campus === c; });
+    var byT = {}; rows.forEach(function (r) { byT[r.type] = r; });
+    if (step < 3) {
+      var series = [], marks = [];
+      [1, 2].forEach(function (rd) {
+        if (rd === 2 && step < 2) return;
+        var pts = ORDER.map(function (t) { return [D.visit_hours[c + "-" + rd + "-" + t], byT[t]["r" + rd], t]; }).sort(function (a, b) { return a[0] - b[0]; });
+        series.push({ name: rd, color: NK.cssVar(rd === 1 ? "--ink" : "--muted"), dash: rd === 2 ? "5 4" : null, width: 1.5, pts: pts.map(function (p) { return [p[0], p[1]]; }) });
+        pts.forEach(function (p) { marks.push({ x: p[0], y: p[1], color: NK.typeColor(p[2]), r: rd === 1 ? 8 : 6 }); });
+      });
+      Charts.line($("dr-chart"), {
+        height: 320, series: series, marks: marks, x: { label: "clock time (hours)", min: 9.9, max: 12.5, fmt: function (h) { var m = Math.round(h * 60); return Math.floor(m / 60) + ":" + String(m % 60).padStart(2, "0"); } },
+        y: { label: NK.chName(ch) + " (" + NK.chUnit(ch) + ")" },
+        tooltip: function (xv) {
+          var best = null; [1, 2].forEach(function (rd) { if (rd === 2 && step < 2) return; ORDER.forEach(function (t) { var h = D.visit_hours[c + "-" + rd + "-" + t]; if (!best || Math.abs(h - xv) < Math.abs(best.h - xv)) best = { h: h, t: t, rd: rd }; }); });
+          return { x: best.h, html: NK.typeName(best.t) + "<br>" + NK.L.round + " " + best.rd + ": <b>" + NK.fmt(byT[best.t]["r" + best.rd], nd) + "</b> " + NK.chUnit(ch) };
+        }
+      });
+      Charts.legend($("dr-legend"), ORDER.map(function (t) { return { color: NK.typeColor(t), label: NK.shortName(t) }; }).concat([{ color: NK.cssVar("--ink"), label: NK.L.round + " 1" }]).concat(step > 1 ? [{ color: NK.cssVar("--muted"), label: NK.L.round + " 2 (dashed)" }] : []));
+      $("dr-cap").textContent = step === 1 ? "Round 1 only: Each dot is a visit median at its clock time. Later stops ride on a warmer morning." : "Round 2 visits the same points in reverse. Early stops of Round 1 are now late, and the ranking changes.";
+    } else {
+      var items = ORDER.filter(function (t) { return t !== "reference"; }).map(function (t) { return { label: NK.shortName(t), value: byT[t].ref, color: NK.typeColor(t) }; })
+        .sort(function (a, b) { return b.value - a.value; });
+      Charts.bars($("dr-chart"), { items: items, signed: true, nd: nd === 0 ? 0 : 2, unit: NK.chUnit(ch), title: "Two-round mean minus the reference point", labelW: 120 });
+      $("dr-legend").innerHTML = "";
+      $("dr-cap").textContent = "The fair result: Each bar is the difference from the quiet reference, with the hour balanced out.";
+    }
+  }
+  document.querySelectorAll("#dr-step button").forEach(function (b) { b.onclick = function () { document.querySelectorAll("#dr-step button").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); step = +b.getAttribute("data-v"); $("dr-chart")._prev = null; drawDrift(); NK.Store.log("drift:step" + step, true); }; });
+  $("dr-campus").onchange = function () { $("dr-chart")._prev = null; drawDrift(); }; $("dr-ch").onchange = function () { $("dr-chart")._prev = null; drawDrift(); };
+  drawDrift();
+  /* ---------- station 2: box plots ---------- */
+  var bxCh = "temp_anomaly", bxMean = false;
+  var UNIT = { temp_anomaly: "°C", pm25_anomaly: "µg/m³", co2_anomaly: "ppm", log10_lux: "log₁₀ lx" };
+  var YL = { temp_anomaly: "Temperature minus campus-round median (°C)", pm25_anomaly: "PM2.5 minus campus-round median (µg/m³)", co2_anomaly: "CO₂ minus campus-round median (ppm)", log10_lux: "Light, log₁₀ of lux" };
+  function drawBox() {
+    var B = D.box[bxCh];
+    Charts.box($("bx-chart"), { height: 330, ylabel: YL[bxCh], showMean: bxMean,
+      groups: ORDER.map(function (t) { var b = B[t]; return Object.assign({ label: NK.shortName(t), color: NK.typeColor(t), sub: "n = " + b.n }, b); }),
+      tip: function (g) { return "<b>" + g.label + "</b><br>median " + NK.fmt(g.med, 2) + " · mean " + NK.fmt(g.mean, 2) + " " + UNIT[bxCh] + "<br>Q1 " + NK.fmt(g.q1, 2) + " · Q3 " + NK.fmt(g.q3, 2); } });
+  }
+  document.querySelectorAll("#bx-ch button").forEach(function (b) { b.onclick = function () { document.querySelectorAll("#bx-ch button").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); bxCh = b.getAttribute("data-v"); drawBox(); }; });
+  $("bx-mean").onclick = function () { bxMean = !bxMean; this.classList.toggle("on", bxMean); drawBox(); };
+  drawBox();
+  /* ---------- station 3: Simpson ---------- */
+  var scMode = "pooled", CC = { A: "--t1", B: "--t2", C: "--t3" };
+  function fit(pts) {
+    var n = pts.length, mx = 0, my = 0; pts.forEach(function (p) { mx += p[0]; my += p[1]; }); mx /= n; my /= n;
+    var sxy = 0, sxx = 0; pts.forEach(function (p) { sxy += (p[0] - mx) * (p[1] - my); sxx += (p[0] - mx) * (p[0] - mx); });
+    var b = sxy / sxx, lo = Math.min.apply(null, pts.map(function (p) { return p[0]; })), hi = Math.max.apply(null, pts.map(function (p) { return p[0]; }));
+    return { x0: lo, y0: my + b * (lo - mx), x1: hi, y1: my + b * (hi - mx) };
+  }
+  function drawSc() {
+    var P = D.corr.pts, within = scMode === "within", mean = {};
+    if (within) {
+      P.forEach(function (p) { var g = p[2] + p[3]; mean[g] = mean[g] || [0, 0, 0]; mean[g][0] += p[0]; mean[g][1] += p[1]; mean[g][2] += 1; });
+    }
+    function X(p) { return within ? p[0] - mean[p[2] + p[3]][0] / mean[p[2] + p[3]][2] : p[0]; }
+    function Y(p) { return within ? p[1] - mean[p[2] + p[3]][1] / mean[p[2] + p[3]][2] : p[1]; }
+    var pts = P.map(function (p) { return { x: X(p), y: Y(p), color: NK.cssVar(CC[p[2]]), r: 3.2, op: 0.6, tip: NK.L.campus[p[2]] + " · " + NK.L.round + " " + p[3] + "<br>" + NK.typeName(p[4]) + "<br>" + NK.fmt(p[0], 1) + " °C · " + NK.fmt(p[1], 1) + " hPa" }; });
+    var lines = [];
+    if (!within) { var f = fit(P.map(function (p) { return [p[0], p[1]]; })); f.color = NK.cssVar("--ink"); f.label = "r = " + NK.signed(D.corr.pooled, 2); lines.push(f); }
+    else { ["A1", "A2", "B1", "B2", "C1", "C2"].forEach(function (g) { var sub = P.filter(function (p) { return p[2] + p[3] === g; }); var f = fit(sub.map(function (p) { return [X(p), Y(p)]; })); f.color = NK.cssVar(CC[g[0]]); f.w = 2.5; lines.push(f); }); }
+    Charts.scatter($("sc-chart"), { height: 360, pts: pts, lines: lines,
+      x: { label: within ? "Temperature minus its campus-round mean (°C)" : "Temperature (°C)" },
+      y: { label: within ? "Pressure minus its campus-round mean (hPa)" : "Air pressure (hPa)" }, tip: function (p) { return p.tip; } });
+    Charts.legend($("sc-legend"), ["A", "B", "C"].map(function (c) { return { color: NK.cssVar(CC[c]), label: NK.L.campus[c] }; }));
+  }
+  document.querySelectorAll("#sc-mode button").forEach(function (b) { b.onclick = function () { document.querySelectorAll("#sc-mode button").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); scMode = b.getAttribute("data-v"); drawSc(); }; });
+  drawSc();
+  /* ---------- station 4: dew point ---------- */
+  function dew(t, rh) { var a = 17.625, b = 243.04, g = Math.log(rh / 100) + a * t / (b + t); return b * g / (a - g); }
+  function drawDew() {
+    var t = +$("dp-t").value, rh = +$("dp-rh").value, td = dew(t, rh);
+    $("dp-to").textContent = NK.fmt(t, 1) + " °C"; $("dp-rho").textContent = NK.fmt(rh, 0) + " %";
+    $("dp-out").textContent = NK.fmt(td, 1); $("dp-gap").textContent = NK.fmt(t - td, 1);
+  }
+  $("dp-t").oninput = drawDew; $("dp-rh").oninput = drawDew; drawDew();
+  function drawDewBars() {
+    var g = $("dp-grp").value, M = D.dew[g];
+    Charts.bars($("dp-bars"), { items: ORDER.map(function (t) { return { label: NK.shortName(t), value: M[t], color: NK.typeColor(t) }; }), nd: 1, unit: "°C", labelW: 110, rowH: 28 });
+  }
+  $("dp-grp").onchange = function () { $("dp-bars")._prev = null; drawDewBars(); }; drawDewBars();
+  document.addEventListener("nokta:theme", function () { drawDrift(); drawBox(); drawSc(); drawDew(); drawDewBars(); });
+});
+</script>
+
+</main>
+<footer class="sig"><div class="wrap"><a class="btn primary next" href="part3.html">Part 3 · Discover →</a><br><b>Prof. Dr. Utku Köse</b><br>Süleyman Demirel University, AI Application and Research Center (YAZEM) · University of North Dakota · Universidad Panamericana · Vel Tech University<br><a href="https://www.utkukose.com">utkukose.com</a> · <a href="https://orcid.org/0000-0002-9652-6415">ORCID 0000-0002-9652-6415</a> · <a href="https://github.com/utkukose">github.com/utkukose</a><br>NOKTA, Objective Measurement, Participation, Monitoring and Action Network · ÜNİDES 2026<br>This workshop is updated in line with current developments in the field. First version: November 2026.<br>Content: CC BY 4.0 · Code: MIT · The data are synthetic and describe no real campus.</div></footer>
+<div class="overlay" id="help-overlay" hidden><div class="box"><button class="btn close" data-act="close">✕</button><h3>Keys</h3><p><kbd>←</kbd> <kbd>→</kbd> previous or next station · <kbd>[</kbd> <kbd>]</kbd> previous or next part · <kbd>T</kbd> paper or night view · <kbd>F</kbd> full screen · <kbd>L</kbd> English or Turkish · <kbd>B</kbd> five-minute break · <kbd>?</kbd> this help</p></div></div>
+<div class="overlay" id="break-overlay" hidden><div class="box"><button class="btn close" data-act="close">✕</button>
+<p class="kicker">Break</p><div class="breakclock">5:00</div>
+<p class="lead" style="text-align:center;margin:14px auto 0">Question for after the break: Which of the six points do you expect to look warmest in Round 1, and why might that be misleading?</p></div></div>
+</body>
+</html>

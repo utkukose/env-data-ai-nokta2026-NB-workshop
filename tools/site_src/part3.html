@@ -1,0 +1,239 @@
+<!--META{"title": "⟪Part 3 · Discover: AI finds patterns‖3. Bölüm · Keşfet: YZ örüntü bulur⟫", "desc": "⟪k-means groups 468 minutes in a rotating 3D space, principal component analysis compresses six channels, and the groups get names.‖k-ortalamalar 468 dakikayı dönen bir 3B uzayda gruplar, temel bileşen analizi altı kanalı sıkıştırır ve gruplara ad verilir.⟫", "part": "p3", "three": true, "next": ["part4", "⟪Part 4 · Explain‖4. Bölüm · Açıkla⟫"]}-->
+<section class="parthead"><div class="wrap">
+  <p class="kicker">⟪Part 3 · Discover · 0:57 to 1:17‖3. Bölüm · Keşfet · 0:57-1:17⟫</p>
+  <h1>⟪AI finds patterns‖YZ örüntü bulur⟫</h1>
+  <p class="lead">⟪Unsupervised learning looks for structure without being told the answer. Here it receives {{n:counts.minutes:0}} clean minutes and no point names, and the question is whether it can find the microclimates of the campus on its own.‖Gözetimsiz öğrenme, cevap verilmeden yapı arar. Burada {{n:counts.minutes:0}} temiz dakikayı nokta adları olmadan alır. Soru, kampüsün mikroiklimlerini kendi başına bulup bulamayacağıdır.⟫</p>
+  <ol class="station-index">
+    <li><a href="#s1"><b>1</b>⟪How many kinds of place?‖Kaç tür yer var?⟫</a></li>
+    <li><a href="#s2"><b>2</b>⟪k-means step by step‖Adım adım k-ortalamalar⟫</a></li>
+    <li><a href="#s3"><b>3</b>⟪Six channels, three axes‖Altı kanal, üç eksen⟫</a></li>
+    <li><a href="#s4"><b>4</b>⟪Name the groups‖Grupları adlandırın⟫</a></li>
+  </ol>
+</div></section>
+
+<section class="scrolly"><div class="wrap scrolly-grid">
+  <div class="sticky-col">
+    <div class="stage3d tall" id="cloud3d">
+      <div class="hud"><span id="cl-title">⟪468 minutes, no names‖468 dakika, isim yok⟫</span><span id="cl-info"></span></div>
+      <div class="legend3d" id="cl-legend"></div>
+    </div>
+    <div class="controls">
+      <div class="seg" id="cl-color"><button class="on" data-v="none">⟪No color‖Renksiz⟫</button><button data-v="type">⟪Point type‖Nokta türü⟫</button><button data-v="cluster">⟪k-means group‖k-ortalamalar grubu⟫</button></div>
+      <label>⟪Highlight‖Öne çıkar⟫ <select id="cl-hl"><option value="">⟪all types‖bütün türler⟫</option></select></label>
+      <button class="btn" id="cl-rot">⟪Rotate‖Döndür⟫</button>
+    </div>
+    <div class="controls">
+      <label>k <select id="km-k"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label>
+      <button class="btn" id="km-init">⟪1 · Place centers‖1 · Merkezleri yerleştir⟫</button>
+      <button class="btn" id="km-assign">⟪2 · Assign‖2 · Ata⟫</button>
+      <button class="btn" id="km-move">⟪3 · Move centers‖3 · Merkezleri taşı⟫</button>
+      <button class="btn primary" id="km-run">⟪Run to the end‖Sonuna kadar çalıştır⟫</button>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="v" id="km-it">0</div><div class="k">⟪iterations‖yineleme⟫</div></div>
+      <div class="stat"><div class="v" id="km-j">–</div><div class="k">⟪J, total squared distance‖J, toplam kare uzaklık⟫</div></div>
+      <div class="stat"><div class="v" id="km-sil">–</div><div class="k">⟪silhouette in the notebook‖defterdeki siluet⟫</div></div>
+    </div>
+    <p class="note" id="km-msg">⟪The scene stays here while the stations on the right move on.‖Sağdaki duraklar ilerlerken sahne burada kalır.⟫</p>
+  </div>
+  <div class="steps-col">
+    <div class="station" id="s1">
+      <div class="station-head"><span class="no">1</span><h2>⟪How many kinds of place?‖Kaç tür yer var?⟫</h2></div>
+      <div class="poll" data-id="p3-s1">
+        <div class="q" data-label="⟪Predict‖Tahmin edin⟫">⟪Rotate the cloud. Each dot is one clean minute, placed by its temperature difference, its brightness and its PM2.5 difference. How many groups do you see?‖Bulutu döndürün. Her nokta, sıcaklık farkına, parlaklığına ve PM2,5 farkına göre yerleştirilmiş temiz bir dakikadır. Kaç grup görüyorsunuz?⟫</div>
+        <div class="opts"><button data-v="2">2</button><button data-v="3">3</button><button data-v="4">4</button><button data-v="5">⟪5 or more‖5 ya da daha fazla⟫</button></div>
+        <div class="verdict"></div>
+        <div class="msg-right" hidden>⟪Now color the dots by point type. Shaded minutes sit low and dark, sunny minutes warm and bright, and the plumes of the road and the entrance shoot upwards. The number of groups is a choice that the analyst defends, not a fact the data hand over.‖Şimdi noktaları nokta türüne göre renklendirin. Gölgeli dakikalar aşağıda ve karanlık tarafta, güneşli dakikalar sıcak ve parlak tarafta durur, yolun ve girişin bulutları ise yukarı fırlar. Grup sayısı verinin kendiliğinden verdiği bir gerçek değil, analistin savunduğu bir seçimdir.⟫</div>
+      </div>
+      <p>⟪The three axes are the difference of the temperature from its campus-round median (°C), the base-10 logarithm of light (lx) and the difference of PM2.5 from its campus-round median (µg/m³). The logarithm keeps a shady 5000 lx and a sunny 60 000 lx on one readable axis.‖Eksenler sırasıyla sıcaklığın kampüs-tur medyanından farkı (°C), ışığın 10 tabanında logaritması (lx) ve PM2,5'in kampüs-tur medyanından farkıdır (µg/m³). Logaritma, gölgedeki 5000 lx ile güneşteki 60 000 lx'i okunabilir tek bir eksende tutar.⟫</p>
+      <p class="note">⟪Values beyond three standard deviations are drawn on the edge of the box. Hover over a dot to see its minute.‖Üç standart sapmanın ötesindeki değerler kutunun kenarında çizilir. Bir noktanın dakikasını görmek için üzerine gelin.⟫</p>
+    </div>
+    <div class="station" id="s2">
+      <div class="station-head"><span class="no">2</span><h2>⟪k-means step by step‖Adım adım k-ortalamalar⟫</h2></div>
+      <p>⟪k-means places k centers, gives each minute to its nearest center, moves every center to the mean of its minutes and repeats until nothing changes [1]. Before that, every channel is standardized, so that one degree and one microgram count on the same scale. Use the buttons under the scene: 1, 2, 3, then 2 and 3 again.‖k-ortalamalar k merkez yerleştirir, her dakikayı en yakın merkeze verir, her merkezi kendi dakikalarının ortalamasına taşır ve hiçbir şey değişmeyene kadar bunu tekrarlar [1]. Bundan önce her kanal standartlaştırılır. Böylece bir derece ile bir mikrogram aynı ölçekte sayılır. Sahnenin altındaki düğmeleri kullanın: 1, 2, 3, sonra yeniden 2 ve 3.⟫</p>
+      <div class="formula">
+        <texd>\begin{gathered} z_{ij} = \frac{x_{ij} - \mu_j}{\sigma_j}, \qquad d(i, c) = \sqrt{\sum_{j=1}^{3} \bigl(z_{ij} - m_{cj}\bigr)^2} \\[4pt] J = \sum_{i} d\bigl(i, c(i)\bigr)^2 \end{gathered}</texd>
+        <p class="sym">⟪<b>x<sub>ij</sub></b> value of channel j in minute i · <b>μ<sub>j</sub></b>, <b>σ<sub>j</sub></b> mean and standard deviation of channel j · <b>m<sub>c</sub></b> center of group c · <b>c(i)</b> the group of minute i · <b>J</b> total squared distance, which every step lowers.‖<b>x<sub>ij</sub></b> i. dakikadaki j kanalının değeri · <b>μ<sub>j</sub></b>, <b>σ<sub>j</sub></b> j kanalının ortalaması ve standart sapması · <b>m<sub>c</sub></b> c grubunun merkezi · <b>c(i)</b> i. dakikanın grubu · <b>J</b> her adımın düşürdüğü toplam kare uzaklık.⟫</p>
+        <div class="worked">⟪<b>Worked example.</b> A sunny minute: ΔT = {{n:k.x0:1}} °C, log₁₀ lux = {{n:k.x1:1}}, ΔPM2.5 = {{n:k.x2:1}}. For temperature, μ = {{n:k.mu0:2}} and σ = {{n:k.sd0:2}}, so z = ({{n:k.x0:1}} − {{n:k.mu0:2}}) / {{n:k.sd0:2}} = {{n:k.z0:2}}. The full z vector is ({{n:k.z0:2}}, {{n:k.z1:2}}, {{n:k.z2:2}}). Its distances to the four centers of the notebook are {{n:k.d0:2}}, {{n:k.d1:2}}, {{n:k.d2:2}} and {{n:k.d3:2}}, so the minute joins group {{n:k.best:0}}, the warm and bright one.‖<b>Çözümlü örnek.</b> Güneşli bir dakika: ΔT = {{n:k.x0:1}} °C, log₁₀ lüks = {{n:k.x1:1}}, ΔPM2,5 = {{n:k.x2:1}}. Sıcaklık için μ = {{n:k.mu0:2}} ve σ = {{n:k.sd0:2}} olduğundan z = ({{n:k.x0:1}} − {{n:k.mu0:2}}) / {{n:k.sd0:2}} = {{n:k.z0:2}}. Bütün z vektörü ({{n:k.z0:2}}, {{n:k.z1:2}}, {{n:k.z2:2}}) olur. Defterdeki dört merkeze uzaklıkları {{n:k.d0:2}}, {{n:k.d1:2}}, {{n:k.d2:2}} ve {{n:k.d3:2}}'dir. Dakika, sıcak ve parlak olan {{n:k.best:0}}. gruba katılır.⟫</div>
+      </div>
+      <div class="viz"><div id="km-elbow"></div>
+      <p class="cap">⟪J falls with every extra group, so it cannot choose k alone. The silhouette score compares how close a minute is to its own group and to the next one, from −1 to +1 [2]. Here it hardly changes between 3 and 6.‖J her ek grupla düşer, bu yüzden k'yi tek başına seçemez. Siluet skoru bir dakikanın kendi grubuna ve bir sonraki gruba ne kadar yakın olduğunu −1 ile +1 arasında karşılaştırır [2]. Burada 3 ile 6 arasında neredeyse değişmez.⟫</p></div>
+      <div class="nbref"><a class="badge" href="{{COLAB}}#scrollTo=sec-3" target="_blank" rel="noopener">Colab ↗</a><p>⟪Sections 3.1 to 3.3 of the Colab notebook standardize the channels and run k-means with scikit-learn [3]. They draw the same cloud in an interactive 3D plot and compute J and the silhouette for every k.‖Colab defterinin 3.1-3.3. kısımları kanalları standartlaştırır, k-ortalamaları scikit-learn ile çalıştırır [3], aynı bulutu etkileşimli bir 3B grafikte çizer ve her k için J ile siluet skorunu hesaplar.⟫</p></div>
+    </div>
+    <div class="station" id="s3">
+      <div class="station-head"><span class="no">3</span><h2>⟪Six channels, three axes‖Altı kanal, üç eksen⟫</h2></div>
+      <div class="poll" data-id="p3-s3" data-answer="85">
+        <div class="q" data-label="⟪Predict‖Tahmin edin⟫">⟪Principal component analysis (PCA) turns six standardized channels into three new axes. How much of the variation can three axes keep?‖Temel bileşen analizi (TBA) altı standart kanalı üç yeni eksene dönüştürür. Üç eksen değişimin ne kadarını koruyabilir?⟫</div>
+        <div class="opts"><button data-v="30">⟪about 30 %‖yaklaşık %30⟫</button><button data-v="60">⟪about 60 %‖yaklaşık %60⟫</button><button data-v="85">⟪about 85 %‖yaklaşık %85⟫</button><button data-v="100">100 %</button></div>
+        <div class="verdict"></div>
+        <div class="msg-right" hidden>⟪The channels move together: Sun raises light, ultraviolet and temperature at once, and humidity falls. Three axes keep most of the story.‖Kanallar birlikte hareket eder: Güneş ışığı, morötesini ve sıcaklığı aynı anda yükseltir, nem ise düşer. Üç eksen hikâyenin büyük kısmını korur.⟫</div>
+        <div class="msg-wrong" hidden>⟪About 85 %. The channels move together: Sun raises light, ultraviolet and temperature at once, and humidity falls, so three axes keep most of the story.‖Yaklaşık %85. Kanallar birlikte hareket eder: Güneş çıktığında ışık, morötesi ve sıcaklık birlikte yükselir, nem ise düşer. Bu yüzden üç eksen hikâyenin büyük kısmını korur.⟫</div>
+      </div>
+      <div class="controls"><div class="seg" id="pc-mode"><button class="on" data-v="raw">⟪Three sensor axes‖Üç sensör ekseni⟫</button><button data-v="pca">⟪Three principal components‖Üç temel bileşen⟫</button></div></div>
+      <div class="viz"><div id="pc-bars"></div>
+      <p class="cap">⟪Share of the variation of the six standardized channels kept by each component. The arrows in the 3D scene show how each channel loads on the components.‖Her bileşenin altı standart kanalın değişiminden koruduğu pay. 3B sahnedeki oklar her kanalın bileşenlere nasıl yüklendiğini gösterir.⟫</p></div>
+      <div class="formula">
+        <texd>\mathbf{s}_i = \mathbf{W}^{\top}\mathbf{z}_i, \qquad \text{⟪share of component‖bileşenin payı⟫ } k = \frac{\lambda_k}{\sum_{j=1}^{6}\lambda_j}</texd>
+        <p class="sym">⟪<b>z<sub>i</sub></b> the six standardized channels of minute i · <b>W</b> the loadings, one column per component · <b>s<sub>i</sub></b> the new coordinates · <b>λ<sub>k</sub></b> variance along component k [4]. The first component explains <b>{{n:cluster.pca.var.0:3}}</b> of the variation, the second {{n:cluster.pca.var.1:3}} and the third {{n:cluster.pca.var.2:3}}.‖<b>z<sub>i</sub></b> i. dakikanın altı standart kanalı · <b>W</b> yükler, her bileşen için bir sütun · <b>s<sub>i</sub></b> yeni koordinatlar · <b>λ<sub>k</sub></b> k bileşeni boyunca varyans [4]. Birinci bileşen değişimin <b>{{n:cluster.pca.var.0:3}}</b> kadarını, ikincisi {{n:cluster.pca.var.1:3}}, üçüncüsü {{n:cluster.pca.var.2:3}} kadarını açıklar.⟫</p>
+      </div>
+      <p>⟪The first component is a sunshine axis: Light, ultraviolet and the temperature difference load positively and humidity negatively. It separates the shaded passage from the sunny square without being told that such places exist.‖Birinci bileşen bir güneşlenme eksenidir: Işık, morötesi ve sıcaklık farkı pozitif, nem ise negatif yüklenir. Böyle yerlerin varlığı söylenmeden gölgeli geçidi güneşli meydandan ayırır.⟫</p>
+      <div class="nbref"><a class="badge" href="{{COLAB}}#scrollTo=sec-3" target="_blank" rel="noopener">Colab ↗</a><p>⟪Section 3.4 of the Colab notebook fits the PCA, prints the loadings and draws the three components in 3D.‖Colab defterinin 3.4. kısmı TBA'yı kurar, yükleri yazdırır ve üç bileşeni 3B olarak çizer.⟫</p></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="station" id="s4"><div class="wrap">
+  <div class="station-head"><span class="no">4</span><h2>⟪Name the groups‖Grupları adlandırın⟫</h2></div>
+  <p>⟪k-means returns numbers, not names. The names come from reading each center and the field forms. Choose a name for each of the four groups of the notebook, then check.‖k-ortalamalar ad değil numara döndürür. Adlar, her merkezin ve saha formlarının okunmasından gelir. Defterdeki dört grubun her biri için bir ad seçin, sonra denetleyin.⟫</p>
+  <div class="grid2 wide-left">
+    <div class="viz"><div id="nm-cards"></div></div>
+    <div class="card">
+      <div class="controls"><button class="btn primary" id="nm-check">⟪Check the names‖Adları denetle⟫</button></div>
+      <p id="nm-result" class="muted">⟪Each card shows the center in sensor units and which point types fill the group.‖Her kart merkezi sensör birimleriyle ve grubu hangi nokta türlerinin doldurduğunu gösterir.⟫</p>
+      <div class="takeaway"><b>⟪Takeaway.‖Çıkarım.⟫</b> ⟪A cluster is a hypothesis about the campus. It becomes a finding only when the field notes, a second round or another campus show the same group.‖Bir küme kampüs hakkında bir hipotezdir. Saha notları, ikinci bir tur ya da başka bir kampüs aynı grubu gösterdiğinde bulguya dönüşür.⟫</div>
+    </div>
+  </div>
+</div></section>
+
+<section class="station" id="refs"><div class="wrap">
+  <h3>⟪References‖Kaynaklar⟫</h3>
+  <ol class="note">
+    <li>Lloyd, S. P. (1982). Least squares quantization in PCM. <i>IEEE Transactions on Information Theory, 28</i>(2), 129–137. <a href="https://doi.org/10.1109/TIT.1982.1056489">doi:10.1109/TIT.1982.1056489</a></li>
+    <li>Rousseeuw, P. J. (1987). Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. <i>Journal of Computational and Applied Mathematics, 20</i>, 53–65. <a href="https://doi.org/10.1016/0377-0427(87)90125-7">doi:10.1016/0377-0427(87)90125-7</a></li>
+    <li>Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel, O., Blondel, M., Prettenhofer, P., Weiss, R., Dubourg, V., Vanderplas, J., Passos, A., Cournapeau, D., Brucher, M., Perrot, M., &amp; Duchesnay, É. (2011). Scikit-learn: Machine learning in Python. <i>Journal of Machine Learning Research, 12</i>, 2825–2830. <a href="https://jmlr.org/papers/v12/pedregosa11a.html">jmlr.org/papers/v12/pedregosa11a.html</a></li>
+    <li>Jolliffe, I. T., &amp; Cadima, J. (2016). Principal component analysis: A review and recent developments. <i>Philosophical Transactions of the Royal Society A, 374</i>(2065), 20150202. <a href="https://doi.org/10.1098/rsta.2015.0202">doi:10.1098/rsta.2015.0202</a></li>
+  </ol>
+</div></section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var D = window.NOKTA, C = D.cluster, $ = function (id) { return document.getElementById(id); };
+  var ORDER = ["shaded", "traffic", "reference", "sunny_hard", "crowded", "green"];
+  var N = C.z.length, SLOT = ["--t1", "--t2", "--t3", "--t4", "--t5", "--t6"];
+  function clip(v) { return Math.max(-1, Math.min(1, v / 3)); }
+  var rawPos = C.z.map(function (z) { return [clip(z[0]), clip(z[1]), clip(z[2])]; });
+  var pcaPos = [], pidx = 0, maxS = 0;
+  C.pca.scores.forEach(function (s) { s.forEach(function (v) { maxS = Math.max(maxS, Math.abs(v)); }); });
+  // PCA scores exist for the minutes without missing values; map them in order
+  var pcaFull = []; C.pca.scores.forEach(function (s) { pcaFull.push([s[0] / 4, s[1] / 4, s[2] / 4].map(function (v) { return Math.max(-1, Math.min(1, v)); })); });
+  var AX = ["⟪ΔT (°C)‖ΔT (°C)⟫", "⟪log₁₀ light‖log₁₀ ışık⟫", "⟪ΔPM2.5‖ΔPM2,5⟫"];
+  var hl = $("cl-hl");
+  ORDER.forEach(function (t) { var o = document.createElement("option"); o.value = t; o.textContent = NK.typeName(t); hl.appendChild(o); });
+  var cloud = NOKTA3D.cloud($("cloud3d"), { n: N, autoRotate: true, fallback: "⟪3D view needs WebGL.‖3B görünüm WebGL gerektirir.⟫",
+    tip: function (i) { var r = C.raw[i]; return "<b>" + NK.typeName(C.type[i]) + "</b><br>" + NK.L.campus[C.campus[i]] + " · " + NK.L.round + " " + C.round[i] + "<br>ΔT " + NK.signed(r[0], 1) + " °C · log₁₀ lx " + NK.fmt(r[1], 2) + " · ΔPM2.5 " + NK.signed(r[2], 1); } });
+  var colorMode = "none", labels = null, cents = null, k = 4, iter = 0, mode = "raw";
+  function gray() { return NK.cssVar("--muted"); }
+  function paint() {
+    if (!cloud) return;
+    var h = hl.value, cols = [];
+    for (var i = 0; i < N; i++) {
+      var c = gray();
+      if (colorMode === "type") c = (!h || C.type[i] === h) ? NK.typeColor(C.type[i]) : (document.documentElement.getAttribute("data-theme") === "dark" ? "#2b3a35" : "#dfe5e0");
+      else if (colorMode === "cluster" && labels) c = NK.cssVar(SLOT[labels[i] % 6]);
+      cols.push(c);
+    }
+    cloud.setColors(cols);
+    var lg = $("cl-legend");
+    if (colorMode === "type") lg.innerHTML = ORDER.map(function (t) { return '<span style="margin-right:8px"><i class="sw" style="background:' + NK.typeColor(t) + '"></i>' + NK.shortName(t) + "</span>"; }).join("");
+    else if (colorMode === "cluster" && labels) { var ks = {}; labels.forEach(function (l) { ks[l] = 1; }); lg.innerHTML = Object.keys(ks).map(function (l) { return '<span style="margin-right:8px"><i class="sw" style="background:' + NK.cssVar(SLOT[l % 6]) + '"></i>⟪group‖grup⟫ ' + (+l + 1) + "</span>"; }).join(""); }
+    else lg.textContent = "⟪Gray: Every minute looks alike‖Gri: Her dakika birbirine benzer⟫";
+  }
+  if (cloud) { cloud.setAxes(AX); cloud.setPositions(rawPos, false); paint(); }
+  document.querySelectorAll("#cl-color button").forEach(function (b) { b.onclick = function () {
+    document.querySelectorAll("#cl-color button").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); colorMode = b.getAttribute("data-v");
+    if (colorMode === "cluster" && !labels) { labels = C.labels[k].slice(); if (cloud) cloud.setCentroids(C.centers[k].map(function (c) { return [clip(c[0]), clip(c[1]), clip(c[2])]; }), C.centers[k].map(function (_, j) { return NK.cssVar(SLOT[j % 6]); })); }
+    paint(); }; });
+  hl.onchange = function () { if (colorMode !== "type") { colorMode = "type"; document.querySelectorAll("#cl-color button").forEach(function (x) { x.classList.toggle("on", x.getAttribute("data-v") === "type"); }); } paint(); };
+  var rot = true; $("cl-rot").onclick = function () { rot = !rot; this.classList.toggle("on", rot); if (cloud) cloud.autoRotate(rot); };
+  $("cl-rot").classList.add("on");
+  /* ---------- k-means in the browser ---------- */
+  function rng(seed) { return function () { seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function d2(a, b) { return (a[0] - b[0]) * (a[0] - b[0]) + (a[1] - b[1]) * (a[1] - b[1]) + (a[2] - b[2]) * (a[2] - b[2]); }
+  function initCentres() {
+    var r = rng(2026 + k), Z = C.z; cents = [Z[Math.floor(r() * N)].slice()];
+    while (cents.length < k) {
+      var ds = Z.map(function (z) { return Math.min.apply(null, cents.map(function (c) { return d2(z, c); })); });
+      var tot = ds.reduce(function (a, b) { return a + b; }, 0), u = r() * tot, acc = 0, pick = 0;
+      for (var i = 0; i < N; i++) { acc += ds[i]; if (acc >= u) { pick = i; break; } }
+      cents.push(Z[pick].slice());
+    }
+    labels = null; iter = 0; showCentres(true); colorMode = "cluster"; syncColorButtons();
+    labels = new Array(N).fill(0).map(function () { return -1; }); paint(); report();
+  }
+  function assign() {
+    if (!cents) initCentres();
+    var changed = 0;
+    labels = labels || [];
+    C.z.forEach(function (z, i) { var best = 0, bd = Infinity; cents.forEach(function (c, j) { var dd = d2(z, c); if (dd < bd) { bd = dd; best = j; } }); if (labels[i] !== best) changed++; labels[i] = best; });
+    paint(); report(); return changed;
+  }
+  function move() {
+    if (!labels || labels[0] === -1) assign();
+    cents = cents.map(function (c, j) { var s = [0, 0, 0], n = 0; C.z.forEach(function (z, i) { if (labels[i] === j) { s[0] += z[0]; s[1] += z[1]; s[2] += z[2]; n++; } }); return n ? [s[0] / n, s[1] / n, s[2] / n] : c; });
+    iter++; showCentres(false); report();
+  }
+  function J() { if (!labels || labels[0] === -1) return null; var s = 0; C.z.forEach(function (z, i) { s += d2(z, cents[labels[i]]); }); return s; }
+  function report() { $("km-it").textContent = iter; var j = J(); $("km-j").textContent = j === null ? "–" : NK.fmt(j, 1); $("km-sil").textContent = NK.fmt(C.silhouette[k], 3); }
+  function showCentres(fresh) {
+    if (!cloud) return;
+    var P = cents.map(function (c) { return [clip(c[0]), clip(c[1]), clip(c[2])]; });
+    if (fresh) cloud.setCentroids(P, cents.map(function (_, j) { return NK.cssVar(SLOT[j % 6]); })); else cloud.moveCentroids(P);
+  }
+  function syncColorButtons() { document.querySelectorAll("#cl-color button").forEach(function (x) { x.classList.toggle("on", x.getAttribute("data-v") === colorMode); }); }
+  $("km-k").onchange = function () { k = +this.value; cents = null; labels = null; iter = 0; if (cloud) cloud.setCentroids([], []); report(); drawElbow(); };
+  $("km-init").onclick = function () { initCentres(); NK.Store.log("kmeans:k", k); };
+  $("km-assign").onclick = function () { assign(); };
+  $("km-move").onclick = function () { move(); };
+  $("km-run").onclick = function () {
+    if (!cents) initCentres();
+    var guard = 0;
+    (function stepLoop() { var ch = assign(); if (ch === 0 || guard++ > 40) { $("km-msg").textContent = "⟪Converged after‖Yakınsadı:⟫ " + iter + " ⟪iterations.‖yineleme.⟫"; NK.Store.log("kmeans:run", { k: k, it: iter }); return; } setTimeout(function () { move(); setTimeout(stepLoop, 450); }, 450); })();
+  };
+  function drawElbow() {
+    var ks = [2, 3, 4, 5, 6];
+    Charts.line($("km-elbow"), { height: 220, series: [{ name: "J", color: NK.cssVar("--p3"), dots: true, pts: ks.map(function (q) { return [q, C.inertia[q]]; }) }],
+      marks: [{ x: k, y: C.inertia[k], color: "var(--ink)", r: 9 }], x: { label: "k", min: 1.8, max: 6.2, fmt: function (v) { return Math.round(v) === v ? String(v) : ""; } },
+      y: { label: "⟪J in the notebook (scikit-learn)‖Defterdeki J (scikit-learn)⟫" },
+      tooltip: function (xv) { var q = Math.max(2, Math.min(6, Math.round(xv))); return { x: q, html: "k = " + q + "<br>J = " + NK.fmt(C.inertia[q], 1) + "<br>⟪silhouette‖siluet⟫ = " + NK.fmt(C.silhouette[q], 3) }; } });
+  }
+  drawElbow(); report();
+  /* ---------- PCA ---------- */
+  var FEAT = { temp_anomaly: "ΔT", rel_humidity_pct: "⟪humidity‖nem⟫", pm25_anomaly: "ΔPM2.5", co2_anomaly: "ΔCO₂", log10_lux: "⟪light‖ışık⟫", uva_wm2: "UVA" };
+  Charts.bars($("pc-bars"), { items: C.pca.var.map(function (v, i) { return { label: "⟪Component‖Bileşen⟫ " + (i + 1), value: v * 100, color: NK.cssVar("--p3") }; }), unit: "%", nd: 1, labelW: 120, max: 60 });
+  document.querySelectorAll("#pc-mode button").forEach(function (b) { b.onclick = function () {
+    document.querySelectorAll("#pc-mode button").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); mode = b.getAttribute("data-v");
+    if (!cloud) return;
+    if (mode === "pca" && pcaFull.length === N) {
+      cloud.setPositions(pcaFull, true); cloud.setAxes(["PC1", "PC2", "PC3"]);
+      cloud.setArrows(C.pca.features.map(function (f, j) { return { name: FEAT[f], v: [C.pca.loadings[0][j] * 1.6, C.pca.loadings[1][j] * 1.6, C.pca.loadings[2][j] * 1.6] }; }));
+      cloud.setCentroids([], []);
+      $("cl-title").textContent = "⟪Principal components of six channels‖Altı kanalın temel bileşenleri⟫";
+    } else {
+      cloud.setPositions(rawPos, true); cloud.setAxes(AX); cloud.setArrows([]);
+      $("cl-title").textContent = "⟪468 minutes, three sensor axes‖468 dakika, üç sensör ekseni⟫";
+    }
+    NK.Store.log("pca:" + mode, true);
+  }; });
+  /* ---------- naming ---------- */
+  var NAMES = [["cool", "⟪Cool and dim‖Serin ve loş⟫"], ["open", "⟪Ordinary open air‖Sıradan açık hava⟫"], ["smoke", "⟪Smoke and exhaust plumes‖Duman ve egzoz bulutları⟫"], ["hot", "⟪Hot and bright‖Sıcak ve parlak⟫"]];
+  var TRUE = ["cool", "open", "smoke", "hot"];
+  var L4 = C.labels[4], cardBox = $("nm-cards"), html = "";
+  C.centers[4].forEach(function (c, j) {
+    var raw = [c[0] * C.sd[0] + C.mu[0], c[1] * C.sd[1] + C.mu[1], c[2] * C.sd[2] + C.mu[2]];
+    var counts = {}; ORDER.forEach(function (t) { counts[t] = 0; }); var n = 0;
+    L4.forEach(function (l, i) { if (l === j) { counts[C.type[i]]++; n++; } });
+    var bar = ORDER.map(function (t) { return counts[t] ? '<span title="' + NK.typeName(t) + ": " + counts[t] + '" style="display:inline-block;height:14px;width:' + (100 * counts[t] / n) + '%;background:' + NK.typeColor(t) + '"></span>' : ""; }).join("");
+    html += '<div class="card" style="border-left:6px solid ' + NK.cssVar(SLOT[j]) + '"><b>⟪Group‖Grup⟫ ' + (j + 1) + "</b> · " + n + " ⟪minutes‖dakika⟫<br><span class='note'>ΔT " + NK.signed(raw[0], 1) + " °C · " + NK.fmt(Math.pow(10, raw[1]), 0) + " lx · ΔPM2.5 " + NK.signed(raw[2], 1) + " µg/m³</span>" +
+      '<div style="display:flex;margin:8px 0;border-radius:4px;overflow:hidden">' + bar + "</div>" +
+      '<label class="note">⟪Name‖Ad⟫ <select data-g="' + j + '"><option value="">…</option>' + NAMES.map(function (nm) { return '<option value="' + nm[0] + '">' + nm[1] + "</option>"; }).join("") + "</select></label></div>";
+  });
+  cardBox.innerHTML = html + '<div class="legend">' + ORDER.map(function (t) { return '<span><i class="sw" style="background:' + NK.typeColor(t) + '"></i>' + NK.shortName(t) + "</span>"; }).join("") + "</div>";
+  $("nm-check").onclick = function () {
+    var ok = 0, picks = [];
+    cardBox.querySelectorAll("select").forEach(function (s) { var g = +s.getAttribute("data-g"); picks.push(s.value); var right = s.value === TRUE[g]; if (right) ok++; s.style.outline = "2px solid " + (right ? "var(--good)" : "var(--bad)"); });
+    $("nm-result").innerHTML = "<b>" + ok + " / 4</b> · " + "⟪Group 1 is the shaded passage and the tree shade, group 4 the sunny square, group 3 the minutes with plumes from the road and the entrance, and group 2 everything in between.‖1. grup gölgeli geçit ve ağaç gölgesi, 4. grup güneşli meydan, 3. grup yoldan ve girişten gelen bulutların olduğu dakikalar, 2. grup ise aradaki her şeydir.⟫";
+    NK.Store.log("names", { ok: ok, picks: picks });
+  };
+  document.addEventListener("nokta:theme", function () { paint(); drawElbow(); });
+});
+</script>

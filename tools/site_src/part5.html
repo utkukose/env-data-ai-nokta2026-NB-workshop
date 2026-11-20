@@ -1,0 +1,225 @@
+<!--META{"title": "⟪Part 5 · Share and turn into action‖5. Bölüm · Paylaş ve aksiyona dönüştür⟫", "desc": "⟪Catch the errors in an AI-written paragraph, build a safe prompt from your numbers, weigh claims and write a solution card for the NOKTA workshop tables.‖YZ ile yazılmış bir paragraftaki hataları yakalayın, kendi sayılarınızdan güvenli bir istem kurun, iddiaları tartın ve NOKTA çalıştay masaları için bir çözüm kartı yazın.⟫", "part": "p5", "next": ["lab", "⟪NOKTA Lab and debrief‖NOKTA Laboratuvarı ve değerlendirme⟫"]}-->
+<section class="parthead"><div class="wrap">
+  <p class="kicker">⟪Part 5 · Share and turn into action · 1:37 to 1:55‖5. Bölüm · Paylaş ve aksiyona dönüştür · 1:37-1:55⟫</p>
+  <h1>⟪From numbers to words to action‖Sayılardan kelimelere, kelimelerden aksiyona⟫</h1>
+  <p class="lead">⟪Generative AI writes fluent reports in seconds, and fluent is not the same as true. This part keeps one rule: The numbers come from the analysis, the words may come from the AI, and the judgment comes from the team.‖Üretken YZ saniyeler içinde akıcı raporlar yazar, ancak akıcı olmak doğru olmak demek değildir. Bu bölüm tek bir kurala uymaktadır: Sayılar analizden, kelimeler YZ'den gelebilir, yargı ise ekipten gelir.⟫</p>
+  <ol class="station-index">
+    <li><a href="#s1"><b>1</b>⟪Spot the errors‖Hataları bulun⟫</a></li>
+    <li><a href="#s2"><b>2</b>⟪A safe prompt‖Güvenli bir istem⟫</a></li>
+    <li><a href="#s3"><b>3</b>⟪How strong is the claim?‖İddia ne kadar güçlü?⟫</a></li>
+    <li><a href="#s4"><b>4</b>⟪The solution card‖Çözüm kartı⟫</a></li>
+  </ol>
+</div></section>
+
+<section class="station" id="s1"><div class="wrap">
+  <div class="station-head"><span class="no">1</span><h2>⟪Spot the errors‖Hataları bulun⟫</h2></div>
+  <div class="grid2 wide-left">
+    <div class="card">
+      <p class="note">⟪An AI assistant was asked to summarize the Campus B results. Click every sentence you would not sign, then check.‖Bir YZ asistanından Kampüs B sonuçlarını özetlemesi istendi. İmzalamayacağınız her cümleye tıklayın, sonra denetleyin.⟫</p>
+      <div class="spot" id="spot"></div>
+      <div class="controls"><button class="btn primary" id="spot-check">⟪Check the marks‖İşaretleri denetle⟫</button><button class="btn" id="spot-reset">⟪Clear‖Temizle⟫</button><span id="spot-score" class="num"></span></div>
+    </div>
+    <div>
+      <div class="card"><h3 style="margin-top:0">⟪The facts it should have used‖Kullanması gereken gerçekler⟫</h3>
+        <table class="tbl" id="facts-b"><thead><tr><th>⟪Point‖Nokta⟫</th><th>⟪PM2.5‖PM2,5⟫</th><th>Δ⟪ref‖ref⟫</th><th>°C Δ⟪ref‖ref⟫</th></tr></thead><tbody></tbody></table>
+        <p class="note">⟪Two-round means of Campus B in µg/m³ and differences from the quiet reference point.‖Kampüs B'nin µg/m³ cinsinden iki tur ortalamaları ve sakin referans noktasından farklar.⟫</p></div>
+      <div id="spot-why"></div>
+    </div>
+  </div>
+  <div class="takeaway"><b>⟪Takeaway.‖Çıkarım.⟫</b> ⟪Language models can produce fluent text that is not supported by their input, often called hallucination [1]. Every number in a generated text is checked against the analysis table, and every cause or comparison against the study design.‖Dil modelleri girdileriyle desteklenmeyen akıcı metinler üretebilir. Buna çoğunlukla halüsinasyon denir [1]. Üretilen bir metindeki her sayı analiz tablosuyla, her neden ve karşılaştırma ise çalışma tasarımıyla denetlenir.⟫</div>
+  <div class="nbref"><a class="badge" href="{{COLAB}}#scrollTo=sec-5" target="_blank" rel="noopener">Colab ↗</a><p>⟪Section 5.3 of the Colab notebook has a number auditor: It lists every number of a text and marks the ones the fact table does not support.‖Colab defterinin 5.3. kısmında bir sayı denetleyicisi vardır: Bir metindeki her sayıyı listeler ve olgu tablosunun desteklemediklerini işaretler.⟫</p></div>
+</div></section>
+
+<section class="station" id="s2"><div class="wrap">
+  <div class="station-head"><span class="no">2</span><h2>⟪A safe prompt‖Güvenli bir istem⟫</h2></div>
+  <div class="grid2">
+    <div>
+      <p>⟪A good prompt hands the assistant the numbers instead of asking it to know them, names the audience and writes the rules down. The builder fills in the fact table of the chosen campus from the analysis.‖İyi bir istem, asistandan sayıları bilmesini istemek yerine sayıları ona verir, okur kitlesini belirtir ve kuralları yazıya döker. Oluşturucu, seçilen kampüsün olgu tablosunu analizden doldurur.⟫</p>
+      <div class="controls">
+        <label>⟪Campus‖Kampüs⟫ <select id="pb-campus"><option>A</option><option selected>B</option><option>C</option></select></label>
+        <label>⟪For‖Hedef⟫ <select id="pb-aud"><option value="report">⟪campus environment report‖kampüs çevre raporu⟫</option><option value="poster">⟪congress abstract‖kongre özeti⟫</option><option value="social">⟪social media post‖sosyal medya paylaşımı⟫</option></select></label>
+        <label>⟪Output language‖Çıktı dili⟫ <select id="pb-lang"><option value="tr">⟪Turkish‖Türkçe⟫</option><option value="en">⟪English‖İngilizce⟫</option></select></label>
+      </div>
+      <div class="card" id="pb-rules"></div>
+    </div>
+    <div>
+      <textarea id="pb-out" rows="22" spellcheck="false" style="font-family:var(--mono);font-size:0.8rem"></textarea>
+      <div class="controls"><button class="btn primary" data-copy="pb-out">⟪Copy the prompt‖İstemi kopyala⟫</button><span class="note" id="pb-count"></span></div>
+      <p class="note">⟪Use the assistant your institution allows, and do not paste personal data into it. Whatever it writes goes back through the number auditor and the claim check below.‖Kurumunuzun izin verdiği asistanı kullanın ve içine kişisel veri yapıştırmayın. Ne yazarsa yazsın, metin sayı denetleyicisinden ve aşağıdaki iddia denetiminden geçer.⟫</p>
+    </div>
+  </div>
+  <div class="nbref"><a class="badge" href="{{COLAB}}#scrollTo=sec-5" target="_blank" rel="noopener">Colab ↗</a><p>⟪Sections 5.1 and 5.2 of the Colab notebook build the fact table and the same prompt from your own data.‖Colab defterinin 5.1. ve 5.2. kısımları olgu tablosunu ve aynı istemi kendi verinizden üretir.⟫</p></div>
+</div></section>
+
+<section class="station" id="s3"><div class="wrap">
+  <div class="station-head"><span class="no">3</span><h2>⟪How strong is the claim?‖İddia ne kadar güçlü?⟫</h2></div>
+  <div class="grid2">
+    <div>
+      <p>⟪Field measurements at six points show what was there and what went together. They rarely prove what caused what. Match each sentence to the strongest wording the NOKTA design supports.‖Altı noktadaki saha ölçümleri neyin orada olduğunu ve neyin birlikte değiştiğini gösterir. Neyin neye yol açtığını ise nadiren kanıtlar. Her cümleyi NOKTA tasarımının desteklediği en güçlü ifadeyle eşleştirin.⟫</p>
+      <div class="card"><b>⟪Observed‖Gözlendi⟫</b> · ⟪measured, in both rounds‖iki turda da ölçüldü⟫<br><b>⟪Associated‖İlişkili⟫</b> · ⟪goes together, cause not shown‖birlikte değişiyor, neden gösterilmedi⟫<br><b>⟪Needs an intervention‖Müdahale gerektirir⟫</b> · ⟪a cause that only a change-and-measure study could show‖yalnızca değiştir-ve-ölç çalışmasının gösterebileceği bir neden⟫<br><b>⟪Not supported‖Desteklenmiyor⟫</b> · ⟪goes beyond the data‖verinin ötesine geçiyor⟫</div>
+    </div>
+    <div class="card" id="cl-quiz"></div>
+  </div>
+</div></section>
+
+<section class="station" id="s4"><div class="wrap">
+  <div class="station-head"><span class="no">4</span><h2>⟪The solution card‖Çözüm kartı⟫</h2></div>
+  <p>⟪On 28 November the NOKTA Environment Workshop works at three thematic tables. Every proposal answers five questions: The problem, the evidence, the solution, its feasibility and the role of young people. Start from a finding of the analysis.‖28 Kasım'da NOKTA Ulusal Çevre Çalıştayı üç tematik masada çalışacak ve her öneri beş soruyu cevaplayacaktır: Sorun, dayanak, çözüm, uygulanabilirlik ve gençlerin rolü. Analizden bir bulguyla başlayın.⟫</p>
+  <div class="grid2">
+    <div class="card">
+      <div class="controls"><label>⟪Table‖Masa⟫ <select id="ac-table">
+        <option value="micro">⟪Microclimate and green campus‖Mikroiklim ve yeşil kampüs⟫</option>
+        <option value="waste">⟪Waste and circular economy‖Atık ve döngüsel ekonomi⟫</option>
+        <option value="water">⟪Water, resource efficiency and youth participation‖Su, kaynak verimliliği ve gençlik katılımı⟫</option></select></label></div>
+      <div class="controls"><label>⟪Start from a finding‖Bir bulgudan başlayın⟫ <select id="ac-find"></select></label></div>
+      <label class="note">⟪Problem‖Sorun⟫</label><textarea id="ac-problem" rows="2"></textarea>
+      <label class="note">⟪Evidence‖Dayanak⟫</label><textarea id="ac-evidence" rows="2"></textarea>
+      <label class="note">⟪Solution‖Çözüm⟫</label><textarea id="ac-solution" rows="2"></textarea>
+      <label class="note">⟪Feasibility‖Uygulanabilirlik⟫</label><textarea id="ac-feas" rows="2"></textarea>
+      <label class="note">⟪Role of young people‖Gençlerin rolü⟫</label><textarea id="ac-youth" rows="2"></textarea>
+    </div>
+    <div>
+      <div class="actioncard" id="ac-card"></div>
+      <div class="controls"><button class="btn primary" id="ac-copy">⟪Copy as text‖Metin olarak kopyala⟫</button><button class="btn" id="ac-dl">⟪Download (.md)‖İndir (.md)⟫</button></div>
+      <p class="note">⟪The card stays in this browser and appears in the debrief of the Lab. The example findings come from the synthetic data. With real NOKTA data the team writes its own.‖Kart bu tarayıcıda kalır ve Laboratuvarın değerlendirmesinde görünür. Örnek bulgular sentetik veriden gelir. Gerçek NOKTA verisiyle ekip kendi bulgusunu yazar.⟫</p>
+    </div>
+  </div>
+  <div class="nbref"><a class="badge" href="{{COLAB}}#scrollTo=sec-5" target="_blank" rel="noopener">Colab ↗</a><p>⟪Section 5.4 of the Colab notebook prints the same card from a finding of your table.‖Colab defterinin 5.4. kısmı aynı kartı tablonuzdaki bir bulgudan yazdırır.⟫</p></div>
+</div></section>
+
+<section class="station" id="refs"><div class="wrap">
+  <h3>⟪References‖Kaynaklar⟫</h3>
+  <ol class="note">
+    <li>Ji, Z., Lee, N., Frieske, R., Yu, T., Su, D., Xu, Y., Ishii, E., Bang, Y. J., Madotto, A., &amp; Fung, P. (2023). Survey of hallucination in natural language generation. <i>ACM Computing Surveys, 55</i>(12), Article 248, 1–38. <a href="https://doi.org/10.1145/3571730">doi:10.1145/3571730</a></li>
+    <li>World Health Organization. (2021). <i>WHO global air quality guidelines: Particulate matter (⟪PM2.5‖PM2,5⟫ and PM10), ozone, nitrogen dioxide, sulfur dioxide and carbon monoxide</i>. World Health Organization. <a href="https://www.who.int/publications/i/item/9789240034228">who.int/publications/i/item/9789240034228</a></li>
+  </ol>
+</div></section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var D = window.NOKTA, $ = function (id) { return document.getElementById(id); };
+  var ORDER = ["shaded", "traffic", "reference", "sunny_hard", "crowded", "green"];
+  function fact(c, ch, t) { return D.facts[c].filter(function (r) { return r.channel === ch && r.type === t; })[0]; }
+  /* ---------- station 1: spot the errors ---------- */
+  var SENT = [
+    { ok: true, s: "⟪On Campus B, the point near the campus road had the highest PM2.5, with a two-round mean of {{n:facts.B.5.mean:1}} µg/m³, about {{n:facts.B.5.ref:1}} µg/m³ above the quiet reference point.‖Kampüs B'de en yüksek PM2,5, iki tur ortalaması {{n:facts.B.5.mean:1}} µg/m³ ile kampüs yoluna yakın noktadaydı ve sakin referans noktasının yaklaşık {{n:facts.B.5.ref:1}} µg/m³ üstündeydi.⟫", why: "⟪Correct: Both numbers are in the table.‖Doğru: İki sayı da tabloda var.⟫" },
+    { ok: false, s: "⟪The green area was the cleanest point at 6.1 µg/m³.‖Yeşil alan 6,1 µg/m³ ile en temiz noktaydı.⟫", why: "⟪The green area was the cleanest point, but its mean is {{n:facts.B.1.mean:1}} µg/m³. The number 6.1 appears nowhere in the table.‖Yeşil alan en temiz noktaydı ama ortalaması {{n:facts.B.1.mean:1}} µg/m³. 6,1 sayısı tablonun hiçbir yerinde yok.⟫" },
+    { ok: false, s: "⟪This proves that trees remove one third of the particles on campus.‖Bu, ağaçların kampüsteki partiküllerin üçte birini temizlediğini kanıtlamaktadır.⟫", why: "⟪A causal claim with an invented share. Six points cannot separate the trees from everything else that differs at that spot.‖Uydurulmuş bir oranla kurulan nedensel bir iddia. Altı nokta, ağaçları o noktada farklı olan diğer her şeyden ayıramaz.⟫" },
+    { ok: false, s: "⟪Near the road PM2.5 exceeded the WHO 24-hour guideline of 15 µg/m³, so the air there was unhealthy that day.‖Yolun yakınında PM2,5, DSÖ'nün 15 µg/m³ olan 24 saatlik kılavuz değerini aştığı için oradaki hava o gün sağlıksızdı.⟫", why: "⟪The guideline value is real, but it refers to a 24-hour mean [2]. Two 15-minute visits cannot be compared with it.‖Kılavuz değeri gerçektir, ancak 24 saatlik ortalamaya karşılık gelir [2]. İki adet 15 dakikalık ziyaret onunla karşılaştırılamaz.⟫" },
+    { ok: false, s: "⟪Campus B therefore has the worst air quality of the three universities.‖Bu nedenle Kampüs B üç üniversite arasında en kötü hava kalitesine sahiptir.⟫", why: "⟪NOKTA does not rank universities. The campuses were measured on different days in different weather, and the data are synthetic.‖NOKTA üniversiteleri sıralamaz. Kampüsler farklı günlerde, farklı hava koşullarında ölçüldü ve veriler sentetiktir.⟫" },
+    { ok: false, s: "⟪In Round 1 the shaded passage was more polluted than the reference point, which shows that narrow passages trap pollution.‖1. turda gölgeli geçit referans noktasından daha kirliydi, bu da dar geçitlerin kirliliği hapsettiğini göstermektedir.⟫", why: "⟪The shaded passage was the first stop of Round 1, at 10:00, when the morning background was highest. Over both rounds it sits only {{n:facts.B.3.ref:1}} µg/m³ above the reference.‖Gölgeli geçit 1. turun saat 10:00'daki ilk durağıydı ve sabah arka planı o sırada en yüksekti. İki turda birlikte referansın yalnızca {{n:facts.B.3.ref:1}} µg/m³ üstündedir.⟫" },
+    { ok: true, s: "⟪At the busy student area, short smoking plumes raised the mean PM2.5 above the median, so the median describes a typical minute better.‖Öğrenci yoğun alanda kısa süreli sigara dumanı bulutları PM2,5 ortalamasını medyanın üstüne çıkardı, bu yüzden tipik bir dakikayı medyan daha iyi anlatır.⟫", why: "⟪Correct: This is what the box plots of Part 2 show.‖Doğru: 2. Bölümdeki kutu grafikleri bunu gösterir.⟫" },
+    { ok: false, s: "⟪A 2024 report of the Ministry of Environment confirms that campus roads are the main source of PM2.5 at Turkish universities.‖Çevre Bakanlığının 2024 tarihli bir raporu, Türk üniversitelerinde PM2,5'in ana kaynağının kampüs yolları olduğunu doğrulamaktadır.⟫", why: "⟪No such report was given to the assistant, and none is cited with a findable reference. An unverifiable source is treated as invented.‖Asistana böyle bir rapor verilmedi ve bulunabilir bir künyeyle de gösterilmedi. Doğrulanamayan bir kaynak uydurulmuş sayılır.⟫" },
+    { ok: true, s: "⟪The sunny concrete square was about {{n:facts.B.10.ref:1}} °C warmer than the reference, but part of this difference may come from sunshine heating the sensor housing.‖Güneşli beton meydan referanstan yaklaşık {{n:facts.B.10.ref:1}} °C daha sıcaktı, ancak bu farkın bir kısmı güneşin sensör gövdesini ısıtmasından kaynaklanıyor olabilir.⟫", why: "⟪Correct, with a fair caution about the sensor.‖Doğru, sensörle ilgili yerinde bir uyarıyla birlikte.⟫" }
+  ];
+  var spot = $("spot");
+  spot.innerHTML = SENT.map(function (x, i) { return '<span class="s ' + (x.ok ? "ok" : "err") + '" data-i="' + i + '">' + x.s + "</span> "; }).join("");
+  spot.querySelectorAll(".s").forEach(function (el) { el.onclick = function () { if (!spot.classList.contains("revealed")) el.classList.toggle("marked"); }; });
+  $("spot-check").onclick = function () {
+    var hit = 0, fp = 0, nerr = 0, why = "";
+    SENT.forEach(function (x, i) {
+      var m = spot.querySelector('[data-i="' + i + '"]').classList.contains("marked");
+      if (!x.ok) { nerr++; if (m) hit++; } else if (m) fp++;
+      why += '<div class="why"><b>' + (i + 1) + (x.ok ? " ✓" : " ✗") + "</b> " + x.why + "</div>";
+    });
+    spot.classList.add("revealed");
+    $("spot-score").innerHTML = "<b>" + hit + " / " + nerr + "</b> ⟪errors found‖hata bulundu⟫" + (fp ? " · " + fp + " ⟪correct sentences marked‖doğru cümle işaretlendi⟫" : "");
+    $("spot-why").innerHTML = why;
+    NK.Store.log("spot", { found: hit, of: nerr, fp: fp });
+  };
+  $("spot-reset").onclick = function () { spot.classList.remove("revealed"); spot.querySelectorAll(".s").forEach(function (e) { e.classList.remove("marked"); }); $("spot-why").innerHTML = ""; $("spot-score").textContent = ""; };
+  var tb = document.querySelector("#facts-b tbody");
+  ORDER.forEach(function (t) { var p = fact("B", "pm25_ugm3", t), q = fact("B", "temperature_c", t);
+    tb.insertAdjacentHTML("beforeend", "<tr><td>" + NK.shortName(t) + "</td><td>" + NK.fmt(p.mean, 1) + "</td><td>" + NK.signed(p.ref, 1) + "</td><td>" + NK.signed(q.ref, 1) + "</td></tr>"); });
+  /* ---------- station 2: prompt builder ---------- */
+  var RULES = [
+    ["nums", "⟪Use only the numbers in the table. Write \"not measured\" when something is missing.‖Yalnızca tablodaki sayıları kullan. Eksik bir şey olduğunda \"ölçülmedi\" yaz.⟫", true],
+    ["rank", "⟪Do not rank campuses, universities or cities.‖Kampüsleri, üniversiteleri ya da şehirleri sıralama.⟫", true],
+    ["avg", "⟪State that each value is the median of two 15-minute visits. Do not compare it with 24-hour or annual guideline values.‖Her değerin iki adet 15 dakikalık ziyaretin medyanı olduğunu belirt. Bunu 24 saatlik ya da yıllık kılavuz değerleriyle karşılaştırma.⟫", true],
+    ["obs", "⟪Keep observation, interpretation and recommendation in separate paragraphs.‖Gözlemi, yorumu ve öneriyi ayrı paragraflarda tut.⟫", true],
+    ["sens", "⟪Mention the limits: Low-cost sensors, humidity correction and station offsets.‖Sınırlılıkları belirt: Düşük maliyetli sensörler, nem düzeltmesi ve istasyon sapmaları.⟫", true],
+    ["cause", "⟪Use cautious verbs for causes, such as \"may\" and \"is associated with\".‖Nedenler için \"olabilir\" ve \"ile ilişkilidir\" gibi temkinli ifadeler kullan.⟫", true],
+    ["list", "⟪End with a list of every number used and the table row it comes from.‖Kullanılan her sayıyı ve geldiği tablo satırını sona bir liste olarak ekle.⟫", false]
+  ];
+  $("pb-rules").innerHTML = RULES.map(function (r) { return '<label style="display:flex;gap:8px;align-items:flex-start;margin:4px 0"><input type="checkbox" data-r="' + r[0] + '"' + (r[2] ? " checked" : "") + "><span>" + r[1] + "</span></label>"; }).join("");
+  var AUD = { report: "⟪a campus environment report for the university units‖üniversite birimleri için bir kampüs çevre raporu⟫", poster: "⟪a 200-word abstract for the NOKTA National Youth Environment and Climate Congress‖NOKTA Ulusal Gençlik Çevre ve İklim Kongresi için 200 kelimelik bir özet⟫", social: "⟪a short social media post for students, under 80 words‖öğrenciler için 80 kelimeyi aşmayan kısa bir sosyal medya paylaşımı⟫" };
+  function buildPrompt() {
+    var c = $("pb-campus").value, outLang = $("pb-lang").value, rows = [];
+    var hdr = "| " + ["⟪Point‖Nokta⟫", "⟪Channel‖Kanal⟫", "⟪Round 1‖1. tur⟫", "⟪Round 2‖2. tur⟫", "⟪Two-round mean‖İki tur ortalaması⟫", "⟪Minus reference‖Referanstan fark⟫"].join(" | ") + " |\n|---|---|---|---|---|---|\n";
+    D.facts[c].forEach(function (r) { if (r.channel === "light_lux" || r.channel === "rel_humidity_pct") return;
+      var nd = r.channel === "co2_ppm" ? 0 : 1;
+      rows.push("| " + NK.typeName(r.type) + " | " + NK.chName(r.channel) + " (" + NK.chUnit(r.channel) + ") | " + NK.fmt(r.r1, nd) + " | " + NK.fmt(r.r2, nd) + " | " + NK.fmt(r.mean, nd) + " | " + (r.type === "reference" ? "0" : NK.signed(r.ref, nd)) + " |"); });
+    var rules = []; $("pb-rules").querySelectorAll("input").forEach(function (b, i) { if (b.checked) rules.push("- " + RULES[i][1]); });
+    var txt = "⟪Role: You are helping a student team write up environmental measurements from their own campus.‖Rol: Kendi kampüsündeki çevresel ölçümleri raporlaştıran bir öğrenci ekibine yardım ediyorsun.⟫\n\n" +
+      "⟪Task: Write " + AUD[$("pb-aud").value] + " about " + NK.L.campus[c] + ". ‖Görev: " + NK.L.campus[c] + " verisiyle " + AUD[$("pb-aud").value] + " yaz. ⟫" + (outLang === "tr" ? "⟪Write in Turkish.‖Türkçe yaz.⟫" : "⟪Write in English.‖İngilizce yaz.⟫") + "\n\n" +
+      "⟪Study design: One portable station visited six fixed points in two rounds, and the second round reversed the order. Each value below is the median of a 15-minute visit after quality control, device offsets and humidity correction.‖Çalışma tasarımı: Taşınabilir tek bir istasyon altı sabit noktayı iki turda ziyaret etti ve ikinci turda sıra tersine çevrildi. Aşağıdaki her değer, kalite kontrolü, cihaz sapmaları ve nem düzeltmesinden sonra 15 dakikalık bir ziyaretin medyanıdır.⟫\n\n" +
+      "⟪Data:‖Veri:⟫\n" + hdr + rows.join("\n") + "\n\n⟪Rules:‖Kurallar:⟫\n" + rules.join("\n") + "\n";
+    $("pb-out").value = txt;
+    $("pb-count").textContent = rows.length + " ⟪table rows‖tablo satırı⟫ · " + rules.length + " ⟪rules‖kural⟫";
+  }
+  ["pb-campus", "pb-aud", "pb-lang"].forEach(function (id) { $(id).onchange = buildPrompt; });
+  $("pb-rules").addEventListener("change", buildPrompt);
+  buildPrompt();
+  /* ---------- station 3: claim ladder ---------- */
+  var LEVELS = [["obs", "⟪Observed‖Gözlendi⟫"], ["assoc", "⟪Associated‖İlişkili⟫"], ["interv", "⟪Needs an intervention‖Müdahale gerektirir⟫"], ["no", "⟪Not supported‖Desteklenmiyor⟫"]];
+  var CLAIMS = [
+    ["obs", "⟪On Campus B, PM2.5 at the road was above the reference point in both rounds.‖Kampüs B'de yoldaki PM2,5 iki turda da referans noktasının üstündeydi.⟫"],
+    ["assoc", "⟪Minutes with more passing vehicles had higher PM2.5.‖Daha fazla aracın geçtiği dakikalarda PM2,5 daha yüksekti.⟫"],
+    ["interv", "⟪Planting trees on the concrete square would cool it.‖Beton meydana ağaç dikmek orayı serinletir.⟫"],
+    ["no", "⟪Closing the road would cut PM2.5 at the faculty entrance by 40 %.‖Yolu kapatmak fakülte girişindeki PM2,5'i %40 azaltır.⟫"]
+  ];
+  var cq = $("cl-quiz");
+  cq.innerHTML = CLAIMS.map(function (c, i) { return '<p style="margin:0 0 6px">' + (i + 1) + ". " + c[1] + '</p><select data-q="' + i + '" style="margin-bottom:12px"><option value="">…</option>' + LEVELS.map(function (l) { return '<option value="' + l[0] + '">' + l[1] + "</option>"; }).join("") + "</select>"; }).join("") +
+    '<div class="controls"><button class="btn primary" id="cl-check">⟪Check‖Denetle⟫</button><span id="cl-res"></span></div><p class="note" id="cl-note"></p>';
+  $("cl-check").onclick = function () {
+    var ok = 0; cq.querySelectorAll("select").forEach(function (s) { var i = +s.getAttribute("data-q"), r = s.value === CLAIMS[i][0]; if (r) ok++; s.style.outline = "2px solid " + (r ? "var(--good)" : "var(--bad)"); });
+    $("cl-res").innerHTML = "<b>" + ok + " / 4</b>";
+    $("cl-note").textContent = "⟪1 is measured in both rounds. 2 is a relation in the data. Traffic is a plausible cause, but the minutes were not an experiment. 3 is a likely effect that only a change-and-measure study can confirm. 4 invents a number that no measurement supports.‖1 iki turda da ölçülmüştür. 2 verideki bir ilişkidir. Trafik akla yatkın bir nedendir ama dakikalar bir deney değildi. 3 olası bir etkidir ve ancak değiştir-ve-ölç çalışmasıyla doğrulanabilir. 4 hiçbir ölçümün desteklemediği bir sayı uydurur.⟫";
+    NK.Store.log("claims", ok);
+  };
+  /* ---------- station 4: action card ---------- */
+  var FIND = [
+    { t: "micro", label: "⟪Sunny square about {{n:facts.B.10.ref:1}} °C warmer than the reference (Campus B)‖Güneşli meydan referanstan yaklaşık {{n:facts.B.10.ref:1}} °C sıcak (Kampüs B)⟫",
+      p: "⟪The concrete square heats up in the sun and is avoided at midday.‖Beton meydan güneşte ısınıyor ve öğle saatlerinde kullanılmıyor.⟫",
+      e: "⟪Two-round mean {{s:facts.B.10.ref:1}} °C against the reference point. Part of it may come from the sun on the sensor housing.‖Referans noktasına göre iki tur ortalaması {{s:facts.B.10.ref:1}} °C. Bunun bir kısmı güneşin sensör gövdesini ısıtmasından gelebilir.⟫",
+      s: "⟪Shade sails over the benches and two rows of trees on the south side.‖Bankların üzerine gölgelik ve güney kenarına iki sıra ağaç.⟫",
+      f: "⟪Low cost for the sails. Trees need one planting season and watering.‖Gölgelikler için maliyet düşüktür. Ağaçlar bir dikim mevsimi ve sulama gerektirir.⟫",
+      y: "⟪Students measure again after one year with the same NOKTA protocol.‖Öğrenciler bir yıl sonra aynı NOKTA protokolüyle yeniden ölçer.⟫" },
+    { t: "micro", label: "⟪PM2.5 at the road about {{n:facts.B.5.ref:1}} µg/m³ above the reference (Campus B)‖Yoldaki PM2,5 referansın yaklaşık {{n:facts.B.5.ref:1}} µg/m³ üstünde (Kampüs B)⟫",
+      p: "⟪Students wait at the bus stop inside the exhaust plume.‖Öğrenciler otobüs durağında egzoz bulutunun içinde bekliyor.⟫",
+      e: "⟪Two-round mean {{s:facts.B.5.ref:1}} µg/m³ against the reference. Short plumes match the vehicle counts of the field form.‖Referansa göre iki tur ortalaması {{s:facts.B.5.ref:1}} µg/m³. Kısa bulutlar saha formundaki araç sayılarıyla örtüşmektedir.⟫",
+      s: "⟪Move the waiting area five meters back behind a hedge and ban idling at the stop.‖Bekleme alanını bir çit arkasına beş metre geri almak ve durakta rölantide beklemeyi yasaklamak.⟫",
+      f: "⟪Needs the campus technical office, and the hedge takes one season.‖Kampüs yapı işleri biriminin desteği gerekir, çit de bir mevsimde yetişir.⟫",
+      y: "⟪A student campaign on idling engines and a repeated measurement.‖Rölantide çalışan motorlar üzerine bir öğrenci kampanyası ve tekrar ölçüm.⟫" },
+    { t: "waste", label: "⟪Smoking plumes at the faculty entrance (field form and PM2.5 spikes)‖Fakülte girişinde sigara dumanı bulutları (saha formu ve PM2,5 sıçramaları)⟫",
+      p: "⟪Cigarette butts and smoke gather at the main entrance.‖Ana girişte izmaritler ve duman birikiyor.⟫",
+      e: "⟪Field notes report a smoking group. PM2.5 at the entrance shows short spikes, and the mean sits above the median.‖Saha notları sigara içen bir grubu bildirmektedir. Girişteki PM2,5 kısa sıçramalar gösterir ve ortalama medyanın üstündedir.⟫",
+      s: "⟪A marked smoking area away from the door with butt bins sent to recycling.‖Kapıdan uzakta, izmaritleri geri dönüşüme gönderilen kutularla işaretli bir sigara alanı.⟫",
+      f: "⟪Low cost, but needs the agreement of the faculty administration.‖Düşük maliyetlidir, ancak fakülte yönetiminin onayını gerektirir.⟫",
+      y: "⟪Student volunteers place the bins and count butts each week.‖Gönüllü öğrenciler kutuları yerleştirir ve her hafta izmarit sayar.⟫" },
+    { t: "water", label: "⟪Higher dew point under the irrigated trees (all campuses)‖Sulanan ağaçların altında daha yüksek çiy noktası (bütün kampüsler)⟫",
+      p: "⟪Lawns are irrigated in the morning, also when the air is already humid.‖Çimler, hava zaten nemliyken de sabahları sulanıyor.⟫",
+      e: "⟪The dew point of the green area sits slightly above the other points, and the field form records morning irrigation.‖Yeşil alanın çiy noktası diğer noktaların biraz üstündedir ve saha formu sabah sulamasını kaydetmektedir.⟫",
+      s: "⟪Water by soil moisture instead of by the clock, with a simple sensor and a shared log.‖Basit bir sensör ve ortak bir kayıtla, saate göre değil toprak nemine göre sulama.⟫",
+      f: "⟪Needs one soil sensor per lawn and a person in charge.‖Her çim alanı için bir toprak nem sensörü ve bir sorumlu gerekir.⟫",
+      y: "⟪A student team keeps the log and shares the water saved each month.‖Bir öğrenci ekibi kaydı tutar ve her ay tasarruf edilen suyu paylaşır.⟫" }
+  ];
+  var TBL = { micro: "⟪Microclimate and green campus‖Mikroiklim ve yeşil kampüs⟫", waste: "⟪Waste and circular economy‖Atık ve döngüsel ekonomi⟫", water: "⟪Water, resource efficiency and youth participation‖Su, kaynak verimliliği ve gençlik katılımı⟫" };
+  var fsel = $("ac-find");
+  FIND.forEach(function (f, i) { var o = document.createElement("option"); o.value = i; o.textContent = f.label; fsel.appendChild(o); });
+  var custom = document.createElement("option"); custom.value = "own"; custom.textContent = "⟪A finding of the team‖Ekibin kendi bulgusu⟫"; fsel.appendChild(custom);
+  var FIELDS = [["ac-problem", "p", "⟪Problem‖Sorun⟫"], ["ac-evidence", "e", "⟪Evidence‖Dayanak⟫"], ["ac-solution", "s", "⟪Solution‖Çözüm⟫"], ["ac-feas", "f", "⟪Feasibility‖Uygulanabilirlik⟫"], ["ac-youth", "y", "⟪Role of young people‖Gençlerin rolü⟫"]];
+  function fill() { var v = fsel.value; if (v === "own") { FIELDS.forEach(function (f) { $(f[0]).value = ""; }); } else { var F = FIND[+v]; $("ac-table").value = F.t; FIELDS.forEach(function (f) { $(f[0]).value = F[f[1]]; }); } render(); }
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+  function cardText() { return "# " + TBL[$("ac-table").value] + "\n\n" + FIELDS.map(function (f) { return "**" + f[2] + ".** " + $(f[0]).value; }).join("\n\n") + "\n"; }
+  function render() {
+    $("ac-card").innerHTML = "<h4>" + TBL[$("ac-table").value] + "</h4><dl>" + FIELDS.map(function (f) { return "<dt>" + f[2] + "</dt><dd>" + esc($(f[0]).value) + "</dd>"; }).join("") + "</dl>";
+    NK.Store.set("card", { table: TBL[$("ac-table").value], fields: FIELDS.map(function (f) { return [f[2], $(f[0]).value]; }) });
+  }
+  fsel.onchange = fill; $("ac-table").onchange = render;
+  FIELDS.forEach(function (f) { $(f[0]).addEventListener("input", render); });
+  $("ac-copy").onclick = function () { NK.copy(cardText(), this); };
+  $("ac-dl").onclick = function () { NK.download("nokta-solution-card.md", cardText()); };
+  fill();
+});
+</script>

@@ -1,0 +1,12 @@
+{
+  "name": "nokta-workshop-build",
+  "private": true,
+  "description": "Node tools of the NOKTA workshop site: KaTeX for the formulas, three.js and the Atkinson Hyperlegible font for docs/assets/vendor.",
+  "license": "MIT",
+  "dependencies": {
+    "@fontsource/atkinson-hyperlegible": "5.3.0",
+    "esbuild": "0.24.0",
+    "katex": "0.16.11",
+    "three": "0.170.0"
+  }
+}

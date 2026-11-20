@@ -1,0 +1,387 @@
+<!--META{"title": "⟪Part 1 · Measure: The campus as data‖1. Bölüm · Ölç: Veri olarak kampüs⟫", "desc": "⟪Replay a NOKTA field round in 3D, read the ten channels, find faulty readings, align three stations and correct humid particle readings.‖Bir NOKTA saha turunu 3B olarak yeniden oynatın, on kanalı okuyun, hatalı ölçümleri bulun, üç istasyonu hizalayın ve nemli havadaki partikül ölçümlerini düzeltin.⟫", "part": "p1", "three": true, "next": ["part2", "⟪Part 2 · Analyze‖2. Bölüm · Analiz et⟫"]}-->
+<section class="parthead"><div class="wrap">
+  <p class="kicker">⟪Part 1 · Measure · 0:08 to 0:30‖1. Bölüm · Ölç · 0:08-0:30⟫</p>
+  <h1>⟪The campus as data‖Veri olarak kampüs⟫</h1>
+  <p class="lead">⟪Before any AI method, the data must be understood and checked. This part replays a field round, reads the ten channels and cleans the readings without hiding anything.‖Herhangi bir YZ yönteminden önce verinin anlaşılması ve denetlenmesi gerekir. Bu bölüm bir saha turunu yeniden oynatmakta, on kanalı okumakta ve hiçbir şeyi gizlemeden ölçümleri temizlemektedir.⟫</p>
+  <ol class="station-index">
+    <li><a href="#s1"><b>1</b>⟪One morning, six points‖Bir sabah, altı nokta⟫</a></li>
+    <li><a href="#s2"><b>2</b>⟪Ten channels‖On kanal⟫</a></li>
+    <li><a href="#s3"><b>3</b>⟪The data doctor‖Veri doktoru⟫</a></li>
+    <li><a href="#s4"><b>4</b>⟪Three stations, one story‖Üç istasyon, tek hikâye⟫</a></li>
+    <li><a href="#s5"><b>5</b>⟪Humid air‖Nemli hava⟫</a></li>
+  </ol>
+</div></section>
+
+<!-- ============================ station 1 ============================ -->
+<section class="station" id="s1"><div class="wrap">
+  <div class="station-head"><span class="no">1</span><h2>⟪One morning, six points‖Bir sabah, altı nokta⟫</h2></div>
+  <div class="poll" data-id="p1-s1" data-answer="traffic">
+    <div class="q" data-label="⟪Predict‖Tahmin edin⟫">⟪In Round 1 on Campus A, which point will show the highest PM2.5?‖Kampüs A'nın 1. turunda en yüksek PM2,5 hangi noktada görülecek?⟫</div>
+    <div class="opts">
+      <button data-v="shaded">⟪Shaded‖Gölgeli⟫</button><button data-v="traffic">⟪Near traffic‖Trafiğe yakın⟫</button>
+      <button data-v="reference">⟪Reference‖Referans⟫</button><button data-v="sunny_hard">⟪Sunny hard surface‖Güneşli sert zemin⟫</button>
+      <button data-v="crowded">⟪Busy student area‖Öğrenci yoğun alan⟫</button><button data-v="green">⟪Green area‖Yeşil alan⟫</button>
+    </div>
+    <div class="verdict"></div>
+    <div class="msg-right" hidden>⟪Buses and cars add short plumes of particles. Press play and watch the column of P2 grow fastest.‖Otobüs ve otomobiller kısa süreli partikül bulutları ekler. Oynat'a basın ve P2 sütununun en hızlı büyüdüğünü izleyin.⟫</div>
+    <div class="msg-wrong" hidden>⟪The road wins: Buses and cars add short plumes of particles. Press play and watch P2. Also look at P1, the first stop at 10:00: it is high too, and Part 2 explains why.‖Yol kazanır: Otobüs ve otomobiller kısa süreli partikül bulutları ekler. Oynat'a basın ve P2'yi izleyin. Saat 10:00'daki ilk durak P1'e de bakın: O da yüksektir ve nedenini 2. Bölüm açıklar.⟫</div>
+  </div>
+  <div class="grid2 wide-left">
+    <div>
+      <div class="stage3d tall" id="twin1">
+        <div class="hud"><span class="clock" id="tw-clock">10:00</span><span id="tw-status">⟪Press play to start the field round‖Saha turunu başlatmak için oynat'a basın⟫</span></div>
+        <div class="legend3d" id="tw-legend"></div>
+      </div>
+      <div class="controls">
+        <button class="btn primary" id="tw-play">▶ ⟪Play the round‖Turu oynat⟫</button>
+        <button class="btn" id="tw-reset">⟲ 10:00</button>
+        <button class="btn" id="tw-results">⟪Show results‖Sonuçları göster⟫</button>
+        <label>⟪Speed‖Hız⟫ <select id="tw-speed"><option value="0.5">×0.5</option><option value="1" selected>×1</option><option value="2">×2</option><option value="4">×4</option></select></label>
+      </div>
+      <div class="controls">
+        <label>⟪Campus‖Kampüs⟫ <select id="tw-campus"><option value="A">A</option><option value="B">B</option><option value="C">C</option></select></label>
+        <label>⟪Round‖Tur⟫ <select id="tw-round"><option value="1">1 (P1 → P6)</option><option value="2">2 (P6 → P1)</option><option value="mean">⟪mean of both‖iki tur ortalaması⟫</option></select></label>
+        <label>⟪Channel‖Kanal⟫ <select id="tw-var"></select></label>
+        <label>⟪View‖Görünüm⟫ <select id="tw-view"><option value="overview">⟪overview‖genel⟫</option><option value="top">⟪from above‖yukarıdan⟫</option><option value="street">⟪street level‖sokak seviyesi⟫</option></select></label>
+      </div>
+    </div>
+    <div>
+      <div class="card" id="tw-form">
+        <h3 style="margin-top:0">⟪Field form of the current visit‖Şu anki ziyaretin saha formu⟫</h3>
+        <p class="muted" id="tw-form-body">⟪Press play, or click one of the six stations.‖Oynat'a basın ya da altı istasyondan birine tıklayın.⟫</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">⟪What the scene shows‖Sahne neyi gösteriyor⟫</h3>
+        <p>⟪One portable station visits the six points. It records for 15 minutes at each point and walks for 10 minutes to the next one. The column beside a point grows with the running median of the chosen channel. The dust cloud thickens with PM2.5, and the shadows follow the sun of that morning.‖Taşınabilir tek bir istasyon altı noktayı ziyaret eder. Her noktada 15 dakika ölçüm yapar ve sonraki noktaya 10 dakika yürür. Noktanın yanındaki sütun, seçilen kanalın o ana kadarki medyanıyla büyür. Toz bulutu PM2,5 ile yoğunlaşır, gölgeler de o sabahın güneşini izler.⟫</p>
+        <p class="note">⟪The first two minutes after each move are left out: The sensors are still settling (Station 3).‖Her taşımadan sonraki ilk iki dakika dışarıda bırakılır: Sensörler hâlâ dengelenmektedir (3. durak).⟫</p>
+      </div>
+    </div>
+  </div>
+  <div class="takeaway"><b>⟪Takeaway.‖Çıkarım.⟫</b> ⟪One station measures one place at a time. Every comparison between points is therefore also a comparison between clock times, and this shapes everything in Part 2.‖Tek bir istasyon her seferinde tek bir yeri ölçer. Bu yüzden noktalar arasındaki her karşılaştırma aynı zamanda saatler arasındaki bir karşılaştırmadır ve bu durum 2. Bölümdeki her şeyi belirler.⟫</div>
+  <div class="nbref"><a class="badge" href="{{COLAB}}#scrollTo=sec-1" target="_blank" rel="noopener">Colab ↗</a><p>⟪Section 1.1 of the Colab notebook loads the same readings, counts the visits and plots one field round.‖Colab defterinin 1.1. kısmı aynı ölçümleri yükler, ziyaretleri sayar ve bir saha turunu çizer.⟫</p></div>
+</div></section>
+
+<!-- ============================ station 2 ============================ -->
+<section class="station" id="s2"><div class="wrap">
+  <div class="station-head"><span class="no">2</span><h2>⟪Ten channels, one reading‖On kanal, tek ölçüm⟫</h2></div>
+  <div class="grid2">
+    <div>
+      <p>⟪Each row of a NOKTA file is one moment at one point: A time stamp, the campus, the round, the point and ten numbers. Units matter more than they seem. A value without its unit and its averaging time cannot be interpreted.‖Bir NOKTA dosyasının her satırı, bir noktadaki tek bir anı gösterir: Bir zaman damgası, kampüs, tur, nokta ve on sayı. Birimler göründüğünden daha önemlidir. Birimi ve ortalama alma süresi belirtilmemiş bir değer yorumlanamaz.⟫</p>
+      <div class="poll" data-id="p1-s2" data-answer="altitude">
+        <div class="q" data-label="⟪Predict‖Tahmin edin⟫">⟪Air pressure is about 900 hPa on Campus A and about 1015 hPa on Campus C. What explains most of this gap?‖Atmosfer basıncı Kampüs A'da yaklaşık 900 hPa, Kampüs C'de yaklaşık 1015 hPa. Bu farkın büyük kısmını ne açıklar?⟫</div>
+        <div class="opts"><button data-v="pollution">⟪Air pollution‖Hava kirliliği⟫</button><button data-v="altitude">⟪Height above sea level‖Deniz seviyesinden yükseklik⟫</button><button data-v="fault">⟪A sensor fault‖Sensör arızası⟫</button><button data-v="temp">⟪Temperature‖Sıcaklık⟫</button></div>
+        <div class="verdict"></div>
+        <div class="msg-right" hidden>⟪Pressure falls with height: Campus A sits about 1000 m above the sea, Campus C at the coast. Pressure differences between campuses describe their location, not their air quality.‖Basınç yükseklikle düşer: Kampüs A deniz seviyesinden yaklaşık 1000 m yukarıdadır, Kampüs C ise kıyıdadır. Kampüsler arasındaki basınç farkı hava kalitesini değil konumu anlatır.⟫</div>
+      </div>
+    </div>
+    <div class="viz">
+      <table class="tbl" id="chan-table">
+        <thead><tr><th>⟪Channel‖Kanal⟫</th><th>⟪Unit‖Birim⟫</th><th>⟪Range of visit medians‖Ziyaret medyanı aralığı⟫</th><th style="text-align:left">⟪Read it as‖Nasıl okunur⟫</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <p class="cap">⟪Ranges come from the 36 visits after quality control. Click a row to see that channel in the 3D scene above.‖Aralıklar kalite kontrolünden sonraki 36 ziyaretten alınmıştır. Bir satıra tıklayınca o kanal yukarıdaki 3B sahnede gösterilir.⟫</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============================ station 3 ============================ -->
+<section class="station" id="s3"><div class="wrap">
+  <div class="station-head"><span class="no">3</span><h2>⟪The data doctor‖Veri doktoru⟫</h2></div>
+  <div class="poll" data-id="p1-s3" data-answer="all">
+    <div class="q" data-label="⟪Predict‖Tahmin edin⟫">⟪The first visit of Round 1 on Campus B has three kinds of trouble. Which readings should stay out of the visit median?‖Kampüs B'nin 1. turundaki ilk ziyarette üç tür sorun var. Hangi ölçümler ziyaret medyanının dışında kalmalı?⟫</div>
+    <div class="opts"><button data-v="warm">⟪The first two minutes‖İlk iki dakika⟫</button><button data-v="flat">⟪The frozen CO₂ stretch‖Donmuş CO₂ bölümü⟫</button><button data-v="spike">⟪The single spikes‖Tekil sıçramalar⟫</button><button data-v="all">⟪All three‖Üçü de⟫</button></div>
+    <div class="verdict"></div>
+    <div class="msg-right" hidden>⟪All three are flagged. They stay in the raw file with a reason, and only the analysis leaves them out.‖Üçü de işaretlenir. Ham dosyada bir gerekçeyle kalırlar, yalnızca analiz onları dışarıda bırakır.⟫</div>
+    <div class="msg-wrong" hidden>⟪All three should be flagged. They stay in the raw file with a reason, and only the analysis leaves them out.‖Üçü de işaretlenmelidir. Ham dosyada bir gerekçeyle kalırlar, yalnızca analiz onları dışarıda bırakır.⟫</div>
+  </div>
+  <div class="reveal-lock locked" data-for="p1-s3"><div class="reveal-body">
+  <div class="grid2 wide-left">
+    <div class="viz">
+      <div class="controls">
+        <label>⟪Visit‖Ziyaret⟫ <select id="qc-visit">
+          <option value="B-R1-P1">⟪B · Round 1 · P1 shaded (first stop)‖B · 1. tur · P1 gölgeli (ilk durak)⟫</option>
+          <option value="A-R1-P2">⟪A · Round 1 · P2 near traffic‖A · 1. tur · P2 trafiğe yakın⟫</option>
+          <option value="B-R1-P5">⟪B · Round 1 · P5 busy student area‖B · 1. tur · P5 öğrenci yoğun alan⟫</option>
+          <option value="C-R2-P6">⟪C · Round 2 · P6 green area (humid)‖C · 2. tur · P6 yeşil alan (nemli)⟫</option>
+        </select></label>
+        <label>⟪Channel‖Kanal⟫ <select id="qc-ch">
+          <option value="co2_ppm">CO₂</option><option value="pm25_ugm3">⟪PM2.5‖PM2,5⟫</option><option value="pm10_ugm3">PM10</option>
+          <option value="temperature_c">⟪Temperature‖Sıcaklık⟫</option><option value="rel_humidity_pct">⟪Relative humidity‖Bağıl nem⟫</option>
+        </select></label>
+      </div>
+      <div class="controls">
+        <button class="btn on" data-qc="warmup">⟪Warm-up‖Isınma⟫</button>
+        <button class="btn on" data-qc="flags">⟪Detector flags‖Dedektör işaretleri⟫</button>
+        <button class="btn" data-qc="truth">⟪Planted problems‖Yerleştirilmiş sorunlar⟫</button>
+      </div>
+      <div id="qc-chart"></div>
+      <div class="legend" id="qc-legend"></div>
+    </div>
+    <div>
+      <h3>⟪A robust test for spikes‖Sıçramalar için dayanıklı bir test⟫</h3>
+      <p>⟪The usual z-score uses the mean and the standard deviation, but a large spike pulls both towards itself and hides. The modified z-score uses the median and the median absolute deviation (MAD), which a single spike cannot move [1].‖Alışılmış z-skoru ortalamayı ve standart sapmayı kullanır, ancak büyük bir sıçrama ikisini de kendine doğru çekerek gizlenir. Değiştirilmiş z-skoru ise tek bir sıçramanın etkileyemediği medyanı ve medyan mutlak sapmayı (MAD) kullanır [1].⟫</p>
+      <div class="formula">
+        <texd>\begin{gathered} M_i = \frac{⟪0.6745‖0{,}6745⟫\,(x_i - \tilde{x})}{\mathrm{MAD}} \\[4pt] \mathrm{MAD} = \operatorname{median}_j \lvert x_j - \tilde{x} \rvert \end{gathered}</texd>
+        <p class="sym">⟪<b>x<sub>i</sub></b> one reading (µg/m³) · <b>x̃</b> median of the readings · <b>MAD</b> median of the distances to x̃ · the factor 0.6745 makes M comparable with an ordinary z-score. A reading with |M| above about 3 deserves a look.‖<b>x<sub>i</sub></b> tek bir ölçüm (µg/m³) · <b>x̃</b> ölçümlerin medyanı · <b>MAD</b> x̃'e olan uzaklıkların medyanı · 0,6745 çarpanı M'yi alışılmış z-skoruyla karşılaştırılabilir kılar. |M| değeri yaklaşık 3'ün üzerindeki ölçüm incelenmelidir.⟫</p>
+        <div class="worked">⟪<b>Worked example.</b> Seven PM2.5 readings: 14.2, 15.0, 13.8, 14.6, 97.3, 15.1, 14.4. The median is {{n:z.med:1}} and the distances to it are 0.4, 0.4, 0.8, 0.0, 82.7, 0.5, 0.2, so MAD = {{n:z.mad:1}}. For 97.3: M = 0.6745 × {{n:z.dev:1}} / {{n:z.mad:1}} = <b>{{n:z.M:2}}</b>, a clear flag. The ordinary z-score gives mean {{n:z.mean:2}}, standard deviation {{n:z.sd:2}} and z = ({{n:z.dev:1}} + 14.6 − {{n:z.mean:2}}) / {{n:z.sd:2}} = <b>{{n:z.z:2}}</b>, below 3: The spike hides itself.‖<b>Çözümlü örnek.</b> Yedi PM2,5 ölçümü: 14,2; 15,0; 13,8; 14,6; 97,3; 15,1; 14,4. Medyan {{n:z.med:1}}, medyana uzaklıklar 0,4; 0,4; 0,8; 0,0; 82,7; 0,5; 0,2 olduğundan MAD = {{n:z.mad:1}}. 97,3 için: M = 0,6745 × {{n:z.dev:1}} / {{n:z.mad:1}} = <b>{{n:z.M:2}}</b>, açık bir işaret. Alışılmış z-skorunda ortalama {{n:z.mean:2}}, standart sapma {{n:z.sd:2}} ve z = ({{n:z.dev:1}} + 14,6 − {{n:z.mean:2}}) / {{n:z.sd:2}} = <b>{{n:z.z:2}}</b> olur, 3'ün altında kalır: Sıçrama kendini gizler.⟫</div>
+      </div>
+      <p class="note">⟪The detector in the notebook adds two physical rules. A real plume lifts PM1, PM2.5 and PM10 together, while a glitch lifts one channel alone. CO₂ readings of 0 or 2000 ppm are out of range, and a CO₂ value that does not move for two minutes is a frozen sensor.‖Defterdeki dedektör iki fiziksel kural ekler. Gerçek bir partikül bulutu PM1, PM2,5 ve PM10'u birlikte yükseltir, hatalı ölçüm ise tek bir kanalı yükseltir. CO₂ için 0 ya da 2000 ppm ölçümleri aralık dışıdır ve iki dakika boyunca hiç değişmeyen bir CO₂ değeri donmuş bir sensörü gösterir.⟫</p>
+    </div>
+  </div>
+  <div class="grid2 even" style="margin-top:18px">
+    <div class="card">
+      <h3 style="margin-top:0">⟪How well did the detector do?‖Dedektör ne kadar başarılı?⟫</h3>
+      <table class="tbl" id="qc-score"><thead><tr><th>⟪Problem‖Sorun⟫</th><th>⟪Planted‖Yerleştirilen⟫</th><th>⟪Flagged‖İşaretlenen⟫</th><th>⟪Caught‖Yakalanan⟫</th></tr></thead><tbody></tbody></table>
+      <p class="note">⟪Two PM2.5 glitches hid among real smoke and traffic plumes. No rule is perfect, which is why the flags are reviewed with the field notes.‖İki PM2,5 hatası gerçek duman ve trafik bulutlarının arasına gizlendi. Hiçbir kural kusursuz değildir. Bu yüzden işaretler saha notlarıyla birlikte gözden geçirilmektedir.⟫</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">⟪Missing is not zero‖Eksik değer sıfır değildir⟫</h3>
+      <p>⟪In Round 2 on Campus A the logger restarted at P5 and lost one minute. Over 22 readings around the gap, the mean temperature is <b>{{n:qc.gap_example.mean_skip:2}} °C</b> when the empty readings are skipped and <b>{{n:qc.gap_example.mean_zero:2}} °C</b> when they are written as zero. Six empty readings cool the point by almost three degrees that never existed.‖Kampüs A'nın 2. turunda kayıt cihazı P5'te yeniden başladı ve bir dakika kayboldu. Boşluğun çevresindeki 22 ölçümde, boş ölçümler atlandığında ortalama sıcaklık <b>{{n:qc.gap_example.mean_skip:2}} °C</b>, sıfır yazıldığında ise <b>{{n:qc.gap_example.mean_zero:2}} °C</b> olur. Altı boş ölçüm noktayı hiç var olmamış yaklaşık üç derece kadar soğutur.⟫</p>
+      <div class="chips"><span class="chip good">⟪keep the raw file‖ham dosyayı koru⟫</span><span class="chip good">⟪flag, do not delete‖işaretle, silme⟫</span><span class="chip good">⟪write the reason‖gerekçeyi yaz⟫</span><span class="chip bad">⟪never fill with zero‖asla sıfırla doldurma⟫</span></div>
+    </div>
+  </div>
+  <div class="nbref"><a class="badge" href="{{COLAB}}#scrollTo=sec-1" target="_blank" rel="noopener">Colab ↗</a><p>⟪Sections 1.2 and 1.3 of the Colab notebook build the same flags, score them against the planted problems and let an Isolation Forest give a second opinion [2].‖Colab defterinin 1.2. ve 1.3. kısımları aynı işaretleri üretir, bunları yerleştirilen sorunlarla karşılaştırır ve ikinci bir görüş için Isolation Forest kullanır [2].⟫</p></div>
+  </div></div>
+</div></section>
+
+<!-- ============================ station 4 ============================ -->
+<section class="station" id="s4"><div class="wrap">
+  <div class="station-head"><span class="no">4</span><h2>⟪Three stations, one story‖Üç istasyon, tek hikâye⟫</h2></div>
+  <div class="grid2">
+    <div>
+      <p>⟪Before the field rounds, the three NOKTA Stations ran side by side for two hours. Any steady difference between them is a property of the devices, not of the campuses.‖Saha turlarından önce üç NOKTA Station iki saat boyunca yan yana çalıştırıldı. Aralarındaki sürekli bir fark kampüslerin değil cihazların özelliğidir.⟫</p>
+      <div class="poll" data-id="p1-s4" data-answer="unknown">
+        <div class="q" data-label="⟪Predict‖Tahmin edin⟫">⟪Station S2 reads about half a degree warmer than the others. Which station is right?‖S2 istasyonu diğerlerinden yaklaşık yarım derece sıcak ölçüyor. Hangi istasyon doğru?⟫</div>
+        <div class="opts"><button data-v="s1">S1</button><button data-v="s2">S2</button><button data-v="unknown">⟪Cannot tell without a reference‖Referans olmadan bilinemez⟫</button></div>
+        <div class="verdict"></div>
+        <div class="msg-right" hidden>⟪Without a calibrated reference instrument, no station can be declared right. The stations are aligned to their common mean. This removes the differences between devices, not an error they all share.‖Kalibre edilmiş bir referans cihaz olmadan hiçbir istasyon doğru ilan edilemez. İstasyonlar ortak ortalamalarına hizalanır. Bu, cihazlar arasındaki farkları giderir, hepsinin paylaştığı bir hatayı gidermez.⟫</div>
+        <div class="msg-wrong" hidden>⟪Without a calibrated reference instrument, no station can be declared right. The stations are aligned to their common mean, which removes the differences between devices but not an error they all share.‖Kalibre edilmiş bir referans cihaz olmadan hiçbir istasyon doğru ilan edilemez. İstasyonlar ortak ortalamalarına hizalanır. Bu işlem cihazlar arasındaki farkları giderir ama hepsinin paylaştığı bir hatayı gidermez.⟫</div>
+      </div>
+      <div class="formula">
+        <texd>\begin{gathered} o_s = \frac{1}{T}\sum_{t=1}^{T}\Bigl(x_s(t) - \bar{x}(t)\Bigr) \\[4pt] \bar{x}(t) = \frac{1}{3}\sum_{s=1}^{3} x_s(t) \end{gathered}</texd>
+        <p class="sym">⟪<b>o<sub>s</sub></b> offset of station s (°C) · <b>x<sub>s</sub>(t)</b> its reading at minute t · <b>x̄(t)</b> mean of the three stations at minute t · <b>T</b> number of minutes (120). The corrected reading is x<sub>s</sub> − o<sub>s</sub>. For particles a ratio is used instead of a difference.‖<b>o<sub>s</sub></b> s istasyonunun sapması (°C) · <b>x<sub>s</sub>(t)</b> t dakikasındaki ölçümü · <b>x̄(t)</b> t dakikasında üç istasyonun ortalaması · <b>T</b> dakika sayısı (120). Düzeltilmiş ölçüm x<sub>s</sub> − o<sub>s</sub> olur. Partiküllerde fark yerine oran kullanılmaktadır.⟫</p>
+        <div class="worked">⟪<b>Worked example, first minute.</b> S1 = {{n:c.s1:2}}, S2 = {{n:c.s2:2}}, S3 = {{n:c.s3:2}} °C. Mean = {{n:c.mean:2}} °C. Differences: S1 {{s:c.d1:2}}, S2 {{s:c.d2:2}}, S3 {{s:c.d3:2}} °C. Averaged over 120 minutes: S1 {{s:coloc.offsets.S1.t:2}}, S2 {{s:coloc.offsets.S2.t:2}}, S3 {{s:coloc.offsets.S3.t:2}} °C.‖<b>Çözümlü örnek, ilk dakika.</b> S1 = {{n:c.s1:2}}, S2 = {{n:c.s2:2}}, S3 = {{n:c.s3:2}} °C. Ortalama = {{n:c.mean:2}} °C. Farklar: S1 {{s:c.d1:2}}, S2 {{s:c.d2:2}}, S3 {{s:c.d3:2}} °C. 120 dakikanın ortalaması: S1 {{s:coloc.offsets.S1.t:2}}, S2 {{s:coloc.offsets.S2.t:2}}, S3 {{s:coloc.offsets.S3.t:2}} °C.⟫</div>
+      </div>
+    </div>
+    <div class="viz">
+      <div class="controls">
+        <div class="seg" id="co-ch"><button class="on" data-v="temperature_c">⟪Temperature‖Sıcaklık⟫</button><button data-v="pm25_ugm3">⟪PM2.5‖PM2,5⟫</button><button data-v="co2_ppm">CO₂</button></div>
+        <button class="btn" id="co-fix">⟪Apply the offsets‖Sapmaları uygula⟫</button>
+      </div>
+      <div id="co-chart"></div>
+      <div class="legend" id="co-legend"></div>
+      <table class="tbl" style="margin-top:10px"><thead><tr><th>⟪Station‖İstasyon⟫</th><th>⟪Temperature‖Sıcaklık⟫</th><th>⟪Humidity‖Nem⟫</th><th>CO₂</th><th>⟪PM ratio‖PM oranı⟫</th></tr></thead>
+        <tbody>
+          <tr><td>S1 (A)</td><td>{{s:coloc.offsets.S1.t:2}} °C</td><td>{{s:coloc.offsets.S1.rh:2}} %</td><td>{{s:coloc.offsets.S1.co2:1}} ppm</td><td>× {{n:coloc.offsets.S1.pm:3}}</td></tr>
+          <tr><td>S2 (B)</td><td>{{s:coloc.offsets.S2.t:2}} °C</td><td>{{s:coloc.offsets.S2.rh:2}} %</td><td>{{s:coloc.offsets.S2.co2:1}} ppm</td><td>× {{n:coloc.offsets.S2.pm:3}}</td></tr>
+          <tr><td>S3 (C)</td><td>{{s:coloc.offsets.S3.t:2}} °C</td><td>{{s:coloc.offsets.S3.rh:2}} %</td><td>{{s:coloc.offsets.S3.co2:1}} ppm</td><td>× {{n:coloc.offsets.S3.pm:3}}</td></tr>
+        </tbody></table>
+    </div>
+  </div>
+  <div class="nbref"><a class="badge" href="{{COLAB}}#scrollTo=sec-1" target="_blank" rel="noopener">Colab ↗</a><p>⟪Section 1.4 of the Colab notebook computes these offsets from the side-by-side file and applies them to every campus reading.‖Colab defterinin 1.4. kısmı bu sapmaları yan yana test dosyasından hesaplar ve her kampüs ölçümüne uygular.⟫</p></div>
+</div></section>
+
+<!-- ============================ station 5 ============================ -->
+<section class="station" id="s5"><div class="wrap">
+  <div class="station-head"><span class="no">5</span><h2>⟪Humid air fools the particle counter‖Nemli hava partikül sayacını yanıltır⟫</h2></div>
+  <div class="poll" data-id="p1-s5" data-answer="humid">
+    <div class="q" data-label="⟪Predict‖Tahmin edin⟫">⟪On the humid morning of Round 2 on Campus C, the raw PM2.5 of the green area is higher than at the road. Why?‖Kampüs C'nin 2. turundaki nemli sabahta yeşil alanın ham PM2,5 değeri yoldakinden yüksek. Neden?⟫</div>
+    <div class="opts"><button data-v="trees">⟪Trees release particles‖Ağaçlar partikül salar⟫</button><button data-v="irrig">⟪Irrigation dust‖Sulama tozu⟫</button><button data-v="humid">⟪Humid air swells the particles‖Nemli hava partikülleri şişirir⟫</button><button data-v="traffic">⟪Traffic moved there‖Trafik oraya kaydı⟫</button></div>
+    <div class="verdict"></div>
+    <div class="msg-right" hidden>⟪The green area was the first stop, at 87 % relative humidity. Particles take up water, grow, and a light-scattering sensor without a dryer counts them as more mass [3, 4].‖Yeşil alan ilk duraktı ve bağıl nem %87'ydi. Partiküller su alır, büyür ve kurutucusu olmayan ışık saçılımlı bir sensör bunları daha fazla kütle olarak sayar [3, 4].⟫</div>
+    <div class="msg-wrong" hidden>⟪It is the air, not the place. The green area was the first stop, at 87 % relative humidity. Particles take up water and grow, and a light-scattering sensor without a dryer counts them as more mass [3, 4].‖Sebep yer değil hava. Yeşil alan ilk duraktı ve bağıl nem %87'ydi. Partiküller su alıp büyür ve kurutucusu olmayan ışık saçılımlı bir sensör bunları daha fazla kütle olarak sayar [3, 4].⟫</div>
+  </div>
+  <div class="reveal-lock locked" data-for="p1-s5"><div class="reveal-body">
+  <div class="grid2">
+    <div>
+      <div class="viz"><canvas id="hum-canvas" width="560" height="250" style="width:100%;height:auto;display:block;border-radius:8px"></canvas>
+        <div class="slider"><span>⟪Relative humidity‖Bağıl nem⟫</span><input type="range" id="hum-rh" min="30" max="95" value="50"><output id="hum-out"></output></div>
+        <p class="cap" id="hum-cap"></p></div>
+      <div class="formula">
+        <texd>\begin{gathered} C(a_w) = 1 + \frac{\kappa\,\rho_w/\rho_p}{-1 + 1/a_w}, \qquad a_w = \frac{\mathrm{RH}}{100} \\[4pt] \mathrm{PM}_{\text{⟪corrected‖düzeltilmiş⟫}} = \frac{\mathrm{PM}_{\text{⟪raw‖ham⟫}}}{C} \end{gathered}</texd>
+        <p class="sym">⟪<b>C</b> growth factor of particle mass (no unit) · <b>κ</b> hygroscopicity of the particles, 0.3 as an average continental value · <b>ρ<sub>w</sub>/ρ<sub>p</sub></b> density of water over the density of dry particles, 1/1.65 · <b>RH</b> relative humidity (%) [4].‖<b>C</b> partikül kütlesinin büyüme çarpanı (birimsiz) · <b>κ</b> partiküllerin higroskopikliği, ortalama karasal değer olarak 0,3 · <b>ρ<sub>w</sub>/ρ<sub>p</sub></b> suyun yoğunluğunun kuru partikül yoğunluğuna oranı, 1/1,65 · <b>RH</b> bağıl nem (%) [4].⟫</p>
+        <div class="worked">⟪<b>Worked example.</b> Green area, RH = {{n:h.rh:1}} %, so a<sub>w</sub> = {{n:h.aw:3}}. Then −1 + 1/{{n:h.aw:3}} = {{n:h.inv:3}} and 0.3/1.65 = {{n:h.kr:3}}. C = 1 + {{n:h.kr:3}}/{{n:h.inv:3}} = <b>{{n:h.c:3}}</b>. The raw median {{n:h.raw:2}} µg/m³ becomes {{n:h.raw:2}}/{{n:h.c:3}} = <b>{{n:h.cor:1}} µg/m³</b>.‖<b>Çözümlü örnek.</b> Yeşil alan, RH = %{{n:h.rh:1}}, dolayısıyla a<sub>w</sub> = {{n:h.aw:3}}. Buradan −1 + 1/{{n:h.aw:3}} = {{n:h.inv:3}} ve 0,3/1,65 = {{n:h.kr:3}} bulunur. C = 1 + {{n:h.kr:3}}/{{n:h.inv:3}} = <b>{{n:h.c:3}}</b>. Ham medyan {{n:h.raw:2}} µg/m³, {{n:h.raw:2}}/{{n:h.c:3}} = <b>{{n:h.cor:1}} µg/m³</b> olur.⟫</div>
+      </div>
+    </div>
+    <div class="viz">
+      <div id="hum-bars"></div>
+      <div class="legend"><span><i class="sw" style="background:var(--muted)"></i>⟪raw‖ham⟫</span><span><i class="sw" style="background:var(--accent)"></i>⟪corrected‖düzeltilmiş⟫</span></div>
+      <p class="cap">⟪Campus C, Round 2, PM2.5 visit medians in µg/m³. After the correction the green area is the cleanest point again. The value of κ belongs to the local air, so a real study estimates it against a reference instrument.‖Kampüs C, 2. tur, µg/m³ cinsinden PM2,5 ziyaret medyanları. Düzeltmeden sonra yeşil alan yeniden en temiz noktadır. κ değeri yerel havaya aittir. Bu yüzden gerçek bir çalışma onu bir referans cihazla karşılaştırarak kestirir.⟫</p>
+    </div>
+  </div>
+  <div class="takeaway"><b>⟪Takeaway.‖Çıkarım.⟫</b> ⟪A low-cost sensor reports what it sees, not always what is there [5]. Quality control, device alignment and physical corrections come before any AI method, and each step is written down.‖Düşük maliyetli bir sensör her zaman orada olanı değil, gördüğünü bildirir [5]. Kalite kontrolü, cihaz hizalaması ve fiziksel düzeltmeler her YZ yönteminden önce gelir ve her adım kayda geçirilir.⟫</div>
+  <div class="nbref"><a class="badge" href="{{COLAB}}#scrollTo=sec-1" target="_blank" rel="noopener">Colab ↗</a><p>⟪Sections 1.5 and 1.6 of the Colab notebook apply the correction to every reading and build the table of clean minutes used in Parts 2 to 4.‖Colab defterinin 1.5. ve 1.6. kısımları düzeltmeyi her ölçüme uygular ve 2-4. bölümlerde kullanılan temiz dakika tablosunu oluşturur.⟫</p></div>
+  </div></div>
+</div></section>
+
+<section class="station" id="refs"><div class="wrap">
+  <h3>⟪References‖Kaynaklar⟫</h3>
+  <ol class="note">
+    <li>Leys, C., Ley, C., Klein, O., Bernard, P., &amp; Licata, L. (2013). Detecting outliers: Do not use standard deviation around the mean, use absolute deviation around the median. <i>Journal of Experimental Social Psychology, 49</i>(4), 764–766. <a href="https://doi.org/10.1016/j.jesp.2013.03.013">doi:10.1016/j.jesp.2013.03.013</a></li>
+    <li>Liu, F. T., Ting, K. M., &amp; Zhou, Z.-H. (2008). Isolation forest. In <i>Proceedings of the 8th IEEE International Conference on Data Mining (ICDM 2008)</i> (pp. 413–422). <a href="https://doi.org/10.1109/ICDM.2008.17">doi:10.1109/ICDM.2008.17</a></li>
+    <li>Jayaratne, R., Liu, X., Thai, P., Dunbabin, M., &amp; Morawska, L. (2018). The influence of humidity on the performance of a low-cost air particle mass sensor and the effect of atmospheric fog. <i>Atmospheric Measurement Techniques, 11</i>(8), 4883–4890. <a href="https://doi.org/10.5194/amt-11-4883-2018">doi:10.5194/amt-11-4883-2018</a></li>
+    <li>Crilley, L. R., Shaw, M., Pound, R., Kramer, L. J., Price, R., Young, S., Lewis, A. C., &amp; Pope, F. D. (2018). Evaluation of a low-cost optical particle counter (Alphasense OPC-N2) for ambient air monitoring. <i>Atmospheric Measurement Techniques, 11</i>(2), 709–720. <a href="https://doi.org/10.5194/amt-11-709-2018">doi:10.5194/amt-11-709-2018</a></li>
+    <li>Morawska, L., Thai, P. K., Liu, X., Asumadu-Sakyi, A., Ayoko, G., Bartonova, A., Bedini, A., Chai, F., Christensen, B., Dunbabin, M., Gao, J., Hagler, G. S. W., Jayaratne, R., Kumar, P., Lau, A. K. H., Louie, P. K. K., Mazaheri, M., Ning, Z., Motta, N., Mullins, B., Rahman, M. M., Ristovski, Z., Shafiei, M., Tjondronegoro, D., Westerdahl, D., &amp; Williams, R. (2018). Applications of low-cost sensing technologies for air quality monitoring and exposure assessment: How far have they gone? <i>Environment International, 116</i>, 286–299. <a href="https://doi.org/10.1016/j.envint.2018.04.018">doi:10.1016/j.envint.2018.04.018</a></li>
+    <li>World Health Organization. (2021). <i>WHO global air quality guidelines: Particulate matter (⟪PM2.5‖PM2,5⟫ and PM10), ozone, nitrogen dioxide, sulfur dioxide and carbon monoxide</i>. World Health Organization. <a href="https://www.who.int/publications/i/item/9789240034228">who.int/publications/i/item/9789240034228</a></li>
+    <li>NOAA Global Monitoring Laboratory. (2026). <i>The NOAA Annual Greenhouse Gas Index (AGGI)</i>. National Oceanic and Atmospheric Administration. <a href="https://gml.noaa.gov/aggi/aggi.html">gml.noaa.gov/aggi/aggi.html</a></li>
+  </ol>
+</div></section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var D = window.NOKTA, $ = function (id) { return document.getElementById(id); };
+  var CH = ["temperature_c", "rel_humidity_pct", "pressure_hpa", "pm1_ugm3", "pm25_ugm3", "pm10_ugm3", "co2_ppm", "light_lux", "uva_wm2", "uvb_wm2"];
+  /* ---------- station 1: the twin ---------- */
+  var vsel = $("tw-var");
+  CH.forEach(function (c) { var o = document.createElement("option"); o.value = c; o.textContent = NK.chName(c) + " (" + NK.chUnit(c) + ")"; if (c === "pm25_ugm3") o.selected = true; vsel.appendChild(o); });
+  function formHTML(v, c, r) {
+    if (!v) return "";
+    return "<b>" + v.pid + " · " + NK.typeName(v.type) + "</b><br>" + NK.L.campus[c] + " · " + NK.L.round + " " + r + " · " + v.start + " ⟪to‖-⟫ " + v.end +
+      "<br>⟪Vehicles in 15 min‖15 dakikadaki araç⟫: <b>" + v.vehicles + "</b> · ⟪people‖kişi⟫: <b>" + v.people + "</b> · ⟪sun‖güneş⟫: <b>" +
+      ({ sun: "⟪full‖tam⟫", partial: "⟪partial‖kısmi⟫", shade: "⟪shade‖gölge⟫" })[v.sun] + "</b><br><span class='note'>" +
+      ["temperature_c", "rel_humidity_pct", "pm25_ugm3", "co2_ppm", "light_lux"].map(function (k) {
+        return NK.chName(k) + " " + NK.fmt(v.median[k], k === "light_lux" ? 0 : 1) + " " + NK.chUnit(k); }).join(" · ") + "</span>";
+  }
+  var tw = NOKTA3D.twin($("twin1"), {
+    accent: NK.cssVar("--p1"), fallback: "⟪3D view needs WebGL.‖3B görünüm WebGL gerektirir.⟫",
+    onPick: function (t, st) {
+      var r = st.round === "mean" ? "1" : st.round;
+      var v = D.twin[st.campus][r].filter(function (x) { return x.type === t; })[0];
+      $("tw-form-body").innerHTML = formHTML(v, st.campus, r);
+    }
+  });
+  function legend() {
+    if (!tw) return;
+    var v = tw.get("variable");
+    $("tw-legend").innerHTML = NK.chName(v) + " (" + NK.chUnit(v) + ") · ⟪Taller and darker: Higher‖Daha yüksek ve koyu: Daha büyük değer⟫";
+  }
+  if (tw) {
+    tw.reset(); legend();
+    function tick(info) {
+      $("tw-clock").textContent = info.clock;
+      var st = info.at ? "⟪Measuring at‖Ölçüm noktası⟫ " + NK.shortName(info.at) + " · ⟪minute‖dakika⟫ " + (info.minute + 1) +
+        (info.minute < 2 ? " · ⟪sensors settling‖sensörler dengeleniyor⟫" : "") :
+        info.moving ? "⟪Walking to‖Yürüyor:⟫ " + NK.shortName(info.next) : "⟪Round finished‖Tur bitti⟫";
+      $("tw-status").textContent = st;
+      if (info.at) {
+        var r = tw.get("round") === "mean" ? "1" : tw.get("round");
+        var v = D.twin[tw.get("campus")][r].filter(function (x) { return x.type === info.at; })[0];
+        $("tw-form-body").innerHTML = formHTML(v, tw.get("campus"), r);
+      }
+    }
+    $("tw-play").onclick = function () {
+      if (tw.get("round") === "mean") { $("tw-round").value = "1"; tw.set("round", "1"); }
+      if (tw.get("playing")) { tw.pause(); this.textContent = "▶ ⟪Play the round‖Turu oynat⟫"; }
+      else { var b = this; tw.play(tick, function () { b.textContent = "▶ ⟪Play the round‖Turu oynat⟫"; }); this.textContent = "❚❚ ⟪Pause‖Duraklat⟫"; NK.Store.log("twin:played", true); }
+    };
+    $("tw-reset").onclick = function () { tw.reset(); $("tw-play").textContent = "▶ ⟪Play the round‖Turu oynat⟫"; tick({ clock: "10:00", at: null, moving: false }); $("tw-status").textContent = "⟪Ready‖Hazır⟫"; };
+    $("tw-results").onclick = function () { tw.results(); $("tw-clock").textContent = "⟪results‖sonuçlar⟫"; $("tw-status").textContent = "⟪Visit medians of the chosen round‖Seçilen turun ziyaret medyanları⟫"; };
+    $("tw-speed").onchange = function () { tw.set("speed", +this.value); };
+    $("tw-campus").onchange = function () { tw.set("campus", this.value); };
+    $("tw-round").onchange = function () { if (this.value === "mean") tw.results(); tw.set("round", this.value); };
+    vsel.onchange = function () { tw.set("variable", this.value); legend(); };
+    $("tw-view").onchange = function () { tw.view(this.value); };
+  }
+  /* ---------- station 2: channel table ---------- */
+  var READ = {
+    temperature_c: "⟪air temperature in the shade of the housing, raised when direct sun heats the housing‖gövdenin gölgesindeki hava sıcaklığı, güneş gövdeyi ısıtınca yükselir⟫",
+    rel_humidity_pct: "⟪how close the air is to saturation, lower in warmer air‖havanın doymaya ne kadar yakın olduğu, hava ısındıkça düşer⟫",
+    pressure_hpa: "⟪weight of the air above, set mostly by altitude‖üstteki havanın ağırlığı, çoğunlukla yüksekliğe bağlıdır⟫",
+    pm1_ugm3: "⟪finest particles, mostly from combustion‖en ince partiküller, çoğunlukla yanmadan⟫",
+    pm25_ugm3: "⟪fine particles that reach deep into the lungs [6]‖akciğerlerin derinlerine ulaşan ince partiküller [6]⟫",
+    pm10_ugm3: "⟪adds coarse dust, for example from roads and bare ground‖kaba tozu da içerir, örneğin yol ve çıplak zeminden⟫",
+    co2_ppm: "⟪from breath and exhaust, over a global background of about 425 ppm [7]‖nefes ve egzozdan gelir, küresel arka plan yaklaşık 425 ppm'dir [7]⟫",
+    light_lux: "⟪brightness for the eye, capped at 65 535 lx by a 16-bit sensor‖göz için parlaklık, 16 bitlik sensör 65 535 lx'te durur⟫",
+    uva_wm2: "⟪longer-wave ultraviolet, drops less than light in shade‖uzun dalga morötesi ışın, gölgede ışıktan daha az düşer⟫",
+    uvb_wm2: "⟪shorter-wave ultraviolet, the part behind sunburn‖kısa dalga morötesi ışın, güneş yanığının nedeni⟫"
+  };
+  var tb = document.querySelector("#chan-table tbody");
+  CH.forEach(function (c) {
+    var lo = Infinity, hi = -Infinity;
+    ["A", "B", "C"].forEach(function (k) { ["1", "2"].forEach(function (r) { D.twin[k][r].forEach(function (v) { var x = v.median[c]; if (x < lo) lo = x; if (x > hi) hi = x; }); }); });
+    var nd = c === "light_lux" ? 0 : c === "uvb_wm2" ? 2 : 1;
+    var tr = document.createElement("tr"); tr.style.cursor = "pointer";
+    tr.innerHTML = "<td><b>" + NK.chName(c) + "</b></td><td>" + NK.chUnit(c) + "</td><td>" + NK.fmt(lo, nd) + " ⟪to‖-⟫ " + NK.fmt(hi, nd) + "</td><td style='text-align:left'>" + READ[c] + "</td>";
+    tr.onclick = function () { if (tw) { vsel.value = c; tw.set("variable", c); legend(); document.getElementById("s1").scrollIntoView({ behavior: "smooth" }); } };
+    tb.appendChild(tr);
+  });
+  /* ---------- station 3: data doctor ---------- */
+  var show = { warmup: true, flags: true, truth: false };
+  document.querySelectorAll("[data-qc]").forEach(function (b) {
+    b.onclick = function () { var k = b.getAttribute("data-qc"); show[k] = !show[k]; b.classList.toggle("on", show[k]); drawQC(); };
+  });
+  var FLAGMAP = { co2_ppm: ["spike_co2_ppm", "flatline_co2"], pm25_ugm3: ["spike_pm25_ugm3"], pm10_ugm3: ["spike_pm10_ugm3"], temperature_c: [], rel_humidity_pct: ["high_rh"] };
+  var TRUTHMAP = { co2_ppm: ["spike_co2", "flatline_co2"], pm25_ugm3: ["spike_pm25", "high_rh"], pm10_ugm3: ["spike_pm10"], temperature_c: [], rel_humidity_pct: ["high_rh"] };
+  function drawQC() {
+    var V = D.qc.visits[$("qc-visit").value], ch = $("qc-ch").value;
+    var pts = V.sec.map(function (s, i) { return [s / 60, V.raw[ch][i]]; });
+    var marks = [];
+    if (show.flags) FLAGMAP[ch].forEach(function (f) { V.flags[f].forEach(function (on, i) { if (on && V.raw[ch][i] !== null) marks.push({ x: V.sec[i] / 60, y: V.raw[ch][i], color: "var(--bad)", r: 6 }); }); });
+    if (show.truth) V.truth.forEach(function (t, i) { if (TRUTHMAP[ch].indexOf(t) >= 0 && V.raw[ch][i] !== null) marks.push({ x: V.sec[i] / 60, y: V.raw[ch][i], color: "var(--ink)", shape: "x" }); });
+    var bands = show.warmup ? [{ x0: 0, x1: 2, fill: "var(--warn)", label: "⟪warm-up‖ısınma⟫", opacity: 0.16 }] : [];
+    Charts.line($("qc-chart"), {
+      height: 300, series: [{ name: ch, color: NK.cssVar("--p1"), pts: pts, width: 1.8 }], marks: marks, bands: bands,
+      x: { label: "⟪minutes since arrival‖varıştan sonraki dakika⟫", min: 0, max: 15 }, y: { label: NK.chName(ch) + " (" + NK.chUnit(ch) + ")" },
+      tooltip: function (xv) {
+        var i = Math.max(0, Math.min(V.sec.length - 1, Math.round(xv * 6)));
+        return { x: V.sec[i] / 60, html: NK.fmt(V.sec[i], 0) + " s · <b>" + NK.fmt(V.raw[ch][i], ch === "co2_ppm" ? 0 : 1) + "</b> " + NK.chUnit(ch) + (V.truth[i] !== "ok" ? "<br>⟪planted‖yerleştirilen⟫: " + V.truth[i] : "") };
+      }
+    });
+    Charts.legend($("qc-legend"), [{ color: NK.cssVar("--p1"), label: "⟪raw readings, every 10 s‖ham ölçümler, 10 saniyede bir⟫" }].concat(show.flags ? [{ color: NK.cssVar("--bad"), label: "⟪flagged by the detector (circle)‖dedektörün işaretlediği (halka)⟫" }] : []).concat(show.truth ? [{ color: NK.cssVar("--ink"), label: "⟪planted problem (cross)‖yerleştirilen sorun (çarpı)⟫" }] : []));
+  }
+  $("qc-visit").onchange = drawQC; $("qc-ch").onchange = drawQC; drawQC();
+  var NAMES = { warmup: "⟪warm-up after a move‖taşıma sonrası ısınma⟫", spike_pm25: "⟪PM2.5 glitch‖PM2,5 hatası⟫", spike_pm10: "⟪PM10 glitch‖PM10 hatası⟫", spike_co2: "⟪CO₂ out of range‖aralık dışı CO₂⟫", flatline_co2: "⟪frozen CO₂ sensor‖donmuş CO₂ sensörü⟫", gap: "⟪logger dropout‖kayıt kesintisi⟫", saturated: "⟪light sensor at its limit‖sınırındaki ışık sensörü⟫", high_rh: "⟪humidity above 85 %‖%85 üzeri nem⟫" };
+  var sb = document.querySelector("#qc-score tbody");
+  D.qc.score.forEach(function (r) { sb.insertAdjacentHTML("beforeend", "<tr><td>" + NAMES[r.problem] + "</td><td>" + r.planted + "</td><td>" + r.flagged + "</td><td>" + r.caught + "</td></tr>"); });
+  /* ---------- station 4: co-location ---------- */
+  var coCh = "temperature_c", coFix = false, SC = { S1: "--t1", S2: "--t2", S3: "--t3" };
+  function drawCo() {
+    var S = D.coloc.series[coCh], off = D.coloc.offsets;
+    var series = ["S1", "S2", "S3"].map(function (s) {
+      return { name: s, color: NK.cssVar(SC[s]), width: 1.8, pts: S[s].map(function (v, i) {
+        var y = v; if (coFix) { y = coCh === "temperature_c" ? v - off[s].t : coCh === "co2_ppm" ? v - off[s].co2 : v / off[s].pm; }
+        return [i, y]; }) };
+    });
+    Charts.line($("co-chart"), { height: 260, series: series, x: { label: "⟪minutes of the side-by-side test‖yan yana testin dakikası⟫" }, y: { label: NK.chName(coCh) + " (" + NK.chUnit(coCh) + ")" },
+      tooltip: function (xv) { var i = Math.max(0, Math.min(119, Math.round(xv))); return { x: i, html: series.map(function (s) { return s.name + ": <b>" + NK.fmt(s.pts[i][1], 2) + "</b>"; }).join("<br>") }; } });
+    Charts.legend($("co-legend"), series.map(function (s) { return { color: s.color, label: s.name + (coFix ? " ⟪(aligned)‖(hizalanmış)⟫" : "") }; }));
+  }
+  document.querySelectorAll("#co-ch button").forEach(function (b) { b.onclick = function () { document.querySelectorAll("#co-ch button").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); coCh = b.getAttribute("data-v"); drawCo(); }; });
+  $("co-fix").onclick = function () { coFix = !coFix; this.classList.toggle("on", coFix); drawCo(); NK.Store.log("coloc:aligned", coFix); };
+  drawCo();
+  /* ---------- station 5: humidity ---------- */
+  var cv = $("hum-canvas"), g = cv.getContext("2d"), parts = [];
+  for (var i = 0; i < 70; i++) parts.push({ x: Math.random() * 560, y: Math.random() * 250, r: 2 + Math.random() * 4, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4 });
+  function C(rh) { var aw = Math.min(0.99, rh / 100); return 1 + (0.3 / 1.65) / (-1 + 1 / aw); }
+  function humTick() {
+    var rh = +$("hum-rh").value, c = C(rh), grow = Math.cbrt(c);
+    g.clearRect(0, 0, 560, 250);
+    g.fillStyle = NK.cssVar("--panel"); g.fillRect(0, 0, 560, 250);
+    g.fillStyle = "rgba(255,240,170,0.25)"; g.beginPath(); g.moveTo(470, 0); g.lineTo(560, 0); g.lineTo(300, 250); g.lineTo(200, 250); g.fill();
+    parts.forEach(function (p) {
+      p.x += p.vx; p.y += p.vy; if (p.x < 0) p.x += 560; if (p.x > 560) p.x -= 560; if (p.y < 0) p.y += 250; if (p.y > 250) p.y -= 250;
+      var rr = p.r * grow;
+      g.fillStyle = "rgba(107,90,70,0.85)"; g.beginPath(); g.arc(p.x, p.y, p.r, 0, 6.283); g.fill();
+      if (grow > 1.02) { g.strokeStyle = "rgba(42,120,214,0.75)"; g.lineWidth = 1.5; g.fillStyle = "rgba(42,120,214,0.18)"; g.beginPath(); g.arc(p.x, p.y, rr, 0, 6.283); g.fill(); g.stroke(); }
+    });
+    g.fillStyle = NK.cssVar("--ink"); g.font = "700 15px Atkinson Hyperlegible, sans-serif";
+    g.fillText("⟪Mass seen by the sensor‖Sensörün gördüğü kütle⟫ × " + NK.fmt(c, 2), 14, 24);
+    requestAnimationFrame(humTick);
+  }
+  function humText() { var rh = +$("hum-rh").value; $("hum-out").textContent = rh + " %"; $("hum-cap").textContent = "⟪Brown cores are dry particles, and blue shells are water taken up at‖Kahverengi çekirdekler kuru partiküllerdir, mavi kabuklar ise şu nemde alınan sudur:⟫ " + rh + " %."; }
+  $("hum-rh").oninput = humText; humText(); humTick();
+  var H = D.humidity.campusC_round2, order = ["green", "crowded", "sunny_hard", "reference", "traffic", "shaded"];
+  var items = [];
+  order.forEach(function (t) {
+    var h = H.filter(function (x) { return x.type === t; })[0];
+    items.push({ label: NK.shortName(t) + " · ⟪raw‖ham⟫ (" + NK.fmt(h.rh, 0) + " %)", value: h.raw, color: NK.cssVar("--muted") });
+    items.push({ label: NK.shortName(t) + " · ⟪corrected‖düzeltilmiş⟫", value: h.corrected, color: NK.cssVar("--p1"), bold: true });
+  });
+  Charts.bars($("hum-bars"), { items: items, unit: "µg/m³", nd: 1, labelW: 210, rowH: 26 });
+  document.addEventListener("nokta:theme", function () {
+    drawQC(); drawCo();
+    items.forEach(function (it) { it.color = NK.cssVar(it.bold ? "--p1" : "--muted"); });
+    Charts.bars($("hum-bars"), { items: items, unit: "µg/m³", nd: 1, labelW: 210, rowH: 26, instant: true });
+  });
+});
+</script>

@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>2. Bölüm · Analiz et: Adil karşılaştırma</title>
+<meta name="description" content="Sabahın son noktası neden sıcak görünür, ters sıralı ikinci tur bunu nasıl düzeltir, tipik değerler, yanlış yönü gösteren bir korelasyon ve çiy noktası.">
+<link rel="stylesheet" href="../assets/vendor/fonts/atkinson.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E7A5F'/%3E%3Ccircle cx='32' cy='32' r='11' fill='white'/%3E%3Ccircle cx='32' cy='32' r='20' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6 6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site-data.js"></script>
+<script src="../assets/site.js"></script>
+<script src="../assets/charts.js"></script>
+
+</head>
+<body data-part="p2">
+<header class="topbar"><div class="wrap">
+<a class="brand" href="index.html"><span class="dot"></span><span class="name">NOKTA · YZ atölyesi<small>Çevresel veri analizi ve yorumlama</small></span></a>
+<nav class="route" aria-label="Atölye rotası"><ol><li data-page="index"><a href="index.html"><span class="pin"></span><span class="lbl">Başlangıç</span></a></li><li data-page="part1"><a href="part1.html"><span class="pin"></span><span class="lbl">1 Ölç</span></a></li><li data-page="part2"><a href="part2.html"><span class="pin"></span><span class="lbl">2 Analiz et</span></a></li><li data-page="part3"><a href="part3.html"><span class="pin"></span><span class="lbl">3 Keşfet</span></a></li><li data-page="part4"><a href="part4.html"><span class="pin"></span><span class="lbl">4 Açıkla</span></a></li><li data-page="part5"><a href="part5.html"><span class="pin"></span><span class="lbl">5 Paylaş ve dönüştür</span></a></li><li data-page="lab"><a href="lab.html"><span class="pin"></span><span class="lbl">Laboratuvar</span></a></li></ol></nav>
+<div class="tools"><a class="lang" href="../part2.html" title="English version">EN</a>
+<button data-act="theme" title="T">◐</button><button data-act="full" title="F">⛶</button><button data-act="help" title="?">?</button></div>
+</div></header>
+<main>
+
+<section class="parthead"><div class="wrap">
+  <p class="kicker">2. Bölüm · Analiz et · 0:30-0:52</p>
+  <h1>Adil karşılaştırma</h1>
+  <p class="lead">Temiz veri de yanıltabilir. Bu bölüm bir yerin etkisini saatin etkisinden ayırmakta, sıçramalara dayanıklı istatistikler seçmekte ve güçlü bir korelasyonun göründüğü anlama gelip gelmediğini sınamaktadır.</p>
+  <ol class="station-index">
+    <li><a href="#s1"><b>1</b>Son durak sıcak görünür</a></li>
+    <li><a href="#s2"><b>2</b>Tipik değerler</a></li>
+    <li><a href="#s3"><b>3</b>İlişki mi, neden mi?</a></li>
+    <li><a href="#s4"><b>4</b>Daha nemli mi, daha soğuk mu?</a></li>
+  </ol>
+</div></section>
+
+<section class="station" id="s1"><div class="wrap">
+  <div class="station-head"><span class="no">1</span><h2>Son durak sıcak görünür</h2></div>
+  <div class="poll" data-id="p2-s1" data-answer="later">
+    <div class="q" data-label="Tahmin edin">Kampüs A'nın 1. turunda yeşil alan 13,9 °C, yol ise 13,3 °C ölçüyor. Yeşil alan gerçekten yoldan daha sıcak mı?</div>
+    <div class="opts"><button data-v="yes">Evet, ağaçlar ısıyı tutar</button><button data-v="later">Hayır, ısınan sabahın daha geç saatinde ölçüldü</button><button data-v="same">İkisi eşittir</button></div>
+    <div class="verdict"></div>
+    <div class="msg-right" hidden>Yeşil alan 12:05'te son duraktı, yol ise 10:25'te ikinci durak. Arada sabah üç dereceden fazla ısındı. Yeşil alanı sıcak gösteren yer değil saatti.</div>
+    <div class="msg-wrong" hidden>Yeşil alan 12:05'te son duraktı, yol ise 10:25'te ikinci durak. Arada sabah üç dereceden fazla ısındı. Yeşil alanı sıcak gösteren yer değil saatti.</div>
+  </div>
+  <div class="grid2 wide-left">
+    <div class="viz">
+      <div class="controls">
+        <div class="seg" id="dr-step"><button class="on" data-v="1">1. tur</button><button data-v="2">+ 2. tur (ters)</button><button data-v="3">Adil sonuç</button></div>
+        <label>Kampüs <select id="dr-campus"><option>A</option><option>B</option><option>C</option></select></label>
+        <label>Kanal <select id="dr-ch"><option value="temperature_c">Sıcaklık</option><option value="pm25_ugm3">PM2,5</option><option value="co2_ppm">CO₂</option></select></label>
+      </div>
+      <div id="dr-chart"></div>
+      <div class="legend" id="dr-legend"></div>
+      <p class="cap" id="dr-cap"></p>
+    </div>
+    <div>
+      <p>1. tur P1'den P6'ya, 2. tur ise aynı saatlerde P6'dan P1'e gider. Bir turda erken ziyaret edilen nokta diğer turda geç ziyaret edilir. İki turun ortalaması her noktaya aynı ortalama saati verir.</p>
+      <div class="formula">
+        <span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8539em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.9463em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.2603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mpunct mtight">,</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mpunct mtight">,</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord">Δ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7178em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">ref</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>
+        <p class="sym"><b>x<sub>p,1</sub></b>, <b>x<sub>p,2</sub></b> p noktasının 1. ve 2. turdaki ziyaret medyanları · <b>x̄<sub>p</sub></b> iki tur ortalaması · <b>Δ<sub>p</sub></b> sakin referans noktasından fark (°C). Sabah saatte b °C ısınıyorsa 1. turun k. sırası ile 2. turun 5 − k. sırası her noktaya aynı kaymayı ekler ve bu kayma Δ<sub>p</sub> içinde birbirini götürür.</p>
+        <div class="worked"><b>Çözümlü örnek, Kampüs A.</b> Yeşil: (13,91 + 8,34) / 2 = 11,12 °C. Yol: (13,30 + 12,39) / 2 = 12,85 °C. Referans: (13,10 + 11,37) / 2 = 12,23 °C. Böylece Δ<sub>yeşil</sub> = −1,11 °C ve Δ<sub>yol</sub> = +0,62 °C: Yeşil alan aslında daha serindir.</div>
+      </div>
+      <p class="note">Sıranın ters çevrilmesi doğrusal bir eğilimi giderir. Öğle saatlerinde tepe yapan güneş gibi eğri bir eğilim küçük bir kalıntı bırakabilir ve saha notları bunu değerlendirmeye yardım eder. Güneşe açık sert yüzeyler ısı depolar, ağaçlar ise gölge ve buharlaşmayla serinletir [1]. Güneşli meydandaki sıcaklığın bir kısmı da güneşin sensör gövdesini ısıtmasından gelmektedir.</p>
+    </div>
+  </div>
+  <div class="takeaway"><b>Çıkarım.</b> Noktaları iki tur ortalaması ve referans noktasından fark üzerinden karşılaştırın. Tek bir turdan çıkan sıralama yeri saatle karıştırır.</div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-2" target="_blank" rel="noopener">Colab ↗</a><p>Colab defterinin 2.1. ve 2.2. kısımları her kampüs ve kanal için ziyaret tablosunu ve adil tabloyu oluşturur.</p></div>
+</div></section>
+
+<section class="station" id="s2"><div class="wrap">
+  <div class="station-head"><span class="no">2</span><h2>Yalnızca ortalama değil, tipik değerler</h2></div>
+  <div class="poll" data-id="p2-s2" data-answer="above">
+    <div class="q" data-label="Tahmin edin">Öğrenci yoğun alanda kapının yanında sigara içiliyor. PM2,5 ortalaması medyana göre nerede olur?</div>
+    <div class="opts"><button data-v="above">Medyanın üstünde</button><button data-v="equal">Yaklaşık eşit</button><button data-v="below">Medyanın altında</button></div>
+    <div class="verdict"></div>
+    <div class="msg-right" hidden>Kısa ve güçlü bulutlar ortalamayı yukarı çeker, medyan ise tipik dakikada kalır. Farkı görmek için ortalamaları (beyaz noktalar) açın.</div>
+    <div class="msg-wrong" hidden>Kısa ve güçlü bulutlar ortalamayı yukarı çeker, medyan ise tipik dakikada kalır. Farkı görmek için ortalamaları (beyaz noktalar) açın.</div>
+  </div>
+  <div class="grid2 wide-left">
+    <div class="viz">
+      <div class="controls">
+        <div class="seg" id="bx-ch"><button data-v="temp_anomaly" class="on">Sıcaklık</button><button data-v="pm25_anomaly">PM2,5</button><button data-v="co2_anomaly">CO₂</button><button data-v="log10_lux">Işık (log)</button></div>
+        <button class="btn" id="bx-mean">Ortalamaları göster</button>
+      </div>
+      <div id="bx-chart"></div>
+    </div>
+    <div>
+      <p>Her kutu, bir nokta türünün üç kampüs ve iki turdaki temiz dakikalarını toplar. Değerler kendi kampüs ve turunun medyanından farktır. Böylece kıyıdaki ve yüksek kesimdeki sabahlar aynı kutuda yer alabilir.</p>
+      <div class="formula">
+        <span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathrm">IQR</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord text"><span class="mord">b</span><span class="mord latin_fallback">ı</span><span class="mord">y</span><span class="mord latin_fallback">ı</span><span class="mord">klar: </span></span><span class="mopen">[</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">5</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathrm">IQR</span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">5</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathrm">IQR</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mclose">]</span></span></span></span></span>
+        <p class="sym"><b>Q<sub>1</sub></b>, <b>Q<sub>3</sub></b> birinci ve üçüncü çeyrek: Dakikaların dörtte biri Q<sub>1</sub>'in altında, dörtte biri Q<sub>3</sub>'ün üstündedir · kutudaki çizgi medyandır · bıyıkların dışındaki halkalar hata değil olağan dışı dakikalardır.</p>
+      </div>
+      <div class="everyday"><b>Gündelik hayatta:</b> Çok yüksek maaşlı tek bir kişi bir sokağın ortalama gelirini değiştirir ama medyanını değiştirmez. Sigara içen bir grup da bir dakikanın PM2,5 ortalamasına aynısını yapar.</div>
+    </div>
+  </div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-2" target="_blank" rel="noopener">Colab ↗</a><p>Colab defterinin 2.3. kısmı aynı kutu grafiklerini çizer ve her nokta türünün ortalamasını ve medyanını yazdırır.</p></div>
+</div></section>
+
+<section class="station" id="s3"><div class="wrap">
+  <div class="station-head"><span class="no">3</span><h2>İlişki mi, neden mi?</h2></div>
+  <div class="poll" data-id="p2-s3" data-answer="campus">
+    <div class="q" data-label="Tahmin edin">468 dakikanın tamamında daha sıcak dakikalar daha yüksek basınçla birlikte geliyor: r = 0,81. Sıcak hava basıncı yükseltiyor mu?</div>
+    <div class="opts"><button data-v="yes">Evet</button><button data-v="campus">Hayır, ikisini de kampüs belirliyor</button><button data-v="noise">Bu bir gürültü</button></div>
+    <div class="verdict"></div>
+    <div class="msg-right" hidden>Kıyıdaki kampüs hem daha sıcak hem daha alçaktır, bu yüzden basıncı yüksektir. Her kampüs ve turun içinde ilişki negatife döner, çünkü sabah ısınırken basınç yavaşça düşer.</div>
+    <div class="msg-wrong" hidden>Kıyıdaki kampüs hem daha sıcak hem daha alçaktır, bu yüzden basıncı yüksektir. Her kampüs ve turun içinde ilişki negatife döner, çünkü sabah ısınırken basınç yavaşça düşer.</div>
+  </div>
+  <div class="grid2 wide-left">
+    <div class="viz">
+      <div class="controls"><div class="seg" id="sc-mode"><button class="on" data-v="pooled">Bütün dakikalar birlikte</button><button data-v="within">Her kampüs ve tur içinde</button></div></div>
+      <div id="sc-chart"></div>
+      <div class="legend" id="sc-legend"></div>
+    </div>
+    <div>
+      <div class="formula">
+        <span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.5697em;vertical-align:-1.13em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4397em;"><span style="top:-2.1999em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9101em;"><span class="svg-align" style="top:-3.2em;"><span class="pstrut" style="height:3.2em;"></span><span class="mord" style="padding-left:1em;"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.162em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-2.8701em;"><span class="pstrut" style="height:3.2em;"></span><span class="hide-tail" style="min-width:1.02em;height:1.28em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.28em" viewBox="0 0 400000 1296" preserveAspectRatio="xMinYMin slice"><path d="M263,681c0.7,0,18,39.7,52,119
+c34,79.3,68.167,158.7,102.5,238c34.3,79.3,51.8,119.3,52.5,120
+c340,-704.7,510.7,-1060.3,512,-1067
+l0 -0
+c4.7,-7.3,11,-11,19,-11
+H40000v40H1012.3
+s-271.3,567,-271.3,567c-38.7,80.7,-84,175,-136,283c-52,108,-89.167,185.3,-111.5,232
+c-22.3,46.7,-33.8,70.3,-34.5,71c-4.7,4.7,-12.3,7,-23,7s-12,-1,-12,-1
+s-109,-253,-109,-253c-72.7,-168,-109.3,-252,-110,-252c-10.7,8,-22,16.7,-34,26
+c-22,17.3,-33.3,26,-34,26s-26,-26,-26,-26s76,-59,76,-59s76,-60,76,-60z
+M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3299em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9101em;"><span class="svg-align" style="top:-3.2em;"><span class="pstrut" style="height:3.2em;"></span><span class="mord" style="padding-left:1em;"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.162em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1944em;"><span class="mord">ˉ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1944em;"><span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-2.8701em;"><span class="pstrut" style="height:3.2em;"></span><span class="hide-tail" style="min-width:1.02em;height:1.28em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.28em" viewBox="0 0 400000 1296" preserveAspectRatio="xMinYMin slice"><path d="M263,681c0.7,0,18,39.7,52,119
+c34,79.3,68.167,158.7,102.5,238c34.3,79.3,51.8,119.3,52.5,120
+c340,-704.7,510.7,-1060.3,512,-1067
+l0 -0
+c4.7,-7.3,11,-11,19,-11
+H40000v40H1012.3
+s-271.3,567,-271.3,567c-38.7,80.7,-84,175,-136,283c-52,108,-89.167,185.3,-111.5,232
+c-22.3,46.7,-33.8,70.3,-34.5,71c-4.7,4.7,-12.3,7,-23,7s-12,-1,-12,-1
+s-109,-253,-109,-253c-72.7,-168,-109.3,-252,-110,-252c-10.7,8,-22,16.7,-34,26
+c-22,17.3,-33.3,26,-34,26s-26,-26,-26,-26s76,-59,76,-59s76,-60,76,-60z
+M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3299em;"><span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.6897em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.162em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="mclose">)</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1944em;"><span class="mord">ˉ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1944em;"><span></span></span></span></span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.13em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+        <p class="sym"><b>r</b> Pearson korelasyonu, −1 ile +1 arasında · <b>x<sub>i</sub></b> i. dakikanın sıcaklığı (°C), <b>y<sub>i</sub></b> basıncı (hPa) · <b>x̄</b>, <b>ȳ</b> ortalamaları. r düz bir çizginin ne kadar iyi uyduğunu ölçer. Hangi değişkenin diğerini hareket ettirdiğini söylemez.</p>
+      </div>
+      <table class="tbl"><thead><tr><th>Grup</th><th>r</th></tr></thead><tbody>
+        <tr><td><b>Bütün dakikalar</b></td><td><b>+0,81</b></td></tr>
+        <tr><td>A · Tur 1 / 2</td><td>−0,62 / −0,44</td></tr>
+        <tr><td>B · Tur 1 / 2</td><td>−0,58 / −0,41</td></tr>
+        <tr><td>C · Tur 1 / 2</td><td>−0,64 / −0,51</td></tr>
+      </tbody></table>
+      <p class="note">Gizli bir üçüncü etken iki değişkeni birlikte sürüklediğinde birleştirilmiş korelasyonun işareti bile tersine dönebilir. Buna Simpson paradoksu denir.</p>
+    </div>
+  </div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-2" target="_blank" rel="noopener">Colab ↗</a><p>Colab defterinin 2.4. kısmı birleştirilmiş ve grup içi korelasyonları hesaplar ve bütün kanalların korelasyon haritasını çizer.</p></div>
+</div></section>
+
+<section class="station" id="s4"><div class="wrap">
+  <div class="station-head"><span class="no">4</span><h2>Daha nemli mi, yalnızca daha soğuk mu?</h2></div>
+  <div class="grid2">
+    <div>
+      <p>Bağıl nem sıcaklığa bağlıdır: Aynı hava, daha serin olduğu yerde daha yüksek bağıl nem gösterir. Çiy noktası bu etkiyi ortadan kaldırır. Havanın doymuş hâle geleceği sıcaklıktır. Bu yüzden yalnızca su eklendiğinde ya da çekildiğinde değişir.</p>
+      <div class="formula">
+        <span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">γ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0463em;vertical-align:-0.686em;"></span><span class="mop">ln</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">100</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathrm">RH</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:2.1297em;vertical-align:-0.7693em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2519em;vertical-align:-0.8804em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">γ</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">γ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">17</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">625</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9186em;vertical-align:-0.1944em;"></span><span class="mord">243</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">04</span><span class="mord"><span class="mspace"> </span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7241em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∘</span></span></span></span></span></span></span></span><span class="mord mathrm">C</span></span></span></span></span>
+        <p class="sym"><b>T</b> sıcaklık (°C) · <b>RH</b> bağıl nem (%) · <b>T<sub>d</sub></b> çiy noktası (°C) · <b>a</b>, <b>b</b> Magnus biçiminin sabitleri [2].</p>
+        <div class="worked"><b>Çözümlü örnek.</b> T = 13,3 °C ve RH = %43. ln(0,43) = −0,844 ve 17,625 × 13,3 / (243,04 + 13,3) = 0,914, dolayısıyla γ = 0,070. T<sub>d</sub> = 243,04 × 0,070 / (17,625 − 0,070) ≈ <b>1,0 °C</b>.</div>
+      </div>
+    </div>
+    <div class="viz">
+      <div class="slider"><span>Sıcaklık</span><input type="range" id="dp-t" min="0" max="30" step="0.1" value="13.3"><output id="dp-to"></output></div>
+      <div class="slider"><span>Bağıl nem</span><input type="range" id="dp-rh" min="10" max="100" step="1" value="43"><output id="dp-rho"></output></div>
+      <div class="stats"><div class="stat"><div class="v" id="dp-out"></div><div class="k">çiy noktası (°C)</div></div><div class="stat"><div class="v" id="dp-gap"></div><div class="k">doymaya kalan fark (°C)</div></div></div>
+      <div class="controls"><label>Kampüs ve tur <select id="dp-grp"><option value="A1">A · 1</option><option value="A2">A · 2</option><option value="B1">B · 1</option><option value="B2">B · 2</option><option value="C1">C · 1</option><option value="C2">C · 2</option></select></label></div>
+      <div id="dp-bars"></div>
+      <p class="cap">Her nokta türünün medyan çiy noktası. Bağıl nem altı yer arasında 20 puana kadar değişirken çiy noktası neredeyse sabit kalır: Farkın çoğu sıcaklıktan gelir. Sulanan çim ve yapraklar nem eklediği için yeşil alan biraz daha yüksektir.</p>
+    </div>
+  </div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-2" target="_blank" rel="noopener">Colab ↗</a><p>Colab defterinin 2.5. kısmı her dakikaya çiy noktasını ekler. Oradaki alıştırma kendi noktanızın çiy noktasını sormaktadır.</p></div>
+</div></section>
+
+<section class="station" id="refs"><div class="wrap">
+  <h3>Kaynaklar</h3>
+  <ol class="note">
+    <li>Oke, T. R. (1982). The energetic basis of the urban heat island. <i>Quarterly Journal of the Royal Meteorological Society, 108</i>(455), 1–24. <a href="https://doi.org/10.1002/qj.49710845502">doi:10.1002/qj.49710845502</a></li>
+    <li>Alduchov, O. A., &amp; Eskridge, R. E. (1996). Improved Magnus form approximation of saturation vapor pressure. <i>Journal of Applied Meteorology, 35</i>(4), 601–609. <a href="https://doi.org/10.1175/1520-0450(1996)035%3C0601:IMFAOS%3E2.0.CO;2">doi:10.1175/1520-0450(1996)035&lt;0601:IMFAOS&gt;2.0.CO;2</a></li>
+  </ol>
+</div></section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var D = window.NOKTA, $ = function (id) { return document.getElementById(id); };
+  var ORDER = ["shaded", "traffic", "reference", "sunny_hard", "crowded", "green"];
+  /* ---------- station 1: drift ---------- */
+  var step = 1;
+  function drawDrift() {
+    var c = $("dr-campus").value, ch = $("dr-ch").value, nd = ch === "co2_ppm" ? 0 : 1;
+    var rows = D.fair[ch].filter(function (r) { return r.campus === c; });
+    var byT = {}; rows.forEach(function (r) { byT[r.type] = r; });
+    if (step < 3) {
+      var series = [], marks = [];
+      [1, 2].forEach(function (rd) {
+        if (rd === 2 && step < 2) return;
+        var pts = ORDER.map(function (t) { return [D.visit_hours[c + "-" + rd + "-" + t], byT[t]["r" + rd], t]; }).sort(function (a, b) { return a[0] - b[0]; });
+        series.push({ name: rd, color: NK.cssVar(rd === 1 ? "--ink" : "--muted"), dash: rd === 2 ? "5 4" : null, width: 1.5, pts: pts.map(function (p) { return [p[0], p[1]]; }) });
+        pts.forEach(function (p) { marks.push({ x: p[0], y: p[1], color: NK.typeColor(p[2]), r: rd === 1 ? 8 : 6 }); });
+      });
+      Charts.line($("dr-chart"), {
+        height: 320, series: series, marks: marks, x: { label: "saat", min: 9.9, max: 12.5, fmt: function (h) { var m = Math.round(h * 60); return Math.floor(m / 60) + ":" + String(m % 60).padStart(2, "0"); } },
+        y: { label: NK.chName(ch) + " (" + NK.chUnit(ch) + ")" },
+        tooltip: function (xv) {
+          var best = null; [1, 2].forEach(function (rd) { if (rd === 2 && step < 2) return; ORDER.forEach(function (t) { var h = D.visit_hours[c + "-" + rd + "-" + t]; if (!best || Math.abs(h - xv) < Math.abs(best.h - xv)) best = { h: h, t: t, rd: rd }; }); });
+          return { x: best.h, html: NK.typeName(best.t) + "<br>" + NK.L.round + " " + best.rd + ": <b>" + NK.fmt(byT[best.t]["r" + best.rd], nd) + "</b> " + NK.chUnit(ch) };
+        }
+      });
+      Charts.legend($("dr-legend"), ORDER.map(function (t) { return { color: NK.typeColor(t), label: NK.shortName(t) }; }).concat([{ color: NK.cssVar("--ink"), label: NK.L.round + " 1" }]).concat(step > 1 ? [{ color: NK.cssVar("--muted"), label: NK.L.round + " 2 (kesikli)" }] : []));
+      $("dr-cap").textContent = step === 1 ? "Yalnızca 1. tur: Her nokta, kendi saatindeki bir ziyaret medyanıdır. Geç duraklar daha sıcak bir sabahın üzerine biner." : "2. tur aynı noktaları ters sırayla ziyaret eder. 1. turun erken durakları şimdi geç kalır ve sıralama değişir.";
+    } else {
+      var items = ORDER.filter(function (t) { return t !== "reference"; }).map(function (t) { return { label: NK.shortName(t), value: byT[t].ref, color: NK.typeColor(t) }; })
+        .sort(function (a, b) { return b.value - a.value; });
+      Charts.bars($("dr-chart"), { items: items, signed: true, nd: nd === 0 ? 0 : 2, unit: NK.chUnit(ch), title: "İki tur ortalaması eksi referans noktası", labelW: 120 });
+      $("dr-legend").innerHTML = "";
+      $("dr-cap").textContent = "Adil sonuç: Her çubuk, saat etkisi dengelenmiş biçimde sakin referanstan farktır.";
+    }
+  }
+  document.querySelectorAll("#dr-step button").forEach(function (b) { b.onclick = function () { document.querySelectorAll("#dr-step button").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); step = +b.getAttribute("data-v"); $("dr-chart")._prev = null; drawDrift(); NK.Store.log("drift:step" + step, true); }; });
+  $("dr-campus").onchange = function () { $("dr-chart")._prev = null; drawDrift(); }; $("dr-ch").onchange = function () { $("dr-chart")._prev = null; drawDrift(); };
+  drawDrift();
+  /* ---------- station 2: box plots ---------- */
+  var bxCh = "temp_anomaly", bxMean = false;
+  var UNIT = { temp_anomaly: "°C", pm25_anomaly: "µg/m³", co2_anomaly: "ppm", log10_lux: "log₁₀ lx" };
+  var YL = { temp_anomaly: "Sıcaklık eksi kampüs-tur medyanı (°C)", pm25_anomaly: "PM2,5 eksi kampüs-tur medyanı (µg/m³)", co2_anomaly: "CO₂ eksi kampüs-tur medyanı (ppm)", log10_lux: "Işık, lüksün log₁₀ değeri" };
+  function drawBox() {
+    var B = D.box[bxCh];
+    Charts.box($("bx-chart"), { height: 330, ylabel: YL[bxCh], showMean: bxMean,
+      groups: ORDER.map(function (t) { var b = B[t]; return Object.assign({ label: NK.shortName(t), color: NK.typeColor(t), sub: "n = " + b.n }, b); }),
+      tip: function (g) { return "<b>" + g.label + "</b><br>medyan " + NK.fmt(g.med, 2) + " · ortalama " + NK.fmt(g.mean, 2) + " " + UNIT[bxCh] + "<br>Q1 " + NK.fmt(g.q1, 2) + " · Q3 " + NK.fmt(g.q3, 2); } });
+  }
+  document.querySelectorAll("#bx-ch button").forEach(function (b) { b.onclick = function () { document.querySelectorAll("#bx-ch button").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); bxCh = b.getAttribute("data-v"); drawBox(); }; });
+  $("bx-mean").onclick = function () { bxMean = !bxMean; this.classList.toggle("on", bxMean); drawBox(); };
+  drawBox();
+  /* ---------- station 3: Simpson ---------- */
+  var scMode = "pooled", CC = { A: "--t1", B: "--t2", C: "--t3" };
+  function fit(pts) {
+    var n = pts.length, mx = 0, my = 0; pts.forEach(function (p) { mx += p[0]; my += p[1]; }); mx /= n; my /= n;
+    var sxy = 0, sxx = 0; pts.forEach(function (p) { sxy += (p[0] - mx) * (p[1] - my); sxx += (p[0] - mx) * (p[0] - mx); });
+    var b = sxy / sxx, lo = Math.min.apply(null, pts.map(function (p) { return p[0]; })), hi = Math.max.apply(null, pts.map(function (p) { return p[0]; }));
+    return { x0: lo, y0: my + b * (lo - mx), x1: hi, y1: my + b * (hi - mx) };
+  }
+  function drawSc() {
+    var P = D.corr.pts, within = scMode === "within", mean = {};
+    if (within) {
+      P.forEach(function (p) { var g = p[2] + p[3]; mean[g] = mean[g] || [0, 0, 0]; mean[g][0] += p[0]; mean[g][1] += p[1]; mean[g][2] += 1; });
+    }
+    function X(p) { return within ? p[0] - mean[p[2] + p[3]][0] / mean[p[2] + p[3]][2] : p[0]; }
+    function Y(p) { return within ? p[1] - mean[p[2] + p[3]][1] / mean[p[2] + p[3]][2] : p[1]; }
+    var pts = P.map(function (p) { return { x: X(p), y: Y(p), color: NK.cssVar(CC[p[2]]), r: 3.2, op: 0.6, tip: NK.L.campus[p[2]] + " · " + NK.L.round + " " + p[3] + "<br>" + NK.typeName(p[4]) + "<br>" + NK.fmt(p[0], 1) + " °C · " + NK.fmt(p[1], 1) + " hPa" }; });
+    var lines = [];
+    if (!within) { var f = fit(P.map(function (p) { return [p[0], p[1]]; })); f.color = NK.cssVar("--ink"); f.label = "r = " + NK.signed(D.corr.pooled, 2); lines.push(f); }
+    else { ["A1", "A2", "B1", "B2", "C1", "C2"].forEach(function (g) { var sub = P.filter(function (p) { return p[2] + p[3] === g; }); var f = fit(sub.map(function (p) { return [X(p), Y(p)]; })); f.color = NK.cssVar(CC[g[0]]); f.w = 2.5; lines.push(f); }); }
+    Charts.scatter($("sc-chart"), { height: 360, pts: pts, lines: lines,
+      x: { label: within ? "Sıcaklık eksi kampüs-tur ortalaması (°C)" : "Sıcaklık (°C)" },
+      y: { label: within ? "Basınç eksi kampüs-tur ortalaması (hPa)" : "Atmosfer basıncı (hPa)" }, tip: function (p) { return p.tip; } });
+    Charts.legend($("sc-legend"), ["A", "B", "C"].map(function (c) { return { color: NK.cssVar(CC[c]), label: NK.L.campus[c] }; }));
+  }
+  document.querySelectorAll("#sc-mode button").forEach(function (b) { b.onclick = function () { document.querySelectorAll("#sc-mode button").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); scMode = b.getAttribute("data-v"); drawSc(); }; });
+  drawSc();
+  /* ---------- station 4: dew point ---------- */
+  function dew(t, rh) { var a = 17.625, b = 243.04, g = Math.log(rh / 100) + a * t / (b + t); return b * g / (a - g); }
+  function drawDew() {
+    var t = +$("dp-t").value, rh = +$("dp-rh").value, td = dew(t, rh);
+    $("dp-to").textContent = NK.fmt(t, 1) + " °C"; $("dp-rho").textContent = NK.fmt(rh, 0) + " %";
+    $("dp-out").textContent = NK.fmt(td, 1); $("dp-gap").textContent = NK.fmt(t - td, 1);
+  }
+  $("dp-t").oninput = drawDew; $("dp-rh").oninput = drawDew; drawDew();
+  function drawDewBars() {
+    var g = $("dp-grp").value, M = D.dew[g];
+    Charts.bars($("dp-bars"), { items: ORDER.map(function (t) { return { label: NK.shortName(t), value: M[t], color: NK.typeColor(t) }; }), nd: 1, unit: "°C", labelW: 110, rowH: 28 });
+  }
+  $("dp-grp").onchange = function () { $("dp-bars")._prev = null; drawDewBars(); }; drawDewBars();
+  document.addEventListener("nokta:theme", function () { drawDrift(); drawBox(); drawSc(); drawDew(); drawDewBars(); });
+});
+</script>
+
+</main>
+<footer class="sig"><div class="wrap"><a class="btn primary next" href="part3.html">3. Bölüm · Keşfet →</a><br><b>Prof. Dr. Utku Köse</b><br>Süleyman Demirel Üniversitesi, Yapay Zekâ Uygulama ve Araştırma Merkezi (YAZEM) · University of North Dakota · Universidad Panamericana · Vel Tech University<br><a href="https://www.utkukose.com">utkukose.com</a> · <a href="https://orcid.org/0000-0002-9652-6415">ORCID 0000-0002-9652-6415</a> · <a href="https://github.com/utkukose">github.com/utkukose</a><br>NOKTA, Nesnel Ölçüm, Katılım, Takip ve Aksiyon Ağı · ÜNİDES 2026<br>Bu atölye alandaki güncel gelişmelere göre güncellenmektedir. İlk sürüm: Kasım 2026.<br>İçerik: CC BY 4.0 · Kod: MIT · Veriler sentetiktir ve gerçek bir kampüsü anlatmaz.</div></footer>
+<div class="overlay" id="help-overlay" hidden><div class="box"><button class="btn close" data-act="close">✕</button><h3>Tuşlar</h3><p><kbd>←</kbd> <kbd>→</kbd> önceki ya da sonraki durak · <kbd>[</kbd> <kbd>]</kbd> önceki ya da sonraki bölüm · <kbd>T</kbd> kâğıt ya da gece görünümü · <kbd>F</kbd> tam ekran · <kbd>L</kbd> İngilizce ya da Türkçe · <kbd>B</kbd> beş dakikalık ara · <kbd>?</kbd> bu yardım</p></div></div>
+<div class="overlay" id="break-overlay" hidden><div class="box"><button class="btn close" data-act="close">✕</button>
+<p class="kicker">Ara</p><div class="breakclock">5:00</div>
+<p class="lead" style="text-align:center;margin:14px auto 0">Aradan sonraki soru: 1. turda altı noktadan hangisinin en sıcak görüneceğini düşünüyorsunuz ve bu neden yanıltıcı olabilir?</p></div></div>
+</body>
+</html>
