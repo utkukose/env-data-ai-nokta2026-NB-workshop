@@ -84,7 +84,7 @@ Oturumun her bölümü aynı ritmi izler. **Tahmin edin:** [Atölye sitesindeki]
 | 0:57-1:17 | **3. Bölüm · Keşfet.** YZ örüntü bulur | [part3.html](https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/part3.html) | 3. kısım |
 | 1:17-1:37 | **4. Bölüm · Açıkla.** Burada neden yüksek? | [part4.html](https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/part4.html) | 4. kısım |
 | 1:37-1:55 | **5. Bölüm · Paylaş ve aksiyona dönüştür.** Sayılardan kelimelere, kelimelerden aksiyona | [part5.html](https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/part5.html) | 5. kısım |
-| 1:55-2:00 | **NOKTA Laboratuvarı.** Değerlendirme ve sorular | [lab.html](https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/lab.html) | |
+| 1:55-2:00 | **NOKTA Laboratuvarı.** Değerlendirme, sahada uygulama ve sorular | [lab.html](https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/lab.html) | |
 
 Süreleri, canlı anket sorularını ve yedek planı içeren akış rehberi [WORKSHOP_GUIDE.tr.md](WORKSHOP_GUIDE.tr.md) dosyasındadır ([İngilizce](WORKSHOP_GUIDE.md)). PDF notları sayfaları durak durak izler ve formülleri, çözümlü örnekleri ve cevapları içerir: [Türkçe](notes/NOKTA_Atolye_Notlari_TR.pdf) ve [İngilizce](notes/NOKTA_Workshop_Notes_EN.pdf). Her sayfanın İngilizce bir eşi vardır ve `L` tuşu dili değiştirir.
 
@@ -126,7 +126,7 @@ Atölye sitesi yedi sayfadan oluşmaktadır: Başlangıç sayfası, beş bölüm
 
 ### 5. Bölüm · Paylaş ve aksiyona dönüştür: Sayılardan kelimelere, kelimelerden aksiyona
 
-5. Bölüm üretken YZ'yi raporlamada kullanır ve baştan sona tek bir kuralı korur: Sayılar analizden, kelimeler YZ'den gelebilir, ancak son karar ekibe aittir. İlk durakta bir YZ asistanının Kampüs B için yazdığı dokuz cümlelik bir özet yer alır. Bu cümlelerin altısında uydurma bir sayı, verinin gösteremeyeceği bir neden ya da var olmayan bir kaynak gibi bir hata bulunmaktadır. İkinci durak, asistana bir kampüsün olgu tablosunu, çalışmanın tasarımını ve yedi kuralı veren bir istem hazırlar. Üçüncü durak iddiaları bir merdivende sıralar: *Gözlendi*, *İlişkili*, *Müdahale gerektirir* ve *Desteklenmiyor*. Dördüncü durakta 28 Kasım'daki NOKTA Ulusal Çevre Çalıştayının üç tematik masasından biri için bir çözüm kartı yazılır.
+5. Bölüm üretken YZ'yi raporlamada kullanır ve baştan sona tek bir kuralı korur: Sayılar analizden, kelimeler YZ'den gelebilir, ancak son karar ekibe aittir. İlk durakta bir YZ asistanının Kampüs B için yazdığı dokuz cümlelik bir özet yer alır. Bu cümlelerin altısında uydurma bir sayı, verinin gösteremeyeceği bir neden ya da var olmayan bir kaynak gibi bir hata bulunmaktadır. İkinci durak, asistana bir kampüsün olgu tablosunu, çalışmanın tasarımını ve yedi kuralı veren bir prompt (istem) hazırlar. Üçüncü durak iddiaları bir merdivende sıralar: *Gözlendi*, *İlişkili*, *Müdahale gerektirir* ve *Desteklenmiyor*. Dördüncü durakta 28 Kasım'daki NOKTA Ulusal Çevre Çalıştayının üç tematik masasından biri için bir çözüm kartı yazılır.
 
 <p align="center"><a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/part5.html"><img src="docs/images/site_part5_tr.png" width="860" alt="5. Bölüm: Bir YZ asistanının yazdığı paragraftaki hataları bulma"></a></p>
 
@@ -136,9 +136,11 @@ Atölye sitesi yedi sayfadan oluşmaktadır: Başlangıç sayfası, beş bölüm
 
 NOKTA Laboratuvarı, oturumun üç 3B aracını tek bir sayfada toplar: Kampüs ikizi, gruplarıyla birlikte dakika bulutu ve modelin yüzeyi. Atölyenin son dakikalarında soruları cevaplamak için, 21-24 Kasım analiz günlerinde ise ekiplerin bu araçlara geri dönmesi için kullanılır. Dördüncü sekme olan değerlendirme, oturum boyunca tarayıcıda kaydedilen cevaplardan ve adımlardan kısa bir saha raporu hazırlar. Rapor yazdırılabilir ya da PDF olarak kaydedilebilir.
 
+Oturumun kendisi kimseden dışarı çıkıp ölçüm yapmasını istemez. Bu yüzden beşinci sekme olan *Sahada uygulama*, oturumun yöntemlerini gerçek bir kampüse taşıyan altı kısa görev sunar. Görevler bir sensörün ısınma süresini izlemekten bir saha formunu doldurmaya ve on öğrenciye havayı en kötü nerede hissettiklerini sormaya kadar uzanır. Atölye yüz yüze yapılabildiğinde ekipler bu görevleri oturumun hemen ardından yapabilir. Atölye çevrim içi yapıldığında ya da oturum daha sonra izlendiğinde ise görevler herhangi bir kampüste, uygun bir zamanda yapılabilir.
+
 <p align="center"><a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/lab.html"><img src="docs/images/site_lab_tr.png" width="860" alt="NOKTA Laboratuvarı: Kampüs A'nın iki tur ortalamalarını gösteren kampüs ikizi"></a></p>
 
-*Ekran görüntüsünde* laboratuvardaki kampüs ikizi, Kampüs A'daki PM2,5 değerlerinin iki tur ortalamalarını göstermektedir. Sahnenin altındaki menüler kampüsü, tek bir turu ya da iki turun ortalamasını, kanalı ve yeniden oynatmanın hızını seçer. Bir noktaya tıklandığında sağda o noktanın iki turdaki değerlerini veren kart açılır.
+*Ekran görüntüsünde* laboratuvardaki kampüs ikizi, Kampüs A'daki PM2,5 değerlerinin iki tur ortalamalarını göstermektedir. Sahnenin üstündeki düğmeler laboratuvarın beş sekmesi arasında geçiş yapar, bunların sonuncusu sahada uygulamadır. Sahnenin altındaki menüler kampüsü, tek bir turu ya da iki turun ortalamasını, kanalı ve yeniden oynatmanın hızını seçer. Bir noktaya tıklandığında sağda o noktanın iki turdaki değerlerini veren kart açılır.
 
 ### Sayfalarla çalışma
 
@@ -157,7 +159,7 @@ Bütün oturumu, iki paralel dil sürümüyle tek bir defter taşır. Ücretsiz 
 | 2 · Analiz et | 2. Bölüm | ziyaret medyanları, iki tur ortalaması, referans noktasından fark, kutu grafikleri, birleştirilmiş ve grup içi korelasyon, çiy noktası |
 | 3 · Keşfet | 3. Bölüm | standartlaştırma, k-ortalamalar, J ve siluet, temel bileşenler analizi, etkileşimli 3B grafikler |
 | 4 · Açıkla | 4. Bölüm | rastgele orman, rastgele ve bir noktayı dışarıda bırakan çapraz doğrulama, permütasyon önemi, senaryo kaydırıcıları, kısmi bağımlılık, 3B yüzey |
-| 5 · Paylaş ve dönüştür | 5. Bölüm | olgu tablosu, güvenli istem, sayı denetleyicisi, çözüm kartı |
+| 5 · Paylaş ve dönüştür | 5. Bölüm | olgu tablosu, güvenli prompt, sayı denetleyicisi, çözüm kartı |
 
 Defterde, 1.A'daki dayanıklı z-skorundan 5.A'daki sayı denetleyicisine kadar altı alıştırma bulunmaktadır. Her alıştırma hücresi çalıştırıldığı anda cevabı denetler ve doğru olup olmadığını söyler. Örnek çözüm, hemen altındaki katlanmış hücrededir. Defterin sonundaki uygulama görevleri tablosu mühendislik, sağlık bilimleri, sosyal bilimler, iletişim, iktisat ve eğitim öğrencilerine birer yeni soru önerir. Böylece her ekip analizi kendi alanından devam ettirebilir.
 

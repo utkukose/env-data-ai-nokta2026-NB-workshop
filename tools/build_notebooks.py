@@ -735,7 +735,7 @@ else:
 
 *⟪Workshop site: [Part 5](""" + SITE + """part5.html)‖Atölye sitesi: [5. Bölüm](""" + SITE + """tr/part5.html)⟫*
 
-⟪Section 5 prepares the results for a report. It builds a fact table from the analysis and writes a prompt that hands these facts to an AI assistant. It then checks every number of an AI-written text against the table and prints a solution card for the workshop of 28 November.‖Defterin 5. kısmı sonuçları bir rapora hazırlar. Analizden bir olgu tablosu oluşturur, bu olguları bir YZ asistanına veren bir istem yazar, YZ ile yazılmış bir metindeki her sayıyı tabloyla denetler ve 28 Kasım çalıştayı için bir çözüm kartı yazdırır.⟫
+⟪Section 5 prepares the results for a report. It builds a fact table from the analysis and writes a prompt that hands these facts to an AI assistant. It then checks every number of an AI-written text against the table and prints a solution card for the workshop of 28 November.‖Defterin 5. kısmı sonuçları bir rapora hazırlar. Analizden bir olgu tablosu oluşturur, bu olguları bir YZ asistanına veren bir prompt (istem) yazar, YZ ile yazılmış bir metindeki her sayıyı tabloyla denetler ve 28 Kasım çalıştayı için bir çözüm kartı yazdırır.⟫
 
 ### 5.1 ⟪The fact table‖Olgu tablosu⟫
 
@@ -747,9 +747,9 @@ facts = facts[facts.campus == CAMPUS][["channel", "point_type", "round1", "round
                                        "two_round_mean", "minus_reference"]].round(1)
 facts.to_csv(f"nokta_facts_{CAMPUS}.csv", index=False)
 display(facts)""", "s5-facts")
-    md("""### 5.2 ⟪A safe prompt‖Güvenli bir istem⟫
+    md("""### 5.2 ⟪A safe prompt‖Güvenli bir prompt⟫
 
-⟪A safe prompt does not ask the assistant to know the numbers. It hands the numbers over, names the task and writes the rules down. The function `make_prompt` combines a role, a task, the fact table and the seven rules in `RULES`. The rules forbid rankings of campuses and comparisons with 24-hour or annual guidelines. They also ask for the averaging time of every value, keep observation, interpretation and advice apart and call for cautious verbs when causes are discussed. The printed prompt can be copied into any assistant, and a team can extend the rules for its own report.‖Güvenli bir istem, asistandan sayıları bilmesini istemez. Sayıları ona verir, görevi tanımlar ve kuralları yazılı olarak belirtir. `make_prompt` fonksiyonu bir rolü, bir görevi, olgu tablosunu ve `RULES` listesindeki yedi kuralı birleştirir. Kurallar kampüslerin sıralanmasını ve değerlerin 24 saatlik ya da yıllık kılavuzlarla karşılaştırılmasını yasaklar. Ayrıca her değerin ortalama alma süresinin belirtilmesini, gözlemin, yorumun ve önerinin birbirinden ayrılmasını ve nedenler tartışılırken temkinli ifadeler kullanılmasını ister. Yazdırılan istem herhangi bir asistana kopyalanabilir, bir ekip de kuralları kendi raporu için genişletebilir.⟫""", "s5-prompt-md")
+⟪A safe prompt does not ask the assistant to know the numbers. It hands the numbers over, names the task and writes the rules down. The function `make_prompt` combines a role, a task, the fact table and the seven rules in `RULES`. The rules forbid rankings of campuses and comparisons with 24-hour or annual guidelines. They also ask for the averaging time of every value, keep observation, interpretation and advice apart and call for cautious verbs when causes are discussed. The printed prompt can be copied into any assistant, and a team can extend the rules for its own report.‖Güvenli bir prompt, asistandan sayıları bilmesini istemez. Sayıları ona verir, görevi tanımlar ve kuralları yazılı olarak belirtir. `make_prompt` fonksiyonu bir rolü, bir görevi, olgu tablosunu ve `RULES` listesindeki yedi kuralı birleştirir. Kurallar kampüslerin sıralanmasını ve değerlerin 24 saatlik ya da yıllık kılavuzlarla karşılaştırılmasını yasaklar. Ayrıca her değerin ortalama alma süresinin belirtilmesini, gözlemin, yorumun ve önerinin birbirinden ayrılmasını ve nedenler tartışılırken temkinli ifadeler kullanılmasını ister. Yazdırılan prompt herhangi bir asistana kopyalanabilir, bir ekip de kuralları kendi raporu için genişletebilir.⟫""", "s5-prompt-md")
     code("""RULES = [
     "⟪Use only the numbers in the table, and write 'not measured' for a missing value.‖Yalnızca tablodaki sayıları kullan, eksik bir değer için 'ölçülmedi' yaz.⟫",
     "⟪Do not rank campuses, universities or cities.‖Kampüsleri, üniversiteleri ya da şehirleri sıralama.⟫",
@@ -818,7 +818,7 @@ display(Markdown(card))""", "s5-card")
 
     md("""## ⟪Application challenges‖Uygulama görevleri⟫
 
-⟪Each challenge below continues the analysis from the point of view of one field of study. It starts from the tables of this notebook and adds a small piece of field work or a calculation.‖Aşağıdaki her görev, analizi bir alanın bakış açısından sürdürür. Görev bu defterdeki tablolardan başlar ve bunlara küçük bir saha çalışması ya da bir hesap ekler.⟫
+⟪Each challenge below continues the analysis from the point of view of one field of study. It starts from the tables of this notebook and adds a small piece of field work or a calculation. When the workshop is held in person, the field work can follow the session directly. Otherwise it can be done later on any campus. The [Field practice](""" + SITE + """lab.html#field) tab of the NOKTA Lab gives six more tasks of this kind.‖Aşağıdaki her görev, analizi bir alanın bakış açısından sürdürür. Görev bu defterdeki tablolardan başlar ve bunlara küçük bir saha çalışması ya da bir hesap ekler. Atölye yüz yüze yapılabildiğinde saha çalışması oturumun hemen ardından yapılabilir. Aksi hâlde daha sonra herhangi bir kampüste yapılabilir. NOKTA Laboratuvarındaki [Sahada uygulama](""" + SITE + """tr/lab.html#field) sekmesi bu türden altı görev daha sunar.⟫
 
 | ⟪Field‖Alan⟫ | ⟪Challenge‖Görev⟫ |
 |---|---|

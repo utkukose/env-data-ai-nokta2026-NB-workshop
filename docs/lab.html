@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>NOKTA Lab and debrief</title>
-<meta name="description" content="All 3D tools of the workshop on one bench and a field report of the session.">
+<meta name="description" content="All 3D tools of the workshop on one bench, a field report of the session and six field tasks for a real campus.">
 <link rel="stylesheet" href="assets/vendor/fonts/atkinson.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E7A5F'/%3E%3Ccircle cx='32' cy='32' r='11' fill='white'/%3E%3Ccircle cx='32' cy='32' r='20' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6 6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
@@ -26,12 +26,13 @@
 <section class="parthead"><div class="wrap">
   <p class="kicker">NOKTA Lab · 1:55 to 2:00 and after the session</p>
   <h1>The bench</h1>
-  <p class="lead">The NOKTA Lab gathers the three 3D tools of the session on one page. In the last minutes of the workshop it serves for questions from the audience. On the analysis days of 21 to 24 November it lets the teams return to the campus twin, the cloud of minutes and the model surface. The fourth tab, the debrief, turns what was done in this browser during the session into a short field report.</p>
+  <p class="lead">The NOKTA Lab gathers the three 3D tools of the session on one page. In the last minutes of the workshop it serves for questions from the audience. On the analysis days of 21 to 24 November it lets the teams return to the campus twin, the cloud of minutes and the model surface. The fourth tab, the debrief, turns what was done in this browser during the session into a short field report. The fifth tab, field practice, offers six short tasks that carry the methods of the session onto a real campus, for teams that can go out.</p>
   <div class="controls" id="tabs" style="margin-top:18px">
     <button class="btn on" data-tab="twin">Campus twin</button>
     <button class="btn" data-tab="cloud">Microclimate groups</button>
     <button class="btn" data-tab="model">Model surface</button>
     <button class="btn" data-tab="debrief">Debrief</button>
+    <button class="btn" data-tab="field">Field practice</button>
   </div>
 </div></section>
 
@@ -87,6 +88,22 @@
   </div>
 </div></section>
 
+<section class="station" id="field" hidden><div class="wrap">
+  <div class="station-head"><h2>Field practice: If you can go out</h2></div>
+  <p>The session itself takes place at the screen, and none of its steps asks anyone to go out and measure. The six short tasks below carry its methods onto a real campus. When the workshop is held in person, the teams can do them right after the session. When it is held online, or when the session is watched later, the tasks can be done on any campus at a convenient time.</p>
+  <p>Each task names the part of the session it belongs to, the time it takes and what it needs. Most tasks need only a notebook and a phone, and two of them use a NOKTA Station or another low-cost sensor. A team that shares the tasks among its members can finish them in about an hour.</p>
+  <div class="parts fieldtasks">
+    <div class="pcard" style="--c:var(--p1)"><span class="t">Part 1 · about 10 minutes · a NOKTA Station or a digital thermometer</span><h3>1 · Watch the warm-up</h3><p>Carry the station from indoors to a shaded point outside. Read the temperature and the relative humidity every 15 seconds for five minutes, or keep the log of the station. Mark the moment after which the readings stop drifting. Part 1 removes the first two minutes of every visit, and this test shows whether two minutes are enough for your own device.</p></div>
+    <div class="pcard" style="--c:var(--p2)"><span class="t">Parts 1 and 2 · about 25 minutes · two identical sensors, or one, and a white sunshade</span><h3>2 · Sun on the sensor</h3><p>At a sunny point, place two identical sensors side by side, one in direct sun and one under a simple white sunshade that lets the air pass. Read both every minute for ten minutes. Their difference shows how much of the measured heat comes from sunshine on the housing rather than from the air. With only one sensor, measure ten minutes in the sun and ten minutes under the shade, and skip the first two minutes after each change. The air may warm between the two halves, which is the clock effect of Part 2.</p></div>
+    <div class="pcard" style="--c:var(--p3)"><span class="t">Part 3 · about 10 minutes · a phone with a light-meter app</span><h3>3 · Light in orders of magnitude</h3><p>With a light-meter app on a phone, measure the light level in a shaded passage, under a tree, at the edge of a lawn and in full sun. Write down each value in lux together with its logarithm, log₁₀ of the value. Full sun is usually ten to a hundred times brighter than deep shade, which is why Part 3 places the minutes by the logarithm of light. Phone sensors are not calibrated, and some stop at a maximum value like the light sensor of the station in Part 1. They serve only to compare orders of magnitude.</p></div>
+    <div class="pcard" style="--c:var(--p4)"><span class="t">Part 4 · about 20 minutes · a notebook and a phone</span><h3>4 · Fill a field form</h3><p>Choose a point such as a faculty entrance or the edge of the campus road. For 15 minutes, count the vehicles that pass and the people who walk by. Note whether the point lies in shade, partial sun or full sun, and estimate its green cover in percent. These are the field-form values from which the model of Part 4 builds its inputs. Divide the counts by 15, set the values in the what-if panel of Part 4 and read the prediction. A value beyond the range of a slider cannot be set, because the model has never seen it. The model learned from synthetic data, so its answer is practice with the method, not a measurement of your campus.</p></div>
+    <div class="pcard" style="--c:var(--p5)"><span class="t">Parts 2 and 5 · about 15 minutes · a notebook</span><h3>5 · Ask and compare</h3><p>Ask ten students where on campus they feel the air is worst, and why. Compare their answers with the fair table of Part 2, using your own data when they are ready and the synthetic table until then. A place that people feel is bad but the data do not show, or the reverse, is a good starting point for a solution card. Write down only the answers, not the names of the students.</p></div>
+    <div class="pcard" style="--c:var(--ink)"><span class="t">Part 5 · about 15 minutes · the notes of the team</span><h3>6 · Bring the results back</h3><p>Write the results of the tasks on one page: The place, the time, what was measured or counted and what surprised the team. Compare each result with the matching part of the session. A result that agrees with the data strengthens the evidence of a solution card. A result that contradicts them is a reason to check the data again before the results are shared.</p></div>
+  </div>
+  <div class="takeaway"><b>Safety and privacy.</b> Count traffic from the pavement and keep a safe distance from the road. Do not block entrances or paths. When taking photos, photograph places rather than people, and ask for consent before a person can be recognized in a photo.</div>
+  <p class="note">The results of these tasks do not replace the measurements of the NOKTA field rounds. They help a team read its own data with more care and give each solution card a first check on site.</p>
+</div></section>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   var D = window.NOKTA, $ = function (id) { return document.getElementById(id); };
@@ -94,9 +111,9 @@ document.addEventListener("DOMContentLoaded", function () {
   var CH = ["temperature_c", "rel_humidity_pct", "pressure_hpa", "pm1_ugm3", "pm25_ugm3", "pm10_ugm3", "co2_ppm", "light_lux", "uva_wm2", "uvb_wm2"];
   var made = {};
   function show(tab) {
-    ["twin", "cloud", "model", "debrief"].forEach(function (t) { $(t).hidden = t !== tab; });
+    ["twin", "cloud", "model", "debrief", "field"].forEach(function (t) { $(t).hidden = t !== tab; });
     document.querySelectorAll("#tabs .btn").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-tab") === tab); });
-    if (!made[tab]) { made[tab] = true; ({ twin: makeTwin, cloud: makeCloud, model: makeModel, debrief: makeReport })[tab](); }
+    if (!made[tab]) { made[tab] = true; ({ twin: makeTwin, cloud: makeCloud, model: makeModel, debrief: makeReport, field: function () {} })[tab](); }
     if (tab === "debrief") makeReport();
     if (location.hash !== "#" + tab) history.replaceState(null, "", "#" + tab);
   }
@@ -197,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   $("db-reset").onclick = function () { ["log", "card", "visited"].forEach(function (k) { NK.Store.set(k, k === "log" ? {} : k === "visited" ? [] : null); }); makeReport(); };
   var start = (location.hash || "#twin").slice(1);
-  show(["twin", "cloud", "model", "debrief"].indexOf(start) >= 0 ? start : "twin");
+  show(["twin", "cloud", "model", "debrief", "field"].indexOf(start) >= 0 ? start : "twin");
 });
 </script>
 

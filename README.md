@@ -85,7 +85,7 @@ Each part of the session follows the same rhythm. **Predict:** Most stations of 
 | 0:57 to 1:17 | **Part 3 · Discover.** AI finds patterns | [part3.html](https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/part3.html) | Section 3 |
 | 1:17 to 1:37 | **Part 4 · Explain.** Why is it high here? | [part4.html](https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/part4.html) | Section 4 |
 | 1:37 to 1:55 | **Part 5 · Share and turn into action.** From numbers to words to action | [part5.html](https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/part5.html) | Section 5 |
-| 1:55 to 2:00 | **NOKTA Lab.** Debrief and questions | [lab.html](https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/lab.html) | |
+| 1:55 to 2:00 | **NOKTA Lab.** Debrief, field practice and questions | [lab.html](https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/lab.html) | |
 
 The run sheet with the timings, the questions for a live poll and a fallback plan is in [WORKSHOP_GUIDE.md](WORKSHOP_GUIDE.md) ([Turkish](WORKSHOP_GUIDE.tr.md)). The PDF notes follow the pages station by station, with the formulas, worked examples and answers: [English](notes/NOKTA_Workshop_Notes_EN.pdf) and [Turkish](notes/NOKTA_Atolye_Notlari_TR.pdf). Every page has a Turkish twin under [`/tr/`](https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/), and the key `L` switches the language.
 
@@ -137,9 +137,11 @@ Part 5 uses generative AI for reporting and keeps one rule throughout. The numbe
 
 The NOKTA Lab gathers the three 3D tools of the session on one page: The campus twin, the cloud of minutes with its groups and the surface of the model. It serves for questions in the last minutes of the workshop and for the analysis days of 21 to 24 November. A fourth tab, the debrief, writes a short field report from the answers and steps recorded in the browser during the session. The report can be printed or saved as a PDF file.
 
+The session itself does not ask anyone to go out and measure. A fifth tab, *Field practice*, therefore lists six short tasks that carry the methods of the session onto a real campus. They range from watching the warm-up of a sensor to filling a field form and asking ten students where the air feels worst. When the workshop is held in person, the teams can do them right after the session. When it is held online, or when the session is watched later, the tasks can be done on any campus at a convenient time.
+
 <p align="center"><a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/lab.html"><img src="docs/images/site_lab.png" width="860" alt="NOKTA Lab: The campus twin with the two-round means of Campus A"></a></p>
 
-*In the screenshot,* the campus twin of the lab shows the two-round means of PM2.5 on Campus A. The menus under the scene choose the campus, a single round or the mean of both rounds, the channel and the speed of the replay. A click on a point opens its card on the right with the values of both rounds.
+*In the screenshot,* the campus twin of the lab shows the two-round means of PM2.5 on Campus A. The buttons above the scene switch between the five tabs of the lab, the last of which holds the field practice. The menus under the scene choose the campus, a single round or the mean of both rounds, the channel and the speed of the replay. A click on a point opens its card on the right with the values of both rounds.
 
 ### Working with the pages
 

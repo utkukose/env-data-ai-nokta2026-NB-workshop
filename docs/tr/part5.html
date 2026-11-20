@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>5. Bölüm · Paylaş ve aksiyona dönüştür</title>
-<meta name="description" content="YZ ile yazılmış bir paragraftaki hataları yakalayın, kendi sayılarınızdan güvenli bir istem kurun, iddiaları tartın ve NOKTA çalıştay masaları için bir çözüm kartı yazın.">
+<meta name="description" content="YZ ile yazılmış bir paragraftaki hataları yakalayın, kendi sayılarınızdan güvenli bir prompt kurun, iddiaları tartın ve NOKTA çalıştay masaları için bir çözüm kartı yazın.">
 <link rel="stylesheet" href="../assets/vendor/fonts/atkinson.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E7A5F'/%3E%3Ccircle cx='32' cy='32' r='11' fill='white'/%3E%3Ccircle cx='32' cy='32' r='20' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6 6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="../assets/vendor/katex/katex.min.css">
@@ -26,10 +26,10 @@
 <section class="parthead"><div class="wrap">
   <p class="kicker">5. Bölüm · Paylaş ve aksiyona dönüştür · 1:37-1:55</p>
   <h1>Sayılardan kelimelere, kelimelerden aksiyona</h1>
-  <p class="lead">Üretken YZ akıcı bir raporu saniyeler içinde yazabilir, ancak akıcı bir metin her zaman doğru bir metin değildir. Bu nedenle bu bölüm baştan sona tek bir kurala dayanmaktadır: Sayılar analizden gelir, kelimeler YZ'den gelebilir, yargı ise ekipte kalır. Dört durak bu kuralı, üretilmiş bir metnin hatalarını yakalamaktan NOKTA çalıştayı için bir öneri yazmaya kadar adım adım uygular.</p>
+  <p class="lead">Üretken YZ akıcı bir raporu saniyeler içinde yazabilir, ancak akıcı bir metin her zaman doğru bir metin değildir. Bu nedenle bu bölüm baştan sona tek bir kurala dayanmaktadır: Sayılar analizden gelir, kelimeler YZ'den gelebilir, yargı ise ekipte kalır. Dört durak bu kuralı, üretilmiş bir metnin hatalarını yakalamaktan güvenli bir prompt (istem) hazırlamaya ve NOKTA çalıştayı için bir öneri yazmaya kadar adım adım uygular.</p>
   <ol class="station-index">
     <li><a href="#s1"><b>1</b>Hataları bulun</a></li>
-    <li><a href="#s2"><b>2</b>Güvenli bir istem</a></li>
+    <li><a href="#s2"><b>2</b>Güvenli bir prompt</a></li>
     <li><a href="#s3"><b>3</b>İddia ne kadar güçlü?</a></li>
     <li><a href="#s4"><b>4</b>Çözüm kartı</a></li>
   </ol>
@@ -55,10 +55,10 @@
 </div></section>
 
 <section class="station" id="s2"><div class="wrap">
-  <div class="station-head"><span class="no">2</span><h2>Güvenli bir istem</h2></div>
+  <div class="station-head"><span class="no">2</span><h2>Güvenli bir prompt</h2></div>
   <div class="grid2">
     <div>
-      <p>İyi bir istem, asistandan sayıları bilmesini beklemez. Sayıları ona kendisi verir, okur kitlesini belirtir ve kuralları açıkça yazar. Aşağıdaki oluşturucu, seçilen kampüsün olgu tablosunu doğrudan analizden doldurur ve çalışma tasarımı ile yedi kuralı ekler. Hazırlanan istem herhangi bir asistana kopyalanabilir.</p>
+      <p>İyi bir prompt, asistandan sayıları bilmesini beklemez. Sayıları ona kendisi verir, okur kitlesini belirtir ve kuralları açıkça yazar. Aşağıdaki oluşturucu, seçilen kampüsün olgu tablosunu doğrudan analizden doldurur ve çalışma tasarımı ile yedi kuralı ekler. Hazırlanan prompt herhangi bir asistana kopyalanabilir.</p>
       <div class="controls">
         <label>Kampüs <select id="pb-campus"><option>A</option><option selected>B</option><option>C</option></select></label>
         <label>Hedef <select id="pb-aud"><option value="report">kampüs çevre raporu</option><option value="poster">kongre özeti</option><option value="social">sosyal medya paylaşımı</option></select></label>
@@ -68,11 +68,11 @@
     </div>
     <div>
       <textarea id="pb-out" rows="22" spellcheck="false" style="font-family:var(--mono);font-size:0.8rem"></textarea>
-      <div class="controls"><button class="btn primary" data-copy="pb-out">İstemi kopyala</button><span class="note" id="pb-count"></span></div>
+      <div class="controls"><button class="btn primary" data-copy="pb-out">Promptu kopyala</button><span class="note" id="pb-count"></span></div>
       <p class="note">Kurumunuzun izin verdiği asistanı kullanın ve içine hiçbir zaman kişisel veri yapıştırmayın. Asistanın yazdığı her metin, kullanılmadan önce defterdeki sayı denetleyicisinden ve bir sonraki duraktaki iddia denetiminden geçirilir.</p>
     </div>
   </div>
-  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Colab defterinin 5.1. ve 5.2. kısımları aynı olgu tablosunu ve aynı istemi 0. kısımda yüklenen veriden üretir. Bu yüzden kendi NOKTA dosyalarını yükleyen bir ekip, kendi sayılarını içeren bir istem elde eder.</p></div>
+  <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Colab defterinin 5.1. ve 5.2. kısımları aynı olgu tablosunu ve aynı promptu 0. kısımda yüklenen veriden üretir. Bu yüzden kendi NOKTA dosyalarını yükleyen bir ekip, kendi sayılarını içeren bir prompt elde eder.</p></div>
 </div></section>
 
 <section class="station" id="s3"><div class="wrap">
@@ -105,7 +105,7 @@
     <div>
       <div class="actioncard" id="ac-card"></div>
       <div class="controls"><button class="btn primary" id="ac-copy">Metin olarak kopyala</button><button class="btn" id="ac-dl">İndir (.md)</button></div>
-      <p class="note">Kart yalnızca bu tarayıcıda saklanır ve NOKTA Laboratuvarındaki değerlendirmede yeniden görünür, orada yazdırılabilir. Örnek bulgular sentetik veriden gelmektedir. Gerçek NOKTA verisiyle çalışan bir ekip kendi bulgusundan başlar ve kendi kartını yazar.</p>
+      <p class="note">Kart yalnızca bu tarayıcıda saklanır ve NOKTA Laboratuvarındaki değerlendirmede yeniden görünür, orada yazdırılabilir. Örnek bulgular sentetik veriden gelmektedir. Gerçek NOKTA verisiyle çalışan bir ekip kendi bulgusundan başlar ve kendi kartını yazar. Ekip dışarı çıkabiliyorsa NOKTA Laboratuvarındaki <a href="lab.html#field">Sahada uygulama</a> sekmesi kartın sahada ilk bir denetimini yapmayı sağlar.</p>
     </div>
   </div>
   <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb#scrollTo=sec-5" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Colab defterinin 5.4. kısmı aynı kartı, ekibin kendi olgu tablosundaki bir bulgudan başlayarak metin olarak yazdırır.</p></div>

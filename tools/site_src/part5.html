@@ -1,11 +1,11 @@
-<!--META{"title": "⟪Part 5 · Share and turn into action‖5. Bölüm · Paylaş ve aksiyona dönüştür⟫", "desc": "⟪Catch the errors in an AI-written paragraph, build a safe prompt from your numbers, weigh claims and write a solution card for the NOKTA workshop tables.‖YZ ile yazılmış bir paragraftaki hataları yakalayın, kendi sayılarınızdan güvenli bir istem kurun, iddiaları tartın ve NOKTA çalıştay masaları için bir çözüm kartı yazın.⟫", "part": "p5", "next": ["lab", "⟪NOKTA Lab and debrief‖NOKTA Laboratuvarı ve değerlendirme⟫"]}-->
+<!--META{"title": "⟪Part 5 · Share and turn into action‖5. Bölüm · Paylaş ve aksiyona dönüştür⟫", "desc": "⟪Catch the errors in an AI-written paragraph, build a safe prompt from your numbers, weigh claims and write a solution card for the NOKTA workshop tables.‖YZ ile yazılmış bir paragraftaki hataları yakalayın, kendi sayılarınızdan güvenli bir prompt kurun, iddiaları tartın ve NOKTA çalıştay masaları için bir çözüm kartı yazın.⟫", "part": "p5", "next": ["lab", "⟪NOKTA Lab and debrief‖NOKTA Laboratuvarı ve değerlendirme⟫"]}-->
 <section class="parthead"><div class="wrap">
   <p class="kicker">⟪Part 5 · Share and turn into action · 1:37 to 1:55‖5. Bölüm · Paylaş ve aksiyona dönüştür · 1:37-1:55⟫</p>
   <h1>⟪From numbers to words to action‖Sayılardan kelimelere, kelimelerden aksiyona⟫</h1>
-  <p class="lead">⟪Generative AI can write a fluent report in seconds, but a fluent text is not necessarily a true one. This part therefore keeps one rule throughout: The numbers come from the analysis, the words may come from the AI, and the judgment stays with the team. The four stations practice this rule, from catching the errors of a generated text to writing a proposal for the NOKTA workshop.‖Üretken YZ akıcı bir raporu saniyeler içinde yazabilir, ancak akıcı bir metin her zaman doğru bir metin değildir. Bu nedenle bu bölüm baştan sona tek bir kurala dayanmaktadır: Sayılar analizden gelir, kelimeler YZ'den gelebilir, yargı ise ekipte kalır. Dört durak bu kuralı, üretilmiş bir metnin hatalarını yakalamaktan NOKTA çalıştayı için bir öneri yazmaya kadar adım adım uygular.⟫</p>
+  <p class="lead">⟪Generative AI can write a fluent report in seconds, but a fluent text is not necessarily a true one. This part therefore keeps one rule throughout: The numbers come from the analysis, the words may come from the AI, and the judgment stays with the team. The four stations practice this rule, from catching the errors of a generated text and building a safe prompt to writing a proposal for the NOKTA workshop.‖Üretken YZ akıcı bir raporu saniyeler içinde yazabilir, ancak akıcı bir metin her zaman doğru bir metin değildir. Bu nedenle bu bölüm baştan sona tek bir kurala dayanmaktadır: Sayılar analizden gelir, kelimeler YZ'den gelebilir, yargı ise ekipte kalır. Dört durak bu kuralı, üretilmiş bir metnin hatalarını yakalamaktan güvenli bir prompt (istem) hazırlamaya ve NOKTA çalıştayı için bir öneri yazmaya kadar adım adım uygular.⟫</p>
   <ol class="station-index">
     <li><a href="#s1"><b>1</b>⟪Spot the errors‖Hataları bulun⟫</a></li>
-    <li><a href="#s2"><b>2</b>⟪A safe prompt‖Güvenli bir istem⟫</a></li>
+    <li><a href="#s2"><b>2</b>⟪A safe prompt‖Güvenli bir prompt⟫</a></li>
     <li><a href="#s3"><b>3</b>⟪How strong is the claim?‖İddia ne kadar güçlü?⟫</a></li>
     <li><a href="#s4"><b>4</b>⟪The solution card‖Çözüm kartı⟫</a></li>
   </ol>
@@ -31,10 +31,10 @@
 </div></section>
 
 <section class="station" id="s2"><div class="wrap">
-  <div class="station-head"><span class="no">2</span><h2>⟪A safe prompt‖Güvenli bir istem⟫</h2></div>
+  <div class="station-head"><span class="no">2</span><h2>⟪A safe prompt‖Güvenli bir prompt⟫</h2></div>
   <div class="grid2">
     <div>
-      <p>⟪A good prompt does not ask the assistant to know the numbers. It hands the numbers over, names the audience and writes the rules down. The builder below fills in the fact table of the chosen campus directly from the analysis and adds the study design and seven rules. The finished prompt can be copied into any assistant.‖İyi bir istem, asistandan sayıları bilmesini beklemez. Sayıları ona kendisi verir, okur kitlesini belirtir ve kuralları açıkça yazar. Aşağıdaki oluşturucu, seçilen kampüsün olgu tablosunu doğrudan analizden doldurur ve çalışma tasarımı ile yedi kuralı ekler. Hazırlanan istem herhangi bir asistana kopyalanabilir.⟫</p>
+      <p>⟪A good prompt does not ask the assistant to know the numbers. It hands the numbers over, names the audience and writes the rules down. The builder below fills in the fact table of the chosen campus directly from the analysis and adds the study design and seven rules. The finished prompt can be copied into any assistant.‖İyi bir prompt, asistandan sayıları bilmesini beklemez. Sayıları ona kendisi verir, okur kitlesini belirtir ve kuralları açıkça yazar. Aşağıdaki oluşturucu, seçilen kampüsün olgu tablosunu doğrudan analizden doldurur ve çalışma tasarımı ile yedi kuralı ekler. Hazırlanan prompt herhangi bir asistana kopyalanabilir.⟫</p>
       <div class="controls">
         <label>⟪Campus‖Kampüs⟫ <select id="pb-campus"><option>A</option><option selected>B</option><option>C</option></select></label>
         <label>⟪For‖Hedef⟫ <select id="pb-aud"><option value="report">⟪campus environment report‖kampüs çevre raporu⟫</option><option value="poster">⟪congress abstract‖kongre özeti⟫</option><option value="social">⟪social media post‖sosyal medya paylaşımı⟫</option></select></label>
@@ -44,11 +44,11 @@
     </div>
     <div>
       <textarea id="pb-out" rows="22" spellcheck="false" style="font-family:var(--mono);font-size:0.8rem"></textarea>
-      <div class="controls"><button class="btn primary" data-copy="pb-out">⟪Copy the prompt‖İstemi kopyala⟫</button><span class="note" id="pb-count"></span></div>
+      <div class="controls"><button class="btn primary" data-copy="pb-out">⟪Copy the prompt‖Promptu kopyala⟫</button><span class="note" id="pb-count"></span></div>
       <p class="note">⟪Use the assistant that your institution allows, and never paste personal data into it. Whatever the assistant writes goes back through the number auditor of the notebook and through the claim check of the next station before it is used.‖Kurumunuzun izin verdiği asistanı kullanın ve içine hiçbir zaman kişisel veri yapıştırmayın. Asistanın yazdığı her metin, kullanılmadan önce defterdeki sayı denetleyicisinden ve bir sonraki duraktaki iddia denetiminden geçirilir.⟫</p>
     </div>
   </div>
-  <div class="nbref"><a class="badge" href="{{COLAB}}#scrollTo=sec-5" target="_blank" rel="noopener">Colab ↗</a><p>⟪Sections 5.1 and 5.2 of the Colab notebook build the same fact table and the same prompt from the data loaded in Section 0. A team that loads its own NOKTA files therefore gets a prompt with its own numbers.‖Colab defterinin 5.1. ve 5.2. kısımları aynı olgu tablosunu ve aynı istemi 0. kısımda yüklenen veriden üretir. Bu yüzden kendi NOKTA dosyalarını yükleyen bir ekip, kendi sayılarını içeren bir istem elde eder.⟫</p></div>
+  <div class="nbref"><a class="badge" href="{{COLAB}}#scrollTo=sec-5" target="_blank" rel="noopener">Colab ↗</a><p>⟪Sections 5.1 and 5.2 of the Colab notebook build the same fact table and the same prompt from the data loaded in Section 0. A team that loads its own NOKTA files therefore gets a prompt with its own numbers.‖Colab defterinin 5.1. ve 5.2. kısımları aynı olgu tablosunu ve aynı promptu 0. kısımda yüklenen veriden üretir. Bu yüzden kendi NOKTA dosyalarını yükleyen bir ekip, kendi sayılarını içeren bir prompt elde eder.⟫</p></div>
 </div></section>
 
 <section class="station" id="s3"><div class="wrap">
@@ -81,7 +81,7 @@
     <div>
       <div class="actioncard" id="ac-card"></div>
       <div class="controls"><button class="btn primary" id="ac-copy">⟪Copy as text‖Metin olarak kopyala⟫</button><button class="btn" id="ac-dl">⟪Download (.md)‖İndir (.md)⟫</button></div>
-      <p class="note">⟪The card is kept only in this browser and appears again in the debrief of the NOKTA Lab, where it can be printed. The example findings come from the synthetic data. With real NOKTA data the team starts from its own finding and writes its own card.‖Kart yalnızca bu tarayıcıda saklanır ve NOKTA Laboratuvarındaki değerlendirmede yeniden görünür, orada yazdırılabilir. Örnek bulgular sentetik veriden gelmektedir. Gerçek NOKTA verisiyle çalışan bir ekip kendi bulgusundan başlar ve kendi kartını yazar.⟫</p>
+      <p class="note">⟪The card is kept only in this browser and appears again in the debrief of the NOKTA Lab, where it can be printed. The example findings come from the synthetic data. With real NOKTA data the team starts from its own finding and writes its own card. When the team can go out, the <a href="lab.html#field">Field practice</a> tab of the NOKTA Lab gives the card a first check on site.‖Kart yalnızca bu tarayıcıda saklanır ve NOKTA Laboratuvarındaki değerlendirmede yeniden görünür, orada yazdırılabilir. Örnek bulgular sentetik veriden gelmektedir. Gerçek NOKTA verisiyle çalışan bir ekip kendi bulgusundan başlar ve kendi kartını yazar. Ekip dışarı çıkabiliyorsa NOKTA Laboratuvarındaki <a href="lab.html#field">Sahada uygulama</a> sekmesi kartın sahada ilk bir denetimini yapmayı sağlar.⟫</p>
     </div>
   </div>
   <div class="nbref"><a class="badge" href="{{COLAB}}#scrollTo=sec-5" target="_blank" rel="noopener">Colab ↗</a><p>⟪Section 5.4 of the Colab notebook prints the same card as text, starting from a finding of the team's own fact table.‖Colab defterinin 5.4. kısmı aynı kartı, ekibin kendi olgu tablosundaki bir bulgudan başlayarak metin olarak yazdırır.⟫</p></div>

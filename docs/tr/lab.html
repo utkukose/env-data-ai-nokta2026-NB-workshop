@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>NOKTA Laboratuvarı ve değerlendirme</title>
-<meta name="description" content="Atölyenin bütün 3B araçları tek bir tezgâhta ve oturumun saha raporu.">
+<meta name="description" content="Atölyenin bütün 3B araçları tek bir tezgâhta, oturumun saha raporu ve gerçek bir kampüs için altı saha görevi.">
 <link rel="stylesheet" href="../assets/vendor/fonts/atkinson.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E7A5F'/%3E%3Ccircle cx='32' cy='32' r='11' fill='white'/%3E%3Ccircle cx='32' cy='32' r='20' fill='none' stroke='white' stroke-width='4' stroke-dasharray='6 6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="../assets/vendor/katex/katex.min.css">
@@ -26,12 +26,13 @@
 <section class="parthead"><div class="wrap">
   <p class="kicker">NOKTA Laboratuvarı · 1:55-2:00 ve oturumdan sonra</p>
   <h1>Tezgâh</h1>
-  <p class="lead">NOKTA Laboratuvarı oturumun üç 3B aracını tek bir sayfada bir araya getirmektedir. Atölyenin son dakikalarında katılımcıların sorularını cevaplamak için kullanılır, 21-24 Kasım analiz günlerinde ise ekiplerin kampüs ikizine, dakika bulutuna ve model yüzeyine yeniden dönmesini sağlar. Dördüncü sekme olan değerlendirme, oturum boyunca bu tarayıcıda yapılanları kısa bir saha raporuna dönüştürür.</p>
+  <p class="lead">NOKTA Laboratuvarı oturumun üç 3B aracını tek bir sayfada bir araya getirmektedir. Atölyenin son dakikalarında katılımcıların sorularını cevaplamak için kullanılır, 21-24 Kasım analiz günlerinde ise ekiplerin kampüs ikizine, dakika bulutuna ve model yüzeyine yeniden dönmesini sağlar. Dördüncü sekme olan değerlendirme, oturum boyunca bu tarayıcıda yapılanları kısa bir saha raporuna dönüştürür. Beşinci sekme olan sahada uygulama ise dışarı çıkabilen ekipler için oturumun yöntemlerini gerçek bir kampüse taşıyan altı kısa görev sunar.</p>
   <div class="controls" id="tabs" style="margin-top:18px">
     <button class="btn on" data-tab="twin">Kampüs ikizi</button>
     <button class="btn" data-tab="cloud">Mikroiklim grupları</button>
     <button class="btn" data-tab="model">Model yüzeyi</button>
     <button class="btn" data-tab="debrief">Değerlendirme</button>
+    <button class="btn" data-tab="field">Sahada uygulama</button>
   </div>
 </div></section>
 
@@ -87,6 +88,22 @@
   </div>
 </div></section>
 
+<section class="station" id="field" hidden><div class="wrap">
+  <div class="station-head"><h2>Sahada uygulama: Dışarı çıkabiliyorsanız</h2></div>
+  <p>Oturumun kendisi ekran başında yürütülür ve adımlarının hiçbiri kimseden dışarı çıkıp ölçüm yapmasını istemez. Aşağıdaki altı kısa görev, oturumda kullanılan yöntemleri gerçek bir kampüse taşımaktadır. Atölye yüz yüze yapılabildiğinde ekipler bu görevleri oturumun hemen ardından yapabilir. Atölye çevrim içi yapıldığında ya da oturum daha sonra izlendiğinde ise görevler herhangi bir kampüste, uygun bir zamanda yapılabilir.</p>
+  <p>Her görev ait olduğu bölümü, süresini ve neye ihtiyaç duyduğunu belirtir. Görevlerin çoğu yalnızca bir not defteri ve bir telefon gerektirir, ikisinde ise bir NOKTA Station ya da düşük maliyetli başka bir sensör kullanılır. Görevleri üyeleri arasında paylaşan bir ekip hepsini yaklaşık bir saatte tamamlayabilir.</p>
+  <div class="parts fieldtasks">
+    <div class="pcard" style="--c:var(--p1)"><span class="t">1. Bölüm · yaklaşık 10 dakika · NOKTA Station ya da dijital termometre</span><h3>1 · Isınma süresini izleyin</h3><p>İstasyonu kapalı bir alandan dışarıdaki gölgeli bir noktaya taşıyın. Beş dakika boyunca her 15 saniyede bir sıcaklığı ve bağıl nemi okuyun ya da istasyonun kaydını saklayın. Ölçümlerin kaymayı bıraktığı anı işaretleyin. 1. Bölüm her ziyaretin ilk iki dakikasını çıkarmaktadır. Bu test, iki dakikanın sizin cihazınız için yeterli olup olmadığını gösterir.</p></div>
+    <div class="pcard" style="--c:var(--p2)"><span class="t">1. ve 2. Bölüm · yaklaşık 25 dakika · iki aynı sensör ya da tek sensör ve beyaz bir gölgelik</span><h3>2 · Sensöre vuran güneş</h3><p>Güneşli bir noktada iki aynı sensörü yan yana yerleştirin: Biri doğrudan güneşte, diğeri havayı geçiren basit beyaz bir gölgeliğin altında dursun. On dakika boyunca ikisini de dakikada bir okuyun. Aradaki fark, ölçülen sıcaklığın ne kadarının havadan değil, sensör gövdesine vuran güneşten geldiğini gösterir. Elinizde tek sensör varsa on dakika güneşte, on dakika gölgelik altında ölçün ve her değişiklikten sonraki ilk iki dakikayı atlayın. İki yarı arasında hava da ısınabilir. Bu, 2. Bölümdeki saat etkisidir.</p></div>
+    <div class="pcard" style="--c:var(--p3)"><span class="t">3. Bölüm · yaklaşık 10 dakika · ışık ölçer uygulaması olan bir telefon</span><h3>3 · Büyüklük mertebesiyle ışık</h3><p>Telefondaki bir ışık ölçer uygulamasıyla ışık düzeyini dört yerde ölçün: Gölgeli bir geçitte, bir ağacın altında, bir çim alanın kenarında ve tam güneşte. Her değeri lüks olarak, logaritmasıyla yani değerin log₁₀'uyla birlikte yazın. Tam güneş, derin gölgeden genellikle on ila yüz kat daha parlaktır. 3. Bölümün dakikaları ışığın logaritmasına göre yerleştirmesinin nedeni budur. Telefon sensörleri kalibre edilmemiştir ve bazıları, 1. Bölümdeki istasyonun ışık sensörü gibi belirli bir üst değerde durur. Bu yüzden yalnızca büyüklük mertebelerini karşılaştırmak için kullanılmalıdır.</p></div>
+    <div class="pcard" style="--c:var(--p4)"><span class="t">4. Bölüm · yaklaşık 20 dakika · not defteri ve telefon</span><h3>4 · Saha formunu doldurun</h3><p>Bir fakülte girişi ya da kampüs yolunun kenarı gibi bir nokta seçin. 15 dakika boyunca geçen araçları ve yürüyerek geçen kişileri sayın. Noktanın gölgede mi, kısmi güneşte mi yoksa tam güneşte mi olduğunu not edin ve yeşil örtüsünü yüzde olarak kestirin. 4. Bölümdeki model, girdilerini tam olarak bu saha formu değerlerinden oluşturmaktadır. Sayıları 15'e bölün, değerleri 4. Bölümdeki senaryo panelinde ayarlayın ve tahmini okuyun. Bir kaydırıcının aralığını aşan bir değer ayarlanamaz, çünkü model böyle bir değeri hiç görmemiştir. Model sentetik veriden öğrendiği için cevabı kampüsünüzün ölçümü değil, yöntemle yapılan bir alıştırmadır.</p></div>
+    <div class="pcard" style="--c:var(--p5)"><span class="t">2. ve 5. Bölüm · yaklaşık 15 dakika · not defteri</span><h3>5 · Sorun ve karşılaştırın</h3><p>On öğrenciye kampüste havayı en kötü nerede hissettiklerini ve nedenini sorun. Cevaplarını 2. Bölümdeki adil tabloyla karşılaştırın. Bunun için veriniz hazırsa kendi tablonuzu, hazır değilse sentetik tabloyu kullanın. İnsanların kötü hissettiği ama verinin göstermediği bir yer ya da bunun tersi, bir çözüm kartı için iyi bir başlangıç noktasıdır. Öğrencilerin adlarını değil, yalnızca cevaplarını not edin.</p></div>
+    <div class="pcard" style="--c:var(--ink)"><span class="t">5. Bölüm · yaklaşık 15 dakika · ekibin notları</span><h3>6 · Sonuçları geri getirin</h3><p>Görevlerin sonuçlarını tek bir sayfaya yazın: Yer, saat, neyin ölçüldüğü ya da sayıldığı ve ekibi neyin şaşırttığı. Her sonucu oturumun ilgili bölümüyle karşılaştırın. Veriyle uyuşan bir sonuç, bir çözüm kartının dayanağını güçlendirir. Veriyle çelişen bir sonuç ise sonuçlar paylaşılmadan önce verinin yeniden denetlenmesi için bir nedendir.</p></div>
+  </div>
+  <div class="takeaway"><b>Güvenlik ve mahremiyet.</b> Trafiği kaldırımdan sayın ve yoldan güvenli bir uzaklıkta durun. Girişleri ve yolları kapatmayın. Fotoğraf çekerken insanları değil yerleri fotoğraflayın, bir fotoğrafta tanınabilecek biri olacaksa önce onun iznini alın.</div>
+  <p class="note">Bu görevlerin sonuçları NOKTA saha turlarının ölçümlerinin yerini tutmaz. Ekibin kendi verisini daha dikkatli okumasına yardım eder ve her çözüm kartına sahada ilk bir denetim sağlar.</p>
+</div></section>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   var D = window.NOKTA, $ = function (id) { return document.getElementById(id); };
@@ -94,9 +111,9 @@ document.addEventListener("DOMContentLoaded", function () {
   var CH = ["temperature_c", "rel_humidity_pct", "pressure_hpa", "pm1_ugm3", "pm25_ugm3", "pm10_ugm3", "co2_ppm", "light_lux", "uva_wm2", "uvb_wm2"];
   var made = {};
   function show(tab) {
-    ["twin", "cloud", "model", "debrief"].forEach(function (t) { $(t).hidden = t !== tab; });
+    ["twin", "cloud", "model", "debrief", "field"].forEach(function (t) { $(t).hidden = t !== tab; });
     document.querySelectorAll("#tabs .btn").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-tab") === tab); });
-    if (!made[tab]) { made[tab] = true; ({ twin: makeTwin, cloud: makeCloud, model: makeModel, debrief: makeReport })[tab](); }
+    if (!made[tab]) { made[tab] = true; ({ twin: makeTwin, cloud: makeCloud, model: makeModel, debrief: makeReport, field: function () {} })[tab](); }
     if (tab === "debrief") makeReport();
     if (location.hash !== "#" + tab) history.replaceState(null, "", "#" + tab);
   }
@@ -197,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   $("db-reset").onclick = function () { ["log", "card", "visited"].forEach(function (k) { NK.Store.set(k, k === "log" ? {} : k === "visited" ? [] : null); }); makeReport(); };
   var start = (location.hash || "#twin").slice(1);
-  show(["twin", "cloud", "model", "debrief"].indexOf(start) >= 0 ? start : "twin");
+  show(["twin", "cloud", "model", "debrief", "field"].indexOf(start) >= 0 ? start : "twin");
 });
 </script>
 

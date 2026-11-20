@@ -42,9 +42,9 @@ Her sayfada sağ ve sol ok tuşları sonraki ya da önceki durağa, `]` ve `[` s
 | 1:26 | Ya şöyle olsaydı? Modelin üzerinde gezinin | 3. ve 4. duraklar | hazır senaryoları dener, yüzeyi döndürür |
 | 1:33 | Modelin kodu | defter, 4. kısım | 4. kısmı çalıştırır, kaydırıcıları dener |
 | 1:37 | 5. Bölüm açılışı: Hataları bulun | `part5.html`, 1. durak | cümleleri işaretler, sonra denetler |
-| 1:44 | Güvenli bir istem · iddia ne kadar güçlü? | 2. ve 3. duraklar | istemi kopyalar, iddiaları sınıflar |
+| 1:44 | Güvenli bir prompt (istem) · iddia ne kadar güçlü? | 2. ve 3. duraklar | promptu kopyalar, iddiaları sınıflar |
 | 1:50 | Çözüm kartı | 4. durak | her ekip bir kart yazar |
-| 1:55 | Değerlendirme ve sorular | `lab.html#debrief` | değerlendirmeyi açar |
+| 1:55 | Değerlendirme, sahada uygulama ve sorular | `lab.html#debrief`, ardından `lab.html#field` | değerlendirmeyi açar, saha görevlerini not eder |
 
 ## Her blokta anlatılacaklar
 
@@ -60,9 +60,9 @@ Akış planı sırayı ve süreleri verir. Aşağıdaki paragraflar ise her blo�
 
 **4. Bölüm, 1:17-1:37.** Bir model, nasıl kullanılacaksa öyle test edilmelidir. Orman kendi eğitim dakikalarında R² = 0,66, rastgele test dakikalarında 0,54 değerine ulaşır, bütün noktalar dışarıda tutulduğunda ise yalnızca 0,32'de kalır. Aynı noktadan gelen çok sayıda dakika birbirinden bağımsız gözlemler değildir. Bu yüzden modelin yeni bir yerde nasıl çalışacağını yalnızca son skor anlatır. Önem sıralamasında trafik ilk, günün arka plan PM2,5 değeri ikinci, kapıdaki insanlar ise üçüncü sıradadır. Nemin etkisi neredeyse yoktur, çünkü 1. Bölüm nemin sensör üzerindeki etkisini zaten düzeltmiştir. Senaryo paneli ve 3B yüzey, kampüste gerçek bir değişiklik yapıldığında ne olacağını değil, modelin veriden ne öğrendiğini gösterir.
 
-**5. Bölüm, 1:37-1:55.** Sayılar analizden gelir, kelimeler YZ'den gelebilir, son karar ise ekibe aittir. YZ paragrafındaki altı hata altı farklı türdendir: Uydurulmuş bir sayı, uydurulmuş bir oranla kurulan nedensel bir iddia, kısa bir ziyaretin medyanının 24 saatlik bir kılavuz değeriyle karşılaştırılması, üniversitelerin sıralanması, yerden değil saatten kaynaklanan bir fark ve bulunamayan bir kaynak. Güvenli istem, asistandan sayıları bilmesini istemek yerine ona olgu tablosunu, çalışmanın tasarımını ve yedi kuralı verir. İddia merdiveni, gözlenen bulguyu yalnızca ilişkili olandan, müdahale gerektirenden ve desteklenmeyenden ayırır. Ardından her ekip 28 Kasım'daki üç masadan biri için bir çözüm kartı yazar: *Mikroiklim ve yeşil kampüs*, *Atık ve döngüsel ekonomi* ya da *Su, kaynak verimliliği ve gençlik katılımı*. Kart beş soruyu cevaplar: Sorun, dayanak, çözüm, uygulanabilirlik ve gençlerin rolü.
+**5. Bölüm, 1:37-1:55.** Sayılar analizden gelir, kelimeler YZ'den gelebilir, son karar ise ekibe aittir. YZ paragrafındaki altı hata altı farklı türdendir: Uydurulmuş bir sayı, uydurulmuş bir oranla kurulan nedensel bir iddia, kısa bir ziyaretin medyanının 24 saatlik bir kılavuz değeriyle karşılaştırılması, üniversitelerin sıralanması, yerden değil saatten kaynaklanan bir fark ve bulunamayan bir kaynak. Güvenli prompt, asistandan sayıları bilmesini istemek yerine ona olgu tablosunu, çalışmanın tasarımını ve yedi kuralı verir. İddia merdiveni, gözlenen bulguyu yalnızca ilişkili olandan, müdahale gerektirenden ve desteklenmeyenden ayırır. Ardından her ekip 28 Kasım'daki üç masadan biri için bir çözüm kartı yazar: *Mikroiklim ve yeşil kampüs*, *Atık ve döngüsel ekonomi* ya da *Su, kaynak verimliliği ve gençlik katılımı*. Kart beş soruyu cevaplar: Sorun, dayanak, çözüm, uygulanabilirlik ve gençlerin rolü.
 
-**NOKTA Laboratuvarı, 1:55-2:00.** Değerlendirme, oturumu ziyaret edilen sayfaları, yapılan tahminleri, atılan etkileşimli adımları ve çözüm kartını içeren bir saha raporuna dönüştürür. Raporun son notu beş kuralı tekrarlar: Ham dosyayı koru, noktaları iki tur üzerinden karşılaştır, ortalama alma süresini bildir, kümeleri ve önem değerlerini hipotez olarak gör ve YZ'nin yazdığı her sayıyı denetle. Kalan dakikalar, laboratuvarın 3B araçları el altındayken soruları cevaplamaya ayrılır.
+**NOKTA Laboratuvarı, 1:55-2:00.** Değerlendirme, oturumu ziyaret edilen sayfaları, yapılan tahminleri, atılan etkileşimli adımları ve çözüm kartını içeren bir saha raporuna dönüştürür. Raporun son notu beş kuralı tekrarlar: Ham dosyayı koru, noktaları iki tur üzerinden karşılaştır, ortalama alma süresini bildir, kümeleri ve önem değerlerini hipotez olarak gör ve YZ'nin yazdığı her sayıyı denetle. Ardından eğitmen *Sahada uygulama* sekmesini açar ve altı görevin nasıl kullanılacağını anlatır. Atölye yüz yüze yapılıyorsa ekipler görevleri oturumun hemen ardından yapar. Çevrim içi yapılıyorsa her ekip bunları daha sonra kendi kampüsünde yapar. Kalan dakikalar, laboratuvarın 3B araçları el altındayken soruları cevaplamaya ayrılır.
 
 ## Canlı anket soruları
 
@@ -84,9 +84,15 @@ Sayfalar kendi sorularını sorar. Aşağıdaki dört soru ayrıca bir anket ara
 
 1. Bölüm en uzun bloktur, çünkü sonraki bütün bölümlerin kullandığı veriyi hazırlar. Süre kısalırsa 2. durak bir dakikada gösterilebilir ve yan yana test durağı tablosundan özetlenebilir. 3. Bölüm, sağdaki duraklar ilerlerken sahne ekranda kaldığında en iyi sonucu verir. Geniş ekranlarda sahne yerinde sabit durur. 4. Bölümde bir noktayı dışarıda bırakma animasyonu kendiliğinden döner, eğitmen de onun üzerine konuşabilir. Değerlendirme yalnızca eğitmenin tarayıcısında cevaplanan soruları raporlayabilir. Bu yüzden salonun cevapları oturum ilerledikçe o tarayıcıda işaretlenmelidir.
 
+## Sahada uygulama: Ekipler dışarı çıkabilirse
+
+Oturumun kendisi kimseden dışarı çıkıp ölçüm yapmasını istemez, çünkü tamamen ekran başında yürütülebilecek biçimde tasarlanmıştır. NOKTA Laboratuvarındaki *Sahada uygulama* sekmesi (`lab.html#field`) gerçek bir kampüs için altı kısa görev ekler: Bir sensörün ısınma süresini izlemek, sensöre vuran güneşi havanın sıcaklığından ayırmak, ışığı büyüklük mertebesiyle ölçmek, bir saha formunu doldurmak, on öğrenciye soru sormak ve sonuçları geri getirmek. Her görev ait olduğu bölümü, süresini ve neye ihtiyaç duyduğunu belirtir.
+
+Atölye yüz yüze yapılabildiğinde sahada uygulama oturumun hemen ardından gelebilir. Her ekip görevleri üyeleri arasında paylaşır, yaklaşık kırk dakika dışarıda çalışır ve son çeyrek saati altıncı göreve ayırır. Atölye çevrim içi yapıldığında eğitmen sekmeyi kapanış dakikalarında tanıtır, ekipler de görevleri analiz günlerinde kendi kampüslerinde yapar. Oturumu daha sonra izleyen herkes bu görevleri istediği zaman yapabilir. Sonuçlar saha turlarının ölçümlerinin yerini tutmaz, ancak her çözüm kartına sahada ilk bir denetim sağlar.
+
 ## Oturumdan sonra: 21-24 Kasım
 
-Analiz günlerinde aynı defter gerçek veriyle kullanılır. Her ekip defterin 0. kısmını açar ve `DATA_SOURCE = "own"` yapar. Ölçümlerini, saha formlarını ve yan yana testi `data/nokta_template.csv` sütunlarıyla yükler, kayıt cihazı başka adlar kullanıyorsa `COLUMN_MAP` sözlüğünü doldurur. Böylece sonraki her hücre ekibin kendi kampüsüyle çalışır. Defterin 5. kısmı da 28 Kasım'daki kongre ve çalıştay için olgu tablosunu, istemi ve çözüm kartını yazdırır.
+Analiz günlerinde aynı defter gerçek veriyle kullanılır. Her ekip defterin 0. kısmını açar ve `DATA_SOURCE = "own"` yapar. Ölçümlerini, saha formlarını ve yan yana testi `data/nokta_template.csv` sütunlarıyla yükler, kayıt cihazı başka adlar kullanıyorsa `COLUMN_MAP` sözlüğünü doldurur. Böylece sonraki her hücre ekibin kendi kampüsüyle çalışır. Defterin 5. kısmı da 28 Kasım'daki kongre ve çalıştay için olgu tablosunu, promptu ve çözüm kartını yazdırır.
 
 Ekipler için kısa bir denetim listesi:
 

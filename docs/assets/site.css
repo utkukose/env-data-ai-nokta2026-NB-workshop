@@ -242,6 +242,9 @@ table.tbl thead th { color: var(--muted); font-weight: 700; font-size: 0.8rem; }
 .cycle span { color: var(--muted); font-size: 0.92rem; }
 @media (max-width: 760px) { .cycle { grid-template-columns: 1fr 1fr; } .cycle div:nth-child(3) { border-left: 0; padding-left: 0; } }
 .parts { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 16px; margin: 18px 0; }
+.parts.fieldtasks { grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); }
+.fieldtasks .pcard p { color: var(--ink); font-size: 0.96rem; }
+.fieldtasks .pcard .t { line-height: 1.4; }
 .pcard { --c: var(--ink); background: var(--panel); border: 1px solid var(--line); border-top: 6px solid var(--c); border-radius: var(--radius); padding: 16px 18px; display: flex; flex-direction: column; text-decoration: none; }
 .pcard .t { font-size: 0.8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
 .pcard h3 { margin: 6px 0 6px; font-size: 1.2rem; }

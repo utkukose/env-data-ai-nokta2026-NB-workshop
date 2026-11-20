@@ -44,7 +44,7 @@ On every page the right and left arrow keys move to the next or previous station
 | 1:37 | Part 5 cold open: Spot the errors | `part5.html`, station 1 | mark the sentences, then check |
 | 1:44 | A safe prompt · how strong is the claim? | stations 2 and 3 | copy the prompt, classify the claims |
 | 1:50 | The solution card | station 4 | write one card per team |
-| 1:55 | Debrief and questions | `lab.html#debrief` | open the debrief |
+| 1:55 | Debrief, field practice and questions | `lab.html#debrief`, then `lab.html#field` | open the debrief, note the field tasks |
 
 ## What to explain in each block
 
@@ -62,7 +62,7 @@ The run sheet gives the order and the timing. The paragraphs below give the mess
 
 **Part 5, 1:37 to 1:55.** The numbers come from the analysis, the words may come from the AI, and the judgment stays with the team. The six errors of the AI paragraph are of six kinds: An invented number, a causal claim with an invented share, a short median set against a 24-hour guideline, a ranking of universities, a difference caused by the clock rather than the place and a source that cannot be found. The safe prompt hands the assistant the fact table, the study design and seven rules instead of asking it to know the numbers. The claim ladder separates what was observed from what is only associated, what would need an intervention and what is not supported. Each team then writes a solution card for one of the three tables of 28 November: *Microclimate and green campus*, *Waste and circular economy* or *Water, resource efficiency and youth participation*. The card answers five questions: The problem, the evidence, the solution, its feasibility and the role of young people.
 
-**NOKTA Lab, 1:55 to 2:00.** The debrief turns the session into a field report with the pages visited, the predictions made, the interactive steps taken and the solution card. Its closing note repeats five rules: Keep the raw file, compare points through both rounds, report the averaging time, treat clusters and importances as hypotheses and check every AI-written number. The remaining minutes are for questions, with the 3D tools of the lab at hand.
+**NOKTA Lab, 1:55 to 2:00.** The debrief turns the session into a field report with the pages visited, the predictions made, the interactive steps taken and the solution card. Its closing note repeats five rules: Keep the raw file, compare points through both rounds, report the averaging time, treat clusters and importances as hypotheses and check every AI-written number. The presenter then opens the *Field practice* tab and explains how its six tasks are used. When the workshop is held in person, the teams do them right after the session. When it is held online, each team does them later on its own campus. The remaining minutes are for questions, with the 3D tools of the lab at hand.
 
 ## Questions for a live poll
 
@@ -83,6 +83,12 @@ If the 3D scenes do not start, the browser lacks WebGL support. Every station st
 ## Timing notes
 
 Part 1 is the longest block, because it sets up the data that all later parts use. When time is short, station 2 can be shown in one minute and the co-location station summarized from its table. Part 3 works best with the scene on screen while the stations on the right move on. The scene stays in place on wide screens. In Part 4 the leave-one-point-out animation runs on its own, so the presenter can talk over it. The debrief can only report what was answered in the presenter's browser, so the answers of the room should be entered there as the session goes on.
+
+## Field practice: If the teams can go out
+
+The session itself does not ask anyone to go out and measure, because it is designed to work entirely at the screen. The *Field practice* tab of the NOKTA Lab (`lab.html#field`) adds six short tasks for a real campus. They cover watching the warm-up of a sensor, separating sunshine on the sensor from the heat of the air, measuring light in orders of magnitude, filling a field form, asking ten students and bringing the results back. Each task names the part of the session it belongs to, the time it takes and what it needs.
+
+When the workshop is held in person, the field practice can follow the session directly. Each team shares the tasks among its members, works outside for about forty minutes and spends the last quarter of an hour on the sixth task. When the workshop is held online, the presenter introduces the tab in the closing minutes, and the teams do the tasks on their own campus during the analysis days. Anyone who watches the session later can do them at any time. The results do not replace the measurements of the field rounds, but they give each solution card a first check on site.
 
 ## After the session: 21 to 24 November
 

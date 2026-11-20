@@ -94,13 +94,19 @@ def add_rich(doc, el, size=11, color=INK, prefix=None):
     return p
 
 
-def page_soup(page, lang, data, extra):
+def page_soup(page, lang, data, extra, state=None):
     src = (bs.SRC / f"{page}.html").read_text(encoding="utf-8")
     body = src[re.match(r"<!--META(.*?)-->", src, re.S).end():]
     text = bs.fill_numbers(bs.lang_pick(body, lang), data, extra, lang)
     text = (text.replace("{{COLAB}}", bs.COLAB[lang]).replace("{{SITE}}", bs.SITE)
             .replace("{{REPO}}", f"https://github.com/{bs.OWNER}/{bs.REPO}"))
     text = re.sub(r"<script>.*?</script>", "", text, flags=re.S)
+    if lang == "tr" and state is not None:
+        # the notes are one document, so only the first mention keeps the Turkish word in parentheses
+        if state.get("istem"):
+            text = text.replace("prompt (istem)", "prompt")
+        elif "prompt (istem)" in text:
+            state["istem"] = True
     return BeautifulSoup(text, "html.parser")
 
 
@@ -137,8 +143,9 @@ def build(word_dir):
                  "cevabı, sembollerin anlamı ve çözümlü bir örnekle birlikte formüller ve çıkarım yer almaktadır. "
                  "Veriler sentetiktir ve gerçek bir kampüsü anlatmaz.")
         add_par(doc, intro, space=12)
+        state = {}
         for page in PAGES:
-            soup = page_soup(page, lang, data, extra)
+            soup = page_soup(page, lang, data, extra, state)
             for block in soup.find_all(["section"], recursive=True):
                 cls = block.get("class") or []
                 if "parthead" in cls or "hero" in cls:
@@ -193,7 +200,12 @@ def build(word_dir):
                             if wk: add_rich(doc, wk, size=10.5)
                         elif "takeaway" in c or "everyday" in c:
                             add_rich(doc, el, size=11)
-                        elif el.name == "p" and not el.find_parent(class_=["poll", "nbref", "formula", "takeaway", "everyday", "hud", "legend3d"]) \
+                        elif "pcard" in c:
+                            t_ = el.find("h3"); tm = el.find(class_="t"); pp = el.find("p")
+                            add_par(doc, text_of(t_), bold=True, space=1)
+                            if tm: add_par(doc, text_of(tm), size=9.5, color=MUTED, space=2)
+                            if pp: add_rich(doc, pp, size=11)
+                        elif el.name == "p" and not el.find_parent(class_=["poll", "nbref", "formula", "takeaway", "everyday", "hud", "legend3d", "pcard"]) \
                                 and "cap" not in c and el.get("id") is None:
                             if text_of(el):
                                 add_rich(doc, el, size=10 if "note" in c else 11, color=MUTED if "note" in c else INK)
