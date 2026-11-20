@@ -144,7 +144,7 @@
       m.position.set(x, y || 0, z); m.receiveShadow = true; scene.add(m); return m;
     }
     // ground, road, square, lawns
-    plane(190, 140, 0xcfd8bf, 0, 0, -0.02);
+    var groundM = plane(190, 140, 0xcfd8bf, 0, 0, -0.02);
     plane(190, 11, 0x5d6266, 0, 45, 0.02);
     for (var i = -90; i < 90; i += 9) plane(4, 0.5, 0xf2f2ea, i, 45, 0.04);
     plane(34, 30, 0xe6e3dc, 20, 8, 0.03);
@@ -166,8 +166,7 @@
       m.position.set(x, h / 2, z); m.castShadow = true; m.receiveShadow = true; scene.add(m); return m;
     }
     building(40, 16, 28, -40, 4, 0xffffff);
-    building(22, 26, 28, 11, -34, 0xf6f1ea);
-    building(22, 26, 28, 41, -34, 0xf3efe6);
+    var backB = [building(22, 26, 28, 11, -34, 0xf6f1ea), building(22, 26, 28, 41, -34, 0xf3efe6)];
     building(18, 10, 16, -62, 14, 0xfbf7ef);
     box(6, 4, 0.6, 0x3b6e91, -20, 2.5, 3.5);           // entrance canopy
     // trees
@@ -296,6 +295,9 @@
     function setPM(t, pm) { var P = points[t]; P.pm = pm; P.cloud.geometry.setDrawRange(0, Math.min(220, Math.round((pm || 0) * 7))); }
     function refresh() {
       Object.keys(deco).forEach(function (k) { deco[k].visible = state.campus === k; });
+      var look = { A: [0xd9cd96, 0.7], B: [0xb9bdc1, 2.1], C: [0xe4e9cf, 1.0] }[state.campus] || [0xcfd8bf, 1];
+      groundM.material.color.setHex(look[0]);
+      backB.forEach(function (b) { b.scale.y = look[1]; b.position.y = 13 * look[1]; });
       if (state.mode === "results") {
         mover.visible = false;
         Object.keys(points).forEach(function (t) {
