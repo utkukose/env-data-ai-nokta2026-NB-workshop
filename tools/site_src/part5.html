@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
     SENT.forEach(function (x, i) {
       var m = spot.querySelector('[data-i="' + i + '"]').classList.contains("marked");
       if (!x.ok) { nerr++; if (m) hit++; } else if (m) fp++;
-      why += '<div class="why"><b>' + (i + 1) + (x.ok ? " ✓" : " ✗") + "</b> " + x.why + "</div>";
+      why += '<div class="why"><b>' + (i + 1) + (x.ok ? " {{ICON:check}}" : " {{ICON:cross}}") + "</b> " + x.why + "</div>";
     });
     spot.classList.add("revealed");
     $("spot-score").innerHTML = "<b>" + hit + " / " + nerr + "</b> ⟪errors found‖hata bulundu⟫" + (fp ? " · " + fp + " ⟪correct sentences marked‖doğru cümle işaretlendi⟫" : "");

@@ -75,13 +75,17 @@
     if (o.shadows) { renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap; }
     container.appendChild(renderer.domElement);
     var scene = new T.Scene();
-    var camera = new T.PerspectiveCamera(o.fov || 42, 1, 0.1, 3000);
+    var fov0 = o.fov || 42, fit = o.fitAspect || 1.15;
+    var camera = new T.PerspectiveCamera(fov0, 1, 0.1, 3000);
     var controls = new T.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true; controls.dampingFactor = 0.08;
     var frames = [], visible = true, clock = new T.Clock();
     function size() {
       var w = container.clientWidth || 600, h = container.clientHeight || 400;
-      renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+      renderer.setSize(w, h, false); camera.aspect = w / h;
+      // On stages narrower than the design ratio the vertical angle grows, so the scene keeps its width.
+      camera.fov = camera.aspect < fit ? Math.atan(Math.tan(fov0 * Math.PI / 360) * fit / camera.aspect) * 360 / Math.PI : fov0;
+      camera.updateProjectionMatrix();
     }
     size();
     if (window.ResizeObserver) new ResizeObserver(size).observe(container); else window.addEventListener("resize", size);

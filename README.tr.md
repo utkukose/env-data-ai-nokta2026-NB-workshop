@@ -1,5 +1,7 @@
 <div align="center">
 
+[**English**](README.md) &nbsp;|&nbsp; **Türkçe**
+
 # Yapay Zekâ ile Çevresel Veri Analizi ve Yorumlama
 
 ### Kampüs Sensör Verisinden Kanıta ve Aksiyona
@@ -9,9 +11,16 @@ NOKTA, Nesnel Ölçüm, Katılım, Takip ve Aksiyon Ağı<br>
 SDÜ Robotik ve İnovasyon Topluluğu · Ankara Üniversitesi · İzmir Yüksek Teknoloji Enstitüsü<br>
 20 Kasım 2026 · iki saat · Türkçe ve İngilizce
 
-<a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/"><img src="https://img.shields.io/badge/At%C3%B6lye%20sitesi-Buradan%20ba%C5%9Flay%C4%B1n-0E7A5F?style=for-the-badge&labelColor=18231F" height="44" alt="Atölye sitesini açın"></a>
-&nbsp;&nbsp;
-<a href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb"><img src="https://img.shields.io/badge/Colab'da%20a%C3%A7-T%C3%BCrk%C3%A7e%20defter-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=F9AB00&labelColor=18231F" height="44" alt="Türkçe defteri Colab'da açın"></a>
+**Türkçe**
+
+<a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/"><img src="https://img.shields.io/badge/At%C3%B6lye%20sitesi-T%C3%BCrk%C3%A7e-0E7A5F?style=for-the-badge&labelColor=18231F" height="40" alt="Atölye sitesini Türkçe açın"></a>&nbsp;&nbsp;
+<a href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb"><img src="https://img.shields.io/badge/Colab'da%20a%C3%A7-T%C3%BCrk%C3%A7e%20defter-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=F9AB00&labelColor=18231F" height="40" alt="Türkçe defteri Colab'da açın"></a>
+
+**English** · The English version of this page, the site and the Colab notebook
+
+<a href="README.md"><img src="https://img.shields.io/badge/English%20README-README.md-1F5F8B?style=for-the-badge&labelColor=18231F" height="40" alt="English README"></a>&nbsp;&nbsp;
+<a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/"><img src="https://img.shields.io/badge/Workshop%20site-English-1F5F8B?style=for-the-badge&labelColor=18231F" height="40" alt="Open the workshop site in English"></a>&nbsp;&nbsp;
+<a href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb"><img src="https://img.shields.io/badge/Open%20in%20Colab-English-1F5F8B?style=for-the-badge&logo=googlecolab&logoColor=F9AB00&labelColor=18231F" height="40" alt="Open the English notebook in Colab"></a>
 
 [![İlk sürüm](https://img.shields.io/badge/%C4%B0lk%20s%C3%BCr%C3%BCm-Kas%C4%B1m%202026-566A73)](#)
 [![NOKTA · ÜNİDES 2026](https://img.shields.io/badge/NOKTA-%C3%9CN%C4%B0DES%202026-1F5F8B)](#teşekkür)

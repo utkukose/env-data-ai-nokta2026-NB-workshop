@@ -17,9 +17,9 @@
 <body data-part="lab">
 <header class="topbar"><div class="wrap">
 <a class="brand" href="index.html"><span class="dot"></span><span class="name">NOKTA · AI workshop<small>Environmental data analysis and interpretation</small></span></a>
-<nav class="route" aria-label="Workshop route"><ol><li data-page="index"><a href="index.html"><span class="pin"></span><span class="lbl">Start</span></a></li><li data-page="part1"><a href="part1.html"><span class="pin"></span><span class="lbl">1 Measure</span></a></li><li data-page="part2"><a href="part2.html"><span class="pin"></span><span class="lbl">2 Analyze</span></a></li><li data-page="part3"><a href="part3.html"><span class="pin"></span><span class="lbl">3 Discover</span></a></li><li data-page="part4"><a href="part4.html"><span class="pin"></span><span class="lbl">4 Explain</span></a></li><li data-page="part5"><a href="part5.html"><span class="pin"></span><span class="lbl">5 Share and act</span></a></li><li data-page="lab"><a href="lab.html"><span class="pin"></span><span class="lbl">Lab</span></a></li></ol></nav>
-<div class="tools"><a class="lang" href="tr/lab.html" title="Türkçe sürüm">TR</a>
-<button data-act="theme" title="T">◐</button><button data-act="full" title="F">⛶</button><button data-act="help" title="?">?</button></div>
+<nav class="route" aria-label="Workshop route"><ol><li data-page="index"><a href="index.html" title="Start"><span class="pin"></span><span class="lbl">Start</span></a></li><li data-page="part1"><a href="part1.html" title="Part 1 · Measure"><span class="pin"></span><span class="lbl">1 Measure</span></a></li><li data-page="part2"><a href="part2.html" title="Part 2 · Analyze"><span class="pin"></span><span class="lbl">2 Analyze</span></a></li><li data-page="part3"><a href="part3.html" title="Part 3 · Discover"><span class="pin"></span><span class="lbl">3 Discover</span></a></li><li data-page="part4"><a href="part4.html" title="Part 4 · Explain"><span class="pin"></span><span class="lbl">4 Explain</span></a></li><li data-page="part5"><a href="part5.html" title="Part 5 · Share and act"><span class="pin"></span><span class="lbl">5 Share</span></a></li><li data-page="lab"><a href="lab.html" title="NOKTA Lab"><span class="pin"></span><span class="lbl">Lab</span></a></li></ol></nav>
+<div class="tools"><a class="lang" href="tr/lab.html" hreflang="tr" lang="tr" title="Bu sayfanın Türkçesi (L)"><svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><circle cx='12' cy='12' r='9'/><path d='M3 12h18M12 3c2.6 2.8 3.9 5.8 3.9 9s-1.3 6.2-3.9 9M12 3c-2.6 2.8-3.9 5.8-3.9 9s1.3 6.2 3.9 9'/></svg><span class="long">Türkçe</span><span class="short">TR</span></a>
+<button data-act="theme" title="Paper or night view (T)" aria-label="Paper or night view"><svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><circle cx='12' cy='12' r='8.5'/><path class='f' d='M12 3.5a8.5 8.5 0 0 0 0 17z'/></svg></button><button data-act="full" title="Full screen (F)" aria-label="Full screen"><svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5'/></svg></button><button data-act="help" title="Keys (?)" aria-label="Keys"><svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><circle cx='12' cy='12' r='9'/><path d='M9.4 9.4a2.7 2.7 0 1 1 3.8 2.5c-.8.4-1.2 1-1.2 1.8v.5'/><circle class='f' cx='12' cy='17' r='1.2'/></svg></button></div>
 </div></header>
 <main>
 
@@ -40,7 +40,7 @@
     <div>
       <div class="stage3d tall" id="lab-twin"><div class="hud"><span class="clock" id="lt-clock">results</span><span id="lt-status">Two-round means</span></div></div>
       <div class="controls">
-        <button class="btn primary" id="lt-play">▶ Play</button><button class="btn" id="lt-res">Results</button>
+        <button class="btn primary" id="lt-play"><svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path class='f' d='M8 5.5v13l10.5-6.5z'/></svg> Play</button><button class="btn" id="lt-res">Results</button>
         <label>Campus <select id="lt-campus"><option>A</option><option>B</option><option>C</option></select></label>
         <label>Round <select id="lt-round"><option value="mean">mean of both</option><option value="1">1</option><option value="2">2</option></select></label>
         <label>Channel <select id="lt-var"></select></label>
@@ -80,7 +80,7 @@
       <div class="controls"><button class="btn primary" onclick="window.print()">Print or save as PDF</button><button class="btn" id="db-reset">Start a new session</button></div>
       <p class="note">Everything here comes from this browser and never leaves it. In a live session, the presenter's browser produces the debrief shown at the close.</p>
       <div class="takeaway"><b>Next steps for the NOKTA teams.</b> 21 to 24 November: Run the Colab notebook on your own files (Section 0, one setting). 28 November: Bring one solution card per table to the workshop and one figure with its averaging time to the congress.</div>
-      <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb#scrollTo=sec-0" target="_blank" rel="noopener">Colab ↗</a><p>Section 0 of the Colab notebook explains how to load real NOKTA files instead of the synthetic data.</p></div>
+      <div class="nbref"><a class="badge" href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb#scrollTo=sec-0" target="_blank" rel="noopener">Colab <svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg></a><p>Section 0 of the Colab notebook explains how to load real NOKTA files instead of the synthetic data.</p></div>
     </div>
   </div>
 </div></section>
@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var log = NK.Store.get("log", {}), card = NK.Store.get("card", null), visited = NK.Store.get("visited", []);
     var answered = 0, right = 0, rowsP = "";
     Object.keys(POLLS).forEach(function (id) { var e = log["poll:" + id]; if (e) { answered++; if (e.v.ok) right++; }
-      rowsP += "<tr><td>" + POLLS[id] + "</td><td>" + (e ? (e.v.ok === null ? "✓" : e.v.ok ? "right" : "revised") : "–") + "</td></tr>"; });
+      rowsP += "<tr><td>" + POLLS[id] + "</td><td>" + (e ? (e.v.ok === null ? "<svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M5 12.5l4.5 4.5L19 7.5'/></svg>" : e.v.ok ? "right" : "revised") : "–") + "</td></tr>"; });
     var acts = [];
     if (log["twin:played"]) acts.push("replayed a field round in 3D");
     if (log["coloc:aligned"]) acts.push("aligned the three stations");
@@ -201,8 +201,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </main>
 <footer class="sig"><div class="wrap"><b>Prof. Dr. Utku Köse</b><br>Süleyman Demirel University, AI Application and Research Center (YAZEM) · University of North Dakota · Universidad Panamericana · Vel Tech University<br><a href="https://www.utkukose.com">utkukose.com</a> · <a href="https://orcid.org/0000-0002-9652-6415">ORCID 0000-0002-9652-6415</a> · <a href="https://github.com/utkukose">github.com/utkukose</a><br>NOKTA, Objective Measurement, Participation, Monitoring and Action Network · ÜNİDES 2026<br>This workshop is updated in line with current developments in the field. First version: November 2026.<br>Content: CC BY 4.0 · Code: MIT · The data are synthetic and describe no real campus.</div></footer>
-<div class="overlay" id="help-overlay" hidden><div class="box"><button class="btn close" data-act="close">✕</button><h3>Keys</h3><p><kbd>←</kbd> <kbd>→</kbd> previous or next station · <kbd>[</kbd> <kbd>]</kbd> previous or next part · <kbd>T</kbd> paper or night view · <kbd>F</kbd> full screen · <kbd>L</kbd> English or Turkish · <kbd>B</kbd> five-minute break · <kbd>?</kbd> this help</p></div></div>
-<div class="overlay" id="break-overlay" hidden><div class="box"><button class="btn close" data-act="close">✕</button>
+<div class="overlay" id="help-overlay" hidden><div class="box"><button class="btn close" data-act="close" aria-label="Close"><svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M6 6l12 12M18 6L6 18'/></svg></button><h3>Keys</h3><p><kbd>←</kbd> <kbd>→</kbd> previous or next station · <kbd>[</kbd> <kbd>]</kbd> previous or next part · <kbd>T</kbd> paper or night view · <kbd>F</kbd> full screen · <kbd>L</kbd> English or Turkish · <kbd>B</kbd> five-minute break · <kbd>?</kbd> this help</p></div></div>
+<div class="overlay" id="break-overlay" hidden><div class="box"><button class="btn close" data-act="close" aria-label="Close"><svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M6 6l12 12M18 6L6 18'/></svg></button>
 <p class="kicker">Break</p><div class="breakclock">5:00</div>
 <p class="lead" style="text-align:center;margin:14px auto 0">Question for after the break: Which of the six points do you expect to look warmest in Round 1, and why might that be misleading?</p></div></div>
 </body>

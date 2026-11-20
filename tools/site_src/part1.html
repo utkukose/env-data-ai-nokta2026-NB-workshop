@@ -33,8 +33,8 @@
         <div class="legend3d" id="tw-legend"></div>
       </div>
       <div class="controls">
-        <button class="btn primary" id="tw-play">▶ ⟪Play the round‖Turu oynat⟫</button>
-        <button class="btn" id="tw-reset">⟲ 10:00</button>
+        <button class="btn primary" id="tw-play">{{ICON:play}} ⟪Play the round‖Turu oynat⟫</button>
+        <button class="btn" id="tw-reset">{{ICON:reset}} 10:00</button>
         <button class="btn" id="tw-results">⟪Show results‖Sonuçları göster⟫</button>
         <label>⟪Speed‖Hız⟫ <select id="tw-speed"><option value="0.5">×0.5</option><option value="1" selected>×1</option><option value="2">×2</option><option value="4">×4</option></select></label>
       </div>
@@ -271,10 +271,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     $("tw-play").onclick = function () {
       if (tw.get("round") === "mean") { $("tw-round").value = "1"; tw.set("round", "1"); }
-      if (tw.get("playing")) { tw.pause(); this.textContent = "▶ ⟪Play the round‖Turu oynat⟫"; }
-      else { var b = this; tw.play(tick, function () { b.textContent = "▶ ⟪Play the round‖Turu oynat⟫"; }); this.textContent = "❚❚ ⟪Pause‖Duraklat⟫"; NK.Store.log("twin:played", true); }
+      if (tw.get("playing")) { tw.pause(); this.innerHTML = "{{ICON:play}} ⟪Play the round‖Turu oynat⟫"; }
+      else { var b = this; tw.play(tick, function () { b.innerHTML = "{{ICON:play}} ⟪Play the round‖Turu oynat⟫"; }); this.innerHTML = "{{ICON:pause}} ⟪Pause‖Duraklat⟫"; NK.Store.log("twin:played", true); }
     };
-    $("tw-reset").onclick = function () { tw.reset(); $("tw-play").textContent = "▶ ⟪Play the round‖Turu oynat⟫"; tick({ clock: "10:00", at: null, moving: false }); $("tw-status").textContent = "⟪Ready‖Hazır⟫"; };
+    $("tw-reset").onclick = function () { tw.reset(); $("tw-play").innerHTML = "{{ICON:play}} ⟪Play the round‖Turu oynat⟫"; tick({ clock: "10:00", at: null, moving: false }); $("tw-status").textContent = "⟪Ready‖Hazır⟫"; };
     $("tw-results").onclick = function () { tw.results(); $("tw-clock").textContent = "⟪results‖sonuçlar⟫"; $("tw-status").textContent = "⟪Visit medians of the chosen round‖Seçilen turun ziyaret medyanları⟫"; };
     $("tw-speed").onchange = function () { tw.set("speed", +this.value); };
     $("tw-campus").onchange = function () { tw.set("campus", this.value); };

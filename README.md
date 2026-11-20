@@ -1,5 +1,7 @@
 <div align="center">
 
+**English** &nbsp;|&nbsp; [**Türkçe**](README.tr.md)
+
 # AI-Based Environmental Data Analysis and Interpretation
 
 ### From Campus Sensor Readings to Evidence and Action
@@ -9,11 +11,16 @@ NOKTA, Objective Measurement, Participation, Monitoring and Action Network<br>
 SDÜ Robotics and Innovation Community · Ankara University · İzmir Institute of Technology<br>
 20 November 2026 · two hours · English and Turkish
 
-<a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/"><img src="https://img.shields.io/badge/Workshop%20site-Start%20here-0E7A5F?style=for-the-badge&labelColor=18231F" height="44" alt="Open the workshop site"></a>
-&nbsp;&nbsp;
-<a href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb"><img src="https://img.shields.io/badge/Open%20in%20Colab-English-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=F9AB00&labelColor=18231F" height="44" alt="Open the English notebook in Colab"></a>
-&nbsp;&nbsp;
-<a href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb"><img src="https://img.shields.io/badge/Colab'da%20a%C3%A7-T%C3%BCrk%C3%A7e-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=F9AB00&labelColor=18231F" height="44" alt="Türkçe defteri Colab'da açın"></a>
+**English**
+
+<a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/"><img src="https://img.shields.io/badge/Workshop%20site-English-0E7A5F?style=for-the-badge&labelColor=18231F" height="40" alt="Open the workshop site in English"></a>&nbsp;&nbsp;
+<a href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_EN.ipynb"><img src="https://img.shields.io/badge/Open%20in%20Colab-English-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=F9AB00&labelColor=18231F" height="40" alt="Open the English notebook in Colab"></a>
+
+**Türkçe** · Bu sayfanın, sitenin ve Colab defterinin Türkçesi
+
+<a href="README.tr.md"><img src="https://img.shields.io/badge/T%C3%BCrk%C3%A7e%20README-README.tr.md-C8102E?style=for-the-badge&labelColor=18231F" height="40" alt="Türkçe README"></a>&nbsp;&nbsp;
+<a href="https://utkukose.github.io/env-data-ai-nokta2026-NB-workshop/tr/"><img src="https://img.shields.io/badge/At%C3%B6lye%20sitesi-T%C3%BCrk%C3%A7e-C8102E?style=for-the-badge&labelColor=18231F" height="40" alt="Atölye sitesini Türkçe açın"></a>&nbsp;&nbsp;
+<a href="https://colab.research.google.com/github/utkukose/env-data-ai-nokta2026-NB-workshop/blob/main/notebooks/NOKTA_AI_Workshop_TR.ipynb"><img src="https://img.shields.io/badge/Colab'da%20a%C3%A7-T%C3%BCrk%C3%A7e-C8102E?style=for-the-badge&logo=googlecolab&logoColor=F9AB00&labelColor=18231F" height="40" alt="Türkçe defteri Colab'da açın"></a>
 
 [![First version](https://img.shields.io/badge/First%20version-November%202026-566A73)](#)
 [![NOKTA · ÜNİDES 2026](https://img.shields.io/badge/NOKTA-%C3%9CN%C4%B0DES%202026-1F5F8B)](#acknowledgments)

@@ -23,7 +23,7 @@
   --t1: #2a78d6; --t2: #eb6834; --t3: #1baf7a; --t4: #eda100; --t5: #e87ba4; --t6: #008300;
   --wrap: 1180px;
   --radius: 10px;
-  --font: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, "Noto Sans", "Segoe UI Symbol", "Apple Symbols", sans-serif;
   --mono: "JetBrains Mono", Consolas, "SFMono-Regular", Menlo, monospace;
   color-scheme: light;
 }
@@ -96,6 +96,18 @@ code, .mono { font-family: var(--mono); font-size: 0.9em; }
 .route .lbl { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 2px; }
 .tools { display: flex; gap: 6px; align-items: center; }
 .tools button, .tools a.lang { font: inherit; font-size: 0.8rem; border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 8px; padding: 6px 9px; cursor: pointer; text-decoration: none; line-height: 1.1; }
+.tools button { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 34px; padding: 0; }
+.tools button .ic { width: 19px; height: 19px; vertical-align: 0; }
+.tools a.lang { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; font-size: 0.86rem; font-weight: 700; color: var(--accent); border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--panel)); }
+.tools a.lang .ic { width: 17px; height: 17px; vertical-align: 0; }
+.tools a.lang .short { display: none; }
+@media (max-width: 1100px) { .tools a.lang .long { display: none; } .tools a.lang .short { display: inline; } }
+@media (max-width: 520px) { .tools { gap: 4px; } .tools [data-act="full"] { display: none; } .tools button { width: 32px; height: 32px; } .tools a.lang { height: 32px; padding: 0 8px; gap: 4px; } }
+.ic { display: inline-block; width: 1.1em; height: 1.1em; vertical-align: -0.2em; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ic .f { fill: currentColor; stroke: none; }
+.langpill { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 18px; padding: 8px 16px; border: 1.5px solid var(--accent); border-radius: 999px; color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--panel)); font-weight: 700; font-size: 0.95rem; text-decoration: none; }
+.langpill:hover { background: color-mix(in srgb, var(--accent) 16%, var(--panel)); }
+.langpill .ic { width: 20px; height: 20px; vertical-align: 0; }
 .tools button:hover, .tools a.lang:hover { border-color: var(--accent); }
 @media (max-width: 860px) { .route .lbl { display: none; } .brand small { display: none; } .topbar .wrap { gap: 10px; } }
 @media (max-width: 520px) { .brand span.name { display: none; } }
@@ -246,7 +258,8 @@ footer.sig .next { display: inline-flex; margin-bottom: 18px; }
 /* ---------- overlays ---------- */
 .overlay { position: fixed; inset: 0; z-index: 90; background: color-mix(in srgb, var(--paper) 96%, transparent); display: grid; place-items: center; padding: 24px; }
 .overlay .box { max-width: 760px; width: 100%; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; position: relative; }
-.overlay .close { position: absolute; top: 10px; right: 12px; }
+.overlay .close { position: absolute; top: 10px; right: 12px; width: 38px; height: 38px; padding: 0; justify-content: center; }
+.overlay .close .ic { width: 20px; height: 20px; vertical-align: 0; }
 .breakclock { font-size: clamp(4rem, 14vw, 9rem); font-weight: 700; font-variant-numeric: tabular-nums; text-align: center; line-height: 1; color: var(--accent); }
 kbd { font-family: var(--mono); font-size: 0.82rem; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px; background: var(--panel); }
 .tooltip { position: fixed; z-index: 95; pointer-events: none; background: var(--ink); color: var(--paper); font-size: 0.8rem; padding: 6px 9px; border-radius: 7px; max-width: 260px; line-height: 1.35; opacity: 0; transition: opacity .1s; }

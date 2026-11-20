@@ -26,8 +26,12 @@ COLAB = {k: f"https://colab.research.google.com/github/{OWNER}/{REPO}/blob/main/
 KATEX = Path(__file__).resolve().parent / "node"   # run "npm install" there once
 PAGES = ["index", "part1", "part2", "part3", "part4", "part5", "lab"]
 ROUTE = {
-    "en": ["Start", "1 Measure", "2 Analyze", "3 Discover", "4 Explain", "5 Share and act", "Lab"],
-    "tr": ["Başlangıç", "1 Ölç", "2 Analiz et", "3 Keşfet", "4 Açıkla", "5 Paylaş ve dönüştür", "Laboratuvar"],
+    "en": ["Start", "1 Measure", "2 Analyze", "3 Discover", "4 Explain", "5 Share", "Lab"],
+    "tr": ["Başlangıç", "1 Ölç", "2 Analiz et", "3 Keşfet", "4 Açıkla", "5 Paylaş", "Laboratuvar"],
+}
+ROUTE_TITLE = {
+    "en": ["Start", "Part 1 · Measure", "Part 2 · Analyze", "Part 3 · Discover", "Part 4 · Explain", "Part 5 · Share and act", "NOKTA Lab"],
+    "tr": ["Başlangıç", "1. Bölüm · Ölç", "2. Bölüm · Analiz et", "3. Bölüm · Keşfet", "4. Bölüm · Açıkla", "5. Bölüm · Paylaş ve aksiyona dönüştür", "NOKTA Laboratuvarı"],
 }
 TOKEN = re.compile(r"⟪(.*?)‖(.*?)⟫", re.S)
 
@@ -141,11 +145,32 @@ def worked_examples(data):
     return ex
 
 
+ICONS = {
+    "theme": "<svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><circle cx='12' cy='12' r='8.5'/><path class='f' d='M12 3.5a8.5 8.5 0 0 0 0 17z'/></svg>",
+    "full": "<svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5'/></svg>",
+    "help": "<svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><circle cx='12' cy='12' r='9'/><path d='M9.4 9.4a2.7 2.7 0 1 1 3.8 2.5c-.8.4-1.2 1-1.2 1.8v.5'/><circle class='f' cx='12' cy='17' r='1.2'/></svg>",
+    "close": "<svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M6 6l12 12M18 6L6 18'/></svg>",
+    "ext": "<svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M8 16L16 8M9.5 8H16v6.5'/></svg>",
+    "play": "<svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path class='f' d='M8 5.5v13l10.5-6.5z'/></svg>",
+    "pause": "<svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path class='f' d='M7 5h3.6v14H7zM13.4 5H17v14h-3.6z'/></svg>",
+    "reset": "<svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M4.5 12a7.5 7.5 0 1 0 2.2-5.3'/><path d='M4.5 4.5v4.6h4.6'/></svg>",
+    "globe": "<svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><circle cx='12' cy='12' r='9'/><path d='M3 12h18M12 3c2.6 2.8 3.9 5.8 3.9 9s-1.3 6.2-3.9 9M12 3c-2.6 2.8-3.9 5.8-3.9 9s1.3 6.2 3.9 9'/></svg>",
+    "check": "<svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M5 12.5l4.5 4.5L19 7.5'/></svg>",
+    "cross": "<svg class='ic' viewBox='0 0 24 24' aria-hidden='true'><path d='M7 7l10 10M17 7L7 17'/></svg>",
+}
+
+
+def put_icons(text):
+    """Replaces {{ICON:name}} placeholders and the external-link arrow with inline SVG icons."""
+    text = re.sub(r"\{\{ICON:(\w+)\}\}", lambda m: ICONS[m.group(1)], text)
+    return text.replace("↗", ICONS["ext"])
+
+
 def page_shell(lang, page, meta, body):
     a = "assets/" if lang == "en" else "../assets/"
     other = ("tr/" if lang == "en" else "../") + f"{page}.html"
     route = "".join(
-        f'<li data-page="{p}"><a href="{p}.html"><span class="pin"></span>'
+        f'<li data-page="{p}"><a href="{p}.html" title="{ROUTE_TITLE[lang][i]}"><span class="pin"></span>'
         f'<span class="lbl">{ROUTE[lang][i]}</span></a></li>' for i, p in enumerate(PAGES))
     help_txt = lang_pick(
         "⟪Keys‖Tuşlar⟫</h3><p><kbd>←</kbd> <kbd>→</kbd> ⟪previous or next station‖önceki ya da sonraki durak⟫ · "
@@ -184,15 +209,15 @@ def page_shell(lang, page, meta, body):
 <header class="topbar"><div class="wrap">
 <a class="brand" href="index.html"><span class="dot"></span><span class="name">NOKTA · {lang_pick('⟪AI workshop‖YZ atölyesi⟫', lang)}<small>{lang_pick('⟪Environmental data analysis and interpretation‖Çevresel veri analizi ve yorumlama⟫', lang)}</small></span></a>
 <nav class="route" aria-label="{lang_pick('⟪Workshop route‖Atölye rotası⟫', lang)}"><ol>{route}</ol></nav>
-<div class="tools"><a class="lang" href="{other}" title="{lang_pick('⟪Türkçe sürüm‖English version⟫', lang)}">{'TR' if lang == 'en' else 'EN'}</a>
-<button data-act="theme" title="T">◐</button><button data-act="full" title="F">⛶</button><button data-act="help" title="?">?</button></div>
+<div class="tools"><a class="lang" href="{other}" hreflang="{'tr' if lang == 'en' else 'en'}" lang="{'tr' if lang == 'en' else 'en'}" title="{lang_pick('⟪Bu sayfanın Türkçesi (L)‖English version of this page (L)⟫', lang)}">{ICONS['globe']}<span class="long">{'Türkçe' if lang == 'en' else 'English'}</span><span class="short">{'TR' if lang == 'en' else 'EN'}</span></a>
+<button data-act="theme" title="{lang_pick('⟪Paper or night view (T)‖Kâğıt ya da gece görünümü (T)⟫', lang)}" aria-label="{lang_pick('⟪Paper or night view‖Kâğıt ya da gece görünümü⟫', lang)}">{ICONS['theme']}</button><button data-act="full" title="{lang_pick('⟪Full screen (F)‖Tam ekran (F)⟫', lang)}" aria-label="{lang_pick('⟪Full screen‖Tam ekran⟫', lang)}">{ICONS['full']}</button><button data-act="help" title="{lang_pick('⟪Keys (?)‖Tuşlar (?)⟫', lang)}" aria-label="{lang_pick('⟪Keys‖Tuşlar⟫', lang)}">{ICONS['help']}</button></div>
 </div></header>
 <main>
 {body}
 </main>
 <footer class="sig"><div class="wrap">{next_html}{sig}</div></footer>
-<div class="overlay" id="help-overlay" hidden><div class="box"><button class="btn close" data-act="close">✕</button><h3>{help_txt}</div></div>
-<div class="overlay" id="break-overlay" hidden><div class="box"><button class="btn close" data-act="close">✕</button>
+<div class="overlay" id="help-overlay" hidden><div class="box"><button class="btn close" data-act="close" aria-label="{lang_pick('⟪Close‖Kapat⟫', lang)}">{ICONS['close']}</button><h3>{help_txt}</div></div>
+<div class="overlay" id="break-overlay" hidden><div class="box"><button class="btn close" data-act="close" aria-label="{lang_pick('⟪Close‖Kapat⟫', lang)}">{ICONS['close']}</button>
 <p class="kicker">{lang_pick('⟪Break‖Ara⟫', lang)}</p><div class="breakclock">5:00</div>
 <p class="lead" style="text-align:center;margin:14px auto 0">{lang_pick('⟪Question for after the break: Which of the six points do you expect to look warmest in Round 1, and why might that be misleading?‖Aradan sonraki soru: 1. turda altı noktadan hangisinin en sıcak görüneceğini düşünüyorsunuz ve bu neden yanıltıcı olabilir?⟫', lang)}</p></div></div>
 </body>
@@ -217,6 +242,7 @@ def build():
             text = (text.replace("{{COLAB}}", COLAB[lang]).replace("{{SITE}}", SITE)
                     .replace("{{REPO}}", f"https://github.com/{OWNER}/{REPO}")
                     .replace("{{NBFILE}}", NB[lang].split("/")[-1]))
+            text = put_icons(text)
             for mt in re.finditer(r"<(texd|tex)>(.*?)</\1>", text, re.S):
                 tex_items.append({"tex": mt.group(2).strip(), "display": mt.group(1) == "texd"})
             outputs[(page, lang)] = (meta, text)
